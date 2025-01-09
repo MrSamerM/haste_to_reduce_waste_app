@@ -5,6 +5,7 @@
 # // https://www.kaggle.com/datasets/boulahchichenadir/algerian-used-cars use kaggle for vehicles
 
 
+# https://medium.com/@ilaslanduzgun/image-classification-with-tensorflow-a361c7b1eb05 for assistance
 import matplotlib.pyplot as plt
 import numpy as np
 import PIL 
