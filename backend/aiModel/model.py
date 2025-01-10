@@ -8,12 +8,23 @@
 # https://medium.com/@ilaslanduzgun/image-classification-with-tensorflow-a361c7b1eb05 for assistance
 import matplotlib.pyplot as plt
 import numpy as np
-import PIL 
+import PIL # this is pillow
+import pathlib # this is to access files
 
+# Ignore the underlines, vscode does not recognise it, but it works
 import tensorflow as tf
-from tensorflow import keras
+from tensorflow import keras # this is to create and load dataset
 from tensorflow.keras import layers
 from tensorflow.keras.models import Sequential
+from tensorflow.keras.layers import Dense
 
-print("TensorFlow and Keras imports successful!")
 
+# model = Sequential([
+#     Dense(10, activation='relu', input_shape=(5,)),  # Input layer with 5 features
+#     Dense(1, activation='sigmoid')                  # Output layer with 1 neuron
+# ])
+
+# # Print the model summary
+# model.summary()
+
+print("Hello agaibn")
