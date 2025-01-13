@@ -8,6 +8,7 @@
 # https://medium.com/@ilaslanduzgun/image-classification-with-tensorflow-a361c7b1eb05 for assistance
 import matplotlib.pyplot as plt
 import numpy as np
+import os
 import PIL # this is pillow
 import pathlib # this is to access files
 
@@ -16,16 +17,37 @@ import tensorflow as tf
 from tensorflow import keras # this is to create and load dataset
 from tensorflow.keras import layers
 from tensorflow.keras.models import Sequential
-from tensorflow.keras.layers import Dense
 
+image_dir=pathlib.Path('backend/aiModel/Train')
+image_height=226
+image_width=226
+num_classes=2
+batch_size=60
 
-# model = Sequential([
-#     Dense(10, activation='relu', input_shape=(5,)),  # Input layer with 5 features
-#     Dense(1, activation='sigmoid')                  # Output layer with 1 neuron
-# ])
+train_dataset=tf.keras.preprocessing.image_dataset_from_directory(
+    image_dir,
+    validation_split=0.1, #90 percent is training
+    subset="training",
+    seed=123,
+    image_size=(image_height,image_width),
+    batch_size=batch_size)
 
-# # Print the model summary
-# model.summary()
+validation_dataset=tf.keras.preprocessing.image_dataset_from_directory(
+    image_dir,
+    validation_split=0.1, #10 percent is validation
+    subset="validation",
+    seed=123,
+    image_size=(image_height,image_width),
+    batch_size=batch_size)
 
+class_names = train_dataset.class_names
+plt.figure(figsize=(10, 10))
+for images, labels in train_dataset.take(1):
+    for i in range(9):
+        ax = plt.subplot(3, 3, i + 1)
+        plt.imshow(images[i].numpy().astype("uint8"))
+        plt.title(class_names[labels[i]])
+        plt.axis("off")
 
-print("Hello agaibn")
+# print(train_dataset)
+# print("Hello again")
