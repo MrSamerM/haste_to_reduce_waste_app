@@ -6,6 +6,7 @@
 
 
 # https://medium.com/@ilaslanduzgun/image-classification-with-tensorflow-a361c7b1eb05 for assistance
+# https://medium.com/nerd-for-tech/building-an-image-classifier-with-tensorflow-3e12c1d5d3a2 for assistance as well
 import matplotlib.pyplot as plt
 import numpy as np
 import os
@@ -22,7 +23,7 @@ image_dir=pathlib.Path('backend/aiModel/Train')
 image_height=226
 image_width=226
 num_classes=2
-batch_size=60
+batch_size=31
 
 train_dataset=tf.keras.preprocessing.image_dataset_from_directory(
     image_dir,
@@ -40,14 +41,43 @@ validation_dataset=tf.keras.preprocessing.image_dataset_from_directory(
     image_size=(image_height,image_width),
     batch_size=batch_size)
 
-class_names = train_dataset.class_names
-plt.figure(figsize=(10, 10))
-for images, labels in train_dataset.take(1):
-    for i in range(9):
-        ax = plt.subplot(3, 3, i + 1)
-        plt.imshow(images[i].numpy().astype("uint8"))
-        plt.title(class_names[labels[i]])
-        plt.axis("off")
+# plt.figure(figsize=(10, 10))
+# for images, labels in train_dataset.take(1):
+#     for i in range(5):
+#         ax = plt.subplot(3, 3, i + 1)
+#         plt.imshow(images[i].numpy().astype("uint8"))
+#         plt.title(class_names[labels[i]])
+#         plt.axis("off")
 
-# print(train_dataset)
-# print("Hello again")
+# plt.show()
+class_names = train_dataset.class_names
+
+num_classes=len(class_names)
+
+model=Sequential([
+    layers.Rescaling(1./255,input_shape=(image_height, image_width, 3)),
+    layers.Conv2D(16, 3, padding='same', activation='relu'),
+    layers.MaxPooling2D(),
+    layers.Conv2D(32, 3, padding='same', activation='relu'),
+    layers.MaxPooling2D(),
+    layers.Conv2D(64, 3, padding='same', activation='relu'),
+    layers.MaxPooling2D(),
+    layers.Flatten(),
+    layers.Dense(128, activation='relu'),
+    layers.Dense(num_classes)
+])
+
+
+model.compile(optimizer='adam',
+              loss=tf.keras.losses.SparseCategoricalCrossentropy(from_logits=True),
+              metrics=['accuracy'])
+
+model.summary()
+
+epochs=10
+history=model.fit(
+    train_dataset,
+    validation_data=validation_dataset,
+    epochs=epochs
+)
+
