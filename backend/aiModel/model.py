@@ -41,43 +41,49 @@ validation_dataset=tf.keras.preprocessing.image_dataset_from_directory(
     image_size=(image_height,image_width),
     batch_size=batch_size)
 
-# plt.figure(figsize=(10, 10))
-# for images, labels in train_dataset.take(1):
-#     for i in range(5):
-#         ax = plt.subplot(3, 3, i + 1)
-#         plt.imshow(images[i].numpy().astype("uint8"))
-#         plt.title(class_names[labels[i]])
-#         plt.axis("off")
-
-# plt.show()
 class_names = train_dataset.class_names
 
 num_classes=len(class_names)
 
-model=Sequential([
-    layers.Rescaling(1./255,input_shape=(image_height, image_width, 3)),
-    layers.Conv2D(16, 3, padding='same', activation='relu'),
-    layers.MaxPooling2D(),
+# https://www.tensorflow.org/api_docs/python/tf/keras/layers/ explanation from tensorflow
+
+#this is to edit / change the dataset even further by making changes so thaty new images are made and patterns are found
+
+data_change=keras.Sequential(
+    [
+        layers.RandomFlip("horizontal",input_shape=(image_height, image_width, 3)),
+        layers.RandomRotation(0.1),
+        layers.RandomZoom(0.1)
+    ]
+)
+
+model=Sequential([ #This groups layers sequentially
+    data_change,
+    layers.Rescaling(1./255),#this rescales the images
+    layers.Conv2D(16, 3, padding='same', activation='relu'),#Conv2D is used for images,16 is number of filter (dimention of output space), 3 is the size of the kernal (specifying size of convolution window) padding same (resulting in even padding all sides of image).relu helps network find complex patterns
+    layers.MaxPooling2D(),#Downsamples the inputs height and width
     layers.Conv2D(32, 3, padding='same', activation='relu'),
     layers.MaxPooling2D(),
     layers.Conv2D(64, 3, padding='same', activation='relu'),
     layers.MaxPooling2D(),
-    layers.Flatten(),
+    layers.Dropout(0.2),
+    layers.Flatten(),#flatterns the inputs, does not affect batch size
     layers.Dense(128, activation='relu'),
-    layers.Dense(num_classes)
+    layers.Dense(num_classes, name="outputs") #this is the 2 classes to predict
 ])
-
-
 model.compile(optimizer='adam',
               loss=tf.keras.losses.SparseCategoricalCrossentropy(from_logits=True),
               metrics=['accuracy'])
 
 model.summary()
 
-epochs=10
-history=model.fit(
+epochs=20
+history=model.fit( #this method is used to train the model
     train_dataset,
-    validation_data=validation_dataset,
-    epochs=epochs
+    validation_data=validation_dataset, #this evaluates loss after iteration
+    epochs=epochs #iteration over data (image) provided
 )
+
+
+
 
