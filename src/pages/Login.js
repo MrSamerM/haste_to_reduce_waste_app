@@ -11,6 +11,8 @@ function Login({ setSessionAvailability }) {
 
     const [email, setEmail] = useState("");
     const [password, setPassword] = useState("");
+    const [validate, setValidate] = useState(true);
+    const [validationMessage, setValidationMessage] = useState("");
 
     const navigate = useNavigate();
 
@@ -26,20 +28,29 @@ function Login({ setSessionAvailability }) {
             password: password
         };
 
-        try {
+        if (email === "" || password === "") {
+            setValidationMessage("You must input an email and a password")
+            setValidate(false);
+        }
 
-            const res = await axios.post('http://localhost:8000/login', data);
+        else {
+            try {
+                const res = await axios.post('http://localhost:8000/login', data);
 
-            if (res.data.userID) {
-                setSessionAvailability(true)
-                navigate('/')
+                if (res.data.userID) {
+                    setSessionAvailability(true)
+                    navigate('/')
+                }
+
             }
-
+            catch (e) {
+                if (e.response.status === 400) {
+                    setValidationMessage("The email or password is incorrect")
+                    setValidate(false);
+                    console.log("Error posting", e)
+                }
+            }
         }
-        catch (e) {
-            console.log("Error posting", e)
-        }
-
     }
 
     return (
@@ -58,7 +69,7 @@ function Login({ setSessionAvailability }) {
                     <input type="password" id="password" placeholder="Input Password" value={password} onChange={(evt) => setPassword(evt.target.value)} />
                 </div>
 
-
+                {validate === true ? null : <p id="loginValidation">{validationMessage}</p>}
                 <button id="loginButton" onClick={submit}>Login</button>
             </div>
 

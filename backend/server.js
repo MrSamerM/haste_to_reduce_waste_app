@@ -127,6 +127,6 @@ app.post('/login', async (req, res) => {
         res.json({ message: "This is a user", userID: user._id });
     } catch (err) {
         console.log("error", err)
-        res.json({ message: "This is a not a user", validate: false })
+        res.status(400).json({ message: "This is a not a user", validate: false })
     }
 });

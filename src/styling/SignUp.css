@@ -23,6 +23,10 @@
     align-items: center;
 }
 
+/* used chatgpt to assist with flex, and alligning items chatgpt 15/01/2025
+prompt 1 "right now the labels are on top of the input, the input is the div with input and label, label is inputLabels, how can I put the inputLabel to the left of input" 
+prompt 2 "I want the inputs to all be one below the other evenly macthed no one lefter than the other
+"*/
 .inputDiv {
     display: flex;
     align-items: center;
@@ -51,6 +55,6 @@ button {
     margin-top: 30px;
 }
 
-#validationMessage {
+#loginValidation {
     color: red;
 }
