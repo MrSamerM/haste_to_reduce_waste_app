@@ -88,27 +88,46 @@ function Signup({ setSessionAvailability }) {
 
     return (
         <>
-            <h1 id="Title">Sign Up</h1>
+            <div id="TitleDiv">
+                <h1 id="Title">Sign Up</h1>
+            </div>
 
-            <label htmlFor="name">Name: </label>
-            <input type="text" id="name" placeholder="Input Name" value={name} onChange={(evt) => setName(evt.target.value)} />
+            <div id="details">
 
-            <label htmlFor="surname">Surname: </label>
-            <input type="text" id="surname" placeholder="Input Surname" value={surname} onChange={(evt) => setSurname(evt.target.value)} />
+                <div className="inputDiv">
+                    <label className="inputLabels" htmlFor="name">Name: </label>
+                    <input type="text" id="name" placeholder="Input Name" value={name} onChange={(evt) => setName(evt.target.value)} />
+                </div>
 
-            <label htmlFor="email">Email: </label>
-            <input type="text" id="email" placeholder="Input Email" value={email} onChange={(evt) => setEmail(evt.target.value)} />
+                <div className="inputDiv">
+                    <label className="inputLabels" htmlFor="surname">Surname: </label>
+                    <input type="text" id="surname" placeholder="Input Surname" value={surname} onChange={(evt) => setSurname(evt.target.value)} />
+                </div>
 
-            <label htmlFor="password">Password: </label>
-            <input type="password" id="password" placeholder="Input Password" value={password} onChange={(evt) => setPassword(evt.target.value)} />
+                <div className="inputDiv">
 
-            <label htmlFor="dateOfBirth">Date of Birth: </label>
-            <input type="date" id="dateOfBirth" value={dateOfBirth} onChange={(evt) => setDateOfBirth(evt.target.value)} />
-            <br></br>
+                    <label className="inputLabels" htmlFor="email">Email: </label>
+                    <input type="text" id="email" placeholder="Input Email" value={email} onChange={(evt) => setEmail(evt.target.value)} />
+                </div>
 
-            {validate === true ? null : <p>{validationMessage}</p>}
+                <div className="inputDiv">
 
-            <button onClick={submit}>Sign Up</button>
+                    <label className="inputLabels" htmlFor="password">Password: </label>
+                    <input type="password" id="password" placeholder="Input Password" value={password} onChange={(evt) => setPassword(evt.target.value)} />
+                </div>
+
+                <div className="inputDiv">
+
+                    <label className="inputLabels" htmlFor="dateOfBirth">Date of Birth: </label>
+                    <input type="date" id="dateOfBirth" value={dateOfBirth} onChange={(evt) => setDateOfBirth(evt.target.value)} />
+                </div>
+
+                <br></br>
+
+                {validate === true ? null : <p id="validationMessage">{validationMessage}</p>}
+
+                <button onClick={submit}>Sign Up</button>
+            </div>
         </>
     );
 }

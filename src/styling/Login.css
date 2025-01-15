@@ -3,3 +3,53 @@
     padding: 0;
     background-color: #E1ECD8;
 }
+
+#loginTitleDiv {
+    align-items: center;
+    margin: 0 auto 30px auto;
+    margin-bottom: 50px;
+    margin-top: 10px;
+}
+
+#Login {
+    text-align: center;
+    text-decoration: underline;
+}
+
+#loginDetails {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+}
+
+.loginInputDiv {
+    display: flex;
+    align-items: center;
+    width: 50%;
+    margin-bottom: 20px;
+}
+
+.loginInputLabel {
+    margin-right: 20px;
+    text-align: right;
+    width: 200px;
+}
+
+#loginDetails input {
+    padding: 5px;
+    margin: 5px;
+    width: 100%;
+}
+
+#loginButton {
+    background-color: black;
+    color: white;
+    width: 150px;
+    height: 40px;
+    font-size: large;
+    margin-top: 30px;
+}
+
+#validationMessage {
+    color: red;
+}

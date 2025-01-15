@@ -16,10 +16,13 @@ nav {
 
 a {
     text-decoration: none;
+    background-color: lightgreen;
+
 }
 
 ul {
     display: flex;
+
 }
 
 li {
@@ -31,12 +34,14 @@ li {
     display: inline-block;
     text-decoration: none;
     text-align: center;
+    background-color: lightgreen;
+
 }
 
 
-Label {
+/* Label {
     display: none;
-}
+} */
 
 
 /* This is for the Link tag to get rid of underlines */

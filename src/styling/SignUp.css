@@ -3,3 +3,54 @@
     padding: 0;
     background-color: #E1ECD8;
 }
+
+#TitleDiv {
+    align-items: center;
+    margin: 0 auto 30px auto;
+    margin-bottom: 50px;
+    margin-top: 10px;
+}
+
+#Title {
+    text-align: center;
+    text-decoration: underline;
+}
+
+
+#details {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+}
+
+.inputDiv {
+    display: flex;
+    align-items: center;
+    width: 50%;
+    margin-bottom: 20px;
+}
+
+.inputLabels {
+    margin-right: 20px;
+    text-align: right;
+    width: 200px;
+}
+
+#details input {
+    padding: 5px;
+    margin: 5px;
+    width: 100%;
+}
+
+button {
+    background-color: black;
+    color: white;
+    width: 150px;
+    height: 40px;
+    font-size: large;
+    margin-top: 30px;
+}
+
+#validationMessage {
+    color: red;
+}
