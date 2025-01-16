@@ -10,6 +10,7 @@ function Donate() {
     const [file, setFile] = useState("");
     const [fileURL, setFileURL] = useState("");
     const [enableInput, setEnableInput] = useState(false);
+    const [percentage, setPercentage] = useState(0);
     const [address, setAddress] = useState("");
 
     const change = (evt) => {
@@ -31,6 +32,24 @@ function Donate() {
         }
     }, [file]);
 
+    const submit = async () => {
+
+        const formData = new FormData();
+        formData.append("image", fileURL);
+
+        try {
+            const res = await axios.post('http://localhost:8000/predict', formData, {
+                headers: {
+                    'Content-Type': 'multipart/form-data'
+                }
+            });
+            setPercentage(res.data);
+
+        } catch (err) {
+            console.log("error", err);
+        }
+    }
+
     return (
         <>
             <h1>Donate</h1>
@@ -45,6 +64,8 @@ function Donate() {
 
             {enableInput === false ? null :
                 <div>
+                    <button onClick={submit}>Scan</button>
+                    <p>The Image is {percentage}</p>
                     <input type="text" id="address" value={address} onChange={(evt) => setAddress(evt.target.value)} />
                 </div>
             }

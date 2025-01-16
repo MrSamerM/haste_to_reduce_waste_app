@@ -10,11 +10,15 @@ const User = require('./databaseModels/userModel');
 const Donation = require('./databaseModels/donationModel');
 const Receipt = require('./databaseModels/receiptModel');
 const Product = require('./databaseModels/productModel');
+const fs = require('fs');
+const multer = require('multer');
 
 // https://javascript.plainenglish.io/what-is-cors-in-node-js-2024-a-comprehensive-guide-542630e0a805 as reference December 27
 // https://expressjs.com/en/resources/middleware/session.html as reference December 27
 // https://stackoverflow.com/questions/50454992/req-session-destroy-and-passport-logout-arent-destroying-cookie-on-client-side  as reference 1/1/25
 // https://www.youtube.com/watch?v=pzGQMwGmCnc as reference
+
+const upload = multer({ dest: 'uploads/' });// This is from ChatGPT 16/01/2025
 
 app.use(bodyParser.json());
 app.use(bodyParser.urlencoded({ extended: true }));//So it is extended for all types to be enoded
@@ -128,5 +132,26 @@ app.post('/login', async (req, res) => {
     } catch (err) {
         console.log("error", err)
         res.status(400).json({ message: "This is a not a user", validate: false })
+    }
+});
+
+// This is from ChatGPT 16/01/2025
+app.post('/predict', upload.single('image'), async (req, res) => {
+    try {
+        const filePath = req.file.path;
+
+        const file = fs.createReadStream(filePath);
+
+        const flaskResponse = await axios.post('http://localhost:5000/predict', { image: file },
+            {
+                headers: {
+                    'Content-Type': 'multipart/form-data'
+                }
+            });
+        fs.unlinkSync(filePath);
+        res.json(flaskResponse.data);
+    } catch (err) {
+        console.log("error", err)
+        res.status(500).json({ message: "Image did not process" })
     }
 });
