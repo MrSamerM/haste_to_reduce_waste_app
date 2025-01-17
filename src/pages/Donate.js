@@ -24,6 +24,7 @@ function Donate() {
     const [baseSixtyFour, setBaseSixtyFour] = useState("");
 
     const change = (evt) => {
+        const target = evt.target.files[0];
         setFile(evt.target.files[0]);
         setFileURL(URL.createObjectURL(evt.target.files[0]));
 
@@ -31,7 +32,7 @@ function Donate() {
         base.onloadend = () => {
             setBaseSixtyFour(base.result.toString());
         }
-        base.readAsDataURL(file);
+        base.readAsDataURL(target);
         console.log(baseSixtyFour)
 
 
