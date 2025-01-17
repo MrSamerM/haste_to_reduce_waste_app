@@ -10,6 +10,8 @@ import axios from 'axios';
 // https://www.geeksforgeeks.org/how-to-upload-image-and-preview-it-using-reactjs/ do display image 15/01/25
 // chatGPT [pasted my code to see why the if statements where not working] 16/01/21. Used for file type, FileURL useState and change function.
 
+//  https://www.youtube.com/watch?v=pxkE2tT6Y-o to convert image to base64 17/01/2025
+
 function Donate() {
 
     const [file, setFile] = useState("");
@@ -26,9 +28,12 @@ function Donate() {
         setFileURL(URL.createObjectURL(evt.target.files[0]));
 
         const base = new FileReader();
-        setBaseSixtyFour(base.result)
-        base.readAsDataURL(evt.target.files[0]);
-        console.log(baseSixtyFour);
+        base.onloadend = () => {
+            setBaseSixtyFour(base.result.toString());
+        }
+        base.readAsDataURL(file);
+        console.log(baseSixtyFour)
+
 
     }
     useEffect(() => {
@@ -75,7 +80,7 @@ function Donate() {
         e.preventDefault();
 
         const data = {
-            image: fileURL,
+            image: baseSixtyFour,
             description: description,
             portionSize: portionSize,
             address: address,
