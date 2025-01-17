@@ -1,6 +1,11 @@
 import React from "react";
 import '../styling/Donate.css'
 import { useState, useEffect } from "react";
+import { GeoapifyGeocoderAutocomplete, GeoapifyContext } from '@geoapify/react-geocoder-autocomplete'
+import '@geoapify/geocoder-autocomplete/styles/minimal.css'
+import axios from 'axios';
+
+
 
 // https://www.geeksforgeeks.org/how-to-upload-image-and-preview-it-using-reactjs/ do display image 15/01/25
 // chatGPT [pasted my code to see why the if statements where not working] 16/01/21. Used for file type, FileURL useState and change function.
@@ -50,6 +55,12 @@ function Donate() {
         }
     }
 
+    const onPlaceSelect = (evt) => {
+
+        if (address === "") {
+            setAddress("");
+        }
+    }
     return (
         <>
             <h1>Donate</h1>
@@ -61,6 +72,18 @@ function Donate() {
             {/* add code that would use the python ai model, if container then display the inputs, else reselect image */}
 
             {/* Change this to a button called scan for suitable container */}
+
+            {/* GeoApify API  https://apidocs.geoapify.com/samples/autocomplete/react-geoapify-geocoder-autocomplete/ 
+            // https://www.npmjs.com/package/@geoapify/react-geocoder-autocomplete*/}
+
+            <GeoapifyContext apiKey={process.env.REACT_APP_GEOAPIFY_API_KEY}>
+                <GeoapifyGeocoderAutocomplete placeholder="Enter address here"
+                    lang='en'
+                    limit={5}
+                    value={address}
+                    placeSelect={onPlaceSelect}
+                />
+            </GeoapifyContext>
 
             {enableInput === false ? null :
                 <div>

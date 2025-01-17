@@ -24,7 +24,7 @@ app.use(bodyParser.json());
 app.use(bodyParser.urlencoded({ extended: true }));//So it is extended for all types to be enoded
 app.use(cors(
     {
-        origin: 'http://localhost:3000',
+        origin: process.env.REACT_APP_API_URL,
         methods: ['GET, POST, PUT, OPTIONS'],
         credentials: true,
         allowedHeaders: 'Content-Type'
@@ -47,7 +47,7 @@ app.use(session(
 
 app.options('*', cors()); //this allows preflight for all routes
 
-mongoose.connect('mongodb+srv://2106040:2106040Password@cluster0.cmsyx.mongodb.net/webAppDatabase?retryWrites=true&w=majority&appName=Cluster0')
+mongoose.connect(process.env.REACT_APP_MONGO_PATH)
     .then(() => {
         console.log("Connected")
     })
