@@ -93,6 +93,29 @@ app.post('/register', async (req, res) => {
     }
 });
 
+app.post('/donate', async (req, res) => {
+    try {
+        const { image, description, portionSize, address } = req.body
+
+        const donation = new Donation(
+            {
+                image: image,
+                description: description,
+                portionSize: portionSize,
+                address: address,
+                donatorID: req.session.userID
+            }
+        )
+        await donation.save()
+        console.log("Donation Successfully");
+        res.json({ message: "Donated" })
+    }
+    catch (e) {
+        console.log("Error", e)
+        res.status(400).json({ error: "There appears to be a error with the input" })
+    }
+});
+
 app.get('/session_check', async (req, res) => {
 
     if (!req.session.userID) {

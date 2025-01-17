@@ -38,6 +38,7 @@ const donationSchema = new mongoose.Schema({
 
     recipientID: {
         type: String,
+        default: "",
         require: true
     },
 
