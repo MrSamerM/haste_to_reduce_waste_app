@@ -31,10 +31,6 @@ function Donate() {
         console.log(baseSixtyFour);
 
     }
-
-
-
-
     useEffect(() => {
         if (file.type === "image/png" || file.type === 'image/jpeg' || file.type === 'image/gif' || file.type === 'image/jpg') {
             setEnableInput(true);
