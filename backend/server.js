@@ -20,8 +20,9 @@ const multer = require('multer');
 
 const upload = multer({ dest: 'uploads/' });// This is from ChatGPT 16/01/2025
 
-app.use(bodyParser.json());
-app.use(bodyParser.urlencoded({ extended: true }));//So it is extended for all types to be enoded
+// https://stackoverflow.com/questions/54716914/413-payload-too-large-for-base64-string-after-adjusting-size-in-express for limits 18/01/2025
+app.use(bodyParser.json({ limit: '50mb', extended: true }));
+app.use(bodyParser.urlencoded({ limit: "50mb", extended: true, parameterLimit: 50000 }));//So it is extended for all types to be enoded
 app.use(cors(
     {
         origin: process.env.REACT_APP_API_URL,

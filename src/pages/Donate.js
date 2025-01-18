@@ -24,30 +24,28 @@ function Donate() {
     const [baseSixtyFour, setBaseSixtyFour] = useState("");
 
     const change = (evt) => {
-        const target = evt.target.files[0];
         setFile(evt.target.files[0]);
         setFileURL(URL.createObjectURL(evt.target.files[0]));
-
-        const base = new FileReader();
-        base.onloadend = () => {
-            setBaseSixtyFour(base.result.toString());
-        }
-        base.readAsDataURL(target);
-        console.log(baseSixtyFour)
-
-
     }
     useEffect(() => {
         if (file.type === "image/png" || file.type === 'image/jpeg' || file.type === 'image/gif' || file.type === 'image/jpg') {
             setEnableInput(true);
             console.log("true");
 
+            const base = new FileReader();
+
+            base.onloadend = () => {
+                const base64 = base.result;
+                setBaseSixtyFour(base64.toString());
+                console.log(base64);
+            }
+            base.readAsDataURL(file);
+
         }
         else {
             setEnableInput(false);
             console.log("false");
             console.log(file);
-
         }
     }, [file]);
 
@@ -69,11 +67,15 @@ function Donate() {
         }
     }
 
-    const onPlaceSelect = (evt) => {
-
-        if (address === "") {
-            setAddress("");
+    // from chatgpt to be able to update the address prompt: why is the address not saving (added my code) 18/01/2025
+    const onPlaceSelect = (place) => {
+        if (place && place.properties && place.properties.formatted) {
+            setAddress(place.properties.formatted);
         }
+    }
+
+    const updatedAddress = (value) => {
+        setAddress(value);
     }
 
     const donate = async (e) => {
@@ -97,6 +99,7 @@ function Donate() {
                 setAddress("");
                 setDescription("");
                 setPortionSize(0);
+                setBaseSixtyFour("")
             }
 
         } catch (e) {
@@ -113,9 +116,7 @@ function Donate() {
                 <input type="file" id="imageFile" onChange={change} />
                 <img id="selectedImage" src={fileURL} alt="selected file" />
             </div>
-            {/* add code that would use the python ai model, if container then display the inputs, else reselect image */}
 
-            {/* Change this to a button called scan for suitable container */}
 
             {/* GeoApify API  https://apidocs.geoapify.com/samples/autocomplete/react-geoapify-geocoder-autocomplete/ 
             // https://www.npmjs.com/package/@geoapify/react-geocoder-autocomplete*/}
@@ -142,6 +143,7 @@ function Donate() {
                                 lang='en'
                                 limit={5}
                                 value={address}
+                                onChange={updatedAddress}
                                 placeSelect={onPlaceSelect}
                             />
                         </GeoapifyContext>
