@@ -86,21 +86,21 @@ history=model.fit( #this method is used to train the model
     epochs=epochs #iteration over data (image) provided
 )
 
-model.save('model.h5')
+# model.save('model.h5')
 
-# imageTest_dir=pathlib.Path('backend/aiModel/Images')
+imageTest_dir=pathlib.Path('backend/aiModel/Images')
 
 
-# for image_file in imageTest_dir.iterdir():
-#     if image_file.suffix.lower() in ['.png', '.jpg', '.jpeg']:  # Filter for image files
-#         images = tf.keras.utils.load_img(image_file, target_size=(image_height, image_width))
-#         img_array = tf.keras.utils.img_to_array(images)
-#         img_array = tf.expand_dims(img_array, 0)  # Create a batch
+for image_file in imageTest_dir.iterdir():
+    if image_file.suffix.lower() in ['.png', '.jpg', '.jpeg']:  # Filter for image files
+        images = tf.keras.utils.load_img(image_file, target_size=(image_height, image_width))
+        img_array = tf.keras.utils.img_to_array(images)
+        img_array = tf.expand_dims(img_array, 0)  # Create a batch
         
-#         # Make prediction
-#         predictions = model.predict(img_array)
-#         score = tf.nn.softmax(predictions[0])
+        # Make prediction
+        predictions = model.predict(img_array)
+        score = tf.nn.softmax(predictions[0])
 
-#         print("This image most likely belongs to {} with a {:.2f} percent confidence."
-#               .format(class_names[np.argmax(score)], 100 * np.max(score)))
+        print("This image most likely belongs to {} with a {:.2f} percent confidence."
+              .format(class_names[np.argmax(score)], 100 * np.max(score)))
 
