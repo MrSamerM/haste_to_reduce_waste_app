@@ -126,7 +126,7 @@ function Signup({ setSessionAvailability }) {
 
                 {validate === true ? null : <p id="validationMessage">{validationMessage}</p>}
 
-                <button onClick={submit}>Sign Up</button>
+                <button id="signupButton" onClick={submit}>Sign Up</button>
             </div>
         </>
     );

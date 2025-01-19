@@ -46,7 +46,7 @@ prompt 2 "I want the inputs to all be one below the other evenly macthed no one 
     width: 100%;
 }
 
-button {
+#signupButton {
     background-color: black;
     color: white;
     width: 150px;

@@ -96,7 +96,7 @@ app.post('/register', async (req, res) => {
 
 app.post('/donate', async (req, res) => {
     try {
-        const { image, description, portionSize, address } = req.body
+        const { image, description, portionSize, address, longitude, latitude } = req.body
 
         const donation = new Donation(
             {
@@ -104,6 +104,8 @@ app.post('/donate', async (req, res) => {
                 description: description,
                 portionSize: portionSize,
                 address: address,
+                longitude: longitude,
+                latitude: latitude,
                 donatorID: req.session.userID
             }
         )

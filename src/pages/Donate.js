@@ -1,6 +1,6 @@
 import React from "react";
 import '../styling/Donate.css'
-import { useState, useEffect } from "react";
+import { useState, useEffect, useRef } from "react";
 import { GeoapifyGeocoderAutocomplete, GeoapifyContext } from '@geoapify/react-geocoder-autocomplete'
 import '@geoapify/geocoder-autocomplete/styles/minimal.css'
 import axios from 'axios';
@@ -19,6 +19,8 @@ function Donate() {
     const [enableInput, setEnableInput] = useState(false);
     const [percentage, setPercentage] = useState(0);
     const [address, setAddress] = useState("");
+    const [longitude, setLongitude] = useState(0);
+    const [latitude, setLatitude] = useState(0);
     const [description, setDescription] = useState("");
     const [portionSize, setPortionSize] = useState(0);
     const [baseSixtyFour, setBaseSixtyFour] = useState("");
@@ -71,12 +73,19 @@ function Donate() {
     const onPlaceSelect = (place) => {
         if (place && place.properties && place.properties.formatted) {
             setAddress(place.properties.formatted);
+            setLongitude(place.geometry.coordinates[0]);
+            setLatitude(place.geometry.coordinates[1]);
+
         }
     }
 
     const updatedAddress = (value) => {
         setAddress(value);
     }
+
+    // Chatgpt Prompt: (image of my code) I want everything to reset, however the file still says the name of the previous file? 19/01/2025
+
+    const fileInputRef = useRef(null); // Add a ref for the file input
 
     const donate = async (e) => {
 
@@ -87,7 +96,10 @@ function Donate() {
             description: description,
             portionSize: portionSize,
             address: address,
+            longitude: longitude,
+            latitude: latitude
         }
+
 
         try {
             const res = await axios.post("http://localhost:8000/donate", data)
@@ -102,6 +114,11 @@ function Donate() {
                 setBaseSixtyFour("")
             }
 
+
+            if (fileInputRef.current) {
+                fileInputRef.current.value = null;
+            }
+
         } catch (e) {
             console.log("Error with submission", e)
         }
@@ -113,7 +130,7 @@ function Donate() {
             <h1>Donate</h1>
 
             <div>
-                <input type="file" id="imageFile" onChange={change} />
+                <input type="file" id="imageFile" onChange={change} ref={fileInputRef} />
                 <img id="selectedImage" src={fileURL} alt="selected file" />
             </div>
 

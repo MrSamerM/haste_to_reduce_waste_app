@@ -40,6 +40,7 @@ export default function Navbar({ sessionAvailability, setSessionAvailability }) 
                         (<>
                             <li><Link to={'/e_commerce'}>E-Commerce</Link></li>
                             <li><Link to={'/donate'}>Donation</Link></li>
+                            <li><Link to={'/reserve_donation'}>Reserve Donation</Link></li>
                             <li><Link onClick={remove}>Sign out</Link></li>
                         </>
                         )}
