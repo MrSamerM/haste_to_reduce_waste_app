@@ -3,7 +3,7 @@
     padding: 0;
 }
 
-nav {
+#navbar {
     width: 100%;
     justify-content: space-between;
     display: flex;
@@ -17,15 +17,13 @@ nav {
 a {
     text-decoration: none;
     background-color: lightgreen;
-
 }
 
-ul {
+#listOfLinks {
     display: flex;
-
 }
 
-li {
+.links {
     padding-left: 40px;
     color: black;
     font-weight: bold;
@@ -37,11 +35,3 @@ li {
     background-color: lightgreen;
 
 }
-
-
-/* Label {
-    display: none;
-} */
-
-
-/* This is for the Link tag to get rid of underlines */

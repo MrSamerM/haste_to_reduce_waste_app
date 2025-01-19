@@ -1,3 +1,10 @@
+body {
+    margin: 0;
+    padding: 0;
+    background-color: #E1ECD8;
+}
+
+
 .leaflet-container {
     height: 450px;
     width: 600px;

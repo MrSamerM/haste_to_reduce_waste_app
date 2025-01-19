@@ -181,3 +181,14 @@ app.post('/predict', upload.single('image'), async (req, res) => {
         res.status(500).json({ message: "Image did not process" })
     }
 });
+
+app.get('/allDonations', async (req, res) => {
+    try {
+        const allDonations = await Donation.find({});
+        res.json({ result: allDonations });
+
+    } catch (err) {
+        console.log("error", err)
+        res.status(500).json({ message: "database can't get data" })
+    }
+})

@@ -27,24 +27,23 @@ export default function Navbar({ sessionAvailability, setSessionAvailability }) 
 
     return (
         <>
-            <nav>
-                <ul>
-                    <li><Link to={'/'}>Home</Link></li>
-                    <li><Link to={'/food_labels'}>Labels</Link></li>
+            <nav id='navbar'>
+                <ul id='listOfLinks'>
+                    <li className='links'><Link to={'/'}>Home</Link></li>
+                    <li className='links'><Link to={'/food_labels'}>Labels</Link></li>
 
                     {!sessionAvailability ?
                         (<>
-                            <li><Link to={'/signup'}>SignUp</Link></li>
-                            <li><Link to={'/login'}>Login</Link></li>
+                            <li className='links'><Link to={'/signup'}>SignUp</Link></li>
+                            <li className='links'><Link to={'/login'}>Login</Link></li>
                         </>) :
                         (<>
-                            <li><Link to={'/e_commerce'}>E-Commerce</Link></li>
-                            <li><Link to={'/donate'}>Donation</Link></li>
-                            <li><Link to={'/reserve_donation'}>Reserve Donation</Link></li>
-                            <li><Link onClick={remove}>Sign out</Link></li>
+                            <li className='links'><Link to={'/e_commerce'}>E-Commerce</Link></li>
+                            <li className='links'><Link to={'/donate'}>Donation</Link></li>
+                            <li className='links'><Link to={'/reserve_donation'}>Reserve Donation</Link></li>
+                            <li className='links'><Link onClick={remove}>Sign out</Link></li>
                         </>
                         )}
-                    <label className="3Lines">☰</label>
                 </ul>
             </nav>
         </>

@@ -1,4 +1,4 @@
-* {
+body {
     margin: 0;
     padding: 0;
     background-color: #E1ECD8;
@@ -40,7 +40,7 @@ prompt 2 "I want the inputs to all be one below the other evenly macthed no one 
     width: 200px;
 }
 
-#details input {
+#details .signUpInputs {
     padding: 5px;
     margin: 5px;
     width: 100%;
