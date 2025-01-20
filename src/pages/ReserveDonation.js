@@ -18,7 +18,9 @@ function ReserveDonation() {
         const processMarkers = async () => {
             try {
                 const res = await axios.get('http://localhost:8000/allDonations')
-                const allDonations = res.data.result.map((data) => [data.latitude, data.longitude]);
+                const allDonations = res.data.result
+                    .filter((data) => data.reserved === false)
+                    .map((data) => ({ latitude: data.latitude, longitude: data.longitude, image: data.image, description: data.description, portionSize: data.portionSize, reserved: data.reserved, id: data._id }));
                 setMarkers(allDonations);
 
             } catch (err) {
@@ -37,6 +39,21 @@ function ReserveDonation() {
         iconSize: [38, 38]
     })
 
+    const reserveDonation = async (id) => {
+
+
+        const data = {
+            reserved: true,
+            donationID: id
+        }
+
+        try {
+            await axios.post('http://localhost:8000/updateReservation', data);
+        } catch (err) {
+            console.log("Error", err)
+        }
+    }
+
     return (
         <div>
             ReserveDonation
@@ -49,9 +66,13 @@ function ReserveDonation() {
                 />
 
                 {markers.map((listOfMarker, index) => (
-                    <Marker key={index} position={listOfMarker} icon={customIcon}>
-                        <Popup>
-                            A pretty CSS3 popup. <br />
+                    <Marker key={index} position={[listOfMarker.latitude, listOfMarker.longitude]} icon={customIcon}>
+                        <Popup className="mapPopup" >
+                            <img src={listOfMarker.image} /> <br />
+                            {listOfMarker.description} <br />
+                            {listOfMarker.portionSize} <br />
+                            {listOfMarker.reserved === true ? null : <button id="reserveButton" onClick={() => reserveDonation(listOfMarker.id)}>Reserve this donation</button>}
+                            {/* used chatgpt for top line, because I had to send the id straight away to the function. Prompt:(My entire code) */}
                         </Popup>
                     </Marker>
                 ))}

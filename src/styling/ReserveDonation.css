@@ -9,3 +9,8 @@ body {
     height: 450px;
     width: 600px;
 }
+
+.mapPopup {
+    height: 300px;
+    width: 250px;
+}

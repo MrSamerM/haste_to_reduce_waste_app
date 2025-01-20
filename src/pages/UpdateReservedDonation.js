@@ -5,7 +5,7 @@ import '../styling/UpdateReservedDonation.css'
 function UpdateReservedDonation() {
     return (
         <div>
-            UpdateReservedDonation
+            View and Update Reserved Donations
         </div>
     );
 }

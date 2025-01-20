@@ -192,3 +192,38 @@ app.get('/allDonations', async (req, res) => {
         res.status(500).json({ message: "database can't get data" })
     }
 })
+
+app.get('/allDonatedDonations', async (req, res) => {
+    try {
+        const allDonations = await Donation.find({ donatorID: req.session.userID });
+        res.json({ result: allDonations });
+
+    } catch (err) {
+        console.log("error", err)
+        res.status(500).json({ message: "database can't get data" })
+    }
+})
+
+app.get('/allReservedDonations', async (req, res) => {
+    try {
+        const allDonations = await Donation.find({ recipientID: req.session.userID });
+        res.json({ result: allDonations });
+
+    } catch (err) {
+        console.log("error", err)
+        res.status(500).json({ message: "database can't get data" })
+    }
+})
+
+app.post('/updateReservation', async (req, res) => {
+    try {
+        const { reserved, donationID } = req.body;
+
+        const findID = await Donation.findByIdAndUpdate(donationID, { reserved: reserved, recipientID: req.session.userID, })
+        findID.save();
+
+    } catch (err) {
+        console.log("error", err)
+        res.status(500).json({ message: "database can't post data" })
+    }
+})
