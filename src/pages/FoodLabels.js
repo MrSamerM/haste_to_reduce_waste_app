@@ -3,6 +3,8 @@ import '../styling/FoodLabels.css'
 
 
 function FoodLabels() {
+
+
     return (
         <div>
             FoodLabels

@@ -7,6 +7,9 @@ function UpdateDonation() {
 
     const [data, setData] = useState([]);
 
+    axios.defaults.withCredentials = true;
+
+
     useEffect(() => {
 
         const allDonations = async () => {

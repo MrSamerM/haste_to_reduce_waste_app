@@ -19,7 +19,7 @@ import axios from "axios";
 
 function App() {
 
-  const [sessionAvailability, setSessionAvailability] = useState(false);
+  const [sessionAvailability, setSessionAvailability] = useState(null);
   axios.defaults.withCredentials = true;
 
   useEffect(() => {
@@ -28,22 +28,26 @@ function App() {
 
       try {
         const res = await axios.get('http://localhost:8000/session_check');
-
-        if (res.data.available === false) {
-          setSessionAvailability(false);
-        }
-        else {
-          setSessionAvailability(true);
-        }
+        setSessionAvailability(res.data.available);
       }
       catch (e) {
         console.log("Error when getting request", e)
+        setSessionAvailability(true);
       }
     })
-
     check();
 
-  }, [sessionAvailability])
+  }, [])
+
+  // Received if statement from chatGPT 20/01/2025, also changed useEffect, and useState(null)
+  // Prompt: when I am in a page that requires a express session, I reload, and it returns me to the homepage. 
+  // Is it because I have to make sure that there is a express session in all pages?   
+  // example what should I add to this page to make it so I refresh on the same page
+  // (sent image of app js and ReserveDonation
+
+  if (sessionAvailability === null) {
+    return <div>Loading...</div>;
+  }
 
   return (
     <div>

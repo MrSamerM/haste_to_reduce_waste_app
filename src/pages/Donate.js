@@ -24,6 +24,11 @@ function Donate() {
     const [description, setDescription] = useState("");
     const [portionSize, setPortionSize] = useState(0);
     const [baseSixtyFour, setBaseSixtyFour] = useState("");
+    const [predictedClass, setPredictedClass] = useState(""); // State for predicted class
+
+
+    axios.defaults.withCredentials = true;
+
 
     const change = (evt) => {
         setFile(evt.target.files[0]);
@@ -54,7 +59,8 @@ function Donate() {
     const submit = async () => {
 
         const formData = new FormData();
-        formData.append("image", fileURL);
+        formData.append("image", file);
+
 
         try {
             const res = await axios.post('http://localhost:8000/predict', formData, {
@@ -62,7 +68,29 @@ function Donate() {
                     'Content-Type': 'multipart/form-data'
                 }
             });
-            setPercentage(res.data);
+            const logits = res.data.prediction[0];
+
+            // This is all ChatGPT
+            //Main Prompt: i get 197 percent, is this correct? (my code)
+
+            // Apply Softmax to get probabilities
+            const softmax = (logits) => {
+                const expValues = logits.map(x => Math.exp(x));  // Calculate e^logit for each logit
+                const sum = expValues.reduce((acc, val) => acc + val, 0);  // Sum of all e^logits
+                return expValues.map(x => x / sum);  // Normalize to get probabilities
+            };
+
+            const probabilities = softmax(logits);  // Get probabilities from logits
+
+            // Determine the predicted class based on probabilities
+            const predictedClass = probabilities[0] > probabilities[1] ? 'container' : 'not container';
+            console.log(predictedClass);
+
+            // Set the percentage based on the highest probability
+            const confidence = Math.max(probabilities[0], probabilities[1]);
+            setPercentage(confidence * 100);  // Valid percentage (0-100)
+            setPredictedClass(predictedClass);
+
 
         } catch (err) {
             console.log("error", err);
@@ -142,7 +170,7 @@ function Donate() {
             {enableInput === false ? null :
                 <div>
                     <button onClick={submit}>Scan</button>
-                    <p>The Image is {percentage}</p>
+                    <p>The Image is {percentage} a {predictedClass}</p>
 
                     <div className="donationInputs">
                         <label htmlFor="descriptionInput">Description:</label>
