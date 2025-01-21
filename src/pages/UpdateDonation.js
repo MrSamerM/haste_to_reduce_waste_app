@@ -16,7 +16,7 @@ function UpdateDonation() {
 
             try {
                 const res = await axios.get('http://localhost:8000/allDonatedDonations')
-                const allDonatedDonations = res.data.result.map((data) => ({ description: data.description, portionSize: data.portionSize, reserved: data.reserved, address: data.address }));
+                const allDonatedDonations = res.data.result.map((data) => ({ id: data._id, description: data.description, portionSize: data.portionSize, reserved: data.reserved, address: data.address }));
                 setData(allDonatedDonations);
 
             } catch (err) {
@@ -26,6 +26,19 @@ function UpdateDonation() {
         allDonations();
 
     }, []);
+
+    const deleteDonation = async (id) => {
+
+        const data = {
+            donationID: id
+        }
+        try {
+            await axios.post('http://localhost:8000/removeDonation', data);
+
+        } catch (err) {
+            console.log("Error", err)
+        }
+    }
 
     return (
         <div>
@@ -58,13 +71,13 @@ function UpdateDonation() {
                     </div>
 
                     <div className="sideInformation">
-                        <p className="tickXAndEditIcon">&#10060;</p>
+                        <button className="tickXAndEditIcon" onClick={() => deleteDonation(data.id)}>&#10060;</button>
                         <br></br>
                         <label className="sideInformationLabels">Delete Donation</label>
                     </div>
 
                     <div className="sideInformation">
-                        <p className="tickXAndEditIcon">&#9998;</p>
+                        <button className="tickXAndEditIcon">&#9998;</button>
                         <br></br>
                         <label className="sideInformationLabels">Update Donation</label>
                     </div>

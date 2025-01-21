@@ -155,49 +155,59 @@ function Donate() {
 
     return (
         <>
-            <h1>Donate</h1>
+            <div id="donateTitleDiv"><h1 id="donateTitle">Donate</h1></div>
 
-            <div>
-                <input type="file" id="imageFile" onChange={change} ref={fileInputRef} />
-                <img id="selectedImage" src={fileURL} alt="selected file" />
-            </div>
+            <div id="donationBox">
+
+                <div id="selectDonationImage">
+                    {/* to remove select file button https://stackoverflow.com/questions/61468441/how-to-change-default-text-in-input-type-file-in-reactjs 21/01/2025 */}
+                    <label htmlFor="imageFile" id="selectFileLabel">Click here to upload donation image: </label>
+                    <input type="file" id="imageFile" onChange={change} ref={fileInputRef} />
+                    <img id="selectedImage" src={fileURL} alt="selected file" />
+                </div>
 
 
-            {/* GeoApify API  https://apidocs.geoapify.com/samples/autocomplete/react-geoapify-geocoder-autocomplete/ 
+                {/* GeoApify API  https://apidocs.geoapify.com/samples/autocomplete/react-geoapify-geocoder-autocomplete/ 
             // https://www.npmjs.com/package/@geoapify/react-geocoder-autocomplete*/}
 
 
-            {enableInput === false ? null :
-                <div>
-                    <button onClick={submit}>Scan</button>
-                    <p>The Image is {percentage} a {predictedClass}</p>
+                {enableInput === false ? null :
+                    <div id="allDonationResults">
+                        <div id="aiResult">
+                            <button onClick={submit}>Scan</button>
+                            <p>The Image is {percentage} {predictedClass}</p>
+                        </div>
 
-                    <div className="donationInputs">
-                        <label htmlFor="descriptionInput">Description:</label>
-                        <input type="text" id="descriptionInput" placeholder="Enter description here" value={description} onChange={(evt) => setDescription(evt.target.value)} />
-                    </div>
-                    <br></br>
-                    <div className="donationInputs">
-                        <label htmlFor="portionSizeInput">Portion Size:</label>
-                        <input type="number" id="portionSizeInput" value={portionSize} onChange={(evt) => setPortionSize(evt.target.value)} />
-                    </div>
-                    <br></br>
-                    <div className="donationInputs">
-                        <GeoapifyContext apiKey={process.env.REACT_APP_GEOAPIFY_API_KEY}>
-                            <GeoapifyGeocoderAutocomplete placeholder="Enter address here"
-                                lang='en'
-                                limit={5}
-                                value={address}
-                                onChange={updatedAddress}
-                                placeSelect={onPlaceSelect}
-                            />
-                        </GeoapifyContext>
-                    </div>
-                    <br></br>
-                    <button id="donateButton" onClick={donate}>Donate</button>
-                </div>
-            }
+                        <div id="donateDetails">
 
+                            <div className="donationInputDiv">
+                                <label className="donateInputLabels" htmlFor="descriptionInput">Description:</label>
+                                <input type="text" id="descriptionInput" placeholder="Enter description here" value={description} onChange={(evt) => setDescription(evt.target.value)} />
+                            </div>
+                            <br></br>
+                            <div className="donationInputDiv">
+                                <label className="donateInputLabels" htmlFor="portionSizeInput">Portion Size:</label>
+                                <input type="number" id="portionSizeInput" value={portionSize} onChange={(evt) => setPortionSize(evt.target.value)} />
+                            </div>
+                            <br></br>
+                            <div className="donationInputDiv">
+                                <GeoapifyContext apiKey={process.env.REACT_APP_GEOAPIFY_API_KEY}>
+                                    <GeoapifyGeocoderAutocomplete placeholder="Enter address here"
+                                        lang='en'
+                                        limit={5}
+                                        value={address}
+                                        onChange={updatedAddress}
+                                        placeSelect={onPlaceSelect}
+                                    />
+                                </GeoapifyContext>
+                            </div>
+                        </div>
+                        <br></br>
+                        <button id="donateButton" onClick={donate}>Donate</button>
+                    </div>
+                }
+
+            </div>
         </>
     );
 }

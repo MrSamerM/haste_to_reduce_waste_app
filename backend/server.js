@@ -205,6 +205,7 @@ app.get('/allDonatedDonations', async (req, res) => {
     }
 })
 
+
 app.get('/allReservedDonations', async (req, res) => {
     try {
         const allDonations = await Donation.find({ recipientID: req.session.userID });
@@ -219,7 +220,6 @@ app.get('/allReservedDonations', async (req, res) => {
 app.post('/updateReservation', async (req, res) => {
     try {
         const { reserved, donationID } = req.body;
-
         const findID = await Donation.findByIdAndUpdate(donationID, { reserved: reserved, recipientID: req.session.userID, })
         findID.save();
 
@@ -228,3 +228,29 @@ app.post('/updateReservation', async (req, res) => {
         res.status(500).json({ message: "database can't post data" })
     }
 })
+
+app.post('/removeReservation', async (req, res) => {
+    try {
+        const { donationID } = req.body
+        const findID = await Donation.findByIdAndUpdate(donationID, { reserved: false, recipientID: "", })
+        findID.save();
+        console.log("Removed Reservation")
+        res.json({ message: "Reservation Removed" });
+
+    } catch (err) {
+        console.log("error", err)
+        res.status(500).json({ message: "database can't post data" })
+    }
+});
+
+app.post('/removeDonation', async (req, res) => {
+    try {
+        const { donationID } = req.body
+        await Donation.findByIdAndDelete(donationID)
+        console.log("Donation Removed")
+
+    } catch (err) {
+        console.log("error", err)
+        res.status(500).json({ message: "database can't find data to remove" })
+    }
+});
