@@ -16,7 +16,7 @@ function Donate() {
 
     const [file, setFile] = useState("");
     const [fileURL, setFileURL] = useState("");
-    const [enableInput, setEnableInput] = useState(false);
+    const [disableInput, setDisableInput] = useState(true);
     const [percentage, setPercentage] = useState(0);
     const [address, setAddress] = useState("");
     const [longitude, setLongitude] = useState(0);
@@ -36,7 +36,7 @@ function Donate() {
     }
     useEffect(() => {
         if (file.type === "image/png" || file.type === 'image/jpeg' || file.type === 'image/gif' || file.type === 'image/jpg') {
-            setEnableInput(true);
+            setDisableInput(false);
             console.log("true");
 
             const base = new FileReader();
@@ -50,7 +50,7 @@ function Donate() {
 
         }
         else {
-            setEnableInput(false);
+            setDisableInput(true);
             console.log("false");
             console.log(file);
         }
@@ -161,23 +161,21 @@ function Donate() {
 
                 <div id="selectDonationImage">
                     {/* to remove select file button https://stackoverflow.com/questions/61468441/how-to-change-default-text-in-input-type-file-in-reactjs 21/01/2025 */}
-                    <div>
-                        <label htmlFor="imageFile" id="selectFileLabel">Click here to upload donation image: </label>
+                    <div id="preDonationInformation">
+                        <label htmlFor="imageFile" id="selectFileLabel">Click here to upload donation image</label>
                         <input type="file" id="imageFile" onChange={change} ref={fileInputRef} />
-                        <br></br>
-                        <br></br>
-                        <p>The image must be a .png, jpeg, jpg, of gif file.<br></br>
-                            This is to allow you to scan the image correctly.<br></br>
+
+                        <p id="imageRequirement">
+                            The image must be a .png, jpeg, jpg, of gif file.<br></br>
+                            This is to allow you to press scan to scan the image.<br></br>
+                            If the image is over 70% a container, then you can donate.<br></br>
                             The item should be put in a suitable container.<br></br>
                             such as; aluminium, plastic, or takeaway container.<br></br>
                         </p>
-                        <br></br>
-                        {enableInput === false ? null :
-                            <div id="aiResult">
-                                <button id="scanImage" onClick={submit}>Scan</button>
-                            </div>}
+                        <button id="scanImage" disabled={disableInput} onClick={submit}>Scan</button>
                     </div>
-                    <div>
+
+                    <div id="imageAndPercentage">
                         <img id="selectedImage" src={fileURL} alt="selected file" />
                         <br></br>
                         <p>The Image is {percentage} {predictedClass}</p>
@@ -189,24 +187,25 @@ function Donate() {
             // https://www.npmjs.com/package/@geoapify/react-geocoder-autocomplete*/}
 
 
-                {enableInput === false ? null :
-                    <div id="allDonationResults">
-                        <div id="donateDetails">
 
-                            <div className="donationInputDiv">
-                                <label className="donateInputLabels" htmlFor="descriptionInput">Description:</label>
-                                <input className="donationInputs" type="text" id="descriptionInput" placeholder="Enter description here" value={description} onChange={(evt) => setDescription(evt.target.value)} />
-                            </div>
-                            <br></br>
-                            <div className="donationInputDiv">
-                                <label className="donateInputLabels" htmlFor="portionSizeInput">Portion Size:</label>
-                                <input className="donationInputs" type="number" id="portionSizeInput" value={portionSize} onChange={(evt) => setPortionSize(evt.target.value)} />
-                            </div>
-                            <br></br>
-                            <div className="donationInputDiv">
+                <div id="allDonationResults">
+                    <div id="donateDetails">
 
-                                <label className="donateInputLabels" htmlFor="addressInput">Address:</label>
-                                <div className="donationInputs" id="autoCompleteAddress">
+                        <div className="donationInputDiv">
+                            <label className="donateInputLabels" htmlFor="descriptionInput">Description:</label>
+                            <input className="donationInputs" disabled={disableInput} type="text" id="descriptionInput" placeholder="Enter description here" value={description} onChange={(evt) => setDescription(evt.target.value)} />
+                        </div>
+                        <br></br>
+                        <div className="donationInputDiv">
+                            <label className="donateInputLabels" htmlFor="portionSizeInput">Portion Size:</label>
+                            <input className="donationInputs" disabled={disableInput} type="number" id="portionSizeInput" value={portionSize} onChange={(evt) => setPortionSize(evt.target.value)} />
+                        </div>
+                        <br></br>
+                        <div className="donationInputDiv">
+
+                            <label className="donateInputLabels" htmlFor="addressInput">Address:</label>
+                            {disableInput === true ? <input className="donationInputs" id="addressInput" placeholder="Enter address here" disabled={disableInput} />
+                                : <div className="donationInputs" id="autoCompleteAddress">
                                     <GeoapifyContext apiKey={process.env.REACT_APP_GEOAPIFY_API_KEY}>
                                         <GeoapifyGeocoderAutocomplete id="addressInput" placeholder="Enter address here"
                                             lang='en'
@@ -216,13 +215,14 @@ function Donate() {
                                             placeSelect={onPlaceSelect}
                                         />
                                     </GeoapifyContext>
-                                </div>
-                            </div>
+                                </div>}
                         </div>
-                        <br></br>
-                        <button id="donateButton" onClick={donate}>Donate</button>
                     </div>
-                }
+                    <br></br>
+                    {percentage > 70 && predictedClass === "container" ? <button id="donateButton" disabled={false} onClick={donate}>Donate</button>
+                        : <button id="donateButton" disabled={true} onClick={donate}>Donate</button>}
+                </div>
+
 
             </div>
         </>

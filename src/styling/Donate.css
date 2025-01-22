@@ -31,6 +31,25 @@ body {
     align-items: center;
 }
 
+
+#imageAndPercentage {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+}
+
+#preDonationInformation {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+
+}
+
+#selectFileLabel,
+#imageRequirement {
+    margin-bottom: 30px;
+}
+
 /* to remove select file button https://stackoverflow.com/questions/61468441/how-to-change-default-text-in-input-type-file-in-reactjs 21/01/2025 */
 
 #imageFile {
@@ -38,9 +57,11 @@ body {
 }
 
 #selectFileLabel {
-    font-size: large;
-    text-decoration: underline;
+    font-size: larger;
     cursor: pointer;
+    font-weight: bold;
+    border-style: solid;
+    border-width: 4px;
 
 }
 
@@ -105,6 +126,7 @@ body {
     height: 40px;
     font-size: large;
     text-align: center;
+    cursor: pointer;
 }
 
 #donateButton {

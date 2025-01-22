@@ -6,6 +6,7 @@ import Donate from "./Donate";
 import UpdateDonation from "./UpdateDonation";
 import ReserveDonation from "./ReserveDonation";
 import UpdateReservedDonation from "./UpdateReservedDonation";
+import UpdateDonationDetails from "./UpdateDonationDetails";
 import Signup from "./SignUp";
 import Login from "./Login";
 import Navbar from "./Navbar";
@@ -62,6 +63,8 @@ function App() {
         <Route path="/update_donation" element={sessionAvailability === true ? <UpdateDonation /> : <Navigate to={'/'} />} />
         <Route path="/reserve_donation" element={sessionAvailability === true ? <ReserveDonation /> : <Navigate to={'/'} />} />
         <Route path="/update_reserved_donation" element={sessionAvailability === true ? <UpdateReservedDonation /> : <Navigate to={'/'} />} />
+        <Route path="/update_donation_details" element={sessionAvailability === true ? <UpdateDonationDetails /> : <Navigate to={'/'} />} />
+
       </Routes>
 
     </div>
