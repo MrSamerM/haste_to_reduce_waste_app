@@ -17,6 +17,7 @@ function Donate() {
     const [file, setFile] = useState("");
     const [fileURL, setFileURL] = useState("");
     const [disableInput, setDisableInput] = useState(true);
+    const [disableScanner, setDisableScanner] = useState(true);
     const [percentage, setPercentage] = useState(0);
     const [address, setAddress] = useState("");
     const [longitude, setLongitude] = useState(0);
@@ -35,8 +36,17 @@ function Donate() {
         setFileURL(URL.createObjectURL(evt.target.files[0]));
     }
     useEffect(() => {
-        if (file.type === "image/png" || file.type === 'image/jpeg' || file.type === 'image/gif' || file.type === 'image/jpg') {
+
+        if (predictedClass === "Not a Container") {
+            setDisableInput(true);
+            console.log("Must be a container");
+        }
+        else if (predictedClass === "a Container") {
             setDisableInput(false);
+            console.log("It is a container");
+        }
+        else if (file.type === "image/png" || file.type === 'image/jpeg' || file.type === 'image/gif' || file.type === 'image/jpg') {
+            setDisableScanner(false);
             console.log("true");
 
             const base = new FileReader();
@@ -50,54 +60,31 @@ function Donate() {
 
         }
         else {
-            setDisableInput(true);
+            setDisableScanner(true);
             console.log("false");
             console.log(file);
         }
-    }, [file]);
+    }, [file, percentage, predictedClass]);
 
-    const submit = async (evt) => {
-        evt.preventDefault();
-
-        if (!file) {
-            console.error("No file selected");
-            return;
-        }
+    const submit = async (event) => {
+        event.preventDefault();
 
         const formData = new FormData();
         formData.append("file", file);
 
         try {
-            const res = await axios.post('http://localhost:5000/predict', formData, {
-                headers: { 'Content-Type': 'multipart/form-data' }
+            // POST request to backend with credentials (if needed)
+            const response = await axios.post("http://localhost:5000/upload", formData, {
+                headers: {
+                    "Content-Type": "multipart/form-data",
+                },
+                withCredentials: true,
             });
-
-            const { prediction, predicted_class, confidence } = res.data;  // Get response correctly
-
-            // Ensure predicted_class is available
-            if (!predicted_class) {
-                console.error("Predicted class is undefined");
-                return;
-            }
-
-            // Update frontend state with prediction and confidence
-            setPercentage(confidence);
-            setPredictedClass(predicted_class);  // Directly use predicted class from backend
-
-            console.log("Prediction:", prediction);
-            console.log("Predicted Class:", predicted_class);  // No need for class_names here if you're using backend's response
-            console.log("Confidence:", confidence);
-
-            // Conditional logic based on predicted class and confidence
-            if (confidence > 70 && predicted_class === "Container") {
-                alert("You can now donate the item!");
-            } else {
-                alert("The item does not meet the donation criteria.");
-            }
-
-        } catch (err) {
-            console.error("Error during prediction:", err);
-            alert("An error occurred while processing your request. Please try again.");
+            console.log(response.data.message);
+            setPredictedClass(response.data.message);
+            setPercentage(response.data.confidence);
+        } catch (error) {
+            console.error("Can't send the file", error);
         }
     };
 
@@ -145,7 +132,12 @@ function Donate() {
                 setAddress("");
                 setDescription("");
                 setPortionSize(0);
-                setBaseSixtyFour("")
+                setBaseSixtyFour("");
+                setPredictedClass("");
+                setDisableInput(true);
+                setDisableScanner(true);
+                setLongitude(0);
+                setLatitude(0);
             }
 
 
@@ -178,13 +170,13 @@ function Donate() {
                             The item should be put in a suitable container.<br></br>
                             such as; aluminium, plastic, or takeaway container.<br></br>
                         </p>
-                        <button id="scanImage" disabled={disableInput} onClick={submit}>Scan</button>
+                        <button id="scanImage" disabled={disableScanner} onClick={submit}>Scan</button>
                     </div>
 
                     <div id="imageAndPercentage">
                         <img id="selectedImage" src={fileURL} alt="selected file" />
                         <br></br>
-                        <p>The Image is {percentage} {predictedClass}</p>
+                        <p>The Image is {percentage}% {predictedClass}</p>
                     </div>
                 </div>
 
@@ -225,7 +217,7 @@ function Donate() {
                         </div>
                     </div>
                     <br></br>
-                    {percentage > 70 && predictedClass === "container" ? <button id="donateButton" disabled={false} onClick={donate}>Donate</button>
+                    {percentage > 70 && predictedClass === "a Container" ? <button id="donateButton" disabled={false} onClick={donate}>Donate</button>
                         : <button id="donateButton" disabled={true} onClick={donate}>Donate</button>}
                 </div>
 
@@ -238,3 +230,109 @@ function Donate() {
 export default Donate;
 
 
+// import { useState, useEffect } from "react";
+// import axios from "axios";
+
+// function Donate() {
+//     const [data, setData] = useState("");
+//     const [val, setVal] = useState("Upload image to predict");
+//     const [filename, setFilename] = useState("No file Uploaded");
+//     const [file, setFile] = useState(null);
+
+//     useEffect(() => {
+//         // Fetching the home message from the backend
+//         fetch("http://localhost:5000")
+//             .then((res) => res.json())
+//             .then((data) => {
+//                 console.log(data);
+//                 setData(data.message);
+//             })
+//             .catch((error) => console.error("Error fetching home message:", error));
+//     }, []);
+
+//     const handleSubmit = async (event) => {
+//         event.preventDefault();
+//         if (!file) {
+//             alert("Please upload a file first!");
+//             return;
+//         }
+
+//         const formData = new FormData();
+//         formData.append("file", file);
+
+//         try {
+//             // POST request to backend with credentials (if needed)
+//             const response = await axios.post("http://localhost:5000/upload", formData, {
+//                 headers: {
+//                     "Content-Type": "multipart/form-data",
+//                 },
+//                 withCredentials: true, // This is optional, depending on whether you need to send credentials with the request
+//             });
+//             console.log(response.data.message);
+//             setVal(response.data.message);
+//             alert("File uploaded and prediction made successfully!");
+//         } catch (error) {
+//             console.error("Error during file upload:", error);
+//             alert("Error uploading file. Please try again.");
+//         }
+//     };
+
+//     const handleFileUpload = (event) => {
+//         const uploadedFile = event.target.files[0];
+//         setFile(uploadedFile);
+//         setFilename(uploadedFile ? uploadedFile.name : "No file Uploaded");
+//     };
+
+//     return (
+//         <>
+//             <h1 className="mt-[5rem] mb-4 text-3xl font-extrabold dark:text-indigo-800 md:text-5xl lg:text-6xl">
+//                 <span className="text-transparent bg-clip-text bg-gradient-to-r to-violet-600 from-blue-900">
+//                     Machine Learning Model to
+//                 </span>
+//                 <br /> Detect Cats & Dogs
+//             </h1>
+//             <p className="text-lg font-normal text-white lg:text-xl">
+//                 Upload the image file to detect.
+//             </p>
+//             <form onSubmit={handleSubmit}>
+//                 <div className="flex w-full items-start justify-center bg-grey-lighter mb-5 mt-[5rem]">
+//                     <label className="w-64 flex flex-col items-center px-4 py-6 bg-white text-blue rounded-lg shadow-lg tracking-wide uppercase border border-blue cursor-pointer hover:bg-blue hover:text-blue-600">
+//                         <svg
+//                             className="w-8 h-8"
+//                             fill="blue"
+//                             xmlns="http://www.w3.org/2000/svg"
+//                             viewBox="0 0 20 20"
+//                         >
+//                             <path d="M16.88 9.1A4 4 0 0 1 16 17H5a5 5 0 0 1-1-9.9V7a3 3 0 0 1 4.52-2.59A4.98 4.98 0 0 1 17 8c0 .38-.04.74-.12 1.1zM11 11h3l-4-4-4 4h3v3h2v-3z" />
+//                         </svg>
+//                         <span className="mt-2 text-base leading-normal">Select a file</span>
+//                         <input
+//                             type="file"
+//                             name="file"
+//                             className="hidden"
+//                             onChange={(e) => { setFile(e.target.files[0]); handleFileUpload(e) }}
+//                         />
+//                     </label>
+//                 </div>
+//                 <span className="text-white">File Uploaded: {filename}</span>
+
+//                 <div className="flex items-center justify-center">
+//                     <button
+//                         className="flex bg-blue-500 hover:bg-blue-700 text-white font-bold py-2 px-4 rounded-full mt-5"
+//                         type="submit"
+//                     >
+//                         PREDICT
+//                     </button>
+//                 </div>
+//             </form>
+
+//             <div className="mt-[5rem] mb-4 text-2xl">
+//                 <span className="text-transparent bg-clip-text bg-gradient-to-r to-violet-600 from-blue-900 font-black">
+//                     Detected Image is: {val}
+//                 </span>
+//             </div>
+//         </>
+//     );
+// }
+
+// export default Donate;

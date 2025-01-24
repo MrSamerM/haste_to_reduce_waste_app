@@ -29,15 +29,21 @@ def upload():
 
     loaded_model = load_model('container_model.keras')
 
-    # Make the prediction
-    prediction = loaded_model.predict(x)
+    # For percentage go from ChatGPT: Prompt: (Image of my code) I want to also send the percentage. How can I do this 24/01/2025
+    prediction = loaded_model.predict(x)[0][0]  
+
     if os.path.exists(f"./uploads/{file.filename}"):
         os.remove(f"uploads/{file.filename}")
-    
+
+    # For percentage go from ChatGPT: Prompt: (Image of my code) I want to also send the percentage. How can I do this 24/01/2025
+    percentage = float(prediction * 100)  # Convert prediction to percentage
+
+    # Determine the label
     if prediction < 0.5:
-        return jsonify({"message": "Container"})
+        return jsonify({"message": "a Container", "confidence": round(100 - percentage, 2)})
     else:
-        return jsonify({"message": "NotContainer"})
+        return jsonify({"message": "Not a Container", "confidence": round(percentage, 2)})
+
 
 if __name__ == '__main__':
     app.run(debug=True)

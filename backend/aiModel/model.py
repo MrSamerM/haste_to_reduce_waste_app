@@ -5,8 +5,10 @@
 # // https://www.kaggle.com/datasets/boulahchichenadir/algerian-used-cars use kaggle for vehicles
 
 
-# https://medium.com/@ilaslanduzgun/image-classification-with-tensorflow-a361c7b1eb05 for assistance
-# https://medium.com/nerd-for-tech/building-an-image-classifier-with-tensorflow-3e12c1d5d3a2 for assistance as well
+# https://medium.com/@ilaslanduzgun/image-classification-with-tensorflow-a361c7b1eb05 for assistance Throughout January
+# https://medium.com/nerd-for-tech/building-an-image-classifier-with-tensorflow-3e12c1d5d3a2 for assistance Throughout January
+# https://medium.com/@pooranjoyb/integration-deployment-of-ml-model-with-react-flask-3033dd6034b3 for assistance 24/01/2025
+
 import numpy as np
 import tensorflow as tf
 from tensorflow import keras
