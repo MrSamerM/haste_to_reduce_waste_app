@@ -83,7 +83,7 @@ function UpdateDonationDetails() {
 
                 <div id="allDonationResults">
                     <div id="donateDetails">
-                        <img src={image} /> <br />
+                        {/* <img src={image} /> <br /> */}
 
                         <div className="donationInputDiv">
                             <label className="donateInputLabels" htmlFor="descriptionInput">Description:</label>

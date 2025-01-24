@@ -13,6 +13,8 @@ const Product = require('./databaseModels/productModel');
 const fs = require('fs');
 const multer = require('multer');
 const axios = require('axios');
+const FormData = require('form-data'); // Import FormData library
+
 
 // https://javascript.plainenglish.io/what-is-cors-in-node-js-2024-a-comprehensive-guide-542630e0a805 as reference December 27
 // https://expressjs.com/en/resources/middleware/session.html as reference December 27
@@ -163,25 +165,31 @@ app.post('/login', async (req, res) => {
 });
 
 // This is from ChatGPT 16/01/2025
-app.post('/predict', upload.single('image'), async (req, res) => {
-    try {
-        const filePath = req.file.path;
+// app.post('/predict', upload.single('image'), async (req, res) => {
+//     try {
+//         const filePath = req.file.path; // Path to the uploaded file
 
-        const file = fs.createReadStream(filePath);
+//         // Create a form-data payload
+//         const formData = new FormData();
+//         formData.append('image', fs.createReadStream(filePath)); // Attach the file under 'image' key
 
-        const flaskResponse = await axios.post('http://localhost:5000/predict', { image: file },
-            {
-                headers: {
-                    'Content-Type': 'multipart/form-data'
-                }
-            });
-        fs.unlinkSync(filePath);
-        res.json(flaskResponse.data);
-    } catch (err) {
-        console.log("error", err)
-        res.status(500).json({ message: "Image did not process" })
-    }
-});
+//         // Send the form-data payload to the Flask backend
+//         const flaskResponse = await axios.post('http://localhost:5000/predict', formData, {
+//             headers: {
+//                 ...formData.getHeaders(), // Add form-data-specific headers (e.g., Content-Type with boundary)
+//             },
+//         });
+
+//         // Clean up the temporary file
+//         fs.unlinkSync(filePath);
+
+//         // Respond to the frontend with the Flask response
+//         res.json(flaskResponse.data);
+//     } catch (err) {
+//         console.log("error", err)
+//         res.status(500).json({ message: "Image did not process" })
+//     }
+// });
 
 app.get('/allDonations', async (req, res) => {
     try {

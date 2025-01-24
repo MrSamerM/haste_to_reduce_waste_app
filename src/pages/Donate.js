@@ -56,46 +56,52 @@ function Donate() {
         }
     }, [file]);
 
-    const submit = async () => {
+    const submit = async (evt) => {
+        evt.preventDefault();
+
+        if (!file) {
+            console.error("No file selected");
+            return;
+        }
 
         const formData = new FormData();
-        formData.append("image", file);
-
+        formData.append("file", file);
 
         try {
-            const res = await axios.post('http://localhost:8000/predict', formData, {
-                headers: {
-                    'Content-Type': 'multipart/form-data'
-                }
+            const res = await axios.post('http://localhost:5000/predict', formData, {
+                headers: { 'Content-Type': 'multipart/form-data' }
             });
-            const logits = res.data.prediction[0];
 
-            // This is all ChatGPT
-            //Main Prompt: i get 197 percent, is this correct? (my code)
+            const { prediction, predicted_class, confidence } = res.data;  // Get response correctly
 
-            // Apply Softmax to get probabilities
-            const softmax = (logits) => {
-                const expValues = logits.map(x => Math.exp(x));  // Calculate e^logit for each logit
-                const sum = expValues.reduce((acc, val) => acc + val, 0);  // Sum of all e^logits
-                return expValues.map(x => x / sum);  // Normalize to get probabilities
-            };
+            // Ensure predicted_class is available
+            if (!predicted_class) {
+                console.error("Predicted class is undefined");
+                return;
+            }
 
-            const probabilities = softmax(logits);  // Get probabilities from logits
+            // Update frontend state with prediction and confidence
+            setPercentage(confidence);
+            setPredictedClass(predicted_class);  // Directly use predicted class from backend
 
-            // Determine the predicted class based on probabilities
-            const predictedClass = probabilities[0] > probabilities[1] ? 'container' : 'not container';
-            console.log(predictedClass);
+            console.log("Prediction:", prediction);
+            console.log("Predicted Class:", predicted_class);  // No need for class_names here if you're using backend's response
+            console.log("Confidence:", confidence);
 
-            // Set the percentage based on the highest probability
-            const confidence = Math.max(probabilities[0], probabilities[1]);
-            setPercentage(confidence * 100);  // Valid percentage (0-100)
-            setPredictedClass(predictedClass);
-
+            // Conditional logic based on predicted class and confidence
+            if (confidence > 70 && predicted_class === "Container") {
+                alert("You can now donate the item!");
+            } else {
+                alert("The item does not meet the donation criteria.");
+            }
 
         } catch (err) {
-            console.log("error", err);
+            console.error("Error during prediction:", err);
+            alert("An error occurred while processing your request. Please try again.");
         }
-    }
+    };
+
+
 
     // from chatgpt to be able to update the address prompt: why is the address not saving (added my code) 18/01/2025
     const onPlaceSelect = (place) => {
@@ -230,3 +236,5 @@ function Donate() {
 }
 
 export default Donate;
+
+

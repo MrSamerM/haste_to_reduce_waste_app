@@ -1,38 +1,43 @@
-# Used chatgpt to integrate the model with the backend and frontend 16/01/2025 
-# main Prompt  is this correct (image of my code)
-
 from flask import Flask, request, jsonify
-import tensorflow as tf
-from PIL import Image
+from flask_cors import CORS
+import os
+from tensorflow.keras.preprocessing import image  # <-- Add this import
 import numpy as np
-
-
+from tensorflow.keras.models import load_model
 
 app = Flask(__name__)
 
-model=tf.keras.models.load_model('model.keras') #loads model
+# https://medium.com/@pooranjoyb/integration-deployment-of-ml-model-with-react-flask-3033dd6034b3 24/01/2025
 
-#this function deal with the image so its suitable to be put in he model
-def process_image(file):
-    image_height, image_width = 226, 226
+CORS(app, resources={r"/*": {"origins": "http://localhost:3000", "supports_credentials": True}})
 
-    image=Image.open(file)
-    if image.mode != "RGB":
-        image = image.convert("RGB")
-    image=image.resize((image_height, image_width))
-    image=np.array(image)/255.0 #turns pixels into 0/1
-    image=np.expand_dims(image, axis=0) #add batch dimension.
+@app.route("/")
+def home():
+    return {"message": "Hello from backend"}
 
-    return image
+@app.route("/upload", methods=['POST'])
+def upload():
+    file = request.files['file']
+    file.save('uploads/' + file.filename)
 
+    # Load the image to predict
+    img_path = f"./uploads/{file.filename}"
+    img = image.load_img(img_path, target_size=(226, 226))
+    x = image.img_to_array(img)
+    x = np.expand_dims(x, axis=0)
+    x /= 255
 
-@app.route('/predict', methods=['POST'])
-def predict():
-    file = request.files['image']
-    image = process_image(file)
-    prediction = model.predict(image)
-    prediction_list = prediction.tolist()
-    return jsonify({'prediction': prediction_list})
+    loaded_model = load_model('container_model.keras')
+
+    # Make the prediction
+    prediction = loaded_model.predict(x)
+    if os.path.exists(f"./uploads/{file.filename}"):
+        os.remove(f"uploads/{file.filename}")
+    
+    if prediction < 0.5:
+        return jsonify({"message": "Container"})
+    else:
+        return jsonify({"message": "NotContainer"})
 
 if __name__ == '__main__':
-    app.run(port=5000, debug=True)
+    app.run(debug=True)
