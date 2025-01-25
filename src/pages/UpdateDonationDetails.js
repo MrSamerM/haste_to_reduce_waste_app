@@ -6,13 +6,6 @@ import '@geoapify/geocoder-autocomplete/styles/minimal.css'
 import axios from 'axios';
 import { useParams } from "react-router-dom";
 
-
-
-// https://www.geeksforgeeks.org/how-to-upload-image-and-preview-it-using-reactjs/ do display image 15/01/25
-// chatGPT [pasted my code to see why the if statements where not working] 16/01/21. Used for file type, FileURL useState and change function.
-
-//  https://www.youtube.com/watch?v=pxkE2tT6Y-o to convert image to base64 17/01/2025
-
 function UpdateDonationDetails() {
 
     const [file, setFile] = useState("");
@@ -26,7 +19,7 @@ function UpdateDonationDetails() {
     const [description, setDescription] = useState("");
     const [portionSize, setPortionSize] = useState(0);
     const [baseSixtyFour, setBaseSixtyFour] = useState("");
-    const [predictedClass, setPredictedClass] = useState(""); // State for predicted class
+    const [predictedClass, setPredictedClass] = useState("");
 
 
     axios.defaults.withCredentials = true;
@@ -52,18 +45,17 @@ function UpdateDonationDetails() {
 
     useEffect(() => {
         const getDonationDetails = async () => {
-            const data = {
-                donationId: id
-            };
 
             try {
-                const res = axios.get("http://localhost:8000/donatedDonation", data)
-                setFileURL(res.data.image)
-                setAddress(res.data.address)
+                const res = await axios.get(`http://localhost:8000/donatedDonation/${id}`)
+                setFileURL(res.data.image);
+                setAddress(res.data.address);
                 setDescription(res.data.description);
                 setPortionSize(res.data.portionSize);
                 setLongitude(res.data.longitude);
                 setLatitude(res.data.latitude);
+                setPredictedClass("a Container");
+
             } catch (e) {
                 console.log("error when sending data", e)
             }
@@ -110,7 +102,6 @@ function UpdateDonationDetails() {
         formData.append("file", file);
 
         try {
-            // POST request to backend with credentials (if needed)
             const response = await axios.post("http://localhost:5000/upload", formData, {
                 headers: {
                     "Content-Type": "multipart/form-data",
@@ -126,8 +117,6 @@ function UpdateDonationDetails() {
     };
 
 
-
-    // from chatgpt to be able to update the address prompt: why is the address not saving (added my code) 18/01/2025
     const onPlaceSelect = (place) => {
         if (place && place.properties && place.properties.formatted) {
             setAddress(place.properties.formatted);
@@ -141,16 +130,16 @@ function UpdateDonationDetails() {
         setAddress(value);
     }
 
-    // Chatgpt Prompt: (image of my code) I want everything to reset, however the file still says the name of the previous file? 19/01/2025
+    const fileInputRef = useRef(null);
 
-    const fileInputRef = useRef(null); // Add a ref for the file input
+    const updateDonation = async (e) => {
 
-    const donate = async (e) => {
-
-        e.preventDefault();
+        // Line bellow is from Chatgpt Prompt: I am making a updated system. But when I update image is "" but it is supposed to be a base64 (my code) 25/01/2025
+        const decision = baseSixtyFour === "" ? fileURL : baseSixtyFour;
 
         const data = {
-            image: baseSixtyFour,
+            donationId: id,
+            image: decision,
             description: description,
             portionSize: portionSize,
             address: address,
@@ -160,9 +149,9 @@ function UpdateDonationDetails() {
 
 
         try {
-            const res = await axios.post("http://localhost:8000/donate", data)
-            if (res.data.message === "Donated") {
-                alert("The donation has been made");
+            const res = await axios.post("http://localhost:8000/updateDonation", data)
+            if (res.data.message === "Updated") {
+                alert("The updated has been made");
                 setFile("");
                 setFileURL("");
                 setPercentage(0);
@@ -195,7 +184,6 @@ function UpdateDonationDetails() {
             <div id="donationBox">
 
                 <div id="selectDonationImage">
-                    {/* to remove select file button https://stackoverflow.com/questions/61468441/how-to-change-default-text-in-input-type-file-in-reactjs 21/01/2025 */}
                     <div id="preDonationInformation">
                         <label htmlFor="imageFile" id="selectFileLabel">Click here to upload donation image</label>
                         <input type="file" id="imageFile" onChange={change} ref={fileInputRef} />
@@ -221,8 +209,6 @@ function UpdateDonationDetails() {
                 {/* GeoApify API  https://apidocs.geoapify.com/samples/autocomplete/react-geoapify-geocoder-autocomplete/ 
             // https://www.npmjs.com/package/@geoapify/react-geocoder-autocomplete*/}
 
-
-
                 <div id="allDonationResults">
                     <div id="donateDetails">
 
@@ -239,7 +225,7 @@ function UpdateDonationDetails() {
                         <div className="donationInputDiv">
 
                             <label className="donateInputLabels" htmlFor="addressInput">Address:</label>
-                            {disableInput === true ? <input className="donationInputs" id="addressInput" placeholder="Enter address here" disabled={disableInput} />
+                            {disableInput === true ? <input className="donationInputs" id="addressInput" placeholder="Enter address here" disabled={disableInput} value={address} />
                                 : <div className="donationInputs" id="autoCompleteAddress">
                                     <GeoapifyContext apiKey={process.env.REACT_APP_GEOAPIFY_API_KEY}>
                                         <GeoapifyGeocoderAutocomplete id="addressInput" placeholder="Enter address here"
@@ -254,8 +240,7 @@ function UpdateDonationDetails() {
                         </div>
                     </div>
                     <br></br>
-                    {percentage > 70 && predictedClass === "a Container" ? <button id="donateButton" disabled={false} onClick={donate}>Donate</button>
-                        : <button id="donateButton" disabled={true} onClick={donate}>Donate</button>}
+                    <button id="donateButton" disabled={disableInput} onClick={updateDonation}>Update Donation</button>
                 </div>
 
 

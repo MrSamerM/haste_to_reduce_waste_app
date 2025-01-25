@@ -1,8 +1,11 @@
 import React, { useEffect, useState } from "react";
 import '../styling/UpdateDonation.css'
 import axios from "axios";
+import { Link, useNavigate } from "react-router-dom";
 
 function UpdateDonation() {
+
+    const navigate = useNavigate();
 
     const [data, setData] = useState([]);
 
@@ -74,13 +77,12 @@ function UpdateDonation() {
                         <label className="sideInformationLabels">Delete Donation</label>
                     </div>
 
+                    {/* https://www.youtube.com/watch?v=CUyU_ySLnIM&t=532s for reference 25/01/2025 */}
                     <div className="sideInformation">
-                        <button className="tickXAndEditIcon">&#9998;</button>
+                        <button className="tickXAndEditIcon"><Link to={`/update_donation_details/${data.id}`}>&#9998;</Link></button>
                         <br></br>
                         <label className="sideInformationLabels">Update Donation</label>
                     </div>
-
-
                 </div>
             ))
             }

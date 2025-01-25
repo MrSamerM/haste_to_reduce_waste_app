@@ -10,10 +10,7 @@ const User = require('./databaseModels/userModel');
 const Donation = require('./databaseModels/donationModel');
 const Receipt = require('./databaseModels/receiptModel');
 const Product = require('./databaseModels/productModel');
-const fs = require('fs');
-const multer = require('multer');
-const axios = require('axios');
-const FormData = require('form-data'); // Import FormData library
+
 
 
 // https://javascript.plainenglish.io/what-is-cors-in-node-js-2024-a-comprehensive-guide-542630e0a805 as reference December 27
@@ -21,7 +18,6 @@ const FormData = require('form-data'); // Import FormData library
 // https://stackoverflow.com/questions/50454992/req-session-destroy-and-passport-logout-arent-destroying-cookie-on-client-side  as reference 1/1/25
 // https://www.youtube.com/watch?v=pzGQMwGmCnc as reference
 
-const upload = multer({ dest: 'uploads/' });// This is from ChatGPT 16/01/2025
 
 // https://stackoverflow.com/questions/54716914/413-payload-too-large-for-base64-string-after-adjusting-size-in-express for limits 18/01/2025
 app.use(bodyParser.json({ limit: '50mb', extended: true }));
@@ -187,11 +183,11 @@ app.get('/allDonatedDonations', async (req, res) => {
     }
 })
 
-app.get('/donatedDonation', async (req, res) => {
+app.get('/donatedDonation/:id', async (req, res) => {
     try {
-        const { donationId } = req.body;
-        const allDonations = await Donation.findById({ donationId });
-        res.json({ allDonations });
+        const { id } = req.params;
+        const allDonations = await Donation.findById(id);
+        res.json(allDonations);
 
     } catch (err) {
         console.log("error", err)
@@ -217,6 +213,24 @@ app.post('/updateReservation', async (req, res) => {
         const findID = await Donation.findByIdAndUpdate(donationID, { reserved: reserved, recipientID: req.session.userID, })
         findID.save();
 
+    } catch (err) {
+        console.log("error", err)
+        res.status(500).json({ message: "database can't post data" })
+    }
+})
+
+app.post('/updateDonation', async (req, res) => {
+    try {
+        const { donationId, image, description, portionSize, address, longitude, latitude } = req.body;
+        await Donation.findByIdAndUpdate(donationId, {
+            image: image,
+            description: description,
+            portionSize: portionSize,
+            address: address,
+            longitude: longitude,
+            latitude: latitude
+        });
+        res.json({ message: "Updated" })
     } catch (err) {
         console.log("error", err)
         res.status(500).json({ message: "database can't post data" })
