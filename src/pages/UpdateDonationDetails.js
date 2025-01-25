@@ -1,9 +1,10 @@
 import React from "react";
 import '../styling/Donate.css'
-import { useState, useEffect } from "react";
+import { useState, useEffect, useRef } from "react";
 import { GeoapifyGeocoderAutocomplete, GeoapifyContext } from '@geoapify/react-geocoder-autocomplete'
 import '@geoapify/geocoder-autocomplete/styles/minimal.css'
 import axios from 'axios';
+import { useParams } from "react-router-dom";
 
 
 
@@ -14,49 +15,119 @@ import axios from 'axios';
 
 function UpdateDonationDetails() {
 
+    const [file, setFile] = useState("");
+    const [fileURL, setFileURL] = useState("");
+    const [disableInput, setDisableInput] = useState(true);
+    const [disableScanner, setDisableScanner] = useState(true);
+    const [percentage, setPercentage] = useState(0);
     const [address, setAddress] = useState("");
     const [longitude, setLongitude] = useState(0);
     const [latitude, setLatitude] = useState(0);
     const [description, setDescription] = useState("");
     const [portionSize, setPortionSize] = useState(0);
+    const [baseSixtyFour, setBaseSixtyFour] = useState("");
+    const [predictedClass, setPredictedClass] = useState(""); // State for predicted class
+
 
     axios.defaults.withCredentials = true;
 
-    useEffect(() => {
+    const { id } = useParams();
 
-    }, []);
 
-    const donate = async (e) => {
+    const change = (evt) => {
 
-        e.preventDefault();
+        setPercentage(0);
+        setAddress("");
+        setDescription("");
+        setPortionSize(0);
+        setBaseSixtyFour("");
+        setPredictedClass("");
+        setDisableInput(true);
+        setLongitude(0);
+        setLatitude(0);
 
-        const data = {
-
-            description: description,
-            portionSize: portionSize,
-            address: address,
-            longitude: longitude,
-            latitude: latitude
-        }
-
-        try {
-            const res = await axios.post("http://localhost:8000/donate", data)
-            if (res.data.message === "Donated") {
-                alert("The update has been made");
-
-                setAddress("");
-                setDescription("");
-                setPortionSize(0);
-                setLongitude(0);
-                setLatitude(0);
-            }
-
-        } catch (e) {
-            console.log("Error with submission", e)
-        }
-
+        setFile(evt.target.files[0]);
+        setFileURL(URL.createObjectURL(evt.target.files[0]));
     }
 
+    useEffect(() => {
+        const getDonationDetails = async () => {
+            const data = {
+                donationId: id
+            };
+
+            try {
+                const res = axios.get("http://localhost:8000/donatedDonation", data)
+                setFileURL(res.data.image)
+                setAddress(res.data.address)
+                setDescription(res.data.description);
+                setPortionSize(res.data.portionSize);
+                setLongitude(res.data.longitude);
+                setLatitude(res.data.latitude);
+            } catch (e) {
+                console.log("error when sending data", e)
+            }
+        }
+        getDonationDetails();
+
+    }, [])
+
+    useEffect(() => {
+
+        if (predictedClass === "Not a Container") {
+            setDisableInput(true);
+            console.log("Must be a container");
+        }
+        else if (predictedClass === "a Container") {
+            setDisableInput(false);
+            console.log("It is a container");
+        }
+        else if (file.type === "image/png" || file.type === 'image/jpeg' || file.type === 'image/gif' || file.type === 'image/jpg') {
+            setDisableScanner(false);
+            console.log("true");
+
+            const base = new FileReader();
+
+            base.onloadend = () => {
+                const base64 = base.result;
+                setBaseSixtyFour(base64.toString());
+                console.log(base64);
+            }
+            base.readAsDataURL(file);
+
+        }
+        else {
+            setDisableScanner(true);
+            console.log("false");
+            console.log(file);
+        }
+    }, [file, percentage, predictedClass]);
+
+    const submit = async (event) => {
+        event.preventDefault();
+
+        const formData = new FormData();
+        formData.append("file", file);
+
+        try {
+            // POST request to backend with credentials (if needed)
+            const response = await axios.post("http://localhost:5000/upload", formData, {
+                headers: {
+                    "Content-Type": "multipart/form-data",
+                },
+                withCredentials: true,
+            });
+            console.log(response.data.message);
+            setPredictedClass(response.data.message);
+            setPercentage(response.data.confidence);
+        } catch (error) {
+            console.error("Can't send the file", error);
+        }
+    };
+
+
+
+    // from chatgpt to be able to update the address prompt: why is the address not saving (added my code) 18/01/2025
     const onPlaceSelect = (place) => {
         if (place && place.properties && place.properties.formatted) {
             setAddress(place.properties.formatted);
@@ -70,49 +141,121 @@ function UpdateDonationDetails() {
         setAddress(value);
     }
 
+    // Chatgpt Prompt: (image of my code) I want everything to reset, however the file still says the name of the previous file? 19/01/2025
+
+    const fileInputRef = useRef(null); // Add a ref for the file input
+
+    const donate = async (e) => {
+
+        e.preventDefault();
+
+        const data = {
+            image: baseSixtyFour,
+            description: description,
+            portionSize: portionSize,
+            address: address,
+            longitude: longitude,
+            latitude: latitude
+        }
+
+
+        try {
+            const res = await axios.post("http://localhost:8000/donate", data)
+            if (res.data.message === "Donated") {
+                alert("The donation has been made");
+                setFile("");
+                setFileURL("");
+                setPercentage(0);
+                setAddress("");
+                setDescription("");
+                setPortionSize(0);
+                setBaseSixtyFour("");
+                setPredictedClass("");
+                setDisableInput(true);
+                setDisableScanner(true);
+                setLongitude(0);
+                setLatitude(0);
+            }
+
+
+            if (fileInputRef.current) {
+                fileInputRef.current.value = null;
+            }
+
+        } catch (e) {
+            console.log("Error with submission", e)
+        }
+
+    }
+
     return (
         <>
-            <div id="donateTitleDiv"><h1 id="donateTitle">Update</h1></div>
-
-
-            {/* GeoApify API  https://apidocs.geoapify.com/samples/autocomplete/react-geoapify-geocoder-autocomplete/ 
-            // https://www.npmjs.com/package/@geoapify/react-geocoder-autocomplete*/}
-
+            <div id="donateTitleDiv"><h1 id="donateTitle">Update Donation</h1></div>
 
             <div id="donationBox">
 
+                <div id="selectDonationImage">
+                    {/* to remove select file button https://stackoverflow.com/questions/61468441/how-to-change-default-text-in-input-type-file-in-reactjs 21/01/2025 */}
+                    <div id="preDonationInformation">
+                        <label htmlFor="imageFile" id="selectFileLabel">Click here to upload donation image</label>
+                        <input type="file" id="imageFile" onChange={change} ref={fileInputRef} />
+
+                        <p id="imageRequirement">
+                            The image must be a .png, jpeg, jpg, of gif file.<br></br>
+                            This is to allow you to press scan to scan the image.<br></br>
+                            If the image is over 70% a container, then you can donate.<br></br>
+                            The item should be put in a suitable container.<br></br>
+                            such as; aluminium, plastic, or takeaway container.<br></br>
+                        </p>
+                        <button id="scanImage" disabled={disableScanner} onClick={submit}>Scan</button>
+                    </div>
+
+                    <div id="imageAndPercentage">
+                        <img id="selectedImage" src={fileURL} alt="selected file" />
+                        <br></br>
+                        <p>The Image is {percentage}% {predictedClass}</p>
+                    </div>
+                </div>
+
+
+                {/* GeoApify API  https://apidocs.geoapify.com/samples/autocomplete/react-geoapify-geocoder-autocomplete/ 
+            // https://www.npmjs.com/package/@geoapify/react-geocoder-autocomplete*/}
+
+
+
                 <div id="allDonationResults">
                     <div id="donateDetails">
-                        {/* <img src={image} /> <br /> */}
 
                         <div className="donationInputDiv">
                             <label className="donateInputLabels" htmlFor="descriptionInput">Description:</label>
-                            <input className="donationInputs" type="text" id="descriptionInput" placeholder="Enter description here" value={description} onChange={(evt) => setDescription(evt.target.value)} />
+                            <input className="donationInputs" disabled={disableInput} type="text" id="descriptionInput" placeholder="Enter description here" value={description} onChange={(evt) => setDescription(evt.target.value)} />
                         </div>
                         <br></br>
                         <div className="donationInputDiv">
                             <label className="donateInputLabels" htmlFor="portionSizeInput">Portion Size:</label>
-                            <input className="donationInputs" type="number" id="portionSizeInput" value={portionSize} onChange={(evt) => setPortionSize(evt.target.value)} />
+                            <input className="donationInputs" disabled={disableInput} type="number" id="portionSizeInput" value={portionSize} onChange={(evt) => setPortionSize(evt.target.value)} />
                         </div>
                         <br></br>
                         <div className="donationInputDiv">
 
                             <label className="donateInputLabels" htmlFor="addressInput">Address:</label>
-                            <div className="donationInputs" id="autoCompleteAddress">
-                                <GeoapifyContext apiKey={process.env.REACT_APP_GEOAPIFY_API_KEY}>
-                                    <GeoapifyGeocoderAutocomplete id="addressInput" placeholder="Enter address here"
-                                        lang='en'
-                                        limit={5}
-                                        value={address}
-                                        onChange={updatedAddress}
-                                        placeSelect={onPlaceSelect}
-                                    />
-                                </GeoapifyContext>
-                            </div>
+                            {disableInput === true ? <input className="donationInputs" id="addressInput" placeholder="Enter address here" disabled={disableInput} />
+                                : <div className="donationInputs" id="autoCompleteAddress">
+                                    <GeoapifyContext apiKey={process.env.REACT_APP_GEOAPIFY_API_KEY}>
+                                        <GeoapifyGeocoderAutocomplete id="addressInput" placeholder="Enter address here"
+                                            lang='en'
+                                            limit={5}
+                                            value={address}
+                                            onChange={updatedAddress}
+                                            placeSelect={onPlaceSelect}
+                                        />
+                                    </GeoapifyContext>
+                                </div>}
                         </div>
                     </div>
                     <br></br>
-                    <button id="donateButton" onClick={donate}>Donate</button>
+                    {percentage > 70 && predictedClass === "a Container" ? <button id="donateButton" disabled={false} onClick={donate}>Donate</button>
+                        : <button id="donateButton" disabled={true} onClick={donate}>Donate</button>}
                 </div>
 
 

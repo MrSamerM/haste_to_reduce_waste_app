@@ -164,32 +164,6 @@ app.post('/login', async (req, res) => {
     }
 });
 
-// This is from ChatGPT 16/01/2025
-// app.post('/predict', upload.single('image'), async (req, res) => {
-//     try {
-//         const filePath = req.file.path; // Path to the uploaded file
-
-//         // Create a form-data payload
-//         const formData = new FormData();
-//         formData.append('image', fs.createReadStream(filePath)); // Attach the file under 'image' key
-
-//         // Send the form-data payload to the Flask backend
-//         const flaskResponse = await axios.post('http://localhost:5000/predict', formData, {
-//             headers: {
-//                 ...formData.getHeaders(), // Add form-data-specific headers (e.g., Content-Type with boundary)
-//             },
-//         });
-
-//         // Clean up the temporary file
-//         fs.unlinkSync(filePath);
-
-//         // Respond to the frontend with the Flask response
-//         res.json(flaskResponse.data);
-//     } catch (err) {
-//         console.log("error", err)
-//         res.status(500).json({ message: "Image did not process" })
-//     }
-// });
 
 app.get('/allDonations', async (req, res) => {
     try {
@@ -206,6 +180,18 @@ app.get('/allDonatedDonations', async (req, res) => {
     try {
         const allDonations = await Donation.find({ donatorID: req.session.userID });
         res.json({ result: allDonations });
+
+    } catch (err) {
+        console.log("error", err)
+        res.status(500).json({ message: "database can't get data" })
+    }
+})
+
+app.get('/donatedDonation', async (req, res) => {
+    try {
+        const { donationId } = req.body;
+        const allDonations = await Donation.findById({ donationId });
+        res.json({ allDonations });
 
     } catch (err) {
         console.log("error", err)

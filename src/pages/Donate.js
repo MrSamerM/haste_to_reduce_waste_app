@@ -32,6 +32,17 @@ function Donate() {
 
 
     const change = (evt) => {
+
+        setPercentage(0);
+        setAddress("");
+        setDescription("");
+        setPortionSize(0);
+        setBaseSixtyFour("");
+        setPredictedClass("");
+        setDisableInput(true);
+        setLongitude(0);
+        setLatitude(0);
+
         setFile(evt.target.files[0]);
         setFileURL(URL.createObjectURL(evt.target.files[0]));
     }

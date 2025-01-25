@@ -63,7 +63,7 @@ function App() {
         <Route path="/update_donation" element={sessionAvailability === true ? <UpdateDonation /> : <Navigate to={'/'} />} />
         <Route path="/reserve_donation" element={sessionAvailability === true ? <ReserveDonation /> : <Navigate to={'/'} />} />
         <Route path="/update_reserved_donation" element={sessionAvailability === true ? <UpdateReservedDonation /> : <Navigate to={'/'} />} />
-        <Route path="/update_donation_details" element={sessionAvailability === true ? <UpdateDonationDetails /> : <Navigate to={'/'} />} />
+        <Route path="/update_donation_details/:id" element={sessionAvailability === true ? <UpdateDonationDetails /> : <Navigate to={'/'} />} />
 
       </Routes>
 

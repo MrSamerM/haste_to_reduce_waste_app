@@ -2,13 +2,11 @@ import React, { useEffect, useState } from "react";
 import '../styling/UpdateDonation.css'
 import axios from "axios";
 
-
 function UpdateDonation() {
 
     const [data, setData] = useState([]);
 
     axios.defaults.withCredentials = true;
-
 
     useEffect(() => {
 
@@ -50,16 +48,16 @@ function UpdateDonation() {
                     <div id="donationDetailsBox">
                         <div className="donationDetails">
                             <label className="donationDetailsInputLabels" htmlFor="donationAddress">Address: </label>
-                            <input className="donationDetailsInputs" id="donationAddress" value={data.address} readonly />
+                            <input className="donationDetailsInputs" id="donationAddress" value={data.address} disabled={true} />
                         </div>
                         <div className="donationDetails">
                             <label className="donationDetailsInputLabels" htmlFor="donationDescription">Description: </label>
-                            <input className="donationDetailsInputs" id="donationDescription" value={data.description} readonly />
+                            <input className="donationDetailsInputs" id="donationDescription" value={data.description} disabled={true} />
                         </div>
 
                         <div className="donationDetails">
                             <label className="donationDetailsInputLabels" htmlFor="donationPortionSize">Portion Size: </label>
-                            <input className="donationDetailsInputs" id="donationPortionSize" value={data.portionSize} readonly />
+                            <input className="donationDetailsInputs" id="donationPortionSize" value={data.portionSize} disabled={true} />
                         </div>
 
                     </div>
@@ -84,9 +82,10 @@ function UpdateDonation() {
 
 
                 </div>
-            ))}
+            ))
+            }
 
-        </div>
+        </div >
     );
 }
 
