@@ -1,7 +1,7 @@
 from flask import Flask, request, jsonify
 from flask_cors import CORS
 import os
-from tensorflow.keras.preprocessing import image  # <-- Add this import
+from tensorflow.keras.preprocessing import image
 import numpy as np
 from tensorflow.keras.models import load_model
 
@@ -11,16 +11,16 @@ app = Flask(__name__)
 
 CORS(app, resources={r"/*": {"origins": "http://localhost:3000", "supports_credentials": True}})
 
-@app.route("/")
-def home():
-    return {"message": "Hello from backend"}
+# @app.route("/")
+# def home():
+#     return {"message": "Hello from backend"}
 
 @app.route("/upload", methods=['POST'])
 def upload():
     file = request.files['file']
     file.save('uploads/' + file.filename)
 
-    # Load the image to predict
+    # Load image
     img_path = f"./uploads/{file.filename}"
     img = image.load_img(img_path, target_size=(226, 226))
     x = image.img_to_array(img)

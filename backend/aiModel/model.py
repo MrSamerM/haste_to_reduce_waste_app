@@ -9,6 +9,8 @@
 # https://medium.com/nerd-for-tech/building-an-image-classifier-with-tensorflow-3e12c1d5d3a2 for assistance Throughout January
 # https://medium.com/@pooranjoyb/integration-deployment-of-ml-model-with-react-flask-3033dd6034b3 for assistance 24/01/2025
 
+# https://www.tensorflow.org/api_docs/python/tf/keras/layers/ explanation from tensorflow
+
 import numpy as np
 import tensorflow as tf
 from tensorflow import keras
@@ -25,20 +27,14 @@ batch_size = 32
 
 # Data augmentation for training only
 data_augmentation = keras.Sequential([
-    layers.RandomFlip("horizontal",
-                      input_shape=(image_height,
-                                  image_width,
-                                  3)),
+    layers.RandomFlip("horizontal",input_shape=(image_height,image_width,3)),
     layers.RandomRotation(0.1),
     layers.RandomZoom(0.1),
 ], name="data_augmentation")
 
 
-
-
-# Data preparation with validation split
 train_datagen = keras.preprocessing.image.ImageDataGenerator(
-    rescale=1./255
+    rescale=1./255 #this rescales the images
 )
 train_dataset = train_datagen.flow_from_directory(
     image_dir,
@@ -49,7 +45,7 @@ train_dataset = train_datagen.flow_from_directory(
 )
 
 validation_datagen = keras.preprocessing.image.ImageDataGenerator(
-    rescale=1./255
+    rescale=1./255 #this rescales the images
 )
 validation_dataset = validation_datagen.flow_from_directory(
     image_dir,
@@ -59,21 +55,19 @@ validation_dataset = validation_datagen.flow_from_directory(
     seed=123
 )
 
-# Model architecture
-# Add the input shape to the first Conv2D layer
-model = keras.Sequential([
-    layers.InputLayer(input_shape=(image_height, image_width, 3)),  # Explicitly define the input layer
+model = keras.Sequential([ #This groups layers sequentially
+    layers.InputLayer(input_shape=(image_height, image_width, 3)),
     data_augmentation,
-    layers.Conv2D(16, 3, padding='same', activation='relu'),
-    layers.MaxPooling2D(),
+    layers.Conv2D(16, 3, padding='same', activation='relu'),#Conv2D is used for images,16 is number of filter (dimention of output space), 3 is the size of the kernal (specifying size of convolution window) padding same (resulting in even padding all sides of image).relu helps network find complex patterns
+    layers.MaxPooling2D(),#Downsamples the inputs height and width
     layers.Conv2D(32, 3, padding='same', activation='relu'),
     layers.MaxPooling2D(),
     layers.Conv2D(64, 3, padding='same', activation='relu'),
     layers.MaxPooling2D(),
     layers.Dropout(0.2),
-    layers.Flatten(),
+    layers.Flatten(),#flatterns the inputs, does not affect batch size
     layers.Dense(128, activation='relu'),
-    layers.Dense(1, activation='sigmoid')
+    layers.Dense(1, activation='sigmoid')#this is the classes to predict
 ])
 
 
@@ -88,11 +82,11 @@ model.summary()
 
 # Train the model
 epochs = 25
-history = model.fit(
+history = model.fit(#this method is used to train the model
     train_dataset,
     steps_per_epoch=100,
-    epochs=epochs,
-    validation_data=validation_dataset,
+    epochs=epochs,#iteration over data (image) provided
+    validation_data=validation_dataset,#this evaluates loss after iteration
     validation_steps=50
 )
 

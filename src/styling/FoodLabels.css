@@ -1,0 +1,94 @@
+body {
+    margin: 0;
+    padding: 0;
+    background-color: #E1ECD8;
+}
+
+#foodLabelTitleDiv {
+    align-items: center;
+    margin: 0 auto 30px auto;
+    margin-bottom: 50px;
+    margin-top: 10px;
+}
+
+
+#foodLabelTitle {
+    text-align: center;
+    text-decoration: underline;
+}
+
+#foodLabelBox {
+    display: flex;
+    flex-direction: column;
+    width: 95%;
+    margin: 0 auto 60px auto;
+}
+
+#selectLabelImage {
+    display: flex;
+    flex-direction: row;
+    margin: 0 auto 30px auto;
+    align-items: center;
+}
+
+#foodLabelImage {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+}
+
+#preLabelImageInformation {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+
+}
+
+#selectFoodLabelFileLabel,
+#imageFoodLabelRequirement {
+    margin-bottom: 30px;
+}
+
+#imageFoodLabelFile {
+    display: none;
+}
+
+#selectFoodLabelFileLabel {
+    font-size: larger;
+    cursor: pointer;
+    font-weight: bold;
+    border-style: solid;
+    border-width: 4px;
+
+}
+
+#selectedFoodLabelImage {
+    height: 250px;
+    width: 350px;
+    margin-left: 30px;
+    border: black;
+    border-style: solid;
+    border-width: 5px;
+}
+
+#scanFoodLabelImage {
+    background-color: black;
+    color: white;
+    width: 150px;
+    height: 40px;
+    font-size: large;
+    text-align: center;
+    cursor: pointer;
+}
+
+#foodLabelDetails {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    margin-top: 20px;
+}
+
+#textArea {
+    width: 800px;
+    height: 200px;
+}
