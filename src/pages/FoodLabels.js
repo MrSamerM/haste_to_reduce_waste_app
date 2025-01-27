@@ -59,13 +59,16 @@ function FoodLabels() {
         // https://www.freecodecamp.org/news/regex-for-date-formats-what-is-the-regular-expression-for-matching-dates/
         // https://stackoverflow.com/questions/33017274/find-all-words-with-3-letters-with-regex
         // https://stackoverflow.com/questions/2951915/javascript-reg-ex-to-match-whole-word-only-bound-only-by-whitespace 
-        // chatGPT about gim at the end, i for case insensitivity Prompt: still a error (my pattern)
+        // chatGPT about gim at the end, i for case insensitivity, and matching by mapping Prompt: still a error (my pattern)
 
-        const words = "Best Before: 12/13/2024";
-        const pattern = /(\sBB\s|\sExpiry Date\s|\sBBE\s|\sEXP\s|\sBest Before\s|\d{1,2}\/\d{1,2}\/\d{2,4}|\d{1,2}\-\d{1,2}\-\d{2,4}|\d{1,2}\ \d{1,2}\ \d{2,4}|\d{1,2}|\d{1,2}[a-zA-Z]{3}\d{2,4})/gim;
-        const newString = words.replace(pattern, "").trim();
-        console.log(newString);
+        const words = "Best Before 36 12/13/2024";
+        const pattern = /(BB|Expiry Date|BBE|EXP|Best Before|\d{1,2}\/\d{1,2}\/\d{2,4}|\d{1,2}\-\d{1,2}\-\d{2,4}|\d{1,2}\ \d{1,2}\ \d{2,4}|\d{1,2}[a-zA-Z]{3}\d{2,4})/gim;
 
+        const matches = [...words.matchAll(pattern)];
+
+        const output = matches.map(match => match[0]).join(" ");
+
+        console.log(output);
 
 
         // Add something that removes everything except due date
