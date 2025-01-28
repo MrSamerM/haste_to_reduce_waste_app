@@ -170,7 +170,18 @@ app.get('/allDonations', async (req, res) => {
         console.log("error", err)
         res.status(500).json({ message: "database can't get data" })
     }
-})
+});
+
+app.get('/allProducts', async (req, res) => {
+    try {
+        const allProducts = await Product.find({});
+        res.json({ result: allProducts });
+
+    } catch (err) {
+        console.log("error", err)
+        res.status(500).json({ message: "database can't get data" })
+    }
+});
 
 app.get('/allDonatedDonations', async (req, res) => {
     try {

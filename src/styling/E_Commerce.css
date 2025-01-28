@@ -1,0 +1,49 @@
+body {
+    margin: 0;
+    padding: 0;
+    background-color: #E1ECD8;
+}
+
+#shopTitleDiv {
+    align-items: center;
+    margin: 0 auto 30px auto;
+    margin-bottom: 50px;
+    margin-top: 10px;
+}
+
+
+#shopTitle {
+    text-align: center;
+    text-decoration: underline;
+}
+
+#shopItems {
+    display: flex;
+    flex-direction: row;
+    width: 95%;
+    margin: 0 auto 60px auto;
+    border-style: solid;
+    border-width: black;
+}
+
+#productDiv {
+    display: flex;
+    flex-direction: column;
+    align-items: flex-start;
+    flex: 2.8;
+}
+
+.productLabel {
+    margin-right: 20px;
+    text-align: right;
+    width: 200px;
+    font-weight: bold;
+
+}
+
+#productDiv .productInput {
+    padding: 5px;
+    margin: 5px;
+    width: 100%;
+
+}

@@ -28,13 +28,14 @@ batch_size = 32
 # Data augmentation for training only
 data_augmentation = keras.Sequential([
     layers.RandomFlip("horizontal",input_shape=(image_height,image_width,3)),
-    layers.RandomRotation(0.1),
-    layers.RandomZoom(0.1),
+    layers.RandomRotation(0.3),
+    layers.RandomZoom(0.2),
 ], name="data_augmentation")
 
 
 train_datagen = keras.preprocessing.image.ImageDataGenerator(
-    rescale=1./255 #this rescales the images
+    rescale=1./255,
+    validation_split=0.2
 )
 train_dataset = train_datagen.flow_from_directory(
     image_dir,
@@ -44,10 +45,10 @@ train_dataset = train_datagen.flow_from_directory(
     seed=123
 )
 
-validation_datagen = keras.preprocessing.image.ImageDataGenerator(
-    rescale=1./255 #this rescales the images
-)
-validation_dataset = validation_datagen.flow_from_directory(
+# validation_datagen = keras.preprocessing.image.ImageDataGenerator(
+#     rescale=1./255 #this rescales the images
+# )
+validation_dataset = train_datagen.flow_from_directory(
     image_dir,
     target_size=(image_height, image_width),
     batch_size=batch_size,
@@ -64,9 +65,11 @@ model = keras.Sequential([ #This groups layers sequentially
     layers.MaxPooling2D(),
     layers.Conv2D(64, 3, padding='same', activation='relu'),
     layers.MaxPooling2D(),
+    layers.Conv2D(128, 3, padding='same', activation='relu'),
+    layers.MaxPooling2D(),
     layers.Dropout(0.2),
     layers.Flatten(),#flatterns the inputs, does not affect batch size
-    layers.Dense(128, activation='relu'),
+    layers.Dense(256, activation='relu'),
     layers.Dense(1, activation='sigmoid')#this is the classes to predict
 ])
 
@@ -99,6 +102,21 @@ x /= 255
 
 # Make the prediction
 prediction = model.predict(x)
+threshold = 0.6  # Adjustable threshold
+if prediction < threshold:
+    print("The image is a Container.")
+else:
+    print("The image is Not a container.")
+
+
+img_path2 = 'backend/aiModel/Images/image2.jpg'
+img2 = image.load_img(img_path2, target_size=(image_height, image_width))
+y = image.img_to_array(img2)
+y = np.expand_dims(y, axis=0)
+y /= 255
+
+# Make the prediction
+prediction = model.predict(y)
 threshold = 0.5  # Adjustable threshold
 if prediction < threshold:
     print("The image is a Container.")
