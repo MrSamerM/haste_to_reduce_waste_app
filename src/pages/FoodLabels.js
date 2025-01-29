@@ -62,6 +62,13 @@ function FoodLabels() {
                 withCredentials: true,
             });
             setRecievedString(response.data.text);
+            console.log(response.data.text)
+
+            // const pattern = /(BB|Expiry Date|BBE|EXP|Best Before|\d{1,2}\/\d{1,2}\/\d{2,4}|\d{1,2}\-\d{1,2}\-\d{2,4}|\d{1,2}\.\d{1,2}\.\d{2,4}|\d{1,2}\ \d{1,2}\ \d{2,4}|\d{1,2}[a-zA-Z]{3}\d{2,4})/gim;
+            // const matches = [...string.matchAll(pattern)];
+            // const output = matches.map(match => match[0]).join(" ");
+            // setText(output);
+            // console.log(output);
         } catch (error) {
             console.error("Can't send the file", error);
         };
@@ -72,12 +79,7 @@ function FoodLabels() {
         // https://stackoverflow.com/questions/2951915/javascript-reg-ex-to-match-whole-word-only-bound-only-by-whitespace 
         // chatGPT about gim at the end, i for case insensitivity, and matching by mapping Prompt: still a error (my pattern)
 
-        const string = recievedString;
-        const pattern = /(BB|Expiry Date|BBE|EXP|Best Before|\d{1,2}\/\d{1,2}\/\d{2,4}|\d{1,2}\-\d{1,2}\-\d{2,4}|\d{1,2}\.\d{1,2}\.\d{2,4}|\d{1,2}\ \d{1,2}\ \d{2,4}|\d{1,2}[a-zA-Z]{3}\d{2,4})/gim;
-        const matches = [...string.matchAll(pattern)];
-        const output = matches.map(match => match[0]).join(" ");
-        setText(output);
-        console.log(output);
+
     };
 
     return (

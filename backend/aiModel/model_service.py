@@ -13,6 +13,7 @@ app = Flask(__name__)
 
 # https://medium.com/@pooranjoyb/integration-deployment-of-ml-model-with-react-flask-3033dd6034b3 24/01/2025
 # https://medium.com/@adityamahajan.work/easyocr-a-comprehensive-guide-5ff1cb850168 29/01/2025 for easyocr
+# ChatGPT helped to handle the image using cv2. Prompt why is this wrong (the route for text) 29/01/2025
 
 CORS(app, resources={r"/*": {"origins": "http://localhost:3000", "supports_credentials": True}})
 
@@ -29,15 +30,18 @@ def text():
     file.save('texts/' + file.filename)
 
     img_path = f"./texts/{file.filename}"
-    img = image.load_img(img_path)
+    img = cv2.imread(img_path)
 
     reader=easyocr.Reader(['en']) #specifies lanuage
     result=reader.readtext(img)
 
+    string=[]
+
     for(bbox,text,prob) in result:
         print(f'Text: {text}, Probability: {prob}')
+        string.append(text)
     
-    return jsonify({"text": [text]})
+    return jsonify({"text":[string] })
 
 
 
