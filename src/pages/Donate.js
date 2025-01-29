@@ -228,7 +228,7 @@ function Donate() {
                         </div>
                     </div>
                     <br></br>
-                    {percentage > 70 && predictedClass === "a Container" ? <button id="donateButton" disabled={false} onClick={donate}>Donate</button>
+                    {predictedClass === "a Container" ? <button id="donateButton" disabled={false} onClick={donate}>Donate</button>
                         : <button id="donateButton" disabled={true} onClick={donate}>Donate</button>}
                 </div>
 

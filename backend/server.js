@@ -108,6 +108,10 @@ app.post('/donate', async (req, res) => {
                 donatorID: req.session.userID
             }
         )
+
+        const findUser = await User.findByIdAndUpdate(req.session.userID, { $inc: { points: +10 } })
+
+        await findUser.save();
         await donation.save()
         console.log("Donation Successfully");
         res.json({ message: "Donated" })
@@ -251,8 +255,10 @@ app.post('/updateDonation', async (req, res) => {
 app.post('/removeReservation', async (req, res) => {
     try {
         const { donationID } = req.body
+
         const findID = await Donation.findByIdAndUpdate(donationID, { reserved: false, recipientID: "", })
-        findID.save();
+        await findID.save();
+
         console.log("Removed Reservation")
         res.json({ message: "Reservation Removed" });
 
@@ -266,6 +272,9 @@ app.post('/removeDonation', async (req, res) => {
     try {
         const { donationID } = req.body
         await Donation.findByIdAndDelete(donationID)
+        const findUser = await User.findByIdAndUpdate(req.session.userID, { $inc: { points: -10 } })
+        await findUser.save();
+
         console.log("Donation Removed")
 
     } catch (err) {
