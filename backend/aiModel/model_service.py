@@ -4,16 +4,43 @@ import os
 from tensorflow.keras.preprocessing import image
 import numpy as np
 from tensorflow.keras.models import load_model
+import easyocr
+import cv2
+
+
 
 app = Flask(__name__)
 
 # https://medium.com/@pooranjoyb/integration-deployment-of-ml-model-with-react-flask-3033dd6034b3 24/01/2025
+# https://medium.com/@adityamahajan.work/easyocr-a-comprehensive-guide-5ff1cb850168 29/01/2025 for easyocr
 
 CORS(app, resources={r"/*": {"origins": "http://localhost:3000", "supports_credentials": True}})
 
 # @app.route("/")
 # def home():
 #     return {"message": "Hello from backend"}
+
+# Fix this
+
+@app.route("/text", methods=['POST'])
+def text():
+
+    file = request.files['file']
+    file.save('texts/' + file.filename)
+
+    img_path = f"./texts/{file.filename}"
+    img = image.load_img(img_path)
+
+    reader=easyocr.Reader(['en']) #specifies lanuage
+    result=reader.readtext(img)
+
+    for(bbox,text,prob) in result:
+        print(f'Text: {text}, Probability: {prob}')
+    
+    return jsonify({"text": [text]})
+
+
+
 
 @app.route("/upload", methods=['POST'])
 def upload():

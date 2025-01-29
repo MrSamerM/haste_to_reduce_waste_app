@@ -1,7 +1,8 @@
 import React from "react";
 import '../styling/FoodLabels.css'
 import { useState, useEffect, useRef } from "react";
-import Tesseract from 'tesseract.js';
+// import Tesseract from 'tesseract.js';
+import axios from "axios";
 
 
 
@@ -13,6 +14,7 @@ function FoodLabels() {
     const [disableScanner, setDisableScanner] = useState(true);
     const [baseSixtyFour, setBaseSixtyFour] = useState("");
     const [text, setText] = useState("");
+    const [recievedString, setRecievedString] = useState("");
 
 
     const change = (evt) => {
@@ -49,11 +51,20 @@ function FoodLabels() {
 
     const submit = async (event) => {
         event.preventDefault();
-        console.log("Text")
+        const formData = new FormData();
+        formData.append("file", file);
 
-        const result = await Tesseract.recognize(fileURL);
-        setText(result.data.text);
-
+        try {
+            const response = await axios.post("http://localhost:5000/text", formData, {
+                headers: {
+                    "Content-Type": "multipart/form-data",
+                },
+                withCredentials: true,
+            });
+            setRecievedString(response.data.text);
+        } catch (error) {
+            console.error("Can't send the file", error);
+        };
 
         // https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/RegExp reference 26/01/2025
         // https://www.freecodecamp.org/news/regex-for-date-formats-what-is-the-regular-expression-for-matching-dates/
@@ -61,19 +72,12 @@ function FoodLabels() {
         // https://stackoverflow.com/questions/2951915/javascript-reg-ex-to-match-whole-word-only-bound-only-by-whitespace 
         // chatGPT about gim at the end, i for case insensitivity, and matching by mapping Prompt: still a error (my pattern)
 
-        const words = "Best Before 36 12/13/2024";
-        const pattern = /(BB|Expiry Date|BBE|EXP|Best Before|\d{1,2}\/\d{1,2}\/\d{2,4}|\d{1,2}\-\d{1,2}\-\d{2,4}|\d{1,2}\ \d{1,2}\ \d{2,4}|\d{1,2}[a-zA-Z]{3}\d{2,4})/gim;
-
-        const matches = [...words.matchAll(pattern)];
-
+        const string = recievedString;
+        const pattern = /(BB|Expiry Date|BBE|EXP|Best Before|\d{1,2}\/\d{1,2}\/\d{2,4}|\d{1,2}\-\d{1,2}\-\d{2,4}|\d{1,2}\.\d{1,2}\.\d{2,4}|\d{1,2}\ \d{1,2}\ \d{2,4}|\d{1,2}[a-zA-Z]{3}\d{2,4})/gim;
+        const matches = [...string.matchAll(pattern)];
         const output = matches.map(match => match[0]).join(" ");
-
+        setText(output);
         console.log(output);
-
-
-        // Add something that removes everything except due date
-        // Then another box that shows the due date, and how long you have to consume
-
     };
 
     return (
