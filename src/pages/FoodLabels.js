@@ -61,14 +61,18 @@ function FoodLabels() {
                 },
                 withCredentials: true,
             });
-            setRecievedString(response.data.text);
-            console.log(response.data.text)
 
-            // const pattern = /(BB|Expiry Date|BBE|EXP|Best Before|\d{1,2}\/\d{1,2}\/\d{2,4}|\d{1,2}\-\d{1,2}\-\d{2,4}|\d{1,2}\.\d{1,2}\.\d{2,4}|\d{1,2}\ \d{1,2}\ \d{2,4}|\d{1,2}[a-zA-Z]{3}\d{2,4})/gim;
-            // const matches = [...string.matchAll(pattern)];
-            // const output = matches.map(match => match[0]).join(" ");
-            // setText(output);
-            // console.log(output);
+            // https://stackoverflow.com/questions/65461724/how-can-i-remove-commas-or-whatever-from-within-a-string answered by munerik 30/01/2025
+
+            const result = response.data.text[0];
+            const newString = result.toString().replace(/[!.,]/g, ' ')
+
+            const pattern = /(BB|Expiry Date|BBE|EXP|Best Before|\d{1,2}\/\d{1,2}\/\d{2,4}|\d{6}|\d{1,2}\-\d{1,2}\-\d{2,4}|\d{1,2}\.\d{1,2}\.\d{2,4}|\d{1,2}\ \d{1,2}\ \d{2,4}|\d{1,2}[a-zA-Z]{3}\d{2,4})/gim;
+
+            const matches = [...newString.matchAll(pattern)];
+            const output = matches.map(match => match[0]).join(" ");
+            setText(output);
+            console.log(output);
         } catch (error) {
             console.error("Can't send the file", error);
         };
