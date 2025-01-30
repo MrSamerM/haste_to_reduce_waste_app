@@ -29,12 +29,17 @@ function E_Commerce() {
             <div id="shopItems">
                 {productList.map((product) => (
                     <div id="productDiv">
-                        <img src={product.image} />
-                        <label className="productLabel" htmlFor="productName">Description: </label>
-                        <input className="productInput" id="productName" value={product.productName} readonly />
+                        <img src={product.image} id="productImage" />
 
-                        <label className="productLabel" htmlFor="productCost">Cost: </label>
-                        <input className="productInput" id="productCost" value={product.cost} readonly />
+                        <div className="groupedDiv">
+                            <label className="productLabel" htmlFor="productName">Description: </label>
+                            <input className="productInput" id="productName" value={product.productName} readonly />
+                        </div>
+
+                        <div className="groupedDiv">
+                            <label className="productLabel" htmlFor="productCost">Cost: </label>
+                            <input className="productInput" id="productCost" value={product.cost} readonly />
+                        </div>
 
                     </div>
                 )

@@ -24,26 +24,42 @@ body {
     margin: 0 auto 60px auto;
     border-style: solid;
     border-width: black;
+    flex-wrap: wrap;
 }
 
 #productDiv {
     display: flex;
     flex-direction: column;
     align-items: flex-start;
-    flex: 2.8;
+    width: 32%;
+    border-style: solid;
+    border-width: rgb(6, 247, 255);
+    border-width: 3px;
+    align-items: center;
 }
+
+
+#groupedDiv {
+    display: flex;
+    align-items: center;
+    width: 50%;
+    margin-bottom: 20px;
+}
+
 
 .productLabel {
     margin-right: 20px;
     text-align: right;
-    width: 200px;
-    font-weight: bold;
-
+    width: 100px;
 }
 
 #productDiv .productInput {
     padding: 5px;
     margin: 5px;
-    width: 100%;
+    width: 50%;
+}
 
+#productImage {
+    height: 200px;
+    width: 200px;
 }
