@@ -47,6 +47,16 @@ function FoodLabels() {
     }, [file]);
 
 
+    // https://stackoverflow.com/questions/7335075/compare-2-dates-in-format-dd-mm-yyyy-with-javascript-jquery By Maxx 31/01/2025
+
+    function dateConvertion(date) {
+        const parts = date.split("/");
+        // this changes date to mm/dd/yy
+        const newDate = new Date(parts[1] + "/" + parts[0] + "/" + parts[2]);
+        return newDate.getTime();
+    }
+
+
     const fileInputRef = useRef(null);
 
     const submit = async (event) => {
@@ -65,14 +75,99 @@ function FoodLabels() {
             // https://stackoverflow.com/questions/65461724/how-can-i-remove-commas-or-whatever-from-within-a-string answered by munerik 30/01/2025
 
             const result = response.data.text[0];
+            console.log(result);
             const newString = result.toString().replace(/[!.,]/g, ' ')
 
-            const pattern = /(BB|Expiry Date|BBE|EXP|Best Before|\d{1,2}\/\d{1,2}\/\d{2,4}|\d{6}|\d{1,2}\-\d{1,2}\-\d{2,4}|\d{1,2}\.\d{1,2}\.\d{2,4}|\d{1,2}\ \d{1,2}\ \d{2,4}|\d{1,2}[a-zA-Z]{3}\d{2,4})/gim;
+            const pattern = /(BB|Expiry Date|BBE|EXP|BEST BY|Best By|Best Before|\d{1,2}\/\d{1,2}\/\d{2,4}|\d{6}|\d{1,2}\-\d{1,2}\-\d{2,4}|\d{1,2}\.\d{1,2}\.\d{2,4}|\d{1,2}\ \d{1,2}\ \d{2,4}|\d{1,2}[a-zA-Z]{3}\d{2,4})/gim;
 
             const matches = [...newString.matchAll(pattern)];
             const output = matches.map(match => match[0]).join(" ");
-            setText(output);
             console.log(output);
+            const workArray = output.split(" ");
+            setText(output);
+            console.log(workArray);
+
+            const array = ["best before", "Expiry date", "10/09/2024", "10/10/2024"];
+            const numberArray = [];
+
+            const pattern1 = /(BB|Expiry Date|BBE|EXP|BEST BY|Best By|Best Before)/i;
+            const pattern2 = /(\d{1,2}\/\d{1,2}\/\d{2,4})/i;
+
+            // filter method recieved by chatgpt, and remove gm, due to global issues with .test()
+            //prompt: I have a array but I want to remove the elements that dont follow a regex pattern. 31/01/2025
+            //prompt2: why is this not working (the method).
+
+            const words = array.filter(element => pattern1.test(element));
+            const dates = array.filter(element => pattern2.test(element));
+
+            console.log(words);
+            console.log(dates);
+
+            for (let i = 0; i < words.length; i++) {
+                if (words[i].toUpperCase().charAt(0) === "B") {
+                    numberArray.push({
+                        word: array[i],
+                        number: 1
+                    });
+                }
+                else if (words[i].toUpperCase().charAt(0) === "E") {
+                    numberArray.push({
+                        word: array[i],
+                        number: 3
+                    });
+                }
+
+            }
+
+            if (dateConvertion(dates[0]) < dateConvertion(dates[1])) {
+                numberArray.push({
+                    word: dates[1],
+                    number: 4
+                });
+
+                numberArray.push({
+                    word: dates[0],
+                    number: 2
+                });
+            }
+
+            else {
+                numberArray.push({
+                    word: dates[0],
+                    number: 4
+                });
+
+                numberArray.push({
+                    word: dates[1],
+                    number: 2
+                });
+            }
+
+            console.log("this is the array", numberArray);
+
+            // https://www.geeksforgeeks.org/insertion-sort-algorithm/ for the insertion sort 31/01/2025
+            // chatgpt to help with handling it with objects.
+            // prompt1: what I am expecting is for the array to sort the complete object. Not the value of the number in the object. how can I do this (my code)
+            // prompt2: questioning
+            // prompt3: but how about if I want to use my one regardless
+
+            for (let i = 1; i < numberArray.length; i++) {
+
+                let key = numberArray[i];
+                let j = i - 1;
+
+                while (j >= 0 && numberArray[j].number > key.number) {
+                    numberArray[j + 1] = numberArray[j];
+                    j = j - 1;
+                }
+
+                numberArray[j + 1] = key;
+            }
+
+            console.log(numberArray)
+
+
+
         } catch (error) {
             console.error("Can't send the file", error);
         };
@@ -100,7 +195,7 @@ function FoodLabels() {
                             The image must be a .png, jpeg, jpg, of gif file.<br></br>
                             This is to allow you to press scan to scan the image.<br></br>
                         </p>
-                        <button id="scanFoodLabelImage" disabled={disableScanner} onClick={submit}>Scan</button>
+                        <button id="scanFoodLabelImage" disabled={false} onClick={submit}>Scan</button>
                     </div>
 
                     <div id="foodLabelImage">

@@ -20,10 +20,8 @@ body {
 #shopItems {
     display: flex;
     flex-direction: row;
-    width: 95%;
+    width: 80%;
     margin: 0 auto 60px auto;
-    border-style: solid;
-    border-width: black;
     flex-wrap: wrap;
 }
 
@@ -31,32 +29,38 @@ body {
     display: flex;
     flex-direction: column;
     align-items: flex-start;
-    width: 32%;
+    width: 30%;
     border-style: solid;
-    border-width: rgb(6, 247, 255);
-    border-width: 3px;
+    border-color: rgb(10, 244, 53);
+    border-width: 5px;
     align-items: center;
+    margin: 5px;
 }
 
 
-#groupedDiv {
+.groupedDiv {
     display: flex;
     align-items: center;
-    width: 50%;
+    width: 100%;
     margin-bottom: 20px;
 }
 
 
 .productLabel {
-    margin-right: 20px;
+    margin-right: 10px;
     text-align: right;
-    width: 100px;
+    width: 200px;
 }
 
 #productDiv .productInput {
     padding: 5px;
     margin: 5px;
-    width: 50%;
+    margin-right: 10%;
+    width: 95%;
+    border-style: solid;
+    border-color: rgb(6, 247, 255);
+    border-width: 3px;
+
 }
 
 #productImage {
