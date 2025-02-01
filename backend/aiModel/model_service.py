@@ -6,6 +6,8 @@ import numpy as np
 from tensorflow.keras.models import load_model
 import easyocr
 import cv2
+from textblob import TextBlob 
+
 
 
 
@@ -37,11 +39,14 @@ def text():
 
     string=[]
 
+
     for(bbox,text,prob) in result:
         print(f'Text: {text}, Probability: {prob}')
-        string.append(text)
+        check_each=TextBlob(text)
+        correct=check_each.correct()
+        string.append(str(correct))
     
-    return jsonify({"text":[string] })
+    return jsonify({"text":string})
 
 
 

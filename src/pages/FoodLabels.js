@@ -166,7 +166,16 @@ function FoodLabels() {
 
             console.log(numberArray)
 
-
+            if ((numberArray[0].word.toUpperCase().charAt(0) === ("B" || "D")) && (numberArray[2].word.toUpperCase().charAt(0) === ("E"))) {
+                console.log(`This means that you have until ${numberArray[1].word} to consume while it is closed. AND`)
+                console.log(`This means that you have until ${numberArray[3].word} to consume. That is it`)
+            }
+            else if ((numberArray[0].word.toUpperCase().charAt(0) === ("E"))) {
+                console.log(`This means that you have until ${numberArray[1].word} to consume. That is it`)
+            }
+            else if ((numberArray[0].word.toUpperCase().charAt(0) === ("B"))) {
+                console.log(`This means that you have until ${numberArray[1].word} to consume while it is closed`)
+            }
 
         } catch (error) {
             console.error("Can't send the file", error);
