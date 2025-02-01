@@ -4,9 +4,6 @@ import { useState, useEffect, useRef } from "react";
 // import Tesseract from 'tesseract.js';
 import axios from "axios";
 
-
-
-
 function FoodLabels() {
 
     const [file, setFile] = useState("");
@@ -166,15 +163,22 @@ function FoodLabels() {
 
             console.log(numberArray)
 
-            if ((numberArray[0].word.toUpperCase().charAt(0) === ("B" || "D")) && (numberArray[2].word.toUpperCase().charAt(0) === ("E"))) {
-                console.log(`This means that you have until ${numberArray[1].word} to consume while it is closed. AND`)
+            // https://www.betterhealth.vic.gov.au/health/healthyliving/food-use-by-and-best-before-dates 01/02/2025
+            // https://www.webmd.com/diet/features/do-food-expiration-dates-matter 01/02/2025
+
+            // Best before is the date where the food quality begins to lose, however if stored properly can be suitbale even after the date.
+            // Use by date is the date where the food consumed has to be eaten before or on that date.
+            // Expiry date is similar to use by date. Meaning it is not recommended to be conumed after the date. 
+
+            if ((numberArray[0].word.toUpperCase().charAt(0) === ("B" || "D")) && (numberArray[2].word.toUpperCase().charAt(0) === ("E") || ("U"))) {
+                console.log(`This means that you have until ${numberArray[1].word} to consume while it is closed, however if stored properly, and quality looks suitbale, it make extend over the date`)
                 console.log(`This means that you have until ${numberArray[3].word} to consume. That is it`)
             }
-            else if ((numberArray[0].word.toUpperCase().charAt(0) === ("E"))) {
+            else if ((numberArray[0].word.toUpperCase().charAt(0) === ("E") || ("U"))) {
                 console.log(`This means that you have until ${numberArray[1].word} to consume. That is it`)
             }
             else if ((numberArray[0].word.toUpperCase().charAt(0) === ("B"))) {
-                console.log(`This means that you have until ${numberArray[1].word} to consume while it is closed`)
+                console.log(`This means that you have until ${numberArray[1].word} to consume while it is closed, however if stored properly, and quality looks suitbale, it make extend over the date`)
             }
 
         } catch (error) {
@@ -186,8 +190,6 @@ function FoodLabels() {
         // https://stackoverflow.com/questions/33017274/find-all-words-with-3-letters-with-regex
         // https://stackoverflow.com/questions/2951915/javascript-reg-ex-to-match-whole-word-only-bound-only-by-whitespace 
         // chatGPT about gim at the end, i for case insensitivity, and matching by mapping Prompt: still a error (my pattern)
-
-
     };
 
     return (
@@ -211,14 +213,10 @@ function FoodLabels() {
                         <img id="selectedFoodLabelImage" src={fileURL} alt="selected file" />
                     </div>
                 </div>
-
                 <div id="foodLabelDetails">
                     <textarea id="textArea" value={text} readOnly></textarea>
                 </div>
-
-
             </div>
-
         </div>
     );
 }
