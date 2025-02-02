@@ -7,10 +7,15 @@ function E_Commerce() {
     const [productList, setProductList] = useState([]);
     const [quantities, setQuantities] = useState({});
     const [totalAmount, setTotalAmount] = useState(0);
+    const [listOfProducts, setListOfProducts] = useState([]);
 
 
 
     useEffect(() => {
+
+        console.log("Total: ", totalAmount)
+        console.log("List of Products: ", listOfProducts)
+
         const products = async () => {
             try {
                 const res = await axios.get('http://localhost:8000/allProducts')
@@ -23,18 +28,22 @@ function E_Commerce() {
         }
         products();
 
-    }, []);
+    }, [totalAmount, listOfProducts]);
 
 
-    // from chatGPT mycode(it still updates all)
+    // from chatGPT Prompt: mycode  it still updates all (my code): for setQuantities 02/02/2025
+
+    // Prompt: The thing is setListOfProducts(prevListOfProducts => prevListOfProducts.filter(id=>id!==productId)),
+    // It may have repeated products ids if a users buys the same thing more than once. so would this remove all of the same ids, or only one. 
+    // ^^: for setListOfProducts 
 
     const add = (productId, cost) => {
         setQuantities((prevQuantities) => ({
             ...prevQuantities,
             [productId]: (prevQuantities[productId] || 0) + 1,
         }));
-        setTotalAmount(prevTotalAmount => prevTotalAmount === 0 ? prevTotalAmount - 0 : prevTotalAmount - cost);
-
+        setTotalAmount(prevTotalAmount => prevTotalAmount + cost);
+        setListOfProducts(prevListOfProducts => [...prevListOfProducts, productId]);
     };
 
     const subtract = (productId, cost) => {
@@ -42,7 +51,13 @@ function E_Commerce() {
             ...prevQuantities,
             [productId]: Math.max((prevQuantities[productId] || 0) - 1, 0), // Prevent negative values
         }));
-        setTotalAmount(prevTotalAmount => prevTotalAmount + cost);
+        setTotalAmount(prevTotalAmount => prevTotalAmount === 0 ? prevTotalAmount - 0 : prevTotalAmount - cost);
+        setListOfProducts(prevListOfProducts => {
+            const index = prevListOfProducts.indexOf(productId);
+            const update = [...prevListOfProducts];
+            update.splice(index, 1);
+            return update;
+        });
     };
 
     return (
