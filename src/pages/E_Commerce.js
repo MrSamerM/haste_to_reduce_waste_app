@@ -5,6 +5,9 @@ import axios from "axios";
 function E_Commerce() {
 
     const [productList, setProductList] = useState([]);
+    const [quantities, setQuantities] = useState({});
+    const [totalAmount, setTotalAmount] = useState(0);
+
 
 
     useEffect(() => {
@@ -21,6 +24,26 @@ function E_Commerce() {
         products();
 
     }, []);
+
+
+    // from chatGPT mycode(it still updates all)
+
+    const add = (productId, cost) => {
+        setQuantities((prevQuantities) => ({
+            ...prevQuantities,
+            [productId]: (prevQuantities[productId] || 0) + 1,
+        }));
+        setTotalAmount(prevTotalAmount => prevTotalAmount === 0 ? prevTotalAmount - 0 : prevTotalAmount - cost);
+
+    };
+
+    const subtract = (productId, cost) => {
+        setQuantities((prevQuantities) => ({
+            ...prevQuantities,
+            [productId]: Math.max((prevQuantities[productId] || 0) - 1, 0), // Prevent negative values
+        }));
+        setTotalAmount(prevTotalAmount => prevTotalAmount + cost);
+    };
 
     return (
         <div>
@@ -39,6 +62,12 @@ function E_Commerce() {
                         <div className="groupedDiv">
                             <label className="productLabel" htmlFor="productCost">Cost: </label>
                             <input className="productInput" id="productCost" value={product.cost} readonly />
+                        </div>
+
+                        <div id="quantity">
+                            <button className="addOrSubtract" onClick={() => subtract(product.id, product.cost)}>-</button>
+                            <input key={product.id} id="quantityRequired" value={quantities[product.id] || 0} readonly />
+                            <button className="addOrSubtract" onClick={() => add(product.id, product.cost)}>+</button>
                         </div>
 
                     </div>

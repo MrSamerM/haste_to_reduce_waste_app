@@ -35,6 +35,7 @@ body {
     border-width: 5px;
     align-items: center;
     margin: 5px;
+    border-radius: 10px;
 }
 
 
@@ -57,13 +58,39 @@ body {
     margin: 5px;
     margin-right: 10%;
     width: 95%;
-    border-style: solid;
-    border-color: rgb(6, 247, 255);
-    border-width: 3px;
 
 }
 
 #productImage {
     height: 200px;
     width: 200px;
+}
+
+#quantity {
+    display: flex;
+    flex-direction: row;
+    width: 95%;
+    align-items: center;
+    justify-content: center;
+    margin: 0 auto 10px auto;
+}
+
+#quantityRequired {
+    text-align: center;
+    font-weight: bold;
+    width: 50%;
+    margin-left: 5%;
+    margin-right: 5%;
+    padding-top: 2.5%;
+    padding-bottom: 2.5%;
+
+}
+
+.addOrSubtract {
+    width: 80px;
+    height: 50px;
+    color: black;
+    background-color: green;
+    font-size: larger;
+    font-weight: bolder;
 }
