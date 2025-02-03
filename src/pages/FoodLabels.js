@@ -130,18 +130,30 @@ function FoodLabels() {
 
             const result = response.data.text;
             console.log(result);
-            // const newString = result.toString().replace(/[!.,]/g, ' ')
 
-            // const pattern = /(BB|Expiry Date|BBE|EXP|BEST BY|Best By|Best Before|\d{1,2}\/\d{1,2}\/\d{2,4}|\d{6}|\d{1,2}\-\d{1,2}\-\d{2,4}|\d{1,2}\.\d{1,2}\.\d{2,4}|\d{1,2} \d{1,2} \d{2,4}|\d{1,2}[a-zA-Z]{3}\\d{1,2} [a-zA-Z]{3} \d{2,4})/i;
+            for (let i = 0; i < result.length; i++) {
 
-            // const matches = [...newString.matchAll(pattern)];
-            // const output = matches.map(match => match[0]).join(" ");
-            // console.log(output);
-            // const workArray = output.split(" ");
-            // setText(output);
-            // console.log(workArray);
+                if (result[i].toUpperCase() === "BEFORE") {
+                    result.unshift(result[i]);
+                }
 
-            // const array = ["best before", "Expiry date", "10/09/2024", "10/10/2024"];
+                else if (result[i].toUpperCase() === "BEST") {
+                    result.unshift(result[i]);
+                }
+            }
+
+            if (result[0].toUpperCase() === "BEFORE" && result[1].toUpperCase() === "BEST") {
+                // result[0] = result[1];
+                // result[1] = result[0];
+                result.swap(result[0], result[1]);
+                const joining = result.slice(0, 2);
+                const newString = joining.join(" ");
+                result.splice(0, 2);
+                result.unshift(newString);
+                console.log(newString)
+                console.log(result);
+            }
+
             const numberArray = [];
 
             const pattern1 = /(BB|Expiry Date|BBE|EXP|BEST BY|Best By|Best Before)/i;

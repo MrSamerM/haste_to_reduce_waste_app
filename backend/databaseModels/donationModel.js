@@ -42,12 +42,12 @@ const donationSchema = new mongoose.Schema({
     },
 
     donatorID: {
-        type: String,
+        type: mongoose.Schema.Types.ObjectID, ref: "User",
         require: true
     },
 
     recipientID: {
-        type: String,
+        type: mongoose.Schema.Types.ObjectID, ref: "User",
         default: "",
         require: true
     },
