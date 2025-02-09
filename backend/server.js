@@ -256,7 +256,7 @@ app.post('/removeReservation', async (req, res) => {
     try {
         const { donationID } = req.body
 
-        const findID = await Donation.findByIdAndUpdate(donationID, { reserved: false, recipientID: "", })
+        const findID = await Donation.findByIdAndUpdate(donationID, { reserved: false, recipientID: null, })
         await findID.save();
 
         console.log("Removed Reservation")

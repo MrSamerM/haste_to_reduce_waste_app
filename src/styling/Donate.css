@@ -4,7 +4,8 @@ body {
     background-color: #E1ECD8;
 }
 
-#donateTitleDiv {
+#donateTitleDiv,
+.educationDonateTitleDiv {
     align-items: center;
     margin: 0 auto 30px auto;
     margin-bottom: 50px;
@@ -12,7 +13,8 @@ body {
 }
 
 
-#donateTitle {
+#donateTitle,
+.educationDonateTitle {
     text-align: center;
     text-decoration: underline;
 }
@@ -119,7 +121,9 @@ body {
 }
 
 #donateButton,
-#scanImage {
+#scanImage,
+.nextButton,
+.skipButton {
     background-color: black;
     color: white;
     width: 150px;
@@ -131,4 +135,250 @@ body {
 
 #donateButton {
     margin: 0 auto 30px auto;
+}
+
+.skipButton {
+    margin-left: auto;
+
+}
+
+.nextButton {
+    margin: 0 auto 30px auto;
+
+}
+
+
+@keyframes opacityTransition {
+    from {
+        opacity: 0;
+    }
+
+    to {
+        opacity: 1;
+    }
+}
+
+/* https://www.youtube.com/watch?v=_7DfrfEWJMc&list=LL&index=1&t=344s 05/02/2025 */
+#educationBox1 {
+    display: flex;
+    flex-direction: column;
+    width: 85%;
+    margin: 0 auto 60px auto;
+    background-color: rgba(59, 175, 59, 0.785);
+    animation: opacityTransition 3s ease-in;
+    margin-top: 3%;
+
+}
+
+#entireSecondBox,
+#educationBox3 {
+    display: flex;
+    background-color: rgba(59, 175, 59, 0.785);
+    width: 85%;
+    margin: 0 auto 0px auto;
+    flex-direction: column;
+    animation: opacityTransition 3s ease-in;
+    margin-top: 3%;
+
+}
+
+#educationBox2,
+#selections {
+    display: flex;
+    flex-direction: row;
+    width: 85%;
+    margin: 0 auto 60px auto;
+    align-items: center;
+    border: black;
+    border-style: solid;
+    border-width: 5px;
+}
+
+/* https://www.youtube.com/watch?v=YFgTZF9_BH4  07/02/2025 to get a gradient animation*/
+@keyframes gradientAnimate {
+    0% {
+        background-position: 0 85%;
+    }
+
+    60% {
+        background-position: 100% 20%;
+    }
+
+    100% {
+        background-position: 0 85%;
+    }
+}
+
+#barChart {
+    height: 250px;
+    width: 550px;
+}
+
+
+.suitableContainers {
+    height: 250px;
+    width: 350px;
+}
+
+.interactP {
+    margin: 0 auto 60px auto;
+    width: 60%;
+}
+
+#interactionParagraph {
+    font-size: large;
+    color: black;
+}
+
+/* https://www.youtube.com/watch?v=hr4JiDr7Aec 06/02/2025 */
+
+.suitableImages {
+    position: relative;
+    width: 100%;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+    width: fit-content;
+    margin-bottom: 5%;
+    margin-top: 10%;
+}
+
+.textOverlay {
+    width: 100%;
+    height: 100%;
+    top: 0;
+    left: 0;
+    position: absolute;
+    background: rgba(0, 0, 0, 0.6);
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    flex-direction: column;
+    opacity: 0;
+    transition: 0.5s;
+}
+
+.textOverlay:hover {
+    opacity: 1;
+}
+
+.textOverlay p {
+    font-size: medium;
+    color: white;
+    text-align: center;
+}
+
+.appropriateContainers {
+    height: 250px;
+    width: 350px;
+}
+
+#firstHalf,
+#secondHalf {
+    display: flex;
+    flex-direction: column;
+    width: 50%;
+    align-items: center;
+}
+
+
+#firstHalf .suitableImages {
+    border: green;
+    border-style: solid;
+    border-width: 8px;
+}
+
+#secondHalf .suitableImages {
+    border: red;
+    border-style: solid;
+    border-width: 8px;
+}
+
+#firstHalf h4 {
+    color: white;
+    font-weight: bolder;
+    text-decoration: underline;
+    text-align: center;
+    font-size: larger;
+}
+
+#secondHalf h4 {
+    color: white;
+    font-weight: bolder;
+    text-decoration: underline;
+    text-align: center;
+    font-size: larger;
+}
+
+.boxOfEverything {
+    width: 100%;
+    margin: 0 auto 10px auto;
+}
+
+.theContents {
+    margin-bottom: 2%;
+    border: black;
+    border-style: solid;
+    border-width: 2px;
+    display: flex;
+    align-items: center;
+    margin-left: auto;
+    margin-right: auto;
+
+}
+
+.theContents {
+    display: flex;
+    align-items: center;
+    width: 60%;
+    margin-bottom: 10px;
+}
+
+.paragraphDetails {
+    margin-right: 20px;
+    text-align: center;
+    width: 50%;
+}
+
+.suitableContainers {
+    padding: 5px;
+    margin: 5px;
+    width: 70%;
+}
+
+
+/* 
+ChatGPT to make a animation 07/02/2025
+Prompt1:I want to have something were the divs will appear one after the other like powerpoint.I am using react js
+Prompt2: is there a way of doing it in css
+ */
+.boxOfEverything {
+    opacity: 0;
+    transform: translateY(20px);
+    animation: fade 1s ease-in forwards;
+}
+
+.boxOfEverything:nth-child(1n) {
+    animation-delay: 8s;
+}
+
+.boxOfEverything:nth-child(2n) {
+    animation-delay: 5s;
+}
+
+.boxOfEverything:nth-child(3n) {
+    animation-delay: 2s;
+}
+
+@keyframes fade {
+    from {
+        opacity: 0;
+        transform: translateY(20px);
+    }
+
+    to {
+        opacity: 1;
+        transform: translateY(0);
+    }
 }

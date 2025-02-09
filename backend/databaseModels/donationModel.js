@@ -48,7 +48,7 @@ const donationSchema = new mongoose.Schema({
 
     recipientID: {
         type: mongoose.Schema.Types.ObjectID, ref: "User",
-        default: "",
+        default: null,
         require: true
     },
 

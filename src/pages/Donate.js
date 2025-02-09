@@ -1,10 +1,31 @@
-import React from "react";
+import React, { use } from "react";
 import '../styling/Donate.css'
 import { useState, useEffect, useRef } from "react";
 import { GeoapifyGeocoderAutocomplete, GeoapifyContext } from '@geoapify/react-geocoder-autocomplete'
 import '@geoapify/geocoder-autocomplete/styles/minimal.css'
 import axios from 'axios';
+import { Bar } from 'react-chartjs-2';
+import suitableContainer1 from '../image/Aluminuim.jpg';
+import suitableContainer2 from '../image/Aluminuim.jpg';
+import suitableContainer3 from '../image/Aluminuim.jpg';
+import suitableContainer4 from '../image/Aluminuim.jpg';
+import suitableContainer5 from '../image/Aluminuim.jpg';
+import suitableContainer6 from '../image/Aluminuim.jpg';
+import {
+    Chart as ChartJS,
+    BarElement,
+    CategoryScale,
+    LinearScale,
+    Tooltip,
+    Legend
+} from 'chart.js'
 
+ChartJS.register(
+    BarElement,
+    CategoryScale,
+    LinearScale,
+    Tooltip,
+    Legend);
 
 
 // https://www.geeksforgeeks.org/how-to-upload-image-and-preview-it-using-reactjs/ do display image 15/01/25
@@ -26,7 +47,31 @@ function Donate() {
     const [portionSize, setPortionSize] = useState(0);
     const [baseSixtyFour, setBaseSixtyFour] = useState("");
     const [predictedClass, setPredictedClass] = useState(""); // State for predicted class
+    const [education, setEducation] = useState(false);
+    const [educationState, setEducationState] = useState(0);
+    const [quizScore, setQuizScore] = useState(0)
+    const [currentQuestion, setCurrentQuestion] = useState(0);
+    const [selectedAnswer, setSelectedAnswer] = useState("");
 
+
+
+    const questions = [
+        {
+            question: "How many tonnes of food waste was prevented in 2024?",
+            options: ["1000 tonnes", "5000 tonnes", "10,000 tonnes"],
+            answer: "5000 tonnes"
+        },
+        {
+            question: "Which container is a suitbale container to use when donating?",
+            options: ["Aluminium container", "Foam container", "Polythene bag"],
+            answer: "Aluminium container"
+        },
+        {
+            question: "what does donating exess food do?",
+            options: ["reduces global warming", "nothing, it does not matter", "saves up space in the fridge"],
+            answer: "reduces global warming"
+        }
+    ]
 
     axios.defaults.withCredentials = true;
 
@@ -162,79 +207,337 @@ function Donate() {
 
     }
 
+    const changeState = (() => {
+        if (educationState < 2) {
+            setEducationState(recentState => recentState + 1);
+        }
+
+        else if (educationState === 2) {
+            if (selectedAnswer === "") {
+                alert("Must select a answer first")
+            }
+            else if (selectedAnswer === questions[currentQuestion].answer) {
+                setQuizScore(currentQuizScore => currentQuizScore + 1);
+                setCurrentQuestion(prevQuestion => prevQuestion + 1);
+            }
+            else {
+                setCurrentQuestion(prevQuestion => prevQuestion + 1);
+            }
+        }
+        else {
+            setEducation(true);
+        }
+    });
+
+    const skipState = (() => {
+        setEducation(true);
+
+    })
+
+    const chartData = {
+        labels: [2015, 2016, 2017, 2018, 2019, 2020, 2021, 2022, 2023, 2024, 2025],
+        datasets: [
+            {
+                label: 'Food waste prevented per tonne',
+                data: [5000, 10000, 5000, 5000, 5000, 5000, 6000, 7000, 8000, 5000, 6000],
+                backgroundColor: '#61DFB0',
+                color: '#000000'
+            },
+            {
+                label: 'My App prevented per tonne',
+                data: [0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 4000],
+                backgroundColor: 'red',
+                color: '#000000'
+            }
+        ]
+
+    }
+
+    // Required chatGPT to change the colour of the labels
+    // Prompt: Can I change the colour of the labels on the top. because it is grey right now
+    // Prompt: how can I change the colour of the axes
+
+    const chartOptions = {
+
+        plugins: {
+            legend: {
+                labels: {
+                    color: '#000000'
+                }
+            }
+        },
+
+        scales: {
+            x: {
+                stacked: true,
+                ticks: {
+                    color: 'black'
+                },
+                grid: {
+                    color: '#black'
+                }
+            },
+            y: {
+                stacked: true,
+                ticks: {
+                    color: 'black'
+                },
+                grid: {
+                    color: '#black'
+                }
+            }
+        }
+
+    }
+
+    const handleSelection = ((answerSelected) => {
+
+        setSelectedAnswer(answerSelected);
+
+    })
+
     return (
-        <>
-            <div id="donateTitleDiv"><h1 id="donateTitle">Donate</h1></div>
+        education === false ?
+            (<>
 
-            <div id="donationBox">
+                {educationState === 0 &&
+                    <div id="educationBox1">
+                        <button className="skipButton" onClick={skipState}>Skip  →</button>
+                        <div className="educationDonateTitleDiv"><h1 className="educationDonateTitle">Why Donate?</h1></div>
+                        <div className="boxOfEverything">
+                            <div className="theContents">
+                                <p className="paragraphDetails">
+                                    Donating is a way that individuals can get rid of exess food or
+                                    food that it about to expire. The method of donating is very well know
+                                    but missed opportunities are assisting waste to good preishable foods
+                                </p>
+                                <div><img className="suitableContainers" src={suitableContainer2} alt="Aluminium container" /></div>
+                            </div>
+                        </div>
 
-                <div id="selectDonationImage">
-                    {/* to remove select file button https://stackoverflow.com/questions/61468441/how-to-change-default-text-in-input-type-file-in-reactjs 21/01/2025 */}
-                    <div id="preDonationInformation">
-                        <label htmlFor="imageFile" id="selectFileLabel">Click here to upload donation image</label>
-                        <input type="file" id="imageFile" onChange={change} ref={fileInputRef} />
+                        <div className="boxOfEverything">
+                            <div className="theContents">
+                                <p className="paragraphDetails">
+                                    The right chart shows the progress that our app is making
+                                    Based on the number of portions we were able to help distibute
+                                    we were able to prevent 1000 tonnes of food waste
+                                </p>
+                                <div id="barChart">
+                                    <Bar data={chartData} options={chartOptions}></Bar>
+                                </div>
+                            </div>
+                        </div>
 
-                        <p id="imageRequirement">
-                            The image must be a .png, jpeg, jpg, of gif file.<br></br>
-                            This is to allow you to press scan to scan the image.<br></br>
-                            If the image is a container, then you can donate.<br></br>
-                            The item should be put in a suitable container.<br></br>
-                            such as; aluminium, plastic, or takeaway container.<br></br>
-                        </p>
-                        <button id="scanImage" disabled={disableScanner} onClick={submit}>Scan</button>
+                        <div className="boxOfEverything">
+
+                            <div className="theContents">
+
+                                <p className="paragraphDetails">
+                                    Facts: Did you know that 5000 tonnes of exess food was wasted <br></br><br></br>
+                                    Facts: Did you know that the food wasted contributes to environmental issues like global warming <br></br><br></br>
+                                    Facts: Did you know that we lose over 20 million pounds in the UK due to food wasted
+                                </p>
+                                <div><img className="suitableContainers" src={suitableContainer2} alt="Aluminium container" /></div>
+                            </div>
+                        </div>
+
+                        <button className="nextButton" onClick={changeState}>Next</button>
                     </div>
+                }
+                {educationState === 1 &&
+                    <div id="entireSecondBox">
+                        <button className="skipButton" onClick={skipState}>Skip  →</button>
+                        <div className="educationDonateTitleDiv"><h1 className="educationDonateTitle">Suitable Containers</h1></div>
+                        <div className="interactP"><p id="interactionParagraph">
+                            Specification for each containers is a must. There are some container that are not
+                            suitbale to use when donating food, as it will contribute further to food waste.
+                            Hover and learn the different types of container that are suitable to gain an uderstanding</p></div>
+                        <div id="educationBox2">
+                            <br></br>
+                            <div id="firstHalf">
+                                <div className="suitableImages">
+                                    <img className="appropriateContainers" src={suitableContainer1} alt="Aluminium container" />
+                                    <div className="textOverlay">
+                                        <h4>Aluminium Container</h4><br></br>
+                                        <p>
+                                            This containers are suitable for
+                                            hot food, especially for hot food,
+                                            and are able to contain heat and store food
+                                            properly without any affect
+                                        </p>
+                                    </div>
+                                </div>
 
-                    <div id="imageAndPercentage">
-                        <img id="selectedImage" src={fileURL} alt="selected file" />
-                        <br></br>
-                        <p>The Image is {percentage}% {predictedClass}</p>
+                                <div className="suitableImages">
+                                    <img className="appropriateContainers" src={suitableContainer2} alt="Aluminium container" />
+                                    <div className="textOverlay">
+                                        <h4>Plastic container</h4><br></br>
+                                        <p>
+                                            This containers are suitable for
+                                            hot food, especially for hot food,
+                                            and are able to contain heat and store food
+                                            properly without any affect
+                                        </p>
+                                    </div>
+                                </div>
+
+                                <div className="suitableImages">
+                                    <img className="appropriateContainers" src={suitableContainer3} alt="Aluminium container" />
+                                    <div className="textOverlay">
+                                        <h4>Takeaway containers</h4><br></br>
+                                        <p>
+                                            This containers are suitable for
+                                            hot food, especially for hot food,
+                                            and are able to contain heat and store food
+                                            properly without any affect
+                                        </p>
+                                    </div>
+                                </div>
+                            </div>
+
+                            <div id="secondHalf">
+                                <div className="suitableImages">
+                                    <img className="appropriateContainers" src={suitableContainer4} alt="Aluminium container" />
+                                    <div className="textOverlay">
+                                        <h4>Foam container</h4><br></br>
+                                        <p>
+                                            This containers is not suitbale to
+                                            store food. This is because it can
+                                            possibly mix the food with chemical, and thus
+                                            affect the food, which is not safe to consume
+                                            thus leaving it to waste
+                                        </p>
+                                    </div>
+                                </div>
+
+                                <div className="suitableImages">
+                                    <img className="appropriateContainers" src={suitableContainer5} alt="Aluminium container" />
+                                    <div className="textOverlay">
+                                        <h4>Cardboard container</h4><br></br>
+                                        <p>
+                                            This containers is not suitbale to
+                                            store food. This is because it can
+                                            possibly mix the food with chemical, and thus
+                                            affect the food, which is not safe to consume
+                                            thus leaving it to waste
+                                        </p>
+                                    </div>
+                                </div>
+
+                                <div className="suitableImages">
+                                    <img className="appropriateContainers" src={suitableContainer6} alt="Aluminium container" />
+                                    <div className="textOverlay">
+                                        <h4>Polythene bags</h4><br></br>
+                                        <p>
+                                            This containers is not suitbale to
+                                            store food. This is because it can
+                                            possibly mix the food with chemical, and thus
+                                            affect the food, which is not safe to consume
+                                            thus leaving it to waste
+                                        </p>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                        <button className="nextButton" onClick={changeState}>Next</button>
                     </div>
-                </div>
+                }
+
+                {/* https://www.youtube.com/watch?v=jE2Ivb7dlSQ&t=986s recieved some assistant 09/02/2025 */}
+
+                {educationState === 2 &&
+                    <div id="educationBox3">
+                        <button className="skipButton" onClick={skipState}>Skip  →</button>
+                        <div className="educationDonateTitleDiv"><h1 className="educationDonateTitle">Quiz</h1></div>
+
+                        <div id="quizQuestion"><p>{questions[currentQuestion].question}</p></div>
+                        <div id="quizSelections">
+
+                            {questions[currentQuestion].options.map((option) => (
+
+                                <button id="answeres" key={option} onClick={() => handleSelection(option)}>{option}</button>
+
+                            ))}
+
+                        </div>
+
+                        <button className="nextButton" onClick={changeState}>Next</button>
+                    </div>
+                }
+
+            </>)
+            :
+            (
+                <>
+                    <div id="donateTitleDiv"><h1 id="donateTitle">Donate</h1></div>
+
+                    <div id="donationBox">
+
+                        <div id="selectDonationImage">
+                            {/* to remove select file button https://stackoverflow.com/questions/61468441/how-to-change-default-text-in-input-type-file-in-reactjs 21/01/2025 */}
+                            <div id="preDonationInformation">
+                                <label htmlFor="imageFile" id="selectFileLabel">Click here to upload donation image</label>
+                                <input type="file" id="imageFile" onChange={change} ref={fileInputRef} />
+
+                                <p id="imageRequirement">
+                                    The image must be a .png, jpeg, jpg, of gif file.<br></br>
+                                    This is to allow you to press scan to scan the image.<br></br>
+                                    If the image is a container, then you can donate.<br></br>
+                                    The item should be put in a suitable container.<br></br>
+                                    such as; aluminium, plastic, or takeaway container.<br></br>
+                                </p>
+                                <button id="scanImage" disabled={disableScanner} onClick={submit}>Scan</button>
+                            </div>
+
+                            <div id="imageAndPercentage">
+                                <img id="selectedImage" src={fileURL} alt="selected file" />
+                                <br></br>
+                                <p>The Image is {percentage}% {predictedClass}</p>
+                            </div>
+                        </div>
 
 
-                {/* GeoApify API  https://apidocs.geoapify.com/samples/autocomplete/react-geoapify-geocoder-autocomplete/ 
+                        {/* GeoApify API  https://apidocs.geoapify.com/samples/autocomplete/react-geoapify-geocoder-autocomplete/ 
             // https://www.npmjs.com/package/@geoapify/react-geocoder-autocomplete*/}
 
 
 
-                <div id="allDonationResults">
-                    <div id="donateDetails">
+                        <div id="allDonationResults">
+                            <div id="donateDetails">
 
-                        <div className="donationInputDiv">
-                            <label className="donateInputLabels" htmlFor="descriptionInput">Description:</label>
-                            <input className="donationInputs" disabled={disableInput} type="text" id="descriptionInput" placeholder="Enter description here" value={description} onChange={(evt) => setDescription(evt.target.value)} />
-                        </div>
-                        <br></br>
-                        <div className="donationInputDiv">
-                            <label className="donateInputLabels" htmlFor="portionSizeInput">Portion Size:</label>
-                            <input className="donationInputs" disabled={disableInput} type="number" id="portionSizeInput" value={portionSize} onChange={(evt) => setPortionSize(evt.target.value)} />
-                        </div>
-                        <br></br>
-                        <div className="donationInputDiv">
+                                <div className="donationInputDiv">
+                                    <label className="donateInputLabels" htmlFor="descriptionInput">Description:</label>
+                                    <input className="donationInputs" disabled={disableInput} type="text" id="descriptionInput" placeholder="Enter description here" value={description} onChange={(evt) => setDescription(evt.target.value)} />
+                                </div>
+                                <br></br>
+                                <div className="donationInputDiv">
+                                    <label className="donateInputLabels" htmlFor="portionSizeInput">Portion Size:</label>
+                                    <input className="donationInputs" disabled={disableInput} type="number" id="portionSizeInput" value={portionSize} onChange={(evt) => setPortionSize(evt.target.value)} />
+                                </div>
+                                <br></br>
+                                <div className="donationInputDiv">
 
-                            <label className="donateInputLabels" htmlFor="addressInput">Address:</label>
-                            {disableInput === true ? <input className="donationInputs" id="addressInput" placeholder="Enter address here" disabled={disableInput} />
-                                : <div className="donationInputs" id="autoCompleteAddress">
-                                    <GeoapifyContext apiKey={process.env.REACT_APP_GEOAPIFY_API_KEY}>
-                                        <GeoapifyGeocoderAutocomplete id="addressInput" placeholder="Enter address here"
-                                            lang='en'
-                                            limit={5}
-                                            value={address}
-                                            onChange={updatedAddress}
-                                            placeSelect={onPlaceSelect}
-                                        />
-                                    </GeoapifyContext>
-                                </div>}
+                                    <label className="donateInputLabels" htmlFor="addressInput">Address:</label>
+                                    {disableInput === true ? <input className="donationInputs" id="addressInput" placeholder="Enter address here" disabled={disableInput} />
+                                        : <div className="donationInputs" id="autoCompleteAddress">
+                                            <GeoapifyContext apiKey={process.env.REACT_APP_GEOAPIFY_API_KEY}>
+                                                <GeoapifyGeocoderAutocomplete id="addressInput" placeholder="Enter address here"
+                                                    lang='en'
+                                                    limit={5}
+                                                    value={address}
+                                                    onChange={updatedAddress}
+                                                    placeSelect={onPlaceSelect}
+                                                />
+                                            </GeoapifyContext>
+                                        </div>}
+                                </div>
+                            </div>
+                            <br></br>
+                            {predictedClass === "a Container" ? <button id="donateButton" disabled={false} onClick={donate}>Donate</button>
+                                : <button id="donateButton" disabled={true} onClick={donate}>Donate</button>}
                         </div>
                     </div>
-                    <br></br>
-                    {predictedClass === "a Container" ? <button id="donateButton" disabled={false} onClick={donate}>Donate</button>
-                        : <button id="donateButton" disabled={true} onClick={donate}>Donate</button>}
-                </div>
-
-
-            </div>
-        </>
+                </>)
     );
 }
 
