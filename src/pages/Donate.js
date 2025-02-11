@@ -55,6 +55,7 @@ function Donate() {
     const [selectedAnswer, setSelectedAnswer] = useState("");
     const [foodPortion, setFoodPortion] = useState(0);
     const [answerSelected, setAnswerSelected] = useState(null);
+    const [wrongAnswers, setWrongAnswers] = useState([]);
 
 
 
@@ -273,6 +274,7 @@ function Donate() {
                 setCurrentQuestion(prevQuestion => prevQuestion + 1);
                 setSelectedAnswer("");
                 setAnswerSelected(null);
+                setWrongAnswers(wrongAnswers => [...wrongAnswers, questions[currentQuestion].question])
             }
         }
         else {
@@ -520,7 +522,23 @@ function Donate() {
                                     ))}
 
                                 </div>
-                            </>) : (<div> Score={quizScore}</div>)}
+                            </>) : (
+                            <div id="finalQuizPage">
+                                <div id="finalScore"> Score: {quizScore}/3</div><br></br>
+                                {quizScore === 3 ?
+                                    <p className="resultMessage">Congratulations You Got Full Marks<br></br>50 Points added</p> :
+                                    <>
+                                        <p className="resultMessage">Well done for attempting the quiz provided<br></br>try again and beat your score to gain points<br></br>
+                                            Learn from the questions you got wrong bellow</p>
+                                        <div>
+                                            {wrongAnswers.map((wrongAnswer) => (
+                                                <div className="wrongAnswers">{wrongAnswer}</div>
+                                            ))}
+                                        </div>
+                                    </>
+                                }
+                            </div>
+                        )}
 
                         <button className="nextButton" onClick={changeState}>Next</button>
                     </div>
