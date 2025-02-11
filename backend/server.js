@@ -198,6 +198,17 @@ app.get('/allDonatedDonations', async (req, res) => {
     }
 })
 
+app.get('/everyDonatedDonations', async (req, res) => {
+    try {
+        const allDonations = await Donation.find({});
+        res.json({ result: allDonations });
+
+    } catch (err) {
+        console.log("error", err)
+        res.status(500).json({ message: "database can't get data" })
+    }
+})
+
 app.get('/donatedDonation/:id', async (req, res) => {
     try {
         const { id } = req.params;

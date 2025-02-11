@@ -6,7 +6,7 @@ import '@geoapify/geocoder-autocomplete/styles/minimal.css'
 import axios from 'axios';
 import { Bar } from 'react-chartjs-2';
 import suitableContainer1 from '../image/Aluminuim.jpg';
-import suitableContainer2 from '../image/Aluminuim.jpg';
+import donationImage from '../image/Donation.jpg';
 import suitableContainer3 from '../image/Aluminuim.jpg';
 import suitableContainer4 from '../image/Aluminuim.jpg';
 import suitableContainer5 from '../image/Aluminuim.jpg';
@@ -49,9 +49,12 @@ function Donate() {
     const [predictedClass, setPredictedClass] = useState(""); // State for predicted class
     const [education, setEducation] = useState(false);
     const [educationState, setEducationState] = useState(0);
+    const [displayScore, setDisplayScore] = useState(false);
     const [quizScore, setQuizScore] = useState(0)
     const [currentQuestion, setCurrentQuestion] = useState(0);
     const [selectedAnswer, setSelectedAnswer] = useState("");
+    const [foodPortion, setFoodPortion] = useState(0);
+    const [answerSelected, setAnswerSelected] = useState(null);
 
 
 
@@ -121,6 +124,43 @@ function Donate() {
             console.log(file);
         }
     }, [file, percentage, predictedClass]);
+
+    const effectRan = useRef(false);
+
+    useEffect(() => {
+
+        // Used chatGPT for the effectRan, because useEffect ran twice which messes with the value
+        // prompt: Why is the use effect running twice. It is affecting my value
+
+        if (effectRan.current) return;
+        effectRan.current = true;
+
+        const portionToTonne = async () => {
+            try {
+                let totalPortion = 0
+                const response = await axios.get("http://localhost:8000/everyDonatedDonations")
+
+                response.data.result.forEach((portion) => {
+                    totalPortion += portion.portionSize;
+                });
+
+                const toTonne = (totalPortion * 75) / 1000000;
+                console.log(toTonne);
+                setFoodPortion(prevPortionSize => {
+                    const newPortionSize = prevPortionSize + toTonne;
+                    console.log("Updated portionSize:", newPortionSize);
+                    return newPortionSize;
+                });
+
+            } catch (error) {
+                console.error("Can't send the file", error);
+            }
+
+        };
+
+        portionToTonne();
+
+    }, []);
 
     const submit = async (event) => {
         event.preventDefault();
@@ -211,17 +251,28 @@ function Donate() {
         if (educationState < 2) {
             setEducationState(recentState => recentState + 1);
         }
+        else if (displayScore === true) {
+            setEducation(true);
+            setDisplayScore(false);
+        }
 
         else if (educationState === 2) {
             if (selectedAnswer === "") {
                 alert("Must select a answer first")
             }
+            else if (currentQuestion >= 2) {
+                setDisplayScore(true);
+            }
             else if (selectedAnswer === questions[currentQuestion].answer) {
                 setQuizScore(currentQuizScore => currentQuizScore + 1);
                 setCurrentQuestion(prevQuestion => prevQuestion + 1);
+                setSelectedAnswer("")
+                setAnswerSelected(null);
             }
             else {
                 setCurrentQuestion(prevQuestion => prevQuestion + 1);
+                setSelectedAnswer("");
+                setAnswerSelected(null);
             }
         }
         else {
@@ -245,7 +296,7 @@ function Donate() {
             },
             {
                 label: 'My App prevented per tonne',
-                data: [0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 4000],
+                data: [0, 0, 0, 0, 0, 0, 0, 0, 0, 0, foodPortion],
                 backgroundColor: 'red',
                 color: '#000000'
             }
@@ -290,9 +341,10 @@ function Donate() {
 
     }
 
-    const handleSelection = ((answerSelected) => {
+    const handleSelection = ((answerSelected, index) => {
 
         setSelectedAnswer(answerSelected);
+        setAnswerSelected(index);
 
     })
 
@@ -311,7 +363,8 @@ function Donate() {
                                     food that it about to expire. The method of donating is very well know
                                     but missed opportunities are assisting waste to good preishable foods
                                 </p>
-                                <div><img className="suitableContainers" src={suitableContainer2} alt="Aluminium container" /></div>
+                                <div><img className="suitableContainers" src={donationImage} alt="Image of foods in containers" /></div>
+                                {/* image from https://www.pexels.com/photo/meals-in-boxed-prepared-for-box-diet-12050951/ 10/02/2025*/}
                             </div>
                         </div>
 
@@ -337,7 +390,7 @@ function Donate() {
                                     Facts: Did you know that the food wasted contributes to environmental issues like global warming <br></br><br></br>
                                     Facts: Did you know that we lose over 20 million pounds in the UK due to food wasted
                                 </p>
-                                <div><img className="suitableContainers" src={suitableContainer2} alt="Aluminium container" /></div>
+                                <div><p id="didYouKnow">DID<br></br>YOU<br></br>KNOW</p></div>
                             </div>
                         </div>
 
@@ -369,7 +422,7 @@ function Donate() {
                                 </div>
 
                                 <div className="suitableImages">
-                                    <img className="appropriateContainers" src={suitableContainer2} alt="Aluminium container" />
+                                    <img className="appropriateContainers" src={suitableContainer1} alt="Aluminium container" />
                                     <div className="textOverlay">
                                         <h4>Plastic container</h4><br></br>
                                         <p>
@@ -412,6 +465,7 @@ function Donate() {
 
                                 <div className="suitableImages">
                                     <img className="appropriateContainers" src={suitableContainer5} alt="Aluminium container" />
+                                    {/* Photo by Abdulrhman Alkady: https://www.pexels.com/photo/photo-of-burger-and-fries-in-a-takeout-box-8228281/ */}
                                     <div className="textOverlay">
                                         <h4>Cardboard container</h4><br></br>
                                         <p>
@@ -426,6 +480,7 @@ function Donate() {
 
                                 <div className="suitableImages">
                                     <img className="appropriateContainers" src={suitableContainer6} alt="Aluminium container" />
+                                    {/* Photo by Anna Shvets: https://www.pexels.com/photo/fruits-in-a-plastic-bag-3645504/ */}
                                     <div className="textOverlay">
                                         <h4>Polythene bags</h4><br></br>
                                         <p>
@@ -450,16 +505,22 @@ function Donate() {
                         <button className="skipButton" onClick={skipState}>Skip  →</button>
                         <div className="educationDonateTitleDiv"><h1 className="educationDonateTitle">Quiz</h1></div>
 
-                        <div id="quizQuestion"><p>{questions[currentQuestion].question}</p></div>
-                        <div id="quizSelections">
+                        {displayScore === false ? (
+                            <>
+                                <div id="quizQuestion"><p>{questions[currentQuestion].question}</p></div>
+                                <div id="quizSelections">
 
-                            {questions[currentQuestion].options.map((option) => (
+                                    {questions[currentQuestion].options.map((option, index) => (
 
-                                <button id="answeres" key={option} onClick={() => handleSelection(option)}>{option}</button>
+                                        <button className={`answers ${answerSelected === index ? "selected" : ""}`} key={option} onClick={() => handleSelection(option, index)}>{option}</button>
+                                        // Used chatGPT to change colour of selected button: 
+                                        // prompt 1: I have this quiz feature where users select the answer they think is correct. the css is on clikc the button changes color,
+                                        // But the thing is now, lets say the user want to swtch answeres, the colour of the previous selection will still be there. What can I do
+                                        // prompt 2: I am using react
+                                    ))}
 
-                            ))}
-
-                        </div>
+                                </div>
+                            </>) : (<div> Score={quizScore}</div>)}
 
                         <button className="nextButton" onClick={changeState}>Next</button>
                     </div>
@@ -499,7 +560,6 @@ function Donate() {
 
                         {/* GeoApify API  https://apidocs.geoapify.com/samples/autocomplete/react-geoapify-geocoder-autocomplete/ 
             // https://www.npmjs.com/package/@geoapify/react-geocoder-autocomplete*/}
-
 
 
                         <div id="allDonationResults">
