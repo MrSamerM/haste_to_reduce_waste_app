@@ -461,6 +461,23 @@ Prompt2: is there a way of doing it in css
     border-style: solid;
 }
 
+/* https://www.geeksforgeeks.org/create-a-coin-toss-using-html-css-javascript/ to make spinning animation for coin 12/02/2025 */
+@keyframes spin {
+    0% {
+        transform: rotateY(0deg);
+    }
+
+    100% {
+        transform: rotateY(360deg);
+    }
+}
+
+#points {
+    margin-bottom: 2%;
+    width: 20%;
+    animation: spin 4s cubic-bezier(0.4, 2.5, 0.6, 0.5) infinite;
+}
+
 /* chatGPT Prompt: I want a font style that looks very cool for the phrase did you know using css 10/02/2025*/
 #didYouKnow {
     font-family: "Orbitron", sans-serif;

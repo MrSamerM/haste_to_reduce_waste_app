@@ -5,12 +5,21 @@ import { GeoapifyGeocoderAutocomplete, GeoapifyContext } from '@geoapify/react-g
 import '@geoapify/geocoder-autocomplete/styles/minimal.css'
 import axios from 'axios';
 import { Bar } from 'react-chartjs-2';
+
 import suitableContainer1 from '../image/Aluminuim.jpg';
+import suitableContainer2 from '../image/plasticContainer.jpg';
+import suitableContainer3 from '../image/takeawayContainer.jpg';
+
+import nonSuitableContainer1 from '../image/foamContainer.jpg';
+import nonSuitableContainer2 from '../image/cardboardContainer.jpg';
+import nonSuitableContainer3 from '../image/polytheneBag.jpg';
+
+import points from '../image/points.PNG';
+
+
 import donationImage from '../image/Donation.jpg';
-import suitableContainer3 from '../image/Aluminuim.jpg';
-import suitableContainer4 from '../image/Aluminuim.jpg';
-import suitableContainer5 from '../image/Aluminuim.jpg';
-import suitableContainer6 from '../image/Aluminuim.jpg';
+
+
 import {
     Chart as ChartJS,
     BarElement,
@@ -261,7 +270,14 @@ function Donate() {
             if (selectedAnswer === "") {
                 alert("Must select a answer first")
             }
+            // The bottom else if, received assistance from chatGPT due to quiz store not updating correctly
+            // prompt 1: (Code) why does this code give me the incorrect score at the end. if I get all of them correct, the score does not show 3/3
+            // prompt 2: It still shows 2/3
+
             else if (currentQuestion >= 2) {
+                if (selectedAnswer === questions[currentQuestion].answer) {
+                    setQuizScore(prevScore => prevScore + 1);
+                }
                 setDisplayScore(true);
             }
             else if (selectedAnswer === questions[currentQuestion].answer) {
@@ -286,6 +302,7 @@ function Donate() {
         setEducation(true);
 
     })
+
 
     const chartData = {
         labels: [2015, 2016, 2017, 2018, 2019, 2020, 2021, 2022, 2023, 2024, 2025],
@@ -424,7 +441,7 @@ function Donate() {
                                 </div>
 
                                 <div className="suitableImages">
-                                    <img className="appropriateContainers" src={suitableContainer1} alt="Aluminium container" />
+                                    <img className="appropriateContainers" src={suitableContainer2} alt="Plastic container" />
                                     <div className="textOverlay">
                                         <h4>Plastic container</h4><br></br>
                                         <p>
@@ -437,7 +454,7 @@ function Donate() {
                                 </div>
 
                                 <div className="suitableImages">
-                                    <img className="appropriateContainers" src={suitableContainer3} alt="Aluminium container" />
+                                    <img className="appropriateContainers" src={suitableContainer3} alt="Takeaway containers" />
                                     <div className="textOverlay">
                                         <h4>Takeaway containers</h4><br></br>
                                         <p>
@@ -452,7 +469,8 @@ function Donate() {
 
                             <div id="secondHalf">
                                 <div className="suitableImages">
-                                    <img className="appropriateContainers" src={suitableContainer4} alt="Aluminium container" />
+                                    <img className="appropriateContainers" src={nonSuitableContainer1} alt="Foam container" />
+                                    {/* image generated from dream.ai prompt: white foam container takeaway box  11/02/2025 */}
                                     <div className="textOverlay">
                                         <h4>Foam container</h4><br></br>
                                         <p>
@@ -466,7 +484,7 @@ function Donate() {
                                 </div>
 
                                 <div className="suitableImages">
-                                    <img className="appropriateContainers" src={suitableContainer5} alt="Aluminium container" />
+                                    <img className="appropriateContainers" src={nonSuitableContainer2} alt="Cardboard container" />
                                     {/* Photo by Abdulrhman Alkady: https://www.pexels.com/photo/photo-of-burger-and-fries-in-a-takeout-box-8228281/ */}
                                     <div className="textOverlay">
                                         <h4>Cardboard container</h4><br></br>
@@ -481,7 +499,7 @@ function Donate() {
                                 </div>
 
                                 <div className="suitableImages">
-                                    <img className="appropriateContainers" src={suitableContainer6} alt="Aluminium container" />
+                                    <img className="appropriateContainers" src={nonSuitableContainer3} alt="Polythene bags" />
                                     {/* Photo by Anna Shvets: https://www.pexels.com/photo/fruits-in-a-plastic-bag-3645504/ */}
                                     <div className="textOverlay">
                                         <h4>Polythene bags</h4><br></br>
@@ -526,7 +544,13 @@ function Donate() {
                             <div id="finalQuizPage">
                                 <div id="finalScore"> Score: {quizScore}/3</div><br></br>
                                 {quizScore === 3 ?
-                                    <p className="resultMessage">Congratulations You Got Full Marks<br></br>50 Points added</p> :
+                                    <>
+                                        <p className="resultMessage">Congratulations You Got Full Marks<br></br>50 Points added</p><br></br>
+                                        <img id="points" src={points} alt="gold points coin" />
+                                        {/* image generated from dream.ai prompt: round circle yellow animated coin with P in the middle 12/02/2025 */}
+
+                                    </>
+                                    :
                                     <>
                                         <p className="resultMessage">Well done for attempting the quiz provided<br></br>try again and beat your score to gain points<br></br>
                                             Learn from the questions you got wrong bellow</p>
