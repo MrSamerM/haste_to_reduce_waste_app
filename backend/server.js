@@ -93,6 +93,20 @@ app.post('/register', async (req, res) => {
     }
 });
 
+app.post('/addPoints', async (req, res) => {
+    try {
+        const findUser = await User.findByIdAndUpdate(req.session.userID, { $inc: { points: +50 } })
+
+        await findUser.save();
+        console.log("Points added Successfully");
+        res.json({ message: "Added" })
+    }
+    catch (e) {
+        console.log("Error", e)
+        res.status(400).json({ error: "There appears to be a error when adding points" })
+    }
+});
+
 app.post('/donate', async (req, res) => {
     try {
         const { image, description, portionSize, address, longitude, latitude } = req.body

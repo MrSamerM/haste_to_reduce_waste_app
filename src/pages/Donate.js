@@ -104,6 +104,25 @@ function Donate() {
         setFile(evt.target.files[0]);
         setFileURL(URL.createObjectURL(evt.target.files[0]));
     }
+
+    useEffect(() => {
+        const addPoints = async () => {
+            try {
+                if (quizScore === 3) {
+                    const response = await axios.post("http://localhost:8000/addPoints");
+                    if (response.data.message === "Added") {
+                        console.log("Points were added")
+                    }
+                }
+            } catch (error) {
+                console.error("Can't send the points", error);
+            }
+        };
+
+        addPoints();
+
+    }, [quizScore]);
+
     useEffect(() => {
 
         if (predictedClass === "Not a Container") {
