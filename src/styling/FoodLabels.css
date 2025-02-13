@@ -4,7 +4,8 @@ body {
     background-color: #E1ECD8;
 }
 
-#foodLabelTitleDiv {
+#foodLabelTitleDiv,
+.educationTitleDivLabel {
     align-items: center;
     margin: 0 auto 30px auto;
     margin-bottom: 50px;
@@ -12,7 +13,8 @@ body {
 }
 
 
-#foodLabelTitle {
+#foodLabelTitle,
+.educationTitleLabel {
     text-align: center;
     text-decoration: underline;
 }
@@ -95,8 +97,8 @@ body {
 
 
 /* NEW */
-.nextButton,
-.skipButton {
+.nextButtonLabel,
+.skipButtonLabel {
     background-color: black;
     color: white;
     width: 150px;
@@ -107,12 +109,12 @@ body {
 }
 
 
-.skipButton {
+.skipButtonLabel {
     margin-left: auto;
 
 }
 
-.nextButton {
+.nextButtonLabel {
     margin: 0 auto 30px auto;
 
 }
@@ -129,7 +131,7 @@ body {
 }
 
 /* https://www.youtube.com/watch?v=_7DfrfEWJMc&list=LL&index=1&t=344s 05/02/2025 */
-#educationBox1 {
+#educationBox1Label {
     display: flex;
     flex-direction: column;
     width: 85%;
@@ -142,8 +144,8 @@ body {
 
 }
 
-#entireSecondBox,
-#educationBox3 {
+#entireSecondBoxLabel,
+#educationBox3Label {
     display: flex;
     background-color: rgba(59, 175, 59, 0.785);
     width: 85%;
@@ -156,8 +158,8 @@ body {
 
 }
 
-#educationBox2,
-#selections {
+#educationBox2Label,
+#selectionsLabel {
     display: flex;
     flex-direction: row;
     width: 85%;
@@ -185,30 +187,26 @@ body {
     }
 }
 
-#barChart {
-    height: 250px;
-    width: 550px;
-}
 
 
-.suitableContainers {
+.suitableContainersLabel {
     height: 250px;
     width: 350px;
 }
 
-.interactP {
+.interactPLabel {
     margin: 0 auto 60px auto;
     width: 60%;
 }
 
-#interactionParagraph {
+#interactionParagraphLabel {
     font-size: large;
     color: black;
 }
 
 /* https://www.youtube.com/watch?v=hr4JiDr7Aec 06/02/2025 */
 
-.suitableImages {
+.suitableImagesLabel {
     position: relative;
     width: 100%;
     display: flex;
@@ -220,7 +218,7 @@ body {
     margin-top: 10%;
 }
 
-.textOverlay {
+.textOverlayLabel {
     width: 100%;
     height: 100%;
     top: 0;
@@ -235,23 +233,23 @@ body {
     transition: 0.5s;
 }
 
-.textOverlay:hover {
+.textOverlayLabel:hover {
     opacity: 1;
 }
 
-.textOverlay p {
+.textOverlayLabel p {
     font-size: medium;
     color: white;
     text-align: center;
 }
 
-.appropriateContainers {
+.appropriateContainersLabel {
     height: 250px;
     width: 350px;
 }
 
-#firstHalf,
-#secondHalf {
+#firstHalfLabel,
+#secondHalfLabel {
     display: flex;
     flex-direction: column;
     width: 50%;
@@ -259,19 +257,19 @@ body {
 }
 
 
-#firstHalf .suitableImages {
+#firstHalfLabel .suitableImagesLabel {
     border: green;
     border-style: solid;
     border-width: 8px;
 }
 
-#secondHalf .suitableImages {
+#secondHalfLabel .suitableImagesLabel {
     border: red;
     border-style: solid;
     border-width: 8px;
 }
 
-#firstHalf h4 {
+#firstHalfLabel h4 {
     color: white;
     font-weight: bolder;
     text-decoration: underline;
@@ -279,7 +277,7 @@ body {
     font-size: larger;
 }
 
-#secondHalf h4 {
+#secondHalfLabel h4 {
     color: white;
     font-weight: bolder;
     text-decoration: underline;
@@ -287,12 +285,12 @@ body {
     font-size: larger;
 }
 
-.boxOfEverything {
+.boxOfEverythingLabel {
     width: 100%;
     margin: 0 auto 10px auto;
 }
 
-.theContents {
+.theContentsLabel {
     margin-bottom: 2%;
     border: black;
     border-style: solid;
@@ -304,20 +302,20 @@ body {
 
 }
 
-.theContents {
+.theContentsLabel {
     display: flex;
     align-items: center;
     width: 60%;
     margin-bottom: 10px;
 }
 
-.paragraphDetails {
+.paragraphDetailsLabel {
     margin-right: 20px;
     text-align: center;
     width: 50%;
 }
 
-.suitableContainers {
+.suitableContainersLabel {
     padding: 5px;
     margin: 5px;
     width: 70%;
@@ -329,21 +327,21 @@ ChatGPT to make a animation 07/02/2025
 Prompt1:I want to have something were the divs will appear one after the other like powerpoint.I am using react js
 Prompt2: is there a way of doing it in css
  */
-.boxOfEverything {
+.boxOfEverythingLabel {
     opacity: 0;
     transform: translateY(20px);
     animation: fade 1s ease-in forwards;
 }
 
-.boxOfEverything:nth-child(1n) {
+.boxOfEverythingLabel:nth-child(1n) {
     animation-delay: 5s;
 }
 
-.boxOfEverything:nth-child(2n) {
+.boxOfEverythingLabel:nth-child(2n) {
     animation-delay: 3s;
 }
 
-.boxOfEverything:nth-child(3n) {
+.boxOfEverythingLabel:nth-child(3n) {
     animation-delay: 1s;
 }
 
@@ -359,7 +357,7 @@ Prompt2: is there a way of doing it in css
     }
 }
 
-#quizQuestion {
+#quizQuestionLabel {
     align-items: center;
     margin: 0 auto 30px auto;
     margin-bottom: 50px;
@@ -368,7 +366,7 @@ Prompt2: is there a way of doing it in css
     font-weight: bolder;
 }
 
-#quizSelections {
+#quizSelectionsLabel {
     display: flex;
     flex-direction: column;
     width: 70%;
@@ -376,7 +374,7 @@ Prompt2: is there a way of doing it in css
     margin: 0 auto 0px auto;
 }
 
-.answers {
+.answersLabel {
     width: 100%;
     text-align: center;
     font-size: larger;
@@ -388,11 +386,11 @@ Prompt2: is there a way of doing it in css
     cursor: pointer;
 }
 
-.answers.selected {
+.answersLabel.selectedLabel {
     background-color: lightcoral;
 }
 
-#finalQuizPage {
+#finalQuizPageLabel {
     display: flex;
     flex-direction: column;
     width: 80%;
@@ -400,7 +398,7 @@ Prompt2: is there a way of doing it in css
     margin: 0 auto 0px auto;
 }
 
-#finalScore {
+#finalScoreLabel {
     font-family: sans-serif;
     font-size: xx-large;
     font-weight: bolder;
@@ -408,7 +406,7 @@ Prompt2: is there a way of doing it in css
     text-decoration: underline;
 }
 
-.resultMessage {
+.resultMessageLabel {
     font-family: sans-serif;
     font-size: medium;
     font-weight: bold;
@@ -417,7 +415,7 @@ Prompt2: is there a way of doing it in css
     margin-bottom: 5%;
 }
 
-.wrongAnswers {
+.wrongAnswersLabel {
     width: 100%;
     text-align: center;
     font-size: larger;
@@ -442,14 +440,14 @@ Prompt2: is there a way of doing it in css
     }
 }
 
-#points {
+#pointsLabel {
     margin-bottom: 2%;
     width: 20%;
     animation: spin 4s cubic-bezier(0.4, 2.5, 0.6, 0.5) infinite;
 }
 
 /* chatGPT Prompt: I want a font style that looks very cool for the phrase did you know using css 10/02/2025*/
-#didYouKnow {
+#didYouKnowLabel {
     font-family: "Orbitron", sans-serif;
     font-size: 60px;
     color: #0ff;

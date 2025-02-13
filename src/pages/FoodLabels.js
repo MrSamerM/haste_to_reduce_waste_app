@@ -3,6 +3,18 @@ import '../styling/FoodLabels.css'
 import { useState, useEffect, useRef } from "react";
 // import Tesseract from 'tesseract.js';
 import axios from "axios";
+import suitableContainer1 from '../image/Aluminuim.jpg';
+import suitableContainer2 from '../image/plasticContainer.jpg';
+import suitableContainer3 from '../image/takeawayContainer.jpg';
+
+import nonSuitableContainer1 from '../image/foamContainer.jpg';
+import nonSuitableContainer2 from '../image/cardboardContainer.jpg';
+import nonSuitableContainer3 from '../image/polytheneBag.jpg';
+
+import points from '../image/points.PNG';
+
+
+import donationImage from '../image/Donation.jpg';
 
 function FoodLabels() {
 
@@ -20,6 +32,24 @@ function FoodLabels() {
     const [selectedAnswer, setSelectedAnswer] = useState("");
     const [answerSelected, setAnswerSelected] = useState(null);
     const [wrongAnswers, setWrongAnswers] = useState([]);
+
+    const questions = [
+        {
+            question: "What does BB stand for?",
+            options: ["Best By", "Best Before", "Better Before"],
+            answer: "Best Before"
+        },
+        {
+            question: "How many types of dates can there be in a food label?",
+            options: ["1", "2", "3"],
+            answer: "3"
+        },
+        {
+            question: "What percentage of people understand food labels?",
+            options: ["20%", "40%", "30%"],
+            answer: "20%"
+        }
+    ]
 
 
     const change = (evt) => {
@@ -277,23 +307,6 @@ function FoodLabels() {
         // chatGPT about gim at the end, i for case insensitivity, and matching by mapping Prompt: still a error (my pattern)
     };
 
-    useEffect(() => {
-        const addPoints = async () => {
-            try {
-                if (quizScore === 3) {
-                    const response = await axios.post("http://localhost:8000/addPoints");
-                    if (response.data.message === "Added") {
-                        console.log("Points were added")
-                    }
-                }
-            } catch (error) {
-                console.error("Can't send the points", error);
-            }
-        };
-
-        addPoints();
-
-    }, [quizScore]);
 
     const changeState = (() => {
         if (educationState < 2) {
@@ -352,65 +365,62 @@ function FoodLabels() {
         education === false ?
             (<>
                 {educationState === 0 &&
-                    <div id="educationBox1">
-                        <button className="skipButton" onClick={skipState}>Skip  →</button>
-                        <div className="educationDonateTitleDiv"><h1 className="educationDonateTitle">Why Donate?</h1></div>
-                        <div className="boxOfEverything">
-                            <div className="theContents">
-                                <p className="paragraphDetails">
-                                    Donating is a way that individuals can get rid of exess food or
-                                    food that it about to expire. The method of donating is very well know
-                                    but missed opportunities are assisting waste to good preishable foods
+                    <div id="educationBox1Label">
+                        <button className="skipButtonLabel" onClick={skipState}>Skip  →</button>
+                        <div className="educationTitleDivLabel"><h1 className="educationTitleLabel">What are Labels?</h1></div>
+                        <div className="boxOfEverythingLabel">
+                            <div className="theContentsLabel">
+                                <p className="paragraphDetailsLabel">
+                                    Labels on a food package is a description of the everything
+                                    about the food, this includes ingridients, allergy warning,
+                                    nutritional description, and finally dates of food.
                                 </p>
-                                <div><img className="suitableContainers" src={donationImage} alt="Image of foods in containers" /></div>
+                                <div><img className="suitableContainersLabel" src={donationImage} alt="Image of foods in containers" /></div>
                                 {/* image from https://www.pexels.com/photo/meals-in-boxed-prepared-for-box-diet-12050951/ 10/02/2025*/}
                             </div>
                         </div>
 
-                        <div className="boxOfEverything">
-                            <div className="theContents">
-                                <p className="paragraphDetails">
-                                    The right chart shows the progress that our app is making
-                                    Based on the number of portions we were able to help distibute
-                                    we were able to prevent 1000 tonnes of food waste
+                        <div className="boxOfEverythingLabel">
+                            <div className="theContentsLabel">
+                                <p className="paragraphDetailsLabel">
+                                    It was stated that around 5000 individuals are not aware
+                                    or are ignorant once it comes to the undertanding of dates
+                                    on a food label. This is due to lack of knowledge on what they mean
                                 </p>
-                                <div id="barChart">
-                                    <Bar data={chartData} options={chartOptions}></Bar>
-                                </div>
                             </div>
                         </div>
 
-                        <div className="boxOfEverything">
+                        <div className="boxOfEverythingLabel">
 
-                            <div className="theContents">
+                            <div className="theContentsLabel">
 
-                                <p className="paragraphDetails">
-                                    Facts: Did you know that 5000 tonnes of exess food was wasted <br></br><br></br>
-                                    Facts: Did you know that the food wasted contributes to environmental issues like global warming <br></br><br></br>
-                                    Facts: Did you know that we lose over 20 million pounds in the UK due to food wasted
+                                <p className="paragraphDetailsLabel">
+                                    Facts: Did you know that there are 3 types of dates that can be displayed in a package <br></br><br></br>
+                                    Facts: Did you know that bb stands for best before, and EXP stands for expiry date <br></br><br></br>
+                                    Facts: Did you know that we I dont knwo fact bab ababababbababababaabbabababbabbaab
                                 </p>
-                                <div><p id="didYouKnow">DID<br></br>YOU<br></br>KNOW</p></div>
+                                <div><p id="didYouKnowLabel">DID<br></br>YOU<br></br>KNOW</p></div>
                             </div>
                         </div>
 
-                        <button className="nextButton" onClick={changeState}>Next</button>
+                        <button className="nextButtonLabel" onClick={changeState}>Next</button>
                     </div>
                 }
                 {educationState === 1 &&
-                    <div id="entireSecondBox">
-                        <button className="skipButton" onClick={skipState}>Skip  →</button>
-                        <div className="educationDonateTitleDiv"><h1 className="educationDonateTitle">Suitable Containers</h1></div>
-                        <div className="interactP"><p id="interactionParagraph">
+                    <div id="entireSecondBoxLabel">
+                        <button className="skipButtonLabel" onClick={skipState}>Skip  →</button>
+                        <div className="educationTitleDivLabel"><h1 className="educationTitleLabel">Suitable Containers</h1></div>
+                        <div className="interactPLabel"><p id="interactionParagraphLabel">
                             Specification for each containers is a must. There are some container that are not
                             suitbale to use when donating food, as it will contribute further to food waste.
                             Hover and learn the different types of container that are suitable to gain an uderstanding</p></div>
-                        <div id="educationBox2">
+                        <div id="educationBox2Label">
                             <br></br>
-                            <div id="firstHalf">
-                                <div className="suitableImages">
-                                    <img className="appropriateContainers" src={suitableContainer1} alt="Aluminium container" />
-                                    <div className="textOverlay">
-                                        <h4>Aluminium Container</h4><br></br>
+                            <div id="firstHalfLabel">
+                                <div className="suitableImagesLabel">
+                                    <img className="appropriateContainersLabel" src={suitableContainer1} alt="Aluminium container" />
+                                    <div className="textOverlayLabel">
+                                        <h4>Use By Date</h4><br></br>
                                         <p>
                                             This containers are suitable for
                                             hot food, especially for hot food,
@@ -420,10 +430,10 @@ function FoodLabels() {
                                     </div>
                                 </div>
 
-                                <div className="suitableImages">
-                                    <img className="appropriateContainers" src={suitableContainer2} alt="Plastic container" />
-                                    <div className="textOverlay">
-                                        <h4>Plastic container</h4><br></br>
+                                <div className="suitableImagesLabel">
+                                    <img className="appropriateContainersLabel" src={suitableContainer2} alt="Plastic container" />
+                                    <div className="textOverlayLabel">
+                                        <h4>Best Before Date</h4><br></br>
                                         <p>
                                             This containers are suitable for
                                             hot food, especially for hot food,
@@ -433,10 +443,10 @@ function FoodLabels() {
                                     </div>
                                 </div>
 
-                                <div className="suitableImages">
-                                    <img className="appropriateContainers" src={suitableContainer3} alt="Takeaway containers" />
-                                    <div className="textOverlay">
-                                        <h4>Takeaway containers</h4><br></br>
+                                <div className="suitableImagesLabel">
+                                    <img className="appropriateContainersLabel" src={suitableContainer3} alt="Takeaway containers" />
+                                    <div className="textOverlayLabel">
+                                        <h4>Expiry Date</h4><br></br>
                                         <p>
                                             This containers are suitable for
                                             hot food, especially for hot food,
@@ -447,11 +457,11 @@ function FoodLabels() {
                                 </div>
                             </div>
 
-                            <div id="secondHalf">
-                                <div className="suitableImages">
-                                    <img className="appropriateContainers" src={nonSuitableContainer1} alt="Foam container" />
+                            <div id="secondHalfLabel">
+                                <div className="suitableImagesLabel">
+                                    <img className="appropriateContainersLabel" src={nonSuitableContainer1} alt="Foam container" />
                                     {/* image generated from dream.ai prompt: white foam container takeaway box  11/02/2025 */}
-                                    <div className="textOverlay">
+                                    <div className="textOverlayLabel">
                                         <h4>Foam container</h4><br></br>
                                         <p>
                                             This containers is not suitbale to
@@ -463,10 +473,10 @@ function FoodLabels() {
                                     </div>
                                 </div>
 
-                                <div className="suitableImages">
-                                    <img className="appropriateContainers" src={nonSuitableContainer2} alt="Cardboard container" />
+                                <div className="suitableImagesLabel">
+                                    <img className="appropriateContainersLabel" src={nonSuitableContainer2} alt="Cardboard container" />
                                     {/* Photo by Abdulrhman Alkady: https://www.pexels.com/photo/photo-of-burger-and-fries-in-a-takeout-box-8228281/ */}
-                                    <div className="textOverlay">
+                                    <div className="textOverlayLabel">
                                         <h4>Cardboard container</h4><br></br>
                                         <p>
                                             This containers is not suitbale to
@@ -478,10 +488,10 @@ function FoodLabels() {
                                     </div>
                                 </div>
 
-                                <div className="suitableImages">
-                                    <img className="appropriateContainers" src={nonSuitableContainer3} alt="Polythene bags" />
+                                <div className="suitableImagesLabel">
+                                    <img className="appropriateContainersLabel" src={nonSuitableContainer3} alt="Polythene bags" />
                                     {/* Photo by Anna Shvets: https://www.pexels.com/photo/fruits-in-a-plastic-bag-3645504/ */}
-                                    <div className="textOverlay">
+                                    <div className="textOverlayLabel">
                                         <h4>Polythene bags</h4><br></br>
                                         <p>
                                             This containers is not suitbale to
@@ -494,25 +504,25 @@ function FoodLabels() {
                                 </div>
                             </div>
                         </div>
-                        <button className="nextButton" onClick={changeState}>Next</button>
+                        <button className="nextButtonLabel" onClick={changeState}>Next</button>
                     </div>
                 }
 
                 {/* https://www.youtube.com/watch?v=jE2Ivb7dlSQ&t=986s recieved some assistant 09/02/2025 */}
 
                 {educationState === 2 &&
-                    <div id="educationBox3">
-                        <button className="skipButton" onClick={skipState}>Skip  →</button>
-                        <div className="educationDonateTitleDiv"><h1 className="educationDonateTitle">Quiz</h1></div>
+                    <div id="educationBox3Label">
+                        <button className="skipButtonLabel" onClick={skipState}>Skip  →</button>
+                        <div className="educationTitleDivLabel"><h1 className="educationTitleLabel">Quiz</h1></div>
 
                         {displayScore === false ? (
                             <>
-                                <div id="quizQuestion"><p>{questions[currentQuestion].question}</p></div>
-                                <div id="quizSelections">
+                                <div id="quizQuestionLabel"><p>{questions[currentQuestion].question}</p></div>
+                                <div id="quizSelectionsLabel">
 
                                     {questions[currentQuestion].options.map((option, index) => (
 
-                                        <button className={`answers ${answerSelected === index ? "selected" : ""}`} key={option} onClick={() => handleSelection(option, index)}>{option}</button>
+                                        <button className={`answersLabel ${answerSelected === index ? "selectedLabel" : ""}`} key={option} onClick={() => handleSelection(option, index)}>{option}</button>
                                         // Used chatGPT to change colour of selected button: 
                                         // prompt 1: I have this quiz feature where users select the answer they think is correct. the css is on clikc the button changes color,
                                         // But the thing is now, lets say the user want to swtch answeres, the colour of the previous selection will still be there. What can I do
@@ -521,22 +531,22 @@ function FoodLabels() {
 
                                 </div>
                             </>) : (
-                            <div id="finalQuizPage">
-                                <div id="finalScore"> Score: {quizScore}/3</div><br></br>
+                            <div id="finalQuizPageLabel">
+                                <div id="finalScoreLabel"> Score: {quizScore}/3</div><br></br>
                                 {quizScore === 3 ?
                                     <>
-                                        <p className="resultMessage">Congratulations You Got Full Marks<br></br>50 Points added</p><br></br>
-                                        <img id="points" src={points} alt="gold points coin" />
+                                        <p className="resultMessageLabel">Congratulations You Got Full Marks<br></br>50 Points added</p><br></br>
+                                        <img id="pointsLabel" src={points} alt="gold points coin" />
                                         {/* image generated from dream.ai prompt: round circle yellow animated coin with P in the middle 12/02/2025 */}
 
                                     </>
                                     :
                                     <>
-                                        <p className="resultMessage">Well done for attempting the quiz provided<br></br>try again and beat your score to gain points<br></br>
+                                        <p className="resultMessageLabel">Well done for attempting the quiz provided<br></br>try again and beat your score to gain points<br></br>
                                             Learn from the questions you got wrong bellow</p>
                                         <div>
                                             {wrongAnswers.map((wrongAnswer) => (
-                                                <div className="wrongAnswers">{wrongAnswer}</div>
+                                                <div className="wrongAnswersLabel">{wrongAnswer}</div>
                                             ))}
                                         </div>
                                     </>
@@ -544,7 +554,7 @@ function FoodLabels() {
                             </div>
                         )}
 
-                        <button className="nextButton" onClick={changeState}>Next</button>
+                        <button className="nextButtonLabel" onClick={changeState}>Next</button>
                     </div>
                 }
 
