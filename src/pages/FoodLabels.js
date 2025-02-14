@@ -260,7 +260,7 @@ function FoodLabels() {
 
             const numberArray = [];
 
-            const pattern1 = /(BB|Expiry Date|BBE|EXP|BEST BY|Best By|Best Before|Use By)/i;
+            const pattern1 = /(BB|Expiry Date|BBE|EXP|BEST BY|Best By|Best Before|Use By|Expiry)/i;
             const pattern2 = /(\d{1,2}\/\d{1,2}\/\d{2,4}|\d{6}|\d{1,2}\-\d{1,2}\-\d{2,4}|\d{1,2}\.\d{1,2}\.\d{2,4}|\d{1,2} \d{1,2} \d{2,4}|\d{1,2}[A-Za-z]{3}\d{1,2}|\d{1,2} [A-Za-z]{3} \d{2,4})/i;
 
             // filter method recieved by chatgpt, and remove gm, due to global issues with .test()
@@ -280,12 +280,22 @@ function FoodLabels() {
                         number: 1
                     });
                 }
+
+                else if ((words[i].toUpperCase().charAt(0) !== "B" || words[i].toUpperCase().charAt(0) !== "U") && (words[i].toUpperCase().charAt(0) === "E")) {
+                    numberArray.push({
+                        word: words[i],
+                        number: 1
+                    });
+                }
+
                 else if (words[i].toUpperCase().charAt(0) === "E") {
                     numberArray.push({
                         word: words[i],
                         number: 3
                     });
                 }
+
+
 
             }
 
