@@ -11,7 +11,7 @@ import nonSuitableContainer1 from '../image/foamContainer.jpg';
 import nonSuitableContainer2 from '../image/cardboardContainer.jpg';
 import nonSuitableContainer3 from '../image/polytheneBag.jpg';
 
-import points from '../image/points.PNG';
+import star from '../image/star.PNG';
 
 
 import donationImage from '../image/Donation.jpg';
@@ -46,8 +46,8 @@ function FoodLabels() {
         },
         {
             question: "What percentage of people understand food labels?",
-            options: ["20%", "40%", "30%"],
-            answer: "20%"
+            options: ["21%", "42%", "36%"],
+            answer: "36%"
         }
     ]
 
@@ -144,7 +144,19 @@ function FoodLabels() {
         else if (date.match(/\d{2}\-\d{2}\-\d{2,4}/)) {
             const parts = date.split("-");
             // this changes date to mm/dd/yy
-            const newDate = new Date(parts[2], parts[0] - 1, parts[1]);
+            const newDate = new Date(parts[1], parts[0] - 1, parts[2]);
+            return newDate.getTime();
+        }
+
+        // const parts=date.match got from chatGPT 
+        // prompt1: string.split () but 2 charcters
+        // prompt2: No i mean every two characters it splits
+        // prompt3:in js. there is a split method
+
+        else if (date.match(/\d{6}/)) {
+            const parts = date.match(/.{2}/g);
+            // this changes date to mm/dd/yy
+            const newDate = new Date(parts[1] + "/" + parts[0] + "/" + +"/" + parts[2]);
             return newDate.getTime();
         }
 
@@ -171,21 +183,40 @@ function FoodLabels() {
 
             for (let i = 0; i < result.length; i++) {
 
-                if (result[i].toUpperCase() === "BEFORE") {
-                    result.unshift(result[i]);
+                if (result[i].toUpperCase() === "BEFORE" || result[i].toUpperCase() === "BY") {
+                    if (result[i].toUpperCase() === "BEFORE" || result[i].toUpperCase() === "BY") {
+                        result.unshift(result[i]);
+                    }
+
+                    else if (result[i].toUpperCase() === "BEST") {
+                        result.unshift(result[i]);
+                    }
                 }
 
-                else if (result[i].toUpperCase() === "BEST") {
-                    result.unshift(result[i]);
+                else if (result[i].toUpperCase() === "USE") {
+                    if (result[i].toUpperCase() === "USE") {
+                        result.unshift(result[i]);
+                    }
+                    else if (result[i].toUpperCase() === "BY") {
+                        result.unshift(result[i]);
+                    }
                 }
             }
 
-            if (result[0].toUpperCase() === "BEFORE" && result[1].toUpperCase() === "BEST") {
-                // result[0] = result[1];
-                // result[1] = result[0];
-                result.swap(result[0], result[1]);
-                const joining = result.slice(0, 2);
-                const newString = joining.join(" ");
+            if ((result[0].toUpperCase() === "BEFORE" && result[1].toUpperCase() === "BEST" ||
+                result[0].toUpperCase() === "BEST" && result[1].toUpperCase() === "BEFORE") ||
+                (result[0].toUpperCase() === "BY" && result[1].toUpperCase() === "BEST" ||
+                    result[0].toUpperCase() === "BEST" && result[1].toUpperCase() === "BY")) {
+                const newString = "Best Before";
+                result.splice(0, 2);
+                result.unshift(newString);
+                console.log(newString)
+                console.log(result);
+            }
+
+            else if (result[0].toUpperCase() === "USE" && result[1].toUpperCase() === "BY" ||
+                result[0].toUpperCase() === "BY" && result[1].toUpperCase() === "USE") {
+                const newString = "Use By";
                 result.splice(0, 2);
                 result.unshift(newString);
                 console.log(newString)
@@ -194,7 +225,7 @@ function FoodLabels() {
 
             const numberArray = [];
 
-            const pattern1 = /(BB|Expiry Date|BBE|EXP|BEST BY|Best By|Best Before)/i;
+            const pattern1 = /(BB|Expiry Date|BBE|EXP|BEST BY|Best By|Best Before|Use By)/i;
             const pattern2 = /(\d{1,2}\/\d{1,2}\/\d{2,4}|\d{6}|\d{1,2}\-\d{1,2}\-\d{2,4}|\d{1,2}\.\d{1,2}\.\d{2,4}|\d{1,2} \d{1,2} \d{2,4}|\d{1,2}[A-Za-z]{3}\d{1,2}|\d{1,2} [A-Za-z]{3} \d{2,4})/i;
 
             // filter method recieved by chatgpt, and remove gm, due to global issues with .test()
@@ -287,7 +318,7 @@ function FoodLabels() {
                 console.log(`This means that you have until ${numberArray[1].word} to consume. That is it`)
             }
             else if ((numberArray[0].word.toUpperCase().charAt(0) === ("B"))) {
-                console.log(`This means that you have until ${numberArray[1].word} to consume while it is closed, however if stored properly, and quality looks suitbale, it make extend over the date`)
+                console.log(`This means that you have until ${numberArray[1].word} to consume while it is closed, however if stored properly, and quality looks suitbale, it can extend over the date`)
             }
 
             else if ((numberArray[0].word.toUpperCase().charAt(0) === ("B" || "D")) && (numberArray[2].word.toUpperCase().charAt(0) === ("E") || ("U"))) {
@@ -383,9 +414,10 @@ function FoodLabels() {
                         <div className="boxOfEverythingLabel">
                             <div className="theContentsLabel">
                                 <p className="paragraphDetailsLabel">
-                                    It was stated that around 5000 individuals are not aware
-                                    or are ignorant once it comes to the undertanding of dates
-                                    on a food label. This is due to lack of knowledge on what they mean
+                                    It was stated by <a href="https://www.edinburghnews.scotsman.com/must-read/over-a-third-of-brits-struggle-to-understand-food-labels-according-to-research-4935330">Edinburgh News </a>
+                                    that around 36% of british people struggle to identify
+                                    the food labels. This is due to lack of knowledge on what they mean, and
+                                    how to deal with them.
                                 </p>
                             </div>
                         </div>
@@ -397,7 +429,7 @@ function FoodLabels() {
                                 <p className="paragraphDetailsLabel">
                                     Facts: Did you know that there are 3 types of dates that can be displayed in a package <br></br><br></br>
                                     Facts: Did you know that bb stands for best before, and EXP stands for expiry date <br></br><br></br>
-                                    Facts: Did you know that we I dont knwo fact bab ababababbababababaabbabababbabbaab
+                                    Facts: Did you know that <a href="https://www.weforum.org/stories/2022/08/waitrose-scrap-best-before-dates-cut-food-waste/">WRAP</a> found the 70% of 6.6 million tonnes of food every year was consumable.
                                 </p>
                                 <div><p id="didYouKnowLabel">DID<br></br>YOU<br></br>KNOW</p></div>
                             </div>
@@ -535,14 +567,14 @@ function FoodLabels() {
                                 <div id="finalScoreLabel"> Score: {quizScore}/3</div><br></br>
                                 {quizScore === 3 ?
                                     <>
-                                        <p className="resultMessageLabel">Congratulations You Got Full Marks<br></br>50 Points added</p><br></br>
-                                        <img id="pointsLabel" src={points} alt="gold points coin" />
-                                        {/* image generated from dream.ai prompt: round circle yellow animated coin with P in the middle 12/02/2025 */}
+                                        <p className="resultMessageLabel">Congratulations You Got Full Marks<br></br></p><br></br>
+                                        <img id="pointsLabel" src={star} alt="gold points coin" />
+                                        {/* image generated from dream.ai prompt: yellow star with "#1" in the middle 13/02/2025 */}
 
                                     </>
                                     :
                                     <>
-                                        <p className="resultMessageLabel">Well done for attempting the quiz provided<br></br>try again and beat your score to gain points<br></br>
+                                        <p className="resultMessageLabel">Well done for attempting the quiz provided<br></br>try again and beat your score<br></br>
                                             Learn from the questions you got wrong bellow</p>
                                         <div>
                                             {wrongAnswers.map((wrongAnswer) => (

@@ -148,7 +148,7 @@ body {
 #educationBox3Label {
     display: flex;
     background-color: rgba(59, 175, 59, 0.785);
-    width: 85%;
+    width: 65%;
     margin: 0 auto 0px auto;
     flex-direction: column;
     animation: opacityTransition 3s ease-in;
@@ -412,7 +412,6 @@ Prompt2: is there a way of doing it in css
     font-weight: bold;
     text-align: center;
     margin-top: 5%;
-    margin-bottom: 5%;
 }
 
 .wrongAnswersLabel {
@@ -442,7 +441,7 @@ Prompt2: is there a way of doing it in css
 
 #pointsLabel {
     margin-bottom: 2%;
-    width: 20%;
+    width: 30%;
     animation: spin 4s cubic-bezier(0.4, 2.5, 0.6, 0.5) infinite;
 }
 
