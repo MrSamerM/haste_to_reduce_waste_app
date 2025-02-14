@@ -144,7 +144,7 @@ function FoodLabels() {
         else if (date.match(/\d{2}\-\d{2}\-\d{2,4}/)) {
             const parts = date.split("-");
             // this changes date to mm/dd/yy
-            const newDate = new Date(parts[1], parts[0] - 1, parts[2]);
+            const newDate = new Date(parts[1] + "/" + parts[0] - 1 + "/" + parts[2]);
             return newDate.getTime();
         }
 
@@ -156,7 +156,7 @@ function FoodLabels() {
         else if (date.match(/\d{6}/)) {
             const parts = date.match(/.{2}/g);
             // this changes date to mm/dd/yy
-            const newDate = new Date(parts[1] + "/" + parts[0] + "/" + +"/" + parts[2]);
+            const newDate = new Date(parts[1] + "/" + parts[0] + "/" + parts[2]);
             return newDate.getTime();
         }
 
@@ -181,41 +181,76 @@ function FoodLabels() {
             const result = response.data.text;
             console.log(result);
 
+            // Used chatGPT for assistance to capture pairs because some pairs both has BY
+            // Main Prompts 1:I want this for loop to loop through a array with strings. If it finds 'by', and the next is 'before' or vise versa, then put it in front. For example [hello, very, best, by] => will be [best, by, hello, very]. I want to do this with use by. However I can't because both best by, and use by have by in it. what should I do (My code)
+            // Main Prompts 2: thats wrong I need best and by to always be together. or use by. Either by use, the start of the array, use by, by best, or best by
+
             for (let i = 0; i < result.length; i++) {
 
-                if (result[i].toUpperCase() === "BEFORE" || result[i].toUpperCase() === "BY") {
-                    if (result[i].toUpperCase() === "BEFORE" || result[i].toUpperCase() === "BY") {
-                        result.unshift(result[i]);
+                let word = result[i].toUpperCase();
+
+                let prevIndex = i - 1;
+                let nextIndex = i + 1
+
+                let prevWord = i > 0 ? result[prevIndex].toUpperCase() : null;
+                let nextWord = i < result.length - 1 ? result[nextIndex].toUpperCase() : null;
+
+                if (word === "BY") {
+
+                    if (prevWord === "BEST" || prevWord === "USE") {
+                        const pairs = [result[prevIndex], result[i]];
+                        result.splice(prevIndex, 2);
+                        result.unshift(...pairs);
+                        i--;
                     }
 
-                    else if (result[i].toUpperCase() === "BEST") {
-                        result.unshift(result[i]);
+                    else if (nextWord === "BEST" || nextWord === "USE") {
+                        const pairs = [result[i], result[nextIndex]];
+                        result.splice(nextIndex, 2);
+                        result.unshift(...pairs);
+                        i--;
                     }
                 }
 
-                else if (result[i].toUpperCase() === "USE") {
-                    if (result[i].toUpperCase() === "USE") {
-                        result.unshift(result[i]);
+                else if (word === "BEFORE") {
+                    if (prevWord === "BEST") {
+                        const pairs = [result[prevIndex], result[i]];
+                        result.splice(prevIndex, 2);
+                        result.unshift(...pairs);
+                        i--;
                     }
-                    else if (result[i].toUpperCase() === "BY") {
-                        result.unshift(result[i]);
+
+                    else if (nextWord === "BEST") {
+                        const pairs = [result[i], result[nextIndex]];
+                        result.splice(nextIndex, 2);
+                        result.unshift(...pairs);
+                        i--;
                     }
                 }
             }
 
+
             if ((result[0].toUpperCase() === "BEFORE" && result[1].toUpperCase() === "BEST" ||
-                result[0].toUpperCase() === "BEST" && result[1].toUpperCase() === "BEFORE") ||
-                (result[0].toUpperCase() === "BY" && result[1].toUpperCase() === "BEST" ||
-                    result[0].toUpperCase() === "BEST" && result[1].toUpperCase() === "BY")) {
+                result[0].toUpperCase() === "BEST" && result[1].toUpperCase() === "BEFORE")) {
                 const newString = "Best Before";
                 result.splice(0, 2);
                 result.unshift(newString);
                 console.log(newString)
                 console.log(result);
             }
+            else if ((result[0].toUpperCase() === "BY" && result[1].toUpperCase() === "BEST" ||
+                result[0].toUpperCase() === "BEST" && result[1].toUpperCase() === "BY")) {
 
-            else if (result[0].toUpperCase() === "USE" && result[1].toUpperCase() === "BY" ||
-                result[0].toUpperCase() === "BY" && result[1].toUpperCase() === "USE") {
+                const newString = "Best By";
+                result.splice(0, 2);
+                result.unshift(newString);
+                console.log(newString)
+                console.log(result);
+
+            }
+
+            else if ((result[0].toUpperCase() === "USE" && result[1].toUpperCase() === "BY") ||
+                (result[0].toUpperCase() === "BY" && result[1].toUpperCase() === "USE")) {
                 const newString = "Use By";
                 result.splice(0, 2);
                 result.unshift(newString);
@@ -239,7 +274,7 @@ function FoodLabels() {
             console.log("this is dates", dates);
 
             for (let i = 0; i < words.length; i++) {
-                if (words[i].toUpperCase().charAt(0) === "B") {
+                if (words[i].toUpperCase().charAt(0) === "B" || words[i].toUpperCase().charAt(0) === "U") {
                     numberArray.push({
                         word: words[i],
                         number: 1
@@ -314,29 +349,36 @@ function FoodLabels() {
             // Use by date is the date where the food consumed has to be eaten before or on that date.
             // Expiry date is similar to use by date. Meaning it is not recommended to be conumed after the date. 
 
-            if ((numberArray[0].word.toUpperCase().charAt(0) === ("E") || ("U"))) {
-                console.log(`This means that you have until ${numberArray[1].word} to consume. That is it`)
+            if ((numberArray[0].word.toUpperCase().charAt(0) === ("E") || numberArray[0].word.toUpperCase().charAt(0) === ("U"))) {
+                console.log(`This means that you have until ${numberArray[1].word} to consume. That is it`);
+                setText(`This means that you have until ${numberArray[1].word} to consume. That is it`);
             }
             else if ((numberArray[0].word.toUpperCase().charAt(0) === ("B"))) {
-                console.log(`This means that you have until ${numberArray[1].word} to consume while it is closed, however if stored properly, and quality looks suitbale, it can extend over the date`)
+                console.log(`This means that you have until ${numberArray[1].word} to consume while it is closed, however if stored properly, and quality looks suitbale, it can extend over the date`);
+                setText(`This means that you have until ${numberArray[1].word} to consume while it is closed, however if stored properly, and quality looks suitbale, it can extend over the date`);
+
             }
 
-            else if ((numberArray[0].word.toUpperCase().charAt(0) === ("B" || "D")) && (numberArray[2].word.toUpperCase().charAt(0) === ("E") || ("U"))) {
+            else if ((numberArray[0].word.toUpperCase().charAt(0) === "B" || numberArray[0].word.toUpperCase().charAt(0) === "D") && (numberArray[2].word.toUpperCase().charAt(0) === ("E") || numberArray[2].word.toUpperCase().charAt(0) === ("U"))) {
                 console.log(`This means that you have until ${numberArray[1].word} to consume while it is closed, however if stored properly, and quality looks suitbale, it make extend over the date`)
                 console.log(`This means that you have until ${numberArray[3].word} to consume. That is it`)
+                setText(`This means that you have until ${numberArray[1].word} to consume while it is closed, however if stored properly, and quality looks suitbale, it make extend over the date`,
+                    `This means that you have until ${numberArray[3].word} to consume. That is it`
+                );
+
             }
 
 
         } catch (error) {
             console.error("Can't send the file", error);
-        };
+        }
+    }
 
-        // https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/RegExp reference 26/01/2025
-        // https://www.freecodecamp.org/news/regex-for-date-formats-what-is-the-regular-expression-for-matching-dates/
-        // https://stackoverflow.com/questions/33017274/find-all-words-with-3-letters-with-regex
-        // https://stackoverflow.com/questions/2951915/javascript-reg-ex-to-match-whole-word-only-bound-only-by-whitespace 
-        // chatGPT about gim at the end, i for case insensitivity, and matching by mapping Prompt: still a error (my pattern)
-    };
+    // https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/RegExp reference 26/01/2025
+    // https://www.freecodecamp.org/news/regex-for-date-formats-what-is-the-regular-expression-for-matching-dates/
+    // https://stackoverflow.com/questions/33017274/find-all-words-with-3-letters-with-regex
+    // https://stackoverflow.com/questions/2951915/javascript-reg-ex-to-match-whole-word-only-bound-only-by-whitespace 
+    // chatGPT about gim at the end, i for case insensitivity, and matching by mapping Prompt: still a error (my pattern)
 
 
     const changeState = (() => {
