@@ -274,12 +274,15 @@ function FoodLabels() {
             console.log("this is dates", dates);
 
             for (let i = 0; i < words.length; i++) {
+                // if best before or use by date
                 if (words[i].toUpperCase().charAt(0) === "B" || words[i].toUpperCase().charAt(0) === "U") {
                     numberArray.push({
                         word: words[i],
                         number: 1
                     });
                 }
+
+                // if expiry date only
 
                 else if ((words[i].toUpperCase().charAt(0) !== "B" || words[i].toUpperCase().charAt(0) !== "U") && (words[i].toUpperCase().charAt(0) === "E")) {
                     numberArray.push({
@@ -288,6 +291,7 @@ function FoodLabels() {
                     });
                 }
 
+                // if expiry date with a use by / best before date.
                 else if (words[i].toUpperCase().charAt(0) === "E") {
                     numberArray.push({
                         word: words[i],
@@ -295,16 +299,27 @@ function FoodLabels() {
                     });
                 }
 
-
-
             }
 
-            if (dates.length === 1) {
+            // if there are two dates, the latest date is the expiry date, words.length is for expiry date
+            if (dates.length === 2 && words.length === 1) {
+                if (dateConvertion(dates[0]) < dateConvertion(dates[1])) {
+                    numberArray.push({
+                        word: dates[1],
+                        number: 4
+                    });
+                }
+            }
+
+            else if (dates.length === 1) {
                 numberArray.push({
                     word: dates[0],
                     number: 2
                 });
             }
+
+            // if there are two dates, and two words
+
             else if (dateConvertion(dates[0]) < dateConvertion(dates[1])) {
                 numberArray.push({
                     word: dates[1],
