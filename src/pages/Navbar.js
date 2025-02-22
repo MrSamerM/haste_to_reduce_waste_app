@@ -39,10 +39,23 @@ export default function Navbar({ sessionAvailability, setSessionAvailability }) 
                         </>) :
                         (<>
                             <li className='links'><Link to={'/e_commerce'}>E-Commerce</Link></li>
-                            <li className='links'><Link to={'/donate'}>Donation</Link></li>
-                            <li className='links'><Link to={'/reserve_donation'}>Reserve Donation</Link></li>
-                            <li className='links'><Link to={'/update_donation'}>Update Donation</Link></li>
-                            <li className='links'><Link to={'/update_reserved_donation'}>Update Reserve Donation</Link></li>
+
+                            <div className='dropdownDiv'>
+                                <a className='links'>Donation</a>
+                                <ul className='dropdownMenue'>
+                                    <li className='links'><Link to={'/donate'}>Donation</Link></li>
+                                    <li className='links'><Link to={'/update_donation'}>Update Donation</Link></li>
+                                </ul>
+                            </div>
+
+                            <div className='dropdownDiv'>
+                                <a className='links'>Reservation</a>
+                                <ul className='dropdownMenue'>
+                                    <li className='links'><Link to={'/reserve_donation'}>Reserve Donation</Link></li>
+                                    <li className='links'><Link to={'/update_reserved_donation'}>Update Reserve Donation</Link></li>
+                                </ul>
+                            </div>
+
                             <li className='links'><Link onClick={remove}>Sign out</Link></li>
                         </>
                         )}

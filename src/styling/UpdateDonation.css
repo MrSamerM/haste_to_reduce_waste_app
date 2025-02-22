@@ -86,3 +86,13 @@ body {
 .tickXAndEditIcon {
     font-size: 80px;
 }
+
+.sideInformation button {
+    cursor: pointer;
+    background: none;
+    border: none;
+}
+
+.sideInformation button:hover {
+    background-color: yellow;
+}

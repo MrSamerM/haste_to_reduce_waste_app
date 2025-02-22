@@ -91,8 +91,11 @@ body {
 }
 
 #textArea {
-    width: 800px;
+    width: 60%;
     height: 200px;
+    font-size: larger;
+    font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+    font-weight: bold;
 }
 
 
@@ -214,8 +217,8 @@ body {
     align-items: center;
     justify-content: center;
     width: fit-content;
-    margin-bottom: 5%;
-    margin-top: 10%;
+    margin-bottom: 3%;
+    margin-top: 3%;
 }
 
 .textOverlayLabel {
@@ -244,15 +247,18 @@ body {
 }
 
 .appropriateContainersLabel {
-    height: 250px;
-    width: 350px;
+    width: 100%;
+    /* aspect ratio from chatGPT 
+    Prompt: is there a way to use percentage for images, because I want it to fit the div size 22/02/2025
+ */
+    aspect-ratio: 5 / 2;
+
 }
 
-#firstHalfLabel,
-#secondHalfLabel {
+#firstHalfLabel {
     display: flex;
     flex-direction: column;
-    width: 50%;
+    width: 100%;
     align-items: center;
 }
 
@@ -263,21 +269,7 @@ body {
     border-width: 8px;
 }
 
-#secondHalfLabel .suitableImagesLabel {
-    border: red;
-    border-style: solid;
-    border-width: 8px;
-}
-
 #firstHalfLabel h4 {
-    color: white;
-    font-weight: bolder;
-    text-decoration: underline;
-    text-align: center;
-    font-size: larger;
-}
-
-#secondHalfLabel h4 {
     color: white;
     font-weight: bolder;
     text-decoration: underline;
@@ -318,7 +310,7 @@ body {
 .suitableContainersLabel {
     padding: 5px;
     margin: 5px;
-    width: 70%;
+    width: 80%;
 }
 
 

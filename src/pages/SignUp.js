@@ -3,6 +3,7 @@ import '../styling/SignUp.css'
 import axios from 'axios'
 import { useNavigate } from 'react-router-dom'
 
+// Use fire event for unit testing check chatgpt for help
 
 function Signup({ setSessionAvailability }) {
 

@@ -41,6 +41,11 @@ function UpdateDonation() {
         }
     }
 
+    const navigateUpdate = (id) => {
+
+        navigate(`/update_donation_details/${id}`)
+    }
+
     return (
         <div>
             <div id="updatedDonationTitleDiv"><h1 id="updatedDonationTitle">Update Donations</h1></div>
@@ -79,7 +84,7 @@ function UpdateDonation() {
 
                     {/* https://www.youtube.com/watch?v=CUyU_ySLnIM&t=532s for reference 25/01/2025 */}
                     <div className="sideInformation">
-                        <button className="tickXAndEditIcon"><Link to={`/update_donation_details/${data.id}`}>&#9998;</Link></button>
+                        <button className="tickXAndEditIcon" onClick={() => navigateUpdate(data.id)}>&#9998;</button>
                         <br></br>
                         <label className="sideInformationLabels">Update Donation</label>
                     </div>

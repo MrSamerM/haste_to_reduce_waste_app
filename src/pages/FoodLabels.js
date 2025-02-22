@@ -3,18 +3,17 @@ import '../styling/FoodLabels.css'
 import { useState, useEffect, useRef } from "react";
 // import Tesseract from 'tesseract.js';
 import axios from "axios";
-import suitableContainer1 from '../image/Aluminuim.jpg';
-import suitableContainer2 from '../image/plasticContainer.jpg';
-import suitableContainer3 from '../image/takeawayContainer.jpg';
 
-import nonSuitableContainer1 from '../image/foamContainer.jpg';
-import nonSuitableContainer2 from '../image/cardboardContainer.jpg';
-import nonSuitableContainer3 from '../image/polytheneBag.jpg';
+import England from '../image/England.PNG'
+
+import UseBy from '../image/UseByDate.jpg';
+import BestBefore from '../image/BestBeforeDate.jpg';
+import Expiry from '../image/ExpiryDate.jpg';
 
 import star from '../image/star.PNG';
 
 
-import donationImage from '../image/Donation.jpg';
+import FullFoodLabel from '../image/FullFoodLabel.jpg';
 
 function FoodLabels() {
 
@@ -161,6 +160,107 @@ function FoodLabels() {
         }
 
     }
+
+    function dateConvertionToDate(date) {
+
+        if (date.match(/\d{2} [A-Za-z]{3} \d{2,4}/)) {
+            const parts = date.split(" ");
+
+            if (parts[2].length === 2) {
+                parts[2] = `20${parts[2]}`;
+            }
+
+            if (parts[1].toUpperCase() === "JAN") {
+                parts[1] = 0
+            }
+            else if (parts[1].toUpperCase() === "FEB") {
+                parts[1] = 1
+            }
+            else if (parts[1].toUpperCase() === "MAR") {
+                parts[1] = 2
+            }
+            else if (parts[1].toUpperCase() === "APR") {
+                parts[1] = 3
+            }
+            else if (parts[1].toUpperCase() === "MAY") {
+                parts[1] = 4
+            }
+            else if (parts[1].toUpperCase() === "JUN") {
+                parts[1] = 5
+            }
+            else if (parts[1].toUpperCase() === "JUL") {
+                parts[1] = 6
+            }
+            else if (parts[1].toUpperCase() === "AUG") {
+                parts[1] = 7
+            }
+            else if (parts[1].toUpperCase() === "SEP") {
+                parts[1] = 8
+            }
+            else if (parts[1].toUpperCase() === "OCT") {
+                parts[1] = 9
+            }
+            else if (parts[1].toUpperCase() === "NOV") {
+                parts[1] = 10
+            }
+            else if (parts[1].toUpperCase() === "DEC") {
+                parts[1] = 11
+            }
+
+            // 6 Lines below recieved from chatgpt to convert to date 22/02/2025
+            // main prompt: why is this wrong (my code)
+            const day = parseInt(parts[0], 10);
+            const month = parseInt(parts[1], 10);
+            const year = parseInt(parts[2], 10);
+
+            const newDate = new Date(year, month, day);
+
+            return `${String(newDate.getDate()).padStart(2, '0')}/${String(newDate.getMonth() + 1).padStart(2, '0')}/${newDate.getFullYear()}`;
+        }
+
+        else if (date.match(/\d{2}\/\d{2}\/\d{2,4}/)) {
+            const parts = date.split("/");
+            // this changes date to mm/dd/yy
+            const day = parseInt(parts[0], 10);
+            const month = parseInt(parts[1], 10);
+            const year = parseInt(parts[2], 10);
+
+            const newDate = new Date(year, month, day);
+
+            return `${String(newDate.getDate()).padStart(2, '0')}/${String(newDate.getMonth() + 1).padStart(2, '0')}/${newDate.getFullYear()}`;
+        }
+
+        else if (date.match(/\d{2}\-\d{2}\-\d{2,4}/)) {
+            const parts = date.split("-");
+            // this changes date to mm/dd/yy
+            const day = parseInt(parts[0], 10);
+            const month = parseInt(parts[1], 10);
+            const year = parseInt(parts[2], 10);
+
+            const newDate = new Date(year, month, day);
+
+            return `${String(newDate.getDate()).padStart(2, '0')}/${String(newDate.getMonth() + 1).padStart(2, '0')}/${newDate.getFullYear()}`;
+        }
+
+        // const parts=date.match got from chatGPT 
+        // prompt1: string.split () but 2 charcters
+        // prompt2: No i mean every two characters it splits
+        // prompt3:in js. there is a split method
+
+        else if (date.match(/\d{6}/)) {
+            const parts = date.match(/.{2}/g);
+            // this changes date to mm/dd/yy
+            const day = parseInt(parts[0], 10);
+            const month = parseInt(parts[1], 10);
+            const year = parseInt(parts[2], 10);
+
+            const newDate = new Date(year, month, day);
+
+            return `${String(newDate.getDate()).padStart(2, '0')}/${String(newDate.getMonth() + 1).padStart(2, '0')}/${newDate.getFullYear()}`;
+        }
+
+    }
+
     const fileInputRef = useRef(null);
 
     const submit = async (event) => {
@@ -178,12 +278,15 @@ function FoodLabels() {
 
             // https://stackoverflow.com/questions/65461724/how-can-i-remove-commas-or-whatever-from-within-a-string answered by munerik 30/01/2025
 
-            const result = response.data.text;
+            let result = response.data.text;
             console.log(result);
 
             // Used chatGPT for assistance to capture pairs because some pairs both has BY
             // Main Prompts 1:I want this for loop to loop through a array with strings. If it finds 'by', and the next is 'before' or vise versa, then put it in front. For example [hello, very, best, by] => will be [best, by, hello, very]. I want to do this with use by. However I can't because both best by, and use by have by in it. what should I do (My code)
             // Main Prompts 2: thats wrong I need best and by to always be together. or use by. Either by use, the start of the array, use by, by best, or best by
+
+            result = result.map(word => word.replace(/[^a-zA-Z0-9\s]/g, "").toUpperCase());
+
 
             for (let i = 0; i < result.length; i++) {
 
@@ -192,8 +295,8 @@ function FoodLabels() {
                 let prevIndex = i - 1;
                 let nextIndex = i + 1
 
-                let prevWord = i > 0 ? result[prevIndex].toUpperCase() : null;
-                let nextWord = i < result.length - 1 ? result[nextIndex].toUpperCase() : null;
+                let prevWord = i > 0 ? result[prevIndex] : null;
+                let nextWord = i < result.length - 1 ? result[nextIndex] : null;
 
                 if (word === "BY") {
 
@@ -227,19 +330,30 @@ function FoodLabels() {
                         i--;
                     }
                 }
+                else if (word === "BEST" && nextWord === "BEFORE") {
+                    const pairs = [result[i], result[nextIndex]];
+                    result.splice(i, 2);
+                    result.unshift(...pairs);
+                    i--;
+                } else if (word === "BEFORE" && nextWord === "BEST") {
+                    const pairs = [result[i], result[nextIndex]];
+                    result.splice(i, 2);
+                    result.unshift(...pairs);
+                    i--;
+                }
             }
 
 
-            if ((result[0].toUpperCase() === "BEFORE" && result[1].toUpperCase() === "BEST" ||
-                result[0].toUpperCase() === "BEST" && result[1].toUpperCase() === "BEFORE")) {
+            if ((result[0] === "BEFORE" && result[1] === "BEST" ||
+                result[0] === "BEST" && result[1] === "BEFORE")) {
                 const newString = "Best Before";
                 result.splice(0, 2);
                 result.unshift(newString);
                 console.log(newString)
                 console.log(result);
             }
-            else if ((result[0].toUpperCase() === "BY" && result[1].toUpperCase() === "BEST" ||
-                result[0].toUpperCase() === "BEST" && result[1].toUpperCase() === "BY")) {
+            else if ((result[0] === "BY" && result[1] === "BEST" ||
+                result[0] === "BEST" && result[1] === "BY")) {
 
                 const newString = "Best By";
                 result.splice(0, 2);
@@ -249,8 +363,8 @@ function FoodLabels() {
 
             }
 
-            else if ((result[0].toUpperCase() === "USE" && result[1].toUpperCase() === "BY") ||
-                (result[0].toUpperCase() === "BY" && result[1].toUpperCase() === "USE")) {
+            else if ((result[0] === "USE" && result[1] === "BY") ||
+                (result[0] === "BY" && result[1] === "USE")) {
                 const newString = "Use By";
                 result.splice(0, 2);
                 result.unshift(newString);
@@ -375,20 +489,20 @@ function FoodLabels() {
             // Expiry date is similar to use by date. Meaning it is not recommended to be conumed after the date. 
 
             if ((numberArray[0].word.toUpperCase().charAt(0) === ("E") || numberArray[0].word.toUpperCase().charAt(0) === ("U"))) {
-                console.log(`This means that you have until ${numberArray[1].word} to consume. That is it`);
-                setText(`This means that you have until ${numberArray[1].word} to consume. That is it`);
+                console.log(`This means that you have until ${dateConvertionToDate(numberArray[1].word)} to consume. That is it`);
+                setText(`This means that you have until ${dateConvertionToDate(numberArray[1].word)} to consume. That is it`);
             }
             else if ((numberArray[0].word.toUpperCase().charAt(0) === ("B"))) {
-                console.log(`This means that you have until ${numberArray[1].word} to consume while it is closed, however if stored properly, and quality looks suitbale, it can extend over the date`);
-                setText(`This means that you have until ${numberArray[1].word} to consume while it is closed, however if stored properly, and quality looks suitbale, it can extend over the date`);
+                console.log(`This means that you have until ${dateConvertionToDate(numberArray[1].word)} to consume while it is closed, however if stored properly, and quality looks suitbale, it can extend over the date`);
+                setText(`This means that you have until ${dateConvertionToDate(numberArray[1].word)} to consume while it is closed, however if stored properly, and quality looks suitbale, it can extend over the date`);
 
             }
 
             else if ((numberArray[0].word.toUpperCase().charAt(0) === "B" || numberArray[0].word.toUpperCase().charAt(0) === "D") && (numberArray[2].word.toUpperCase().charAt(0) === ("E") || numberArray[2].word.toUpperCase().charAt(0) === ("U"))) {
-                console.log(`This means that you have until ${numberArray[1].word} to consume while it is closed, however if stored properly, and quality looks suitbale, it make extend over the date`)
-                console.log(`This means that you have until ${numberArray[3].word} to consume. That is it`)
-                setText(`This means that you have until ${numberArray[1].word} to consume while it is closed, however if stored properly, and quality looks suitbale, it make extend over the date`,
-                    `This means that you have until ${numberArray[3].word} to consume. That is it`
+                console.log(`This means that you have until ${dateConvertionToDate(numberArray[1].word)} to consume while it is closed, however if stored properly, and quality looks suitbale, it make extend over the date`)
+                console.log(`This means that you have until ${dateConvertionToDate(numberArray[3].word)} to consume. That is it`)
+                setText(`This means that you have until ${dateConvertionToDate(numberArray[1].word)} to consume while it is closed, however if stored properly, and quality looks suitbale, it make extend over the date`,
+                    `This means that you have until ${dateConvertionToDate(numberArray[3].word)} to consume. That is it`
                 );
 
             }
@@ -473,8 +587,7 @@ function FoodLabels() {
                                     about the food, this includes ingridients, allergy warning,
                                     nutritional description, and finally dates of food.
                                 </p>
-                                <div><img className="suitableContainersLabel" src={donationImage} alt="Image of foods in containers" /></div>
-                                {/* image from https://www.pexels.com/photo/meals-in-boxed-prepared-for-box-diet-12050951/ 10/02/2025*/}
+                                <div><img className="suitableContainersLabel" src={FullFoodLabel} alt="Image a food label" /></div>
                             </div>
                         </div>
 
@@ -486,6 +599,11 @@ function FoodLabels() {
                                     the food labels. This is due to lack of knowledge on what they mean, and
                                     how to deal with them.
                                 </p>
+                                <div><img className="suitableContainersLabel" src={England} alt="Image of england with 36%" /></div>
+                                {/* Image from chatgpt 22/02/2025
+                                prompt 1: Make me a image that shows an image of the map of England in green, then a large number in the middle going diaganol from south west to north west with the writing '36%' bold and black
+                                prompt 2: Only the map of england. and 36 percent
+                                prompt 3: the number has to be 36 % not 5 */}
                             </div>
                         </div>
 
@@ -510,18 +628,21 @@ function FoodLabels() {
                         <button className="skipButtonLabel" onClick={skipState}>Skip  →</button>
                         <div className="educationTitleDivLabel"><h1 className="educationTitleLabel">Suitable Containers</h1></div>
                         <div className="interactPLabel"><p id="interactionParagraphLabel">
-                            Specification for each containers is a must. There are some container that are not
-                            suitbale to use when donating food, as it will contribute further to food waste.
-                            Hover and learn the different types of container that are suitable to gain an uderstanding</p></div>
+                            There are three main dates that you should look for on the food labels.<br></br> <br></br>
+                            1. Best before date, hover over the first row to see more <br></br> <br></br>
+                            2. Use by date, hover over the second row to see more<br></br> <br></br>
+                            3. Expiry date, hover over the third row to see more
+                        </p></div>
+
                         <div id="educationBox2Label">
                             <br></br>
                             <div id="firstHalfLabel">
                                 <div className="suitableImagesLabel">
-                                    <img className="appropriateContainersLabel" src={suitableContainer1} alt="Aluminium container" />
+                                    <img className="appropriateContainersLabel" src={UseBy} alt="Aluminium container" />
                                     <div className="textOverlayLabel">
                                         <h4>Use By Date</h4><br></br>
                                         <p>
-                                            This containers are suitable for
+                                            Use By Date is when .......
                                             hot food, especially for hot food,
                                             and are able to contain heat and store food
                                             properly without any affect
@@ -530,11 +651,11 @@ function FoodLabels() {
                                 </div>
 
                                 <div className="suitableImagesLabel">
-                                    <img className="appropriateContainersLabel" src={suitableContainer2} alt="Plastic container" />
+                                    <img className="appropriateContainersLabel" src={BestBefore} alt="Plastic container" />
                                     <div className="textOverlayLabel">
                                         <h4>Best Before Date</h4><br></br>
                                         <p>
-                                            This containers are suitable for
+                                            Best Before Date is when .....
                                             hot food, especially for hot food,
                                             and are able to contain heat and store food
                                             properly without any affect
@@ -543,61 +664,14 @@ function FoodLabels() {
                                 </div>
 
                                 <div className="suitableImagesLabel">
-                                    <img className="appropriateContainersLabel" src={suitableContainer3} alt="Takeaway containers" />
+                                    <img className="appropriateContainersLabel" src={Expiry} alt="Takeaway containers" />
                                     <div className="textOverlayLabel">
                                         <h4>Expiry Date</h4><br></br>
                                         <p>
-                                            This containers are suitable for
+                                            Expriy Date is when ......
                                             hot food, especially for hot food,
                                             and are able to contain heat and store food
                                             properly without any affect
-                                        </p>
-                                    </div>
-                                </div>
-                            </div>
-
-                            <div id="secondHalfLabel">
-                                <div className="suitableImagesLabel">
-                                    <img className="appropriateContainersLabel" src={nonSuitableContainer1} alt="Foam container" />
-                                    {/* image generated from dream.ai prompt: white foam container takeaway box  11/02/2025 */}
-                                    <div className="textOverlayLabel">
-                                        <h4>Foam container</h4><br></br>
-                                        <p>
-                                            This containers is not suitbale to
-                                            store food. This is because it can
-                                            possibly mix the food with chemical, and thus
-                                            affect the food, which is not safe to consume
-                                            thus leaving it to waste
-                                        </p>
-                                    </div>
-                                </div>
-
-                                <div className="suitableImagesLabel">
-                                    <img className="appropriateContainersLabel" src={nonSuitableContainer2} alt="Cardboard container" />
-                                    {/* Photo by Abdulrhman Alkady: https://www.pexels.com/photo/photo-of-burger-and-fries-in-a-takeout-box-8228281/ */}
-                                    <div className="textOverlayLabel">
-                                        <h4>Cardboard container</h4><br></br>
-                                        <p>
-                                            This containers is not suitbale to
-                                            store food. This is because it can
-                                            possibly mix the food with chemical, and thus
-                                            affect the food, which is not safe to consume
-                                            thus leaving it to waste
-                                        </p>
-                                    </div>
-                                </div>
-
-                                <div className="suitableImagesLabel">
-                                    <img className="appropriateContainersLabel" src={nonSuitableContainer3} alt="Polythene bags" />
-                                    {/* Photo by Anna Shvets: https://www.pexels.com/photo/fruits-in-a-plastic-bag-3645504/ */}
-                                    <div className="textOverlayLabel">
-                                        <h4>Polythene bags</h4><br></br>
-                                        <p>
-                                            This containers is not suitbale to
-                                            store food. This is because it can
-                                            possibly mix the food with chemical, and thus
-                                            affect the food, which is not safe to consume
-                                            thus leaving it to waste
                                         </p>
                                     </div>
                                 </div>
