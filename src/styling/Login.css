@@ -6,14 +6,22 @@ body {
 
 #loginTitleDiv {
     align-items: center;
-    margin: 0 auto 30px auto;
-    margin-bottom: 50px;
+    margin: 0 auto 0px auto;
     margin-top: 10px;
 }
 
 #Login {
     text-align: center;
     text-decoration: underline;
+}
+
+/* Used chatGPT because it was not centering properly 23/02/2025
+Prompt: How to allign this center (my code) */
+#IconImageDiv {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    margin: 0 auto 0px auto;
 }
 
 #loginDetails {
@@ -52,4 +60,9 @@ body {
 
 #validationMessage {
     color: red;
+}
+
+#profile {
+    width: 400px;
+    height: 400px;
 }

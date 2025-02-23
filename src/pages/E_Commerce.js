@@ -1,6 +1,7 @@
 import React, { useEffect, useState } from "react";
 import '../styling/E_Commerce.css'
 import axios from "axios";
+import { maximum } from "@tensorflow/tfjs";
 
 function E_Commerce() {
 
@@ -8,8 +9,6 @@ function E_Commerce() {
     const [quantities, setQuantities] = useState({});
     const [totalAmount, setTotalAmount] = useState(0);
     const [listOfProducts, setListOfProducts] = useState([]);
-
-
 
     useEffect(() => {
 
@@ -36,14 +35,24 @@ function E_Commerce() {
     // Prompt: The thing is setListOfProducts(prevListOfProducts => prevListOfProducts.filter(id=>id!==productId)),
     // It may have repeated products ids if a users buys the same thing more than once. so would this remove all of the same ids, or only one. 
     // ^^: for setListOfProducts 
+    // prompt 2: would this not work to cap it as the max quantity (my code) 23/02/2025
+    // prompt 3: why would this not work (code) 23/02/2025
 
-    const add = (productId, cost) => {
+    const add = (productId, cost, quantity) => {
         setQuantities((prevQuantities) => ({
             ...prevQuantities,
-            [productId]: (prevQuantities[productId] || 0) + 1,
+            [productId]: (prevQuantities[productId] || 0) < quantity
+                ? (prevQuantities[productId] || 0) + 1
+                : prevQuantities[productId]
         }));
-        setTotalAmount(prevTotalAmount => prevTotalAmount + cost);
-        setListOfProducts(prevListOfProducts => [...prevListOfProducts, productId]);
+        setTotalAmount((prevTotalAmount) => {
+            const currentQuantity = quantities[productId] || 0;
+            return currentQuantity < quantity ? prevTotalAmount + cost : prevTotalAmount;
+        })
+        setListOfProducts((prevListOfProducts) => {
+            const currentQuantity = quantities[productId] || 0;
+            return currentQuantity < quantity ? [...prevListOfProducts, productId] : prevListOfProducts;
+        })
     };
 
     const subtract = (productId, cost) => {
@@ -60,10 +69,23 @@ function E_Commerce() {
         });
     };
 
+    const submit = () => {
+
+        const data = {
+            listOfProducts: listOfProducts,
+            totalAmount: totalAmount
+        }
+        try {
+
+
+        } catch (err) {
+            console.log('error', err)
+        }
+    }
+
     return (
         <div>
             <div id="shopTitleDiv"><h1 id="shopTitle">Prevention Shop</h1></div>
-
             <div id="shopItems">
                 {productList.map((product) => (
                     <div id="productDiv">
@@ -82,13 +104,17 @@ function E_Commerce() {
                         <div id="quantity">
                             <button className="addOrSubtract" onClick={() => subtract(product.id, product.cost)}>-</button>
                             <input key={product.id} id="quantityRequired" value={quantities[product.id] || 0} readonly />
-                            <button className="addOrSubtract" onClick={() => add(product.id, product.cost)}>+</button>
+                            <button className="addOrSubtract" onClick={() => add(product.id, product.cost, product.quantity)}>+</button>
                         </div>
 
                     </div>
                 )
                 )}
 
+            </div>
+
+            <div>
+                <button onClick={submit}>Submit</button>
             </div>
         </div>
     );

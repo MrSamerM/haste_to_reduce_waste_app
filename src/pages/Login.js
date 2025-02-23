@@ -3,6 +3,9 @@ import '../styling/Login.css'
 import axios from 'axios'
 import { useNavigate } from 'react-router-dom'
 
+import profileIcon from '../image/profileIcon.PNG';
+
+
 
 function Login({ setSessionAvailability }) {
 
@@ -11,6 +14,7 @@ function Login({ setSessionAvailability }) {
     const [password, setPassword] = useState("");
     const [validate, setValidate] = useState(true);
     const [validationMessage, setValidationMessage] = useState("");
+
 
     const navigate = useNavigate();
 
@@ -56,6 +60,12 @@ function Login({ setSessionAvailability }) {
             <div id='loginTitleDiv'>
                 <h1 id="Login">Login</h1>
             </div>
+
+            <div id="IconImageDiv">
+                <img id="profile" src={profileIcon} />
+            </div>
+            {/* https://pixabay.com/illustrations/icon-profile-user-clip-art-7797704/ image */}
+
             <div id="loginDetails">
                 <div className="loginInputDiv">
                     <label className="loginInputLabel" htmlFor="email">Email: </label>

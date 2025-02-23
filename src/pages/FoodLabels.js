@@ -207,7 +207,7 @@ function FoodLabels() {
                 parts[1] = 11
             }
 
-            // 6 Lines below recieved from chatgpt to convert to date 22/02/2025
+            // 5 Lines below recieved from chatgpt to convert to date 22/02/2025
             // main prompt: why is this wrong (my code)
             const day = parseInt(parts[0], 10);
             const month = parseInt(parts[1], 10);
@@ -222,7 +222,7 @@ function FoodLabels() {
             const parts = date.split("/");
             // this changes date to mm/dd/yy
             const day = parseInt(parts[0], 10);
-            const month = parseInt(parts[1], 10);
+            const month = parseInt(parts[1], 10) - 1;
             const year = parseInt(parts[2], 10);
 
             const newDate = new Date(year, month, day);
@@ -234,7 +234,7 @@ function FoodLabels() {
             const parts = date.split("-");
             // this changes date to mm/dd/yy
             const day = parseInt(parts[0], 10);
-            const month = parseInt(parts[1], 10);
+            const month = parseInt(parts[1], 10) - 1;
             const year = parseInt(parts[2], 10);
 
             const newDate = new Date(year, month, day);
@@ -251,7 +251,7 @@ function FoodLabels() {
             const parts = date.match(/.{2}/g);
             // this changes date to mm/dd/yy
             const day = parseInt(parts[0], 10);
-            const month = parseInt(parts[1], 10);
+            const month = parseInt(parts[1], 10) - 1;
             const year = parseInt(parts[2], 10);
 
             const newDate = new Date(year, month, day);
@@ -281,67 +281,44 @@ function FoodLabels() {
             let result = response.data.text;
             console.log(result);
 
-            // Used chatGPT for assistance to capture pairs because some pairs both has BY
+            // Used chatGPT for bottom function 
             // Main Prompts 1:I want this for loop to loop through a array with strings. If it finds 'by', and the next is 'before' or vise versa, then put it in front. For example [hello, very, best, by] => will be [best, by, hello, very]. I want to do this with use by. However I can't because both best by, and use by have by in it. what should I do (My code)
-            // Main Prompts 2: thats wrong I need best and by to always be together. or use by. Either by use, the start of the array, use by, by best, or best by
+            //Main Prompt 2: No you do not understand. I need to try and find the pairs either Best and By || By and Best || Best and Before || Before and Best || Use and By || By and Use, when these pairs are found, it does not mean they are next to each other, they could be very far a part, if they are found in the same array then I need to put them into the front
 
             result = result.map(word => word.replace(/[^a-zA-Z0-9\s]/g, "").toUpperCase());
 
+            const targetPairs = [
+                ["BY", "BEST"],
+                ["BY", "USE"],
+                ["BEST", "BY"],
+                ["BEST", "USE"],
+                ["USE", "BY"],
+                ["USE", "BEST"],
+                ["BEFORE", "BEST"],
+                ["BEST", "BEFORE"]
+            ];
 
-            for (let i = 0; i < result.length; i++) {
+            let pairs = [];
 
-                let word = result[i].toUpperCase();
+            for (let i = 0; i < targetPairs.length; i++) {
+                let pair = targetPairs[i];
+                let firstWord = pair[0];
+                let secondWord = pair[1];
 
-                let prevIndex = i - 1;
-                let nextIndex = i + 1
+                let firstIndex = result.indexOf(firstWord);
+                let secondIndex = result.indexOf(secondWord, firstIndex + 1);
 
-                let prevWord = i > 0 ? result[prevIndex] : null;
-                let nextWord = i < result.length - 1 ? result[nextIndex] : null;
+                if (firstIndex !== -1 && secondIndex !== -1) {
+                    pairs.push([firstWord, secondWord]);
 
-                if (word === "BY") {
-
-                    if (prevWord === "BEST" || prevWord === "USE") {
-                        const pairs = [result[prevIndex], result[i]];
-                        result.splice(prevIndex, 2);
-                        result.unshift(...pairs);
-                        i--;
-                    }
-
-                    else if (nextWord === "BEST" || nextWord === "USE") {
-                        const pairs = [result[i], result[nextIndex]];
-                        result.splice(nextIndex, 2);
-                        result.unshift(...pairs);
-                        i--;
-                    }
-                }
-
-                else if (word === "BEFORE") {
-                    if (prevWord === "BEST") {
-                        const pairs = [result[prevIndex], result[i]];
-                        result.splice(prevIndex, 2);
-                        result.unshift(...pairs);
-                        i--;
-                    }
-
-                    else if (nextWord === "BEST") {
-                        const pairs = [result[i], result[nextIndex]];
-                        result.splice(nextIndex, 2);
-                        result.unshift(...pairs);
-                        i--;
-                    }
-                }
-                else if (word === "BEST" && nextWord === "BEFORE") {
-                    const pairs = [result[i], result[nextIndex]];
-                    result.splice(i, 2);
-                    result.unshift(...pairs);
-                    i--;
-                } else if (word === "BEFORE" && nextWord === "BEST") {
-                    const pairs = [result[i], result[nextIndex]];
-                    result.splice(i, 2);
-                    result.unshift(...pairs);
-                    i--;
+                    result.splice(secondIndex, 1);
+                    result.splice(firstIndex, 1);
                 }
             }
+
+            result = [...pairs.flat(), ...result];
+
+            console.log(result);
 
 
             if ((result[0] === "BEFORE" && result[1] === "BEST" ||
@@ -373,6 +350,12 @@ function FoodLabels() {
             }
 
             const numberArray = [];
+
+            // https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/RegExp reference 26/01/2025
+            // https://www.freecodecamp.org/news/regex-for-date-formats-what-is-the-regular-expression-for-matching-dates/
+            // https://stackoverflow.com/questions/33017274/find-all-words-with-3-letters-with-regex
+            // https://stackoverflow.com/questions/2951915/javascript-reg-ex-to-match-whole-word-only-bound-only-by-whitespace 
+            // chatGPT i for case insensitivity, and matching by mapping Prompt: still a error (my pattern)
 
             const pattern1 = /(BB|Expiry Date|BBE|EXP|BEST BY|Best By|Best Before|Use By|Expiry)/i;
             const pattern2 = /(\d{1,2}\/\d{1,2}\/\d{2,4}|\d{6}|\d{1,2}\-\d{1,2}\-\d{2,4}|\d{1,2}\.\d{1,2}\.\d{2,4}|\d{1,2} \d{1,2} \d{2,4}|\d{1,2}[A-Za-z]{3}\d{1,2}|\d{1,2} [A-Za-z]{3} \d{2,4})/i;
@@ -504,21 +487,15 @@ function FoodLabels() {
                 setText(`This means that you have until ${dateConvertionToDate(numberArray[1].word)} to consume while it is closed, however if stored properly, and quality looks suitbale, it make extend over the date`,
                     `This means that you have until ${dateConvertionToDate(numberArray[3].word)} to consume. That is it`
                 );
-
             }
-
-
+            else {
+                console.log(`The image provided was not sufficient. The reason could be because the image was not clear enough, of the dates were not displayed, please find the dates and take clearer picture`);
+                setText(`The image provided was not sufficient. The reason could be because the image was not clear enough, of the dates were not displayed, please find the dates and take clearer picture`);
+            }
         } catch (error) {
             console.error("Can't send the file", error);
         }
     }
-
-    // https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/RegExp reference 26/01/2025
-    // https://www.freecodecamp.org/news/regex-for-date-formats-what-is-the-regular-expression-for-matching-dates/
-    // https://stackoverflow.com/questions/33017274/find-all-words-with-3-letters-with-regex
-    // https://stackoverflow.com/questions/2951915/javascript-reg-ex-to-match-whole-word-only-bound-only-by-whitespace 
-    // chatGPT about gim at the end, i for case insensitivity, and matching by mapping Prompt: still a error (my pattern)
-
 
     const changeState = (() => {
         if (educationState < 2) {
