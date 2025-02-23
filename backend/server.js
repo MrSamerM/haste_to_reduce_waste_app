@@ -247,6 +247,39 @@ app.get('/allReservedDonations', async (req, res) => {
     }
 })
 
+app.get('/userPoints', async (req, res) => {
+    try {
+        const points = await User.findById(req.session.userID);
+        res.json({ result: points });
+
+    } catch (err) {
+        console.log("error", err)
+        res.status(500).json({ message: "database can't get data" })
+    }
+})
+
+app.post('/purchase', async (req, res) => {
+    try {
+        const { listOfProducts, totalAmount, address } = req.body;
+
+        const registerReceipt = new Receipt(
+            {
+                userID: req.session.userID,
+                productID: listOfProducts,
+                cost: totalAmount,
+                address: address
+            }
+        )
+        await registerReceipt.save()
+        res.json({ message: "Purchased" })
+
+
+    } catch (err) {
+        console.log("error", err)
+        res.status(500).json({ message: "database can't post data" })
+    }
+})
+
 app.post('/updateReservation', async (req, res) => {
     try {
         const { reserved, donationID } = req.body;

@@ -4,6 +4,13 @@ body {
     background-color: #E1ECD8;
 }
 
+#allECommerceContent {
+    display: flex;
+    flex-direction: column;
+    width: 95%;
+    margin: 0 auto 60px auto;
+}
+
 #shopTitleDiv {
     align-items: center;
     margin: 0 auto 30px auto;
@@ -93,4 +100,32 @@ body {
     background-color: green;
     font-size: larger;
     font-weight: bolder;
+}
+
+#purchaseButtonDiv {
+    display: flex;
+    align-items: center;
+    width: 100%;
+    margin-bottom: 5%;
+}
+
+#autoCompleteAddressForPurchaseDiv {
+    position: relative;
+    margin-bottom: 2%;
+    width: 70%;
+}
+
+#submitPurchase {
+    background-color: black;
+    color: white;
+    width: 150px;
+    height: 40px;
+    font-size: large;
+    text-align: center;
+    cursor: pointer;
+}
+
+#submitPurchase,
+#autoCompleteAddressForPurchaseDiv {
+    margin: 0 auto 30px auto;
 }

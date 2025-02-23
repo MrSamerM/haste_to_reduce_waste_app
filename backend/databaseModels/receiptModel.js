@@ -21,6 +21,11 @@ const receiptSchema = new mongoose.Schema({
         require: true
     },
 
+    address: {
+        type: String,
+        require: true
+    },
+
 });
 
 module.exports = mongoose.model("Receipt", receiptSchema)

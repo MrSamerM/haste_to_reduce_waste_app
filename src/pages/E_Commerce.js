@@ -1,7 +1,8 @@
 import React, { useEffect, useState } from "react";
 import '../styling/E_Commerce.css'
 import axios from "axios";
-import { maximum } from "@tensorflow/tfjs";
+import { GeoapifyGeocoderAutocomplete, GeoapifyContext } from '@geoapify/react-geocoder-autocomplete'
+import '@geoapify/geocoder-autocomplete/styles/minimal.css'
 
 function E_Commerce() {
 
@@ -9,17 +10,27 @@ function E_Commerce() {
     const [quantities, setQuantities] = useState({});
     const [totalAmount, setTotalAmount] = useState(0);
     const [listOfProducts, setListOfProducts] = useState([]);
+    const [userPoints, setUserPoints] = useState(0);
+    const [address, setAddress] = useState("");
+
+
 
     useEffect(() => {
 
         console.log("Total: ", totalAmount)
         console.log("List of Products: ", listOfProducts)
+        console.log("User Points: ", userPoints)
 
         const products = async () => {
+
             try {
                 const res = await axios.get('http://localhost:8000/allProducts')
                 const allProducts = res.data.result.map((data) => ({ id: data._id, image: data.productImage, productName: data.productName, cost: data.pointCost, quantity: data.quantity }));
                 setProductList(allProducts);
+
+                const secondRes = await axios.get('http://localhost:8000/userPoints')
+                const points = secondRes.data.result.points;
+                setUserPoints(points)
 
             } catch (err) {
                 console.log("Error", err)
@@ -27,7 +38,7 @@ function E_Commerce() {
         }
         products();
 
-    }, [totalAmount, listOfProducts]);
+    }, [totalAmount, listOfProducts, userPoints]);
 
 
     // from chatGPT Prompt: mycode  it still updates all (my code): for setQuantities 02/02/2025
@@ -69,22 +80,53 @@ function E_Commerce() {
         });
     };
 
-    const submit = () => {
-
-        const data = {
-            listOfProducts: listOfProducts,
-            totalAmount: totalAmount
-        }
-        try {
-
-
-        } catch (err) {
-            console.log('error', err)
+    const onPlaceSelect = (place) => {
+        if (place && place.properties && place.properties.formatted) {
+            setAddress(place.properties.formatted);
         }
     }
 
+    const updatedAddress = (value) => {
+        setAddress(value);
+    }
+
+    const submit = async (e) => {
+
+        e.preventDefault();
+
+        if (address === "") {
+            alert("Must enter a address")
+        }
+        else if (listOfProducts.length === 0) {
+            alert("Must enter add something to purchase")
+        }
+        else if (userPoints < totalAmount) {
+            alert(`You currently have ${userPoints} which is not enough to purchase all these items. Please remove some items`)
+        }
+        else {
+            const data = {
+                listOfProducts: listOfProducts,
+                totalAmount: totalAmount,
+                address: address
+            }
+
+            try {
+                const res = await axios.post("http://localhost:8000/purchase", data)
+                if (res.data.message === "Purchased") {
+                    alert("The purchase has been made");
+                    window.location.reload()
+
+                }
+
+            } catch (err) {
+                console.log('error', err)
+            }
+        }
+
+    }
+
     return (
-        <div>
+        <div id="allECommerceContent">
             <div id="shopTitleDiv"><h1 id="shopTitle">Prevention Shop</h1></div>
             <div id="shopItems">
                 {productList.map((product) => (
@@ -113,8 +155,20 @@ function E_Commerce() {
 
             </div>
 
-            <div>
-                <button onClick={submit}>Submit</button>
+            <div id="autoCompleteAddressForPurchaseDiv">
+                <GeoapifyContext apiKey={process.env.REACT_APP_GEOAPIFY_API_KEY}>
+                    <GeoapifyGeocoderAutocomplete id="autoCompleteAddressForPurchase" placeholder="Enter address here"
+                        lang='en'
+                        limit={5}
+                        value={address}
+                        onChange={updatedAddress}
+                        placeSelect={onPlaceSelect}
+                    />
+                </GeoapifyContext>
+            </div>
+
+            <div id="purchaseButtonDiv">
+                <button id="submitPurchase" onClick={submit}>Submit</button>
             </div>
         </div>
     );
