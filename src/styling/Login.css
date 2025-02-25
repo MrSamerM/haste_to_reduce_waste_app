@@ -63,6 +63,12 @@ Prompt: How to allign this center (my code) */
 }
 
 #profile {
-    width: 400px;
-    height: 400px;
+    width: 250px;
+    height: 250px;
+    border-radius: 60%;
+    border-color: black;
+    border-width: 5px;
+    border-style: solid;
+    margin-top: 2%;
+    margin-bottom: 2%;
 }

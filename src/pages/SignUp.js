@@ -3,8 +3,6 @@ import '../styling/SignUp.css'
 import axios from 'axios'
 import { useNavigate } from 'react-router-dom'
 
-// Use fire event for unit testing check chatgpt for help
-
 function Signup({ setSessionAvailability }) {
 
     const [name, setName] = useState("");
@@ -125,9 +123,10 @@ function Signup({ setSessionAvailability }) {
 
                 <br></br>
 
-                {validate === true ? null : <p id="validationMessage">{validationMessage}</p>}
+                <p data-testid="validateMessage" id="validationMessage">{validate ? "" : validationMessage}</p>
 
-                <button id="signupButton" onClick={submit}>Sign Up</button>
+
+                <button data-testid="signup" id="signupButton" onClick={submit}>Sign Up</button>
             </div>
         </>
     );

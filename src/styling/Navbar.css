@@ -1,30 +1,44 @@
+/* https://www.youtube.com/watch?v=M498DvQDkJo Used to assist me when making the navbar December 2024 */
+
 * {
     margin: 0;
     padding: 0;
 }
 
+/* to center the navbar chatgpt  25/02/2025
+prompt: how can I center the nav bar  */
+
 #navbar {
     width: 100%;
-    justify-content: space-between;
     display: flex;
     align-items: center;
     list-style: none;
     background-color: lightgreen;
     position: relative;
     padding-bottom: 20px;
+    text-align: center;
+    justify-content: center;
+    flex-wrap: nowrap;
+
 }
 
-a {
+#listOfLinks a {
     text-decoration: none;
     background-color: lightgreen;
+    color: black;
 }
 
 #listOfLinks {
-    display: flex;
+    display: inline-flex;
+    white-space: nowrap;
+    justify-content: center;
+    align-items: center;
+    text-decoration: none;
+    gap: 15%;
 }
 
 .links {
-    padding-left: 40px;
+    text-decoration: none;
     color: black;
     font-weight: bold;
     font-size: large;
@@ -33,7 +47,14 @@ a {
     text-decoration: none;
     text-align: center;
     background-color: lightgreen;
+    cursor: pointer;
 }
+
+/* to make a dropdown menue I used w3School https://www.w3schools.com/howto/howto_css_dropdown.asp 25/02/2025 */
+/* To fix the dropdown menue and center it correctly Chatgpt 
+prompt 1: why is the dropdown not working (my css)
+prompt 2: but it is kind of to the left. it works but not centered correctly
+ */
 
 .dropdownMenue {
     width: max-content;
@@ -43,8 +64,7 @@ a {
     display: none;
     left: 50%;
     transform: translateX(-50%);
-    padding: 0;
-    margin: 0;
+    padding-top: 10px;
 }
 
 .dropdownMenue li {

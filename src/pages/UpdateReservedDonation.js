@@ -46,7 +46,7 @@ function UpdateReservedDonation() {
 
     return (
         <div>
-            <div id="updatedReservedDonationTitleDiv"><h1 id="updatedReservedDonationTitle">Update Donations</h1></div>
+            <div id="updatedReservedDonationTitleDiv"><h1 id="updatedReservedDonationTitle">Update Reserved Donation</h1></div>
 
             {data.map((data) => (
                 <div className="reservedDonationEntireBox">
