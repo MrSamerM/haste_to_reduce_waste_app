@@ -1,5 +1,6 @@
 import { Link } from 'react-router-dom';
 import { useNavigate } from 'react-router-dom';
+import { useState } from 'react';
 import '../styling/Navbar.css'
 import axios from 'axios';
 
@@ -9,6 +10,8 @@ import axios from 'axios';
 export default function Navbar({ sessionAvailability, setSessionAvailability }) {
 
     const navigate = useNavigate();
+
+    const [menue, setMenue] = useState(false);
 
     const remove = (async () => {
 
@@ -28,7 +31,7 @@ export default function Navbar({ sessionAvailability, setSessionAvailability }) 
     return (
         <>
             <nav id='navbar'>
-                <ul id='listOfLinks'>
+                <ul id='listOfLinks' className={menue ? "active" : ""}>
                     <li className='links'><Link to={'/'}>Home</Link></li>
                     <li className='links'><Link to={'/food_labels'}>Labels</Link></li>
 
@@ -60,6 +63,10 @@ export default function Navbar({ sessionAvailability, setSessionAvailability }) 
                         </>
                         )}
                 </ul>
+                {/* used chatgpt to find out, how to manage clicking 3 lines */}
+                <div id='threeLines' onClick={() => setMenue(!menue)}>
+                    <p>&#9776;</p>
+                </div>
             </nav>
         </>
     )

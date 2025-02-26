@@ -1,4 +1,5 @@
 /* https://www.youtube.com/watch?v=M498DvQDkJo Used to assist me when making the navbar December 2024 */
+/* https://www.youtube.com/watch?v=M498DvQDkJo&t=383s  Used to assist me when making the navbar  26/02/2025*/
 
 * {
     margin: 0;
@@ -15,11 +16,14 @@ prompt: how can I center the nav bar  */
     list-style: none;
     background-color: lightgreen;
     position: relative;
+    top: 0;
+    right: 0;
+    left: 0;
     padding-bottom: 20px;
     text-align: center;
     justify-content: center;
     flex-wrap: nowrap;
-
+    z-index: 1000;
 }
 
 #listOfLinks a {
@@ -80,4 +84,81 @@ prompt 2: but it is kind of to the left. it works but not centered correctly
 
 .dropdownDiv:hover .dropdownMenue {
     display: block;
+}
+
+#threeLines {
+    right: 20px;
+    top: 30%;
+    transform: translateY(-50%);
+    cursor: pointer;
+    font-weight: bolder;
+    font-size: larger;
+}
+
+#threeLines {
+    display: none;
+}
+
+@media (max-width:805px) {
+
+    #listOfLinks {
+        position: absolute;
+        top: 70px;
+        left: 0;
+        right: 0;
+        flex-direction: column;
+        text-align: center;
+        background-color: lightgreen;
+        gap: 0;
+        padding-bottom: 20px;
+        display: none;
+        margin-top: 10px;
+    }
+
+    .dropdownMenue {
+        position: relative;
+    }
+
+    /* chatgpt 26/02/2025
+    prompt: the final problem is that the drop down drops, the menu goes beyond the nav bar, a bit of the link is going out of the nav bar */
+
+    #navbar {
+        flex-direction: column;
+        align-items: center;
+        position: relative;
+        min-height: 20px;
+    }
+
+    #listOfLinks.active {
+        display: flex;
+        position: relative;
+        top: 100%;
+
+    }
+
+    #listOfLinks li {
+        padding: 20px;
+        padding-bottom: 20px;
+    }
+
+    /* to always center the 3 lines 
+    prompt: The thing is, I want the 3lines to be in the middle, but now it is merged with one of the links */
+    #threeLines {
+        display: block;
+        position: absolute;
+        top: 5px;
+        left: 50%;
+        width: auto;
+        height: auto;
+        transform: translateX(-50%);
+        width: auto;
+        text-align: center;
+        z-index: 1000;
+
+    }
+
+    .dropdownDiv {
+        margin-bottom: 3%;
+    }
+
 }
