@@ -38,7 +38,7 @@ prompt: how can I center the nav bar  */
     justify-content: center;
     align-items: center;
     text-decoration: none;
-    gap: 15%;
+    gap: 20%;
 }
 
 .links {
@@ -51,7 +51,12 @@ prompt: how can I center the nav bar  */
     text-decoration: none;
     text-align: center;
     background-color: lightgreen;
-    cursor: pointer;
+}
+
+/* is it because it is a li, chatgpt to remove cursor from points system 27/02/2025 */
+#userPoints a {
+    cursor: default;
+    text-decoration: underline;
 }
 
 /* to make a dropdown menue I used w3School https://www.w3schools.com/howto/howto_css_dropdown.asp 25/02/2025 */
@@ -69,6 +74,7 @@ prompt 2: but it is kind of to the left. it works but not centered correctly
     left: 50%;
     transform: translateX(-50%);
     padding-top: 10px;
+
 }
 
 .dropdownMenue li {
@@ -80,6 +86,8 @@ prompt 2: but it is kind of to the left. it works but not centered correctly
 .dropdownDiv {
     position: relative;
     display: inline-block;
+    cursor: pointer;
+
 }
 
 .dropdownDiv:hover .dropdownMenue {
@@ -99,7 +107,7 @@ prompt 2: but it is kind of to the left. it works but not centered correctly
     display: none;
 }
 
-@media (max-width:805px) {
+@media (max-width:1105px) {
 
     #listOfLinks {
         position: absolute;
@@ -158,7 +166,8 @@ prompt 2: but it is kind of to the left. it works but not centered correctly
     }
 
     .dropdownDiv {
-        margin-bottom: 3%;
+        margin-top: 10px;
+        margin-bottom: 20px;
     }
 
 }

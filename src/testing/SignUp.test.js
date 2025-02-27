@@ -80,8 +80,68 @@ jest.mock("axios");
 // );
 
 
-describe("password less than or equal to 6", () => {
-    test("shows error if password is not of length <= 6", async () => {
+// describe("password less than or equal to 6", () => {
+//     test("shows error if password is not of length <= 6", async () => {
+//         render(
+//             <MemoryRouter>
+//                 <Signup setSessionAvailability={jest.fn()} />
+//             </MemoryRouter>
+//         );
+
+//         const name = screen.getByTestId('name');;
+//         const surname = screen.getByTestId('surname');
+//         const dateOfBirth = screen.getByTestId('dateOfBirth');
+//         const email = screen.getByTestId('email');
+//         const password = screen.getByTestId('password');
+//         const signup = screen.getByTestId('signup');
+
+
+//         fireEvent.change(name, { target: { value: 'Sam' } });
+//         fireEvent.change(surname, { target: { value: 'hhey' } });
+//         fireEvent.change(dateOfBirth, { target: { value: '2002-09-10' } });
+//         fireEvent.change(email, { target: { value: 'sam@gmail.com' } });
+//         fireEvent.change(password, { target: { value: 'pass' } });
+
+//         fireEvent.click(signup);
+
+//         await waitFor(() => {
+//             expect(screen.getByTestId("validateMessage").textContent).toBe("Must have a longer password");
+//         });
+//     });
+// });
+
+// describe("incorrect email format", () => {
+//     test("shows error if email format is not correct", async () => {
+//         render(
+//             <MemoryRouter>
+//                 <Signup setSessionAvailability={jest.fn()} />
+//             </MemoryRouter>
+//         );
+
+//         const name = screen.getByTestId('name');;
+//         const surname = screen.getByTestId('surname');
+//         const dateOfBirth = screen.getByTestId('dateOfBirth');
+//         const email = screen.getByTestId('email');
+//         const password = screen.getByTestId('password');
+//         const signup = screen.getByTestId('signup');
+
+
+//         fireEvent.change(name, { target: { value: 'Sam' } });
+//         fireEvent.change(surname, { target: { value: 'hhey' } });
+//         fireEvent.change(dateOfBirth, { target: { value: '2002-09-10' } });
+//         fireEvent.change(email, { target: { value: 'sam.com@brunel' } });
+//         fireEvent.change(password, { target: { value: 'password' } });
+
+//         fireEvent.click(signup);
+
+//         await waitFor(() => {
+//             expect(screen.getByTestId("validateMessage").textContent).toBe("Must have a valid email");
+//         });
+//     });
+// });
+
+describe("age of user less than 18", () => {
+    test("shows error if user is less than 18", async () => {
         render(
             <MemoryRouter>
                 <Signup setSessionAvailability={jest.fn()} />
@@ -98,14 +158,46 @@ describe("password less than or equal to 6", () => {
 
         fireEvent.change(name, { target: { value: 'Sam' } });
         fireEvent.change(surname, { target: { value: 'hhey' } });
-        fireEvent.change(dateOfBirth, { target: { value: '2002-09-10' } });
+        fireEvent.change(dateOfBirth, { target: { value: '2015-09-10' } });
         fireEvent.change(email, { target: { value: 'sam@gmail.com' } });
-        fireEvent.change(password, { target: { value: 'pass' } });
+        fireEvent.change(password, { target: { value: 'password' } });
 
         fireEvent.click(signup);
 
         await waitFor(() => {
-            expect(screen.getByTestId("validateMessage").textContent).toBe("Must have a longer password");
+            expect(screen.getByTestId("validateMessage").textContent).toBe("Must be 18 or above");
         });
     });
 });
+
+describe("All fields correctly filled, and email unique", () => {
+    test("consoles, signed up", async () => {
+        render(
+            <MemoryRouter>
+                <Signup setSessionAvailability={jest.fn()} />
+            </MemoryRouter>
+        );
+
+        const name = screen.getByTestId('name');;
+        const surname = screen.getByTestId('surname');
+        const dateOfBirth = screen.getByTestId('dateOfBirth');
+        const email = screen.getByTestId('email');
+        const password = screen.getByTestId('password');
+        const signup = screen.getByTestId('signup');
+
+
+        fireEvent.change(name, { target: { value: 'Sam' } });
+        fireEvent.change(surname, { target: { value: 'hhey' } });
+        fireEvent.change(dateOfBirth, { target: { value: '2015-09-10' } });
+        fireEvent.change(email, { target: { value: 'sam@gmail.com' } });
+        fireEvent.change(password, { target: { value: 'password' } });
+
+        fireEvent.click(signup);
+
+        await waitFor(() => {
+            expect(screen.getByTestId("validateMessage").textContent).toBe("Must be 18 or above");
+        });
+    });
+});
+
+

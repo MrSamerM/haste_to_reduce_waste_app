@@ -60,8 +60,8 @@ function Signup({ setSessionAvailability }) {
             setValidate(false);
         }
         else if (validateAge(dateOfBirth) < 18) {
-            console.log("Must have be 18 or above")
-            setValidationMessage("Must have be 18 or above")
+            console.log("Must be 18 or above")
+            setValidationMessage("Must be 18 or above")
             setValidate(false);
         }
         else {
@@ -69,6 +69,7 @@ function Signup({ setSessionAvailability }) {
                 const res = await axios.post('http://localhost:8000/register', data);
 
                 if (res.data.userID) {
+                    console.log("Sign up successful")
                     setValidate(true);
                     setSessionAvailability(true)
                     navigate('/')

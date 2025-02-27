@@ -16,11 +16,12 @@ import React, { useEffect, useState } from "react";
 import axios from "axios";
 
 
-
-
 function App() {
 
   const [sessionAvailability, setSessionAvailability] = useState(null);
+  const [userPoints, setUserPoints] = useState(null);
+
+
   axios.defaults.withCredentials = true;
 
   useEffect(() => {
@@ -29,7 +30,9 @@ function App() {
 
       try {
         const res = await axios.get('http://localhost:8000/session_check');
+        const resSecond = await axios.get('http://localhost:8000/userPoints');
         setSessionAvailability(res.data.available);
+        setUserPoints(resSecond.data.result.points);
       }
       catch (e) {
         console.log("Error when getting request", e)
@@ -52,7 +55,7 @@ function App() {
 
   return (
     <div>
-      <Navbar sessionAvailability={sessionAvailability} setSessionAvailability={setSessionAvailability} />
+      <Navbar sessionAvailability={sessionAvailability} setSessionAvailability={setSessionAvailability} userPoints={userPoints} />
       <Routes>
         <Route path="/" element={<Home />} />
         <Route path="/food_labels" element={<FoodLabels />} />

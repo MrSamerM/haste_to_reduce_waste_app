@@ -15,6 +15,7 @@ customData=pd.read_csv("chatbotDataset.csv")
 customData=customData.head()
 
 question_tokens=[]
+response_tokens=[]
 stop_words=set(stopwords.words('english'))
 
 for question in customData['Questions']:
@@ -26,6 +27,15 @@ for question in customData['Questions']:
 
 customData['Question_Token']=question_tokens #adds another column into the dataset
 
+for question in customData['Response']:
+
+    question =question.translate(str.maketrans('','',string.punctuation)) #This remove punctuations in the dataset
+    word_tokens=word_tokenize(question.lower())  #This makes the corpus lowercase
+    filtered_stop_word=[each_word for each_word in word_tokens if each_word not in stop_words]  #for each word in the token,keep those not in stop_words
+    response_tokens.append(filtered_stop_word) #append the filtered sentence
+
+customData['Response_Token']=question_tokens #adds another column into the dataset
+
 #Transform, paraphrase each sentence 10 times for accurate result, questions and answers. Do it before tokenization
 #Do not overwrite the old dataset, instead, make a new one, after testing it
 #Vectorize to count the most important or used word, in each sentence
@@ -36,7 +46,6 @@ customData['Question_Token']=question_tokens #adds another column into the datas
 #After testing integrate with react js
 
 print(customData.head())
-
 vectorizer=CountVectorizer()
 
 

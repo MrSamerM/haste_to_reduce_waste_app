@@ -7,7 +7,7 @@ import axios from 'axios';
 // https://stackoverflow.com/questions/34693811/where-do-i-get-a-3-horizontal-lines-symbol-for-my-webpage to get the 3 lines
 // https://www.youtube.com/watch?v=QQlxvj_GKss for responsive nav bar
 
-export default function Navbar({ sessionAvailability, setSessionAvailability }) {
+export default function Navbar({ sessionAvailability, setSessionAvailability, userPoints }) {
 
     const navigate = useNavigate();
 
@@ -60,6 +60,8 @@ export default function Navbar({ sessionAvailability, setSessionAvailability }) 
                             </div>
 
                             <li className='links'><Link onClick={remove}>Sign out</Link></li>
+
+                            <li className='links' id='userPoints'><Link>Points: {userPoints} </Link></li>
                         </>
                         )}
                 </ul>
