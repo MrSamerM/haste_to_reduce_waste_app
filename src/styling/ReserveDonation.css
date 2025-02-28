@@ -4,13 +4,70 @@ body {
     background-color: #E1ECD8;
 }
 
-
-.leaflet-container {
-    height: 450px;
-    width: 600px;
+#reserveDonationTitleDiv {
+    align-items: center;
+    margin: 0 auto 30px auto;
+    margin-bottom: 50px;
+    margin-top: 10px;
 }
 
-.mapPopup {
-    height: 300px;
-    width: 250px;
+#reserveDonationTitle {
+    text-align: center;
+    text-decoration: underline;
+}
+
+.leaflet-container {
+    height: 400px;
+    width: 600px;
+    margin: 0 auto 30px auto;
+}
+
+
+.leaflet-popup-content {
+    text-align: center;
+}
+
+/* 
+chatGPT 28/02/2025
+Prompt:the pop up is hiding merged into the map, but I want it to be visible and big because of the image inside */
+.mapPopup img {
+    max-width: 100%;
+    height: auto;
+    display: block;
+    margin: 0 auto;
+    border-color: black;
+    border-style: solid;
+    border-width: 3px;
+}
+
+.mapPopup p {
+    font-size: medium;
+}
+
+#reserveButton {
+    background-color: lime;
+    color: black;
+    font-size: large;
+    font-family: 'Franklin Gothic Medium', 'Arial Narrow', Arial, sans-serif;
+    margin-top: 2%;
+    border-radius: 5px;
+    border-color: black;
+    border-style: solid;
+    border-width: 3px;
+    cursor: pointer;
+}
+
+.reserveDonationInputs {
+    padding: 5px;
+    margin: 0 auto 30px auto;
+    width: 70%;
+}
+
+/* chatgpt to make the dropdown menue to be over the map. 28/02/2025
+prompt 1: the dropdown menu of the address is being coverd by the map, how can I make it over 
+prompt 2: the first one works, but the plus and negative sign does not get covered in the map
+*/
+#autoCompleteAddress {
+    position: relative;
+    z-index: 9999;
 }

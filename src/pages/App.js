@@ -36,7 +36,7 @@ function App() {
       }
       catch (e) {
         console.log("Error when getting request", e)
-        setSessionAvailability(true);
+        setSessionAvailability(false);
       }
     })
     check();

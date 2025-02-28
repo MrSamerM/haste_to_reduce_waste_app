@@ -5,7 +5,18 @@ import { MapContainer, TileLayer, useMap, Marker, Popup } from 'react-leaflet'
 import 'leaflet/dist/leaflet.css'
 import { Icon } from "leaflet";
 import markerIcon from '../image/marker.png';
+import { GeoapifyGeocoderAutocomplete, GeoapifyContext } from '@geoapify/react-geocoder-autocomplete'
+import '@geoapify/geocoder-autocomplete/styles/minimal.css'
 
+// chatGPT 28/02/2025
+// Prompt: when I change the address I want the position to move, but it isn't.
+const MapUpdater = ({ latitude, longitude }) => {
+    const map = useMap();
+    useEffect(() => {
+        map.setView([latitude, longitude], 13);
+    }, [latitude, longitude, map]); // Runs whenever latitude or longitude changes
+    return null;
+};
 
 // https://react-leaflet.js.org/docs/start-installation/ 19/01/2025
 // https://www.youtube.com/watch?v=jD6813wGdBA&t=442s  received help from video on 19/01/2025
@@ -13,6 +24,9 @@ function ReserveDonation() {
     axios.defaults.withCredentials = true;
 
     const [markers, setMarkers] = useState([]);
+    const [address, setAddress] = useState("");
+    const [longitude, setLongitude] = useState(51.505);
+    const [latitude, setLatitude] = useState(-0.09);
 
     useEffect(() => {
         const processMarkers = async () => {
@@ -31,7 +45,18 @@ function ReserveDonation() {
 
     }, []);
 
-    const position = [51.505, -0.09]
+    const onPlaceSelect = (place) => {
+        if (place && place.properties && place.properties.formatted) {
+            setAddress(place.properties.formatted);
+            setLongitude(place.geometry.coordinates[0]);
+            setLatitude(place.geometry.coordinates[1]);
+
+        }
+    }
+
+    const updatedAddress = (value) => {
+        setAddress(value);
+    }
 
     const customIcon = new Icon({
         // image marker from https://www.iconfinder.com/icons/285659/marker_map_icon 19/01/2025
@@ -56,10 +81,22 @@ function ReserveDonation() {
 
     return (
         <div>
-            ReserveDonation
+            <div id="reserveDonationTitleDiv"><h1 id="reserveDonationTitle">Reserve Donation</h1></div>
+
+            <div className="reserveDonationInputs" id="autoCompleteAddress">
+                <GeoapifyContext apiKey={process.env.REACT_APP_GEOAPIFY_API_KEY}>
+                    <GeoapifyGeocoderAutocomplete id="addressInput" placeholder="Enter address here"
+                        lang='en'
+                        limit={5}
+                        value={address}
+                        onChange={updatedAddress}
+                        placeSelect={onPlaceSelect}
+                    />
+                </GeoapifyContext>
+            </div>
             <br></br>
-            <br></br>
-            <MapContainer center={position} zoom={13} scrollWheelZoom={false}>
+            <MapContainer center={[latitude, longitude]} zoom={13} scrollWheelZoom={false}>
+                <MapUpdater latitude={latitude} longitude={longitude} />
                 <TileLayer
                     attribution='&copy; <a href="https://www.openstreetmap.org/copyright">OpenStreetMap</a> contributors'
                     url="https://{s}.tile.openstreetmap.org/{z}/{x}/{y}.png"
@@ -69,8 +106,8 @@ function ReserveDonation() {
                     <Marker key={index} position={[listOfMarker.latitude, listOfMarker.longitude]} icon={customIcon}>
                         <Popup className="mapPopup" >
                             <img src={listOfMarker.image} /> <br />
-                            {listOfMarker.description} <br />
-                            {listOfMarker.portionSize} <br />
+                            <p>Description: {listOfMarker.description} </p>
+                            <p>Portion Size: {listOfMarker.portionSize}</p>
                             {listOfMarker.reserved === true ? null : <button id="reserveButton" onClick={() => reserveDonation(listOfMarker.id)}>Reserve this donation</button>}
                             {/* used chatgpt for top line, because I had to send the id straight away to the function. Prompt:(My entire code) */}
                         </Popup>
