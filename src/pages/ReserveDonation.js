@@ -25,8 +25,8 @@ function ReserveDonation() {
 
     const [markers, setMarkers] = useState([]);
     const [address, setAddress] = useState("");
-    const [longitude, setLongitude] = useState(51.505);
-    const [latitude, setLatitude] = useState(-0.09);
+    const [longitude, setLongitude] = useState(-0.09);
+    const [latitude, setLatitude] = useState(51.505);
 
     useEffect(() => {
         const processMarkers = async () => {
@@ -50,7 +50,6 @@ function ReserveDonation() {
             setAddress(place.properties.formatted);
             setLongitude(place.geometry.coordinates[0]);
             setLatitude(place.geometry.coordinates[1]);
-
         }
     }
 

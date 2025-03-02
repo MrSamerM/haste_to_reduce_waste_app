@@ -247,6 +247,67 @@ app.get('/allReservedDonations', async (req, res) => {
     }
 })
 
+app.get('/allReceipts', async (req, res) => {
+    try {
+
+        // from chatgpt
+        // prompt: I want to do something. Right now the productid array stores productIDs,but I want it to store the names of the products which is in another table in mongo, how can I fix this 
+        const allReceipts = await Receipt.aggregate([
+            {
+                $match: {
+                    userID: new mongoose.Types.ObjectId(req.session.userID)
+                }
+            },
+            {
+                $lookup: {
+                    from: "products",
+                    localField: "productID",
+                    foreignField: "_id",
+                    as: "productDetails"
+                }
+            },
+            {
+                $project: {
+                    userID: 1,
+                    cost: 1,
+                    address: 1,
+                    productNames: {
+                        $map: {
+                            input: "$productDetails",
+                            as: "product",
+                            in: "$$product.productName"
+                        }
+                    }
+                }
+            }
+        ]);
+
+        res.json({ result: allReceipts });
+
+    } catch (err) {
+        console.log("error", err)
+        res.status(500).json({ message: "database can't get data" })
+    }
+})
+
+app.post('/removeReceipt', async (req, res) => {
+    try {
+        const { receiptID } = req.body
+
+        const findID = await Receipt.findByIdAndDelete(receiptID)
+        await findID.save();
+
+        console.log("Removed Receipt")
+        res.json({ message: "Receipt Removed" });
+
+    } catch (err) {
+        console.log("error", err)
+        res.status(500).json({ message: "database can't post data" })
+    }
+});
+
+
+
 app.get('/userPoints', async (req, res) => {
     try {
         const points = await User.findById(req.session.userID);

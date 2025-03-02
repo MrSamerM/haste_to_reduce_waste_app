@@ -10,6 +10,7 @@ import UpdateDonationDetails from "./UpdateDonationDetails";
 import Signup from "./SignUp";
 import Login from "./Login";
 import Navbar from "./Navbar";
+import Receipt from "./Receipt";
 import '../styling/App.css'
 import { Routes, Route, Navigate } from 'react-router-dom';
 import React, { useEffect, useState } from "react";
@@ -62,6 +63,7 @@ function App() {
         <Route path="/signup" element={sessionAvailability === false ? <Signup setSessionAvailability={setSessionAvailability} /> : <Navigate to={'/'} />} />
         <Route path="/login" element={sessionAvailability === false ? <Login setSessionAvailability={setSessionAvailability} /> : <Navigate to={'/'} />} />
         <Route path="/e_commerce" element={sessionAvailability === true ? <E_Commerce /> : <Navigate to={'/'} />} />
+        <Route path="/receipt" element={sessionAvailability === true ? <Receipt /> : <Navigate to={'/'} />} />
         <Route path="/donate" element={sessionAvailability === true ? <Donate /> : <Navigate to={'/'} />} />
         <Route path="/update_donation" element={sessionAvailability === true ? <UpdateDonation /> : <Navigate to={'/'} />} />
         <Route path="/reserve_donation" element={sessionAvailability === true ? <ReserveDonation /> : <Navigate to={'/'} />} />
