@@ -6,7 +6,7 @@ import numpy as np
 from tensorflow.keras.models import load_model
 import easyocr
 import cv2
-
+from NLP.nlp import genResponse
 
 app = Flask(__name__)
 
@@ -21,6 +21,12 @@ CORS(app, resources={r"/*": {"origins": "http://localhost:3000", "supports_crede
 #     return {"message": "Hello from backend"}
 
 # Fix this
+
+
+@app.route("/response", methods=['POST'])
+def response(text):
+    response_to_question=genResponse(text)
+    return jsonify({"response":response_to_question})
 
 @app.route("/text", methods=['POST'])
 def text():

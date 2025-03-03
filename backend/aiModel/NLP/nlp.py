@@ -4,12 +4,10 @@ from nltk.corpus import stopwords
 from sklearn.feature_extraction.text import CountVectorizer
 from sklearn.linear_model import LogisticRegression
 from sklearn.metrics.pairwise import cosine_similarity
-from transformers import AutoTokenizer, AutoModelForSeq2SeqLM
-from parrot import Parrot
-import torch
 import string
 import random
 import numpy as np
+import os
 import nltk
 nltk.download('punkt_tab')
 nltk.download('stopwords')
@@ -19,10 +17,12 @@ nltk.download('stopwords')
 # https://kantschants.com/paraphrasing-with-transformer-t5-bart-pegasus#heading-2-t5-text-to-text-transfer-transformer 28/02/2025
 # https://www.eatingwell.com/article/286048/the-best-way-to-store-fruits-and-veggies/ data from here
 
-# chatGPT to formulate the for loop to itterate throgh all of the header and appending to the csv
-# prompt:I want it to append a new row with paraphased question, and response, and the label should be the label is parpahsed from. The thing is this code only paraphaes question, and does not append what can I do 02/03/2025
+# chatGPT to change the way to read the csv file from an external python file
+# prompt:import sys sys.path.append("./NLP")from nlp import * would this code be correct based on the image (Screen shot), if my file is in NLP, and the file is called nlp.py 03/03/2025
 
-customData=pd.read_csv("chatbotDataset.csv")
+script_dir = os.path.dirname(os.path.abspath(__file__))
+dataset_path = os.path.join(script_dir, "chatbotDataset.csv")
+customData = pd.read_csv(dataset_path)
 
 question_tokens=[]
 response_tokens=[]
@@ -70,8 +70,8 @@ def genResponse(input):
     return best_response
 
     
-while True:
-    user_input = input("You: ")
-    if user_input.lower() == "exit":
-        break
-    print("Bot:", genResponse(user_input))
+# while True:
+#     user_input = input("You: ")
+#     if user_input.lower() == "exit":
+#         break
+#     print("Bot:", genResponse(user_input))
