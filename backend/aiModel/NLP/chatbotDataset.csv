@@ -7,17 +7,145 @@ Why should I donate?,Donation,"Anything regarding donations, is specified in the
 What does donating do?,Donation,"Anything regarding donations, is specified in the donation page. Sign up, or Login to see more!"
 Does donating cost money?,Donation,"Anything regarding donations, is specified in the donation page. Sign up, or Login to see more!"
 "I have food donations, what should I do?",Donation,"Anything regarding donations, is specified in the donation page. Sign up, or Login to see more!"
+What can I do with donations,Donation,"Anything regarding donations, is specified in the donation page. Sign up, or Login to see more!"
+donation,Donation,"Anything regarding donations, is specified in the donation page. Sign up, or Login to see more!"
+tell me more about donations,Donation,"Anything regarding donations, is specified in the donation page. Sign up, or Login to see more!"
+where are your donations going to,Donation,"Anything regarding donations, is specified in the donation page. Sign up, or Login to see more!"
+how are donations managed,Donation,"Anything regarding donations, is specified in the donation page. Sign up, or Login to see more!"
+how are you dealing with donations,Donation,"Anything regarding donations, is specified in the donation page. Sign up, or Login to see more!"
+what does a donation look like,Donation,"Anything regarding donations, is specified in the donation page. Sign up, or Login to see more!"
+how should a donation be managed,Donation,"Anything regarding donations, is specified in the donation page. Sign up, or Login to see more!"
+how many donations has there been,Donation,"Anything regarding donations, is specified in the donation page. Sign up, or Login to see more!"
+Where can I donate?,Donation,"Anything regarding donations, is specified in the donation page. Sign up, or Login to see more!"
+where to donate,Donation,"Anything regarding donations, is specified in the donation page. Sign up, or Login to see more!"
+can you help me to donate,Donation,"Anything regarding donations, is specified in the donation page. Sign up, or Login to see more!"
+can I help donate,Donation,"Anything regarding donations, is specified in the donation page. Sign up, or Login to see more!"
+can I donate,Donation,"Anything regarding donations, is specified in the donation page. Sign up, or Login to see more!"
+help me donate,Donation,"Anything regarding donations, is specified in the donation page. Sign up, or Login to see more!"
+I need help donating,Donation,"Anything regarding donations, is specified in the donation page. Sign up, or Login to see more!"
+I need help to donate,Donation,"Anything regarding donations, is specified in the donation page. Sign up, or Login to see more!"
+I need help to know where to donate,Donation,"Anything regarding donations, is specified in the donation page. Sign up, or Login to see more!"
+I need help on where to donate,Donation,"Anything regarding donations, is specified in the donation page. Sign up, or Login to see more!"
+what is donating,Donation,"Anything regarding donations, is specified in the donation page. Sign up, or Login to see more!"
+tell me about donating,Donation,"Anything regarding donations, is specified in the donation page. Sign up, or Login to see more!"
+tell me about donations,Donation,"Anything regarding donations, is specified in the donation page. Sign up, or Login to see more!"
+Hi what is your name,Greet,"Hi My name is Haste, can I help you with anything?"
+what is your name,Greet,"My name is Haste, can I help you with anything?"
+name,Greet,"My name is Haste, can I help you with anything?"
+who are you,Greet,"My name is Haste, can I help you with anything?"
 "Hello, can you help me",Greet,"Hello! my name is Haste, how can I help you?"
-Hi what is your name,Greet,"My name is Haste, can I help you with anything?"
-Hey what is your name,Greet,"My name is Haste, can I help you with anything?"
-"Wo can I donate?","Donation","Anything about donations is specified on the donation page . Sign up or Login to see more!"
-"How can I donate?","Donation","Anything about donations is specified on the donation page . Sign up or Login to see more!"
-"When can I donate?","Donation","Anything about donations is specified on the donation page . Sign up or Login to see more!"
-"Who can I donate to?","Donation","Anything about donations is specified on the donation page . Sign up or Login to see more!"
-"Why should I donate?","Donation","Anything about donations is specified on the donation page . Sign up or Login to see more!"
-"What does donating do?","Donation","Anything about donations is specified on the donation page . Sign up or Login to see more!"
-"Does donating money cost money?","Donation","Anything about donations is specified on the donation page . Sign up or Login to see more!"
-"What should I do if I have food donations?","Donation","Anything about donations is specified on the donation page . Sign up or Login to see more!"
-"Hello, can you help me?","Greet","Hello! My name is Haste, how can I help you?"
-"Hi what is your name?","Greet","My name is Haste, can I help you with anything?"
-"Hey what is your name?","Greet","My name is Haste, can I help you with anything?"
+whats up,Greet,not much. Do you need help
+hello,Greet,hello. Do you need help
+hey,Greet,hey. Do you need help
+"Hello, can you help me",Greet,"Hello! my name is Haste, how can I help you?"
+Haste?,Greet,Do you need help?
+where are you haste,Greet,Here. How can I help you.
+hello haste,Greet,hello. Do you need help
+hey haste ,Greet,hey. Do you need help
+whats up haste,Greet,not much. Do you need help
+hi haste,Greet,Hi how can I help you
+what are you,Greet,I am a chatbot used to educate you on prevention of food waste
+can you help me,Greet,Hi how can I help you
+can you assist me,Greet,Hi how can I help you
+I need your help,Greet,Hi how can I help you
+Tell me about use by date,Labeling,"If you want more information about labels, click the label button on the nav bar to learn more"
+Tell me about best by date,Labeling,"If you want more information about labels, click the label button on the nav bar to learn more"
+Tell me about best before date,Labeling,"If you want more information about labels, click the label button on the nav bar to learn more"
+Tell me about expiry date,Labeling,"If you want more information about labels, click the label button on the nav bar to learn more"
+best before date,Labeling,"If you want more information about labels, click the label button on the nav bar to learn more"
+best by date,Labeling,"If you want more information about labels, click the label button on the nav bar to learn more"
+expiry date,Labeling,"If you want more information about labels, click the label button on the nav bar to learn more"
+use by date,Labeling,"If you want more information about labels, click the label button on the nav bar to learn more"
+labeling,Labeling,"If you want more information about labels, click the label button on the nav bar to learn more"
+labels,Labeling,"If you want more information about labels, click the label button on the nav bar to learn more"
+what are the labels,Labeling,"If you want more information about labels, click the label button on the nav bar to learn more"
+tell me more about labels,Labeling,"If you want more information about labels, click the label button on the nav bar to learn more"
+what are the labels on food products,Labeling,"If you want more information about labels, click the label button on the nav bar to learn more"
+what is a use by date,Labeling,"If you want more information about labels, click the label button on the nav bar to learn more"
+what is a best by date,Labeling,"If you want more information about labels, click the label button on the nav bar to learn more"
+what is a best before date,Labeling,"If you want more information about labels, click the label button on the nav bar to learn more"
+what is a expiry date,Labeling,"If you want more information about labels, click the label button on the nav bar to learn more"
+what are best before dates,Labeling,"If you want more information about labels, click the label button on the nav bar to learn more"
+what are best by dates,Labeling,"If you want more information about labels, click the label button on the nav bar to learn more"
+what are expiry dates,Labeling,"If you want more information about labels, click the label button on the nav bar to learn more"
+what are use by dates,Labeling,"If you want more information about labels, click the label button on the nav bar to learn more"
+where are dates located,Labeling,"If you want more information about labels, click the label button on the nav bar to learn more"
+How can I store bananas?,Storage,"Bananas should normally be stored in room temperature, so out in a bowl is perfect"
+where should I store bananas?,Storage,"Bananas should normally be stored in room temperature, so out in a bowl is perfect"
+bananas storage?,Storage,"Bananas should normally be stored in room temperature, so out in a bowl is perfect"
+where should a banana be stored?,Storage,"Bananas should normally be stored in room temperature, so out in a bowl is perfect"
+How can I store basil?,Storage,"Basil should normally be stored in room temperature, so out in a container is best"
+where should I store basil?,Storage,"Basil should normally be stored in room temperature, so out in a container is best"
+basil storage?,Storage,"Basil should normally be stored in room temperature, so out in a container is best"
+where should basil be stored?,Storage,"Basil should normally be stored in room temperature, so out in a container is best"
+How can I store cucumbers?,Storage,"Cucumbers should normally be stored in room temperature, so out in a container is best"
+where should I store cucumbers?,Storage,"Cucumbers should normally be stored in room temperature, so out in a container is best"
+cucumber storage?,Storage,"Cucumbers should normally be stored in room temperature, so out in a container is best"
+where should a cucumber be stored?,Storage,"Cucumbers should normally be stored in room temperature, so out in a container is best"
+How can I store eggplants?,Storage,"Eggplants should normally be stored in room temperature, so out in a container is best"
+where should I store eggplants?,Storage,"Eggplants should normally be stored in room temperature, so out in a container is best"
+eggplant storage?,Storage,"Eggplants should normally be stored in room temperature, so out in a container is best"
+where should a eggplant be stored?,Storage,"Eggplants should normally be stored in room temperature, so out in a container is best"
+How can I store garlic?,Storage,"garlic should normally be stored in room temperature, so  in a container is best and store alone"
+where should I store garlic?,Storage,
+garlic storage?,Storage,
+where should garlic be stored?,Storage,
+How can I store grapefruit?,Storage,
+where should I store basil?,Storage,
+basil storage?,Storage,
+where should basil be stored?,Storage,
+How can I store greenbeans?,Storage,
+where should I store basil?,Storage,
+basil storage?,Storage,
+where should basil be stored?,Storage,
+How can I store lemons?,Storage,
+where should I store basil?,Storage,
+basil storage?,Storage,
+where should basil be stored?,Storage,
+How can I store onions?,Storage,
+where should I store basil?,Storage,
+basil storage?,Storage,
+where should basil be stored?,Storage,
+,Storage,
+,Disposal,
+,Disposal,
+,Disposal,
+,Disposal,
+,Disposal,
+,Disposal,
+,Disposal,
+,Disposal,
+,Disposal,
+,Disposal,
+,Disposal,
+,Disposal,
+,Disposal,
+,Disposal,
+,Disposal,
+,Disposal,
+,Disposal,
+,Disposal,
+,Disposal,
+,Disposal,
+,Disposal,
+,Disposal,
+,Disposal,
+,Disposal,
+,Disposal,
+,Disposal,
+,Disposal,
+,Disposal,
+,Disposal,
+,Disposal,
+,Disposal,
+,Disposal,
+,Disposal,
+,Disposal,
+,Disposal,
+,Disposal,
+,Disposal,
+,Disposal,
+,Disposal,
+,Disposal,
+,Disposal,
+,Disposal,
