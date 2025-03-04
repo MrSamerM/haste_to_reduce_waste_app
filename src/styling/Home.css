@@ -19,7 +19,6 @@ body {
 #overviewTitle {
     text-align: center;
     text-decoration: underline;
-    float: left;
 }
 
 .overviewBox {
@@ -27,7 +26,7 @@ body {
     flex-direction: row;
     background-color: #94EF7E;
     width: 99.199%;
-    margin: 0 auto 60px auto;
+    margin: 0 auto 0.4px auto;
     border-color: black;
     border-style: solid;
     border-width: 5px;
@@ -35,57 +34,60 @@ body {
 
 #overviewInformationBox {
     display: flex;
-    flex-direction: column;
+    flex-direction: row;
     align-items: flex-start;
     flex: 2.8;
 }
 
-
-.receiptsDetails {
+.overviewDetails {
     display: flex;
     align-items: center;
-    width: 100%;
+    width: 50%;
     margin-bottom: 30px;
     flex-direction: column;
 }
 
-.receiptsDetailsInputLabels {
-    margin-right: 20px;
-    text-align: right;
-    width: 200px;
-    font-weight: bold;
+#overviewTitleDiv {
+    margin: 0 auto auto 0.5%;
 }
 
-
-#overviewInformationBox .receiptsDetailsInputs {
-    padding: 5px;
-    margin: 5px;
-    width: 100%;
+.overviewParagraphs {
+    font-size: medium;
+    font-family: sans-serif;
+    line-height: 230%;
 }
 
-.receiptsSideInformation {
+#overviewParagraphsDiv {
+    margin: 5% auto auto 10%;
+}
+
+.sideImages {
     display: flex;
     flex-direction: column;
+    width: 50%;
     align-items: center;
-    justify-content: center;
-    flex: 0.8;
 }
 
-.receiptsSideInformationLabels {
-    text-align: center;
-    font-weight: bold;
+
+.Responses {
+    display: flex;
+    flex-direction: column;
+    width: 50%;
+    align-items: center;
 }
 
-.receiptsSideInformation button {
-    cursor: pointer;
-    background: none;
-    border: none;
+.Questions {
+    display: flex;
+    align-items: center;
+    width: 50%;
+    margin-bottom: 30px;
+    flex-direction: column;
 }
 
-.receiptsSideInformation button:hover {
-    background-color: yellow;
-}
 
 .xIcon {
-    font-size: 80px;
+    height: 200px;
+    width: 300px;
+    margin-top: 1%;
+    margin-bottom: 1%;
 }

@@ -1,7 +1,6 @@
 import React from "react";
 import '../styling/FoodLabels.css'
 import { useState, useEffect, useRef } from "react";
-// import Tesseract from 'tesseract.js';
 import axios from "axios";
 
 import England from '../image/England.PNG'
