@@ -2,13 +2,29 @@ import React, { useState } from "react";
 import '../styling/Home.css'
 import foodWaste from '../image/foodWaste.jpg';
 import foodWaste2 from '../image/foodWaste2.jpg';
+import axios from "axios";
 
 function Home() {
 
     const [input, setInput] = useState(null)
-    const [question, setQuestion] = useState(["Hello"])
-    const [response, setResponse] = useState(["Hi"])
+    const [question, setQuestion] = useState([])
+    const [response, setResponse] = useState([])
 
+    const addQuestionAndResponse = async () => {
+
+        setQuestion((prevQuestion) => [...prevQuestion, input])
+        setInput("")
+        const data = {
+            input: input
+        }
+        try {
+            const response = await axios.post("http://localhost:5000/response", data, { withCredentials: true });
+            console.log(response.data.response);
+            setResponse((prevQuestion) => [...prevQuestion, response.data.response])
+        } catch (error) {
+            console.error("Can't send the file", error);
+        }
+    }
     return (
         <>
             <div id='homeTitleDiv'>
@@ -51,7 +67,7 @@ function Home() {
                             </div>
                         ))}
                         <input type="text" id="input" placeholder="Input question" value={input} onChange={(evt) => setInput(evt.target.value)} />
-                        <button>Submit</button>
+                        <button id="submitQuestion" onClick={addQuestionAndResponse}>Submit</button>
                     </div>
                     <div className="Responses">
                         {response.map((response, index) => (

@@ -24,8 +24,15 @@ CORS(app, resources={r"/*": {"origins": "http://localhost:3000", "supports_crede
 
 
 @app.route("/response", methods=['POST'])
-def response(text):
-    response_to_question=genResponse(text)
+def response():
+
+# two lines underneath received from chatGPT
+#prompt: (frontend function) this is the frontend, but how do I get the input from python (python function)
+    data = request.get_json()
+    user_input = data.get("input", "")
+
+
+    response_to_question=genResponse(user_input)
     return jsonify({"response":response_to_question})
 
 @app.route("/text", methods=['POST'])
