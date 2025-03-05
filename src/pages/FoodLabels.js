@@ -125,21 +125,41 @@ function FoodLabels() {
             else if (parts[1].toUpperCase() === "DEC") {
                 parts[1] = 11
             }
-            const newDate = new Date(parts[1] + "/" + parts[0] + "/" + parts[2])
+
+            const day = parseInt(parts[0], 10);
+            const month = parseInt(parts[1], 10);
+
+            // bottom 4 lines from chatGPT to differentiate between 2 and 4 digits
+            // prompt 1: no that is not my question. the last regex is {2,4} meaning it could be 18, or 2018, how can I differentiate them.
+            // prompt 2:assume that it is always 20xx
+
+            const yearString = parts[2];
+            const year = parseInt(yearString, 10);
+            const fullYear = yearString.length === 2 ? 2000 + year : year;
+            const newDate = new Date(fullYear, month, day);
+
             return newDate.getTime();
         }
 
         else if (date.match(/\d{2}\/\d{2}\/\d{2,4}/)) {
             const parts = date.split("/");
-            // this changes date to mm/dd/yy
-            const newDate = new Date(parts[1] + "/" + parts[0] + "/" + parts[2]);
+            const day = parseInt(parts[0], 10);
+            const month = parseInt(parts[1], 10) - 1;
+            const yearString = parts[2];
+            const year = parseInt(yearString, 10);
+            const fullYear = yearString.length === 2 ? 2000 + year : year;
+            const newDate = new Date(fullYear, month, day);
             return newDate.getTime();
         }
 
         else if (date.match(/\d{2}\-\d{2}\-\d{2,4}/)) {
             const parts = date.split("-");
-            // this changes date to mm/dd/yy
-            const newDate = new Date(parts[1] + "/" + parts[0] - 1 + "/" + parts[2]);
+            const day = parseInt(parts[0], 10);
+            const month = parseInt(parts[1], 10) - 1;
+            const yearString = parts[2];
+            const year = parseInt(yearString, 10);
+            const fullYear = yearString.length === 2 ? 2000 + year : year;
+            const newDate = new Date(fullYear, month, day);
             return newDate.getTime();
         }
 
@@ -150,9 +170,16 @@ function FoodLabels() {
 
         else if (date.match(/\d{6}/)) {
             const parts = date.match(/.{2}/g);
-            // this changes date to mm/dd/yy
-            const newDate = new Date(parts[1] + "/" + parts[0] + "/" + parts[2]);
+            const day = parseInt(parts[0], 10);
+            const month = parseInt(parts[1], 10) - 1;
+            const yearString = parts[2];
+            const year = parseInt(yearString, 10);
+            const fullYear = yearString.length === 2 ? 2000 + year : year;
+            const newDate = new Date(fullYear, month, day);
             return newDate.getTime();
+        }
+        else {
+            return null
         }
 
     }
@@ -207,16 +234,16 @@ function FoodLabels() {
             // main prompt: why is this wrong (my code)
             const day = parseInt(parts[0], 10);
             const month = parseInt(parts[1], 10);
-            const year = parseInt(parts[2], 10);
-
-            const newDate = new Date(year, month, day);
+            const yearString = parts[2];
+            const year = parseInt(yearString, 10);
+            const fullYear = yearString.length === 2 ? 2000 + year : year;
+            const newDate = new Date(fullYear, month, day);
 
             return `${String(newDate.getDate()).padStart(2, '0')}/${String(newDate.getMonth() + 1).padStart(2, '0')}/${newDate.getFullYear()}`;
         }
 
         else if (date.match(/\d{2}\/\d{2}\/\d{2,4}/)) {
             const parts = date.split("/");
-            // this changes date to mm/dd/yy
             const day = parseInt(parts[0], 10);
             const month = parseInt(parts[1], 10) - 1;
             const yearString = parts[2];
@@ -229,32 +256,28 @@ function FoodLabels() {
 
         else if (date.match(/\d{2}\-\d{2}\-\d{2,4}/)) {
             const parts = date.split("-");
-            // this changes date to mm/dd/yy
             const day = parseInt(parts[0], 10);
             const month = parseInt(parts[1], 10) - 1;
-            const year = parseInt(parts[2], 10);
-            const fullYear = year < 100 ? 2000 + year : year;
+            const yearString = parts[2];
+            const year = parseInt(yearString, 10);
+            const fullYear = yearString.length === 2 ? 2000 + year : year;
             const newDate = new Date(fullYear, month, day);
 
             return `${String(newDate.getDate()).padStart(2, '0')}/${String(newDate.getMonth() + 1).padStart(2, '0')}/${newDate.getFullYear()}`;
         }
 
-        // const parts=date.match got from chatGPT 
-        // prompt1: string.split () but 2 charcters
-        // prompt2: No i mean every two characters it splits
-        // prompt3:in js. there is a split method
-
         else if (date.match(/\d{6}/)) {
             const parts = date.match(/.{2}/g);
-            // this changes date to mm/dd/yy
             const day = parseInt(parts[0], 10);
             const month = parseInt(parts[1], 10) - 1;
-            const year = parseInt(parts[2], 10);
-            const fullYear = year < 100 ? 2000 + year : year;
+            const yearString = parts[2];
+            const year = parseInt(yearString, 10);
+            const fullYear = yearString.length === 2 ? 2000 + year : year;
             const newDate = new Date(fullYear, month, day);
-
-
             return `${String(newDate.getDate()).padStart(2, '0')}/${String(newDate.getMonth() + 1).padStart(2, '0')}/${newDate.getFullYear()}`;
+        }
+        else {
+            return null
         }
 
     }
