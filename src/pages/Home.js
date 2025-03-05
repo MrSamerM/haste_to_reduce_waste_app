@@ -69,8 +69,13 @@ function Home() {
                         <div id='overviewTitleDiv'><h1 id="overviewTitle">Haste Bot</h1></div>
                         {chatbotInformation === false ?
                             question.map((question, index) => (
-                                <div id="QuestionBox" key={index}>
-                                    <p>{question}</p>
+                                <div id="questionBox" key={index}>
+                                    <div id="youBubble">
+                                        <p>YOU</p>
+                                    </div>
+                                    <div id="typeQuestion">
+                                        <p>{question}</p>
+                                    </div>
                                 </div>
                             ))
                             :
@@ -88,8 +93,13 @@ function Home() {
                     <div className="Responses">
                         {chatbotInformation === false ?
                             response.map((response, index) => (
-                                <div id="ResponseBox" key={index}>
-                                    <p>{response}</p>
+                                <div id="responseBox" key={index}>
+                                    <div id="hasteBubble">
+                                        <p>HASTE</p>
+                                    </div>
+                                    <div id="responseSent">
+                                        <p>{response}</p>
+                                    </div>
                                 </div>
                             )) :
                             <div id="noQuestionBoxResponse">

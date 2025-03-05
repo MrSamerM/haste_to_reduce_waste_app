@@ -87,8 +87,8 @@ body {
 /* used w3school to alling in the center https://www.w3schools.com/css/css_align.asp 04/03/2025
 section: Center Vertically - Using line-height  */
 
-#QuestionBox {
-    width: 400px;
+#questionBox {
+    width: 350px;
     min-height: 80px;
     line-height: 80px;
     background-color: lime;
@@ -96,22 +96,15 @@ section: Center Vertically - Using line-height  */
     border-color: black;
     border-style: solid;
     border-width: 5px;
-    margin: 0 0 10% auto;
+    margin: 0 8% 25% auto;
     text-align: center;
-
     /* bottom 2 lines from chatGPT 04/03/2025
     Pompt: (my code) but the thing is, if their is a paragraph with a very long word, it will extedn out of the div. how can I fix that */
     overflow-wrap: break-word;
     word-break: break-word;
 }
 
-#QuestionBox p {
-    line-height: 1.5;
-    display: inline-block;
-    vertical-align: middle;
-}
-
-#ResponseBox {
+#responseBox {
     width: 400px;
     min-height: 80px;
     line-height: 80px;
@@ -120,17 +113,47 @@ section: Center Vertically - Using line-height  */
     border-color: black;
     border-style: solid;
     border-width: 5px;
-    margin: 20% 0 auto 0;
+    margin: 27% auto auto 8%;
     overflow-wrap: break-word;
     word-break: break-word;
     text-align: center;
 }
 
-#ResponseBox p {
+#responseBox p {
     line-height: 1.5;
     display: inline-block;
     vertical-align: middle;
 }
+
+#responseSent {
+    width: 350px;
+    min-height: 80px;
+    line-height: 80px;
+    background-color: rgb(0, 225, 254);
+    margin: 0 0 10% auto;
+    text-align: center;
+    overflow-wrap: break-word;
+    word-break: break-word;
+}
+
+#typeQuestion {
+    width: 350px;
+    min-height: 80px;
+    line-height: 80px;
+    background-color: lime;
+    margin: 0 0 10% auto;
+    text-align: center;
+    overflow-wrap: break-word;
+    word-break: break-word;
+}
+
+#typeQuestion p,
+#responseSent p {
+    line-height: 1.5;
+    display: inline-block;
+    vertical-align: middle;
+}
+
 
 #noQuestionBox {
     width: 400px;
@@ -192,4 +215,56 @@ section: Center Vertically - Using line-height  */
     font-size: large;
     text-align: center;
     cursor: pointer;
+}
+
+/* https://www.geeksforgeeks.org/how-to-create-a-bouncing-bubble-effect-using-css/ 05/03/2025*/
+@keyframes animate {
+    0% {
+        transform: translateY(4px);
+    }
+
+    50% {
+        transform: translateY(0px);
+    }
+
+    100% {
+        transform: translateY(4px);
+    }
+}
+
+#youBubble {
+    border-radius: 100%;
+    background-color: lime;
+    border-color: black;
+    border-style: solid;
+    border-width: 5px;
+    width: 60px;
+    height: 50px;
+    line-height: 50px;
+    text-align: center;
+    margin: 1% 1% auto auto;
+    animation: animate 1s ease-in-out infinite;
+
+}
+
+#hasteBubble {
+    border-radius: 100%;
+    background-color: rgb(0, 225, 254);
+    border-color: black;
+    border-style: solid;
+    border-width: 5px;
+    width: 60px;
+    height: 50px;
+    line-height: 50px;
+    text-align: center;
+    margin: 1% auto auto 1%;
+    animation: animate 1s ease-in-out infinite;
+}
+
+#youBubble p,
+#hasteBubble p {
+    line-height: 1.5;
+    display: inline-block;
+    vertical-align: middle;
+    font-weight: bold;
 }
