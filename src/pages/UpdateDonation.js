@@ -1,7 +1,7 @@
 import React, { useEffect, useState } from "react";
 import '../styling/UpdateDonation.css'
 import axios from "axios";
-import { Link, useNavigate } from "react-router-dom";
+import { useNavigate } from "react-router-dom";
 
 function UpdateDonation() {
 
@@ -35,6 +35,7 @@ function UpdateDonation() {
         }
         try {
             await axios.post('http://localhost:8000/removeDonation', data);
+            window.location.reload();
 
         } catch (err) {
             console.log("Error", err)

@@ -39,6 +39,7 @@ function Receipt() {
 
         try {
             await axios.post('http://localhost:8000/removeReceipt', data)
+            window.location.reload()
 
         } catch (err) {
             console.log("Error", err)

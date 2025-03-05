@@ -331,6 +331,9 @@ app.post('/purchase', async (req, res) => {
                 address: address
             }
         )
+
+        const findUser = await User.findByIdAndUpdate(req.session.userID, { $inc: { points: -totalAmount } })
+        await findUser.save();
         await registerReceipt.save()
         res.json({ message: "Purchased" })
 

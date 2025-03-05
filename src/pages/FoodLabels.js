@@ -18,10 +18,9 @@ function FoodLabels() {
 
     const [file, setFile] = useState("");
     const [fileURL, setFileURL] = useState("");
-    const [disableScanner, setDisableScanner] = useState(true);
+    // const [disableScanner, setDisableScanner] = useState(true);
     const [baseSixtyFour, setBaseSixtyFour] = useState("");
     const [text, setText] = useState("");
-    const [recievedString, setRecievedString] = useState("");
     const [education, setEducation] = useState(false);
     const [educationState, setEducationState] = useState(0);
     const [displayScore, setDisplayScore] = useState(false);
@@ -59,7 +58,6 @@ function FoodLabels() {
 
     useEffect(() => {
         if (file.type === "image/png" || file.type === 'image/jpeg' || file.type === 'image/gif' || file.type === 'image/jpg') {
-            setDisableScanner(false);
             console.log("true");
 
             const base = new FileReader();
@@ -73,7 +71,6 @@ function FoodLabels() {
 
         }
         else {
-            setDisableScanner(true);
             console.log("false");
             console.log(file);
         }
@@ -222,9 +219,10 @@ function FoodLabels() {
             // this changes date to mm/dd/yy
             const day = parseInt(parts[0], 10);
             const month = parseInt(parts[1], 10) - 1;
-            const year = parseInt(parts[2], 10);
-
-            const newDate = new Date(year, month, day);
+            const yearString = parts[2];
+            const year = parseInt(yearString, 10);
+            const fullYear = yearString.length === 2 ? 2000 + year : year;
+            const newDate = new Date(fullYear, month, day);
 
             return `${String(newDate.getDate()).padStart(2, '0')}/${String(newDate.getMonth() + 1).padStart(2, '0')}/${newDate.getFullYear()}`;
         }
@@ -235,8 +233,8 @@ function FoodLabels() {
             const day = parseInt(parts[0], 10);
             const month = parseInt(parts[1], 10) - 1;
             const year = parseInt(parts[2], 10);
-
-            const newDate = new Date(year, month, day);
+            const fullYear = year < 100 ? 2000 + year : year;
+            const newDate = new Date(fullYear, month, day);
 
             return `${String(newDate.getDate()).padStart(2, '0')}/${String(newDate.getMonth() + 1).padStart(2, '0')}/${newDate.getFullYear()}`;
         }
@@ -252,8 +250,9 @@ function FoodLabels() {
             const day = parseInt(parts[0], 10);
             const month = parseInt(parts[1], 10) - 1;
             const year = parseInt(parts[2], 10);
+            const fullYear = year < 100 ? 2000 + year : year;
+            const newDate = new Date(fullYear, month, day);
 
-            const newDate = new Date(year, month, day);
 
             return `${String(newDate.getDate()).padStart(2, '0')}/${String(newDate.getMonth() + 1).padStart(2, '0')}/${newDate.getFullYear()}`;
         }
@@ -264,235 +263,242 @@ function FoodLabels() {
 
     const submit = async (event) => {
         event.preventDefault();
-        const formData = new FormData();
-        formData.append("file", file);
 
-        try {
-            const response = await axios.post("http://localhost:5000/text", formData, {
-                headers: {
-                    "Content-Type": "multipart/form-data",
-                },
-                withCredentials: true,
-            });
+        if (!file) {
+            alert("You must add a label to recieve a response")
+        }
+        else {
 
-            // https://stackoverflow.com/questions/65461724/how-can-i-remove-commas-or-whatever-from-within-a-string answered by munerik 30/01/2025
+            const formData = new FormData();
+            formData.append("file", file);
 
-            let result = response.data.text;
-            console.log(result);
+            try {
+                const response = await axios.post("http://localhost:5000/text", formData, {
+                    headers: {
+                        "Content-Type": "multipart/form-data",
+                    },
+                    withCredentials: true,
+                });
 
-            // Used chatGPT for bottom function 
-            // Main Prompts 1:I want this for loop to loop through a array with strings. If it finds 'by', and the next is 'before' or vise versa, then put it in front. For example [hello, very, best, by] => will be [best, by, hello, very]. I want to do this with use by. However I can't because both best by, and use by have by in it. what should I do (My code)
-            //Main Prompt 2: No you do not understand. I need to try and find the pairs either Best and By || By and Best || Best and Before || Before and Best || Use and By || By and Use, when these pairs are found, it does not mean they are next to each other, they could be very far a part, if they are found in the same array then I need to put them into the front
+                // https://stackoverflow.com/questions/65461724/how-can-i-remove-commas-or-whatever-from-within-a-string answered by munerik 30/01/2025
 
-            result = result.map(word => word.replace(/[^a-zA-Z0-9\s]/g, "").toUpperCase());
+                let result = response.data.text;
+                console.log(result);
 
-            const targetPairs = [
-                ["BY", "BEST"],
-                ["BY", "USE"],
-                ["BEST", "BY"],
-                ["BEST", "USE"],
-                ["USE", "BY"],
-                ["USE", "BEST"],
-                ["BEFORE", "BEST"],
-                ["BEST", "BEFORE"]
-            ];
+                // Used chatGPT for bottom function 
+                // Main Prompts 1:I want this for loop to loop through a array with strings. If it finds 'by', and the next is 'before' or vise versa, then put it in front. For example [hello, very, best, by] => will be [best, by, hello, very]. I want to do this with use by. However I can't because both best by, and use by have by in it. what should I do (My code)
+                //Main Prompt 2: No you do not understand. I need to try and find the pairs either Best and By || By and Best || Best and Before || Before and Best || Use and By || By and Use, when these pairs are found, it does not mean they are next to each other, they could be very far a part, if they are found in the same array then I need to put them into the front
 
-            let pairs = [];
+                result = result.map(word => word.replace(/[^a-zA-Z0-9\s\/]/g, "").toUpperCase());
 
-            for (let i = 0; i < targetPairs.length; i++) {
-                let pair = targetPairs[i];
-                let firstWord = pair[0];
-                let secondWord = pair[1];
+                const targetPairs = [
+                    ["BY", "BEST"],
+                    ["BY", "USE"],
+                    ["BEST", "BY"],
+                    ["BEST", "USE"],
+                    ["USE", "BY"],
+                    ["USE", "BEST"],
+                    ["BEFORE", "BEST"],
+                    ["BEST", "BEFORE"]
+                ];
 
-                let firstIndex = result.indexOf(firstWord);
-                let secondIndex = result.indexOf(secondWord, firstIndex + 1);
+                let pairs = [];
 
-                if (firstIndex !== -1 && secondIndex !== -1) {
-                    pairs.push([firstWord, secondWord]);
+                for (let i = 0; i < targetPairs.length; i++) {
+                    let pair = targetPairs[i];
+                    let firstWord = pair[0];
+                    let secondWord = pair[1];
 
-                    result.splice(secondIndex, 1);
-                    result.splice(firstIndex, 1);
+                    let firstIndex = result.indexOf(firstWord);
+                    let secondIndex = result.indexOf(secondWord, firstIndex + 1);
+
+                    if (firstIndex !== -1 && secondIndex !== -1) {
+                        pairs.push([firstWord, secondWord]);
+
+                        result.splice(secondIndex, 1);
+                        result.splice(firstIndex, 1);
+                    }
                 }
-            }
 
-            result = [...pairs.flat(), ...result];
+                result = [...pairs.flat(), ...result];
 
-            console.log(result);
-
-
-            if ((result[0] === "BEFORE" && result[1] === "BEST" ||
-                result[0] === "BEST" && result[1] === "BEFORE")) {
-                const newString = "Best Before";
-                result.splice(0, 2);
-                result.unshift(newString);
-                console.log(newString)
-                console.log(result);
-            }
-            else if ((result[0] === "BY" && result[1] === "BEST" ||
-                result[0] === "BEST" && result[1] === "BY")) {
-
-                const newString = "Best By";
-                result.splice(0, 2);
-                result.unshift(newString);
-                console.log(newString)
                 console.log(result);
 
-            }
 
-            else if ((result[0] === "USE" && result[1] === "BY") ||
-                (result[0] === "BY" && result[1] === "USE")) {
-                const newString = "Use By";
-                result.splice(0, 2);
-                result.unshift(newString);
-                console.log(newString)
-                console.log(result);
-            }
+                if ((result[0] === "BEFORE" && result[1] === "BEST" ||
+                    result[0] === "BEST" && result[1] === "BEFORE")) {
+                    const newString = "Best Before";
+                    result.splice(0, 2);
+                    result.unshift(newString);
+                    console.log(newString)
+                    console.log(result);
+                }
+                else if ((result[0] === "BY" && result[1] === "BEST" ||
+                    result[0] === "BEST" && result[1] === "BY")) {
 
-            const numberArray = [];
+                    const newString = "Best By";
+                    result.splice(0, 2);
+                    result.unshift(newString);
+                    console.log(newString)
+                    console.log(result);
 
-            // https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/RegExp reference 26/01/2025
-            // https://www.freecodecamp.org/news/regex-for-date-formats-what-is-the-regular-expression-for-matching-dates/
-            // https://stackoverflow.com/questions/33017274/find-all-words-with-3-letters-with-regex
-            // https://stackoverflow.com/questions/2951915/javascript-reg-ex-to-match-whole-word-only-bound-only-by-whitespace 
-            // chatGPT i for case insensitivity, and matching by mapping Prompt: still a error (my pattern)
+                }
 
-            const pattern1 = /(BB|Expiry Date|BBE|EXP|BEST BY|Best By|Best Before|Use By|Expiry)/i;
-            const pattern2 = /(\d{1,2}\/\d{1,2}\/\d{2,4}|\d{6}|\d{1,2}\-\d{1,2}\-\d{2,4}|\d{1,2}\.\d{1,2}\.\d{2,4}|\d{1,2} \d{1,2} \d{2,4}|\d{1,2}[A-Za-z]{3}\d{1,2}|\d{1,2} [A-Za-z]{3} \d{2,4})/i;
+                else if ((result[0] === "USE" && result[1] === "BY") ||
+                    (result[0] === "BY" && result[1] === "USE")) {
+                    const newString = "Use By";
+                    result.splice(0, 2);
+                    result.unshift(newString);
+                    console.log(newString)
+                    console.log(result);
+                }
 
-            // filter method recieved by chatgpt, and remove gm, due to global issues with .test()
-            //prompt: I have a array but I want to remove the elements that dont follow a regex pattern. 31/01/2025
-            //prompt2: why is this not working (the method).
+                const numberArray = [];
 
-            const words = result.filter(element => pattern1.test(element));
-            const dates = result.filter(element => pattern2.test(element));
+                // https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/RegExp reference 26/01/2025
+                // https://www.freecodecamp.org/news/regex-for-date-formats-what-is-the-regular-expression-for-matching-dates/
+                // https://stackoverflow.com/questions/33017274/find-all-words-with-3-letters-with-regex
+                // https://stackoverflow.com/questions/2951915/javascript-reg-ex-to-match-whole-word-only-bound-only-by-whitespace 
+                // chatGPT i for case insensitivity, and matching by mapping Prompt: still a error (my pattern)
 
-            console.log("this is word", words);
-            console.log("this is dates", dates);
+                const pattern1 = /(BB|Expiry Date|BBE|EXP|BEST BY|Best By|Best Before|Use By|Expiry)/i;
+                const pattern2 = /(\d{1,2}\/\d{1,2}\/\d{2,4}|\d{6}(?<=^\d{2}[01-9]{1}[0-9]{1}[0-9]{1})|\d{1,2}\-\d{1,2}\-\d{2,4}|\d{1,2}\.\d{1,2}\.\d{2,4}|\d{1,2} \d{1,2} \d{2,4}|\d{1,2}[A-Za-z]{3}\d{1,2}|\d{1,2} [A-Za-z]{3} \d{2,4})/i;
 
-            for (let i = 0; i < words.length; i++) {
-                // if best before or use by date
-                if (words[i].toUpperCase().charAt(0) === "B" || words[i].toUpperCase().charAt(0) === "U") {
+                // filter method recieved by chatgpt, and remove gm, due to global issues with .test()
+                //prompt: I have a array but I want to remove the elements that dont follow a regex pattern. 31/01/2025
+                //prompt2: why is this not working (the method).
+
+                const words = result.filter(element => pattern1.test(element));
+                const dates = result.filter(element => pattern2.test(element));
+
+                console.log("this is word", words);
+                console.log("this is dates", dates);
+
+                for (let i = 0; i < words.length; i++) {
+                    // if best before or use by date
+                    if (words[i].toUpperCase().charAt(0) === "B" || words[i].toUpperCase().charAt(0) === "U") {
+                        numberArray.push({
+                            word: words[i],
+                            number: 1
+                        });
+                    }
+
+                    // if expiry date only
+
+                    else if ((words[i].toUpperCase().charAt(0) !== "B" || words[i].toUpperCase().charAt(0) !== "U") && (words[i].toUpperCase().charAt(0) === "E")) {
+                        numberArray.push({
+                            word: words[i],
+                            number: 1
+                        });
+                    }
+
+                    // if expiry date with a use by / best before date.
+                    else if (words[i].toUpperCase().charAt(0) === "E") {
+                        numberArray.push({
+                            word: words[i],
+                            number: 3
+                        });
+                    }
+
+                }
+
+                // if there are two dates, the latest date is the expiry date, words.length is for expiry date
+                if (dates.length === 2 && words.length === 1) {
+                    if (dateConvertion(dates[0]) < dateConvertion(dates[1])) {
+                        numberArray.push({
+                            word: dates[1],
+                            number: 4
+                        });
+                    }
+                }
+
+                else if (dates.length === 1) {
                     numberArray.push({
-                        word: words[i],
-                        number: 1
+                        word: dates[0],
+                        number: 2
                     });
                 }
 
-                // if expiry date only
+                // if there are two dates, and two words
 
-                else if ((words[i].toUpperCase().charAt(0) !== "B" || words[i].toUpperCase().charAt(0) !== "U") && (words[i].toUpperCase().charAt(0) === "E")) {
-                    numberArray.push({
-                        word: words[i],
-                        number: 1
-                    });
-                }
-
-                // if expiry date with a use by / best before date.
-                else if (words[i].toUpperCase().charAt(0) === "E") {
-                    numberArray.push({
-                        word: words[i],
-                        number: 3
-                    });
-                }
-
-            }
-
-            // if there are two dates, the latest date is the expiry date, words.length is for expiry date
-            if (dates.length === 2 && words.length === 1) {
-                if (dateConvertion(dates[0]) < dateConvertion(dates[1])) {
+                else if (dateConvertion(dates[0]) < dateConvertion(dates[1])) {
                     numberArray.push({
                         word: dates[1],
                         number: 4
                     });
-                }
-            }
 
-            else if (dates.length === 1) {
-                numberArray.push({
-                    word: dates[0],
-                    number: 2
-                });
-            }
-
-            // if there are two dates, and two words
-
-            else if (dateConvertion(dates[0]) < dateConvertion(dates[1])) {
-                numberArray.push({
-                    word: dates[1],
-                    number: 4
-                });
-
-                numberArray.push({
-                    word: dates[0],
-                    number: 2
-                });
-            }
-
-            else {
-                numberArray.push({
-                    word: dates[0],
-                    number: 4
-                });
-
-                numberArray.push({
-                    word: dates[1],
-                    number: 2
-                });
-            }
-
-            console.log("this is the array", numberArray);
-
-            // https://www.geeksforgeeks.org/insertion-sort-algorithm/ for the insertion sort 31/01/2025
-            // chatgpt to help with handling it with objects.
-            // prompt1: what I am expecting is for the array to sort the complete object. Not the value of the number in the object. how can I do this (my code)
-            // prompt2: questioning
-            // prompt3: but how about if I want to use my one regardless
-
-            for (let i = 1; i < numberArray.length; i++) {
-
-                let key = numberArray[i];
-                let j = i - 1;
-
-                while (j >= 0 && numberArray[j].number > key.number) {
-                    numberArray[j + 1] = numberArray[j];
-                    j = j - 1;
+                    numberArray.push({
+                        word: dates[0],
+                        number: 2
+                    });
                 }
 
-                numberArray[j + 1] = key;
+                else {
+                    numberArray.push({
+                        word: dates[0],
+                        number: 4
+                    });
+
+                    numberArray.push({
+                        word: dates[1],
+                        number: 2
+                    });
+                }
+
+                console.log("this is the array", numberArray);
+
+                // https://www.geeksforgeeks.org/insertion-sort-algorithm/ for the insertion sort 31/01/2025
+                // chatgpt to help with handling it with objects.
+                // prompt1: what I am expecting is for the array to sort the complete object. Not the value of the number in the object. how can I do this (my code)
+                // prompt2: questioning
+                // prompt3: but how about if I want to use my one regardless
+
+                for (let i = 1; i < numberArray.length; i++) {
+
+                    let key = numberArray[i];
+                    let j = i - 1;
+
+                    while (j >= 0 && numberArray[j].number > key.number) {
+                        numberArray[j + 1] = numberArray[j];
+                        j = j - 1;
+                    }
+
+                    numberArray[j + 1] = key;
+                }
+
+                console.log(numberArray)
+
+                // https://www.betterhealth.vic.gov.au/health/healthyliving/food-use-by-and-best-before-dates 01/02/2025
+                // https://www.webmd.com/diet/features/do-food-expiration-dates-matter 01/02/2025
+
+                // Best before is the date where the food quality begins to lose, however if stored properly can be suitbale even after the date.
+                // Use by date is the date where the food consumed has to be eaten before or on that date.
+                // Expiry date is similar to use by date. Meaning it is not recommended to be conumed after the date. 
+
+                if ((numberArray[0].word.toUpperCase().charAt(0) === ("E") || numberArray[0].word.toUpperCase().charAt(0) === ("U"))) {
+                    console.log(`This means that you have until ${dateConvertionToDate(numberArray[1].word)} to consume. That is it`);
+                    setText(`This means that you have until ${dateConvertionToDate(numberArray[1].word)} to consume. That is it`);
+                }
+                else if ((numberArray[0].word.toUpperCase().charAt(0) === ("B"))) {
+                    console.log(`This means that you have until ${dateConvertionToDate(numberArray[1].word)} to consume while it is closed, however if stored properly, and quality looks suitbale, it can extend over the date`);
+                    setText(`This means that you have until ${dateConvertionToDate(numberArray[1].word)} to consume while it is closed, however if stored properly, and quality looks suitbale, it can extend over the date`);
+
+                }
+
+                else if ((numberArray[0].word.toUpperCase().charAt(0) === "B" || numberArray[0].word.toUpperCase().charAt(0) === "D") && (numberArray[2].word.toUpperCase().charAt(0) === ("E") || numberArray[2].word.toUpperCase().charAt(0) === ("U"))) {
+                    console.log(`This means that you have until ${dateConvertionToDate(numberArray[1].word)} to consume while it is closed, however if stored properly, and quality looks suitbale, it make extend over the date`)
+                    console.log(`This means that you have until ${dateConvertionToDate(numberArray[3].word)} to consume. That is it`)
+                    setText(`This means that you have until ${dateConvertionToDate(numberArray[1].word)} to consume while it is closed, however if stored properly, and quality looks suitbale, it make extend over the date`,
+                        `This means that you have until ${dateConvertionToDate(numberArray[3].word)} to consume. That is it`
+                    );
+                }
+                else {
+                    console.log(`The image provided was not sufficient. The reason could be because the image was not clear enough, of the dates were not displayed, please find the dates and take clearer picture`);
+                    setText(`The image provided was not sufficient. The reason could be because the image was not clear enough, of the dates were not displayed, please find the dates and take clearer picture`);
+                }
+            } catch (error) {
+                console.error("Can't send the file", error);
             }
-
-            console.log(numberArray)
-
-            // https://www.betterhealth.vic.gov.au/health/healthyliving/food-use-by-and-best-before-dates 01/02/2025
-            // https://www.webmd.com/diet/features/do-food-expiration-dates-matter 01/02/2025
-
-            // Best before is the date where the food quality begins to lose, however if stored properly can be suitbale even after the date.
-            // Use by date is the date where the food consumed has to be eaten before or on that date.
-            // Expiry date is similar to use by date. Meaning it is not recommended to be conumed after the date. 
-
-            if ((numberArray[0].word.toUpperCase().charAt(0) === ("E") || numberArray[0].word.toUpperCase().charAt(0) === ("U"))) {
-                console.log(`This means that you have until ${dateConvertionToDate(numberArray[1].word)} to consume. That is it`);
-                setText(`This means that you have until ${dateConvertionToDate(numberArray[1].word)} to consume. That is it`);
-            }
-            else if ((numberArray[0].word.toUpperCase().charAt(0) === ("B"))) {
-                console.log(`This means that you have until ${dateConvertionToDate(numberArray[1].word)} to consume while it is closed, however if stored properly, and quality looks suitbale, it can extend over the date`);
-                setText(`This means that you have until ${dateConvertionToDate(numberArray[1].word)} to consume while it is closed, however if stored properly, and quality looks suitbale, it can extend over the date`);
-
-            }
-
-            else if ((numberArray[0].word.toUpperCase().charAt(0) === "B" || numberArray[0].word.toUpperCase().charAt(0) === "D") && (numberArray[2].word.toUpperCase().charAt(0) === ("E") || numberArray[2].word.toUpperCase().charAt(0) === ("U"))) {
-                console.log(`This means that you have until ${dateConvertionToDate(numberArray[1].word)} to consume while it is closed, however if stored properly, and quality looks suitbale, it make extend over the date`)
-                console.log(`This means that you have until ${dateConvertionToDate(numberArray[3].word)} to consume. That is it`)
-                setText(`This means that you have until ${dateConvertionToDate(numberArray[1].word)} to consume while it is closed, however if stored properly, and quality looks suitbale, it make extend over the date`,
-                    `This means that you have until ${dateConvertionToDate(numberArray[3].word)} to consume. That is it`
-                );
-            }
-            else {
-                console.log(`The image provided was not sufficient. The reason could be because the image was not clear enough, of the dates were not displayed, please find the dates and take clearer picture`);
-                setText(`The image provided was not sufficient. The reason could be because the image was not clear enough, of the dates were not displayed, please find the dates and take clearer picture`);
-            }
-        } catch (error) {
-            console.error("Can't send the file", error);
         }
     }
 

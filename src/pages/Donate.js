@@ -1,4 +1,4 @@
-import React, { use } from "react";
+import React from "react";
 import '../styling/Donate.css'
 import { useState, useEffect, useRef } from "react";
 import { GeoapifyGeocoderAutocomplete, GeoapifyContext } from '@geoapify/react-geocoder-autocomplete'
@@ -263,6 +263,7 @@ function Donate() {
                 setDisableScanner(true);
                 setLongitude(0);
                 setLatitude(0);
+                window.location.reload();
             }
 
 

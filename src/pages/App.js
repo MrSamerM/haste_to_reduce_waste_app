@@ -42,7 +42,7 @@ function App() {
     })
     check();
 
-  }, [])
+  }, [userPoints, sessionAvailability])
 
   // Received if statement from chatGPT 20/01/2025, also changed useEffect, and useState(null)
   // Prompt: when I am in a page that requires a express session, I reload, and it returns me to the homepage. 

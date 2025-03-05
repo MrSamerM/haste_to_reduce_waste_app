@@ -38,6 +38,7 @@ function UpdateReservedDonation() {
 
         try {
             await axios.post('http://localhost:8000/removeReservation', data)
+            window.location.reload()
 
         } catch (err) {
             console.log("Error", err)

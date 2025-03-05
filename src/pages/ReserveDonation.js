@@ -65,7 +65,6 @@ function ReserveDonation() {
 
     const reserveDonation = async (id) => {
 
-
         const data = {
             reserved: true,
             donationID: id
@@ -73,6 +72,7 @@ function ReserveDonation() {
 
         try {
             await axios.post('http://localhost:8000/updateReservation', data);
+            window.location.reload()
         } catch (err) {
             console.log("Error", err)
         }

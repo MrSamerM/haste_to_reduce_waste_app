@@ -21,7 +21,6 @@ function UpdateDonationDetails() {
     const [baseSixtyFour, setBaseSixtyFour] = useState("");
     const [predictedClass, setPredictedClass] = useState("");
 
-
     axios.defaults.withCredentials = true;
 
     const { id } = useParams();
@@ -164,6 +163,7 @@ function UpdateDonationDetails() {
                 setDisableScanner(true);
                 setLongitude(0);
                 setLatitude(0);
+                window.location.reload()
             }
 
 

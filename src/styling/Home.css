@@ -132,6 +132,44 @@ section: Center Vertically - Using line-height  */
     vertical-align: middle;
 }
 
+#noQuestionBox {
+    width: 400px;
+    height: 200px;
+    line-height: 200px;
+    border-radius: 20px;
+    background-color: lime;
+    border-color: black;
+    border-style: solid;
+    border-width: 5px;
+    margin: 05% 0 3% 0;
+    overflow-wrap: break-word;
+    word-break: break-word;
+    text-align: center;
+}
+
+#noQuestionBoxResponse {
+    width: 400px;
+    min-height: 200px;
+    line-height: 200px;
+    border-radius: 20px;
+    background-color: rgb(0, 225, 254);
+    border-color: black;
+    border-style: solid;
+    border-width: 5px;
+    margin: 12% 0 auto 0;
+    overflow-wrap: break-word;
+    word-break: break-word;
+    text-align: center;
+}
+
+#noQuestionBox p,
+#noQuestionBoxResponse p {
+    line-height: 1.5;
+    display: inline-block;
+    vertical-align: middle;
+    font-weight: bold;
+}
+
 .xIcon {
     height: 200px;
     width: 300px;

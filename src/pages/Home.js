@@ -1,4 +1,4 @@
-import React, { useState } from "react";
+import React, { useEffect, useState } from "react";
 import '../styling/Home.css'
 import foodWaste from '../image/foodWaste.jpg';
 import foodWaste2 from '../image/foodWaste2.jpg';
@@ -9,6 +9,7 @@ function Home() {
     const [input, setInput] = useState(null)
     const [question, setQuestion] = useState([])
     const [response, setResponse] = useState([])
+    const [chatbotInformation, setChatbotInformation] = useState(true)
 
     const addQuestionAndResponse = async () => {
 
@@ -25,6 +26,12 @@ function Home() {
             console.error("Can't send the file", error);
         }
     }
+
+    useEffect(() => {
+        if (question.length !== 0) {
+            setChatbotInformation(false)
+        }
+    }, [question, chatbotInformation])
     return (
         <>
             <div id='homeTitleDiv'>
@@ -60,21 +67,37 @@ function Home() {
                 <div id="overviewInformationBox">
                     <div className="Questions">
                         <div id='overviewTitleDiv'><h1 id="overviewTitle">Haste Bot</h1></div>
-
-                        {question.map((question, index) => (
-                            <div id="QuestionBox" key={index}>
-                                <p>{question}</p>
+                        {chatbotInformation === false ?
+                            question.map((question, index) => (
+                                <div id="QuestionBox" key={index}>
+                                    <p>{question}</p>
+                                </div>
+                            ))
+                            :
+                            <div id="noQuestionBox">
+                                <p>
+                                    This is where you can ask Haste about your troubles understanding how to store fruits,
+                                    vegetables, meat and other. Also troubles with understanding how to dipose of waste that
+                                    has already expired. Just input your question, and wait for a response.
+                                </p>
                             </div>
-                        ))}
+                        }
                         <input type="text" id="input" placeholder="Input question" value={input} onChange={(evt) => setInput(evt.target.value)} />
                         <button id="submitQuestion" onClick={addQuestionAndResponse}>Submit</button>
                     </div>
                     <div className="Responses">
-                        {response.map((response, index) => (
-                            <div id="ResponseBox" key={index}>
-                                <p>{response}</p>
+                        {chatbotInformation === false ?
+                            response.map((response, index) => (
+                                <div id="ResponseBox" key={index}>
+                                    <p>{response}</p>
+                                </div>
+                            )) :
+                            <div id="noQuestionBoxResponse">
+                                <p>
+                                    Haste is waiting for a question to answer...
+                                </p>
                             </div>
-                        ))}
+                        }
                     </div>
                 </div>
             </div>

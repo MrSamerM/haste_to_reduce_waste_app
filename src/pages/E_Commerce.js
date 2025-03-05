@@ -155,6 +155,10 @@ function E_Commerce() {
 
             </div>
 
+            <div id="totalCost">
+                <p>Total cost: {totalAmount}</p>
+            </div>
+
             <div id="autoCompleteAddressForPurchaseDiv">
                 <GeoapifyContext apiKey={process.env.REACT_APP_GEOAPIFY_API_KEY}>
                     <GeoapifyGeocoderAutocomplete id="autoCompleteAddressForPurchase" placeholder="Enter address here"

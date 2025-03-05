@@ -42,17 +42,22 @@ def text():
     file.save('texts/' + file.filename)
 
     img_path = f"./texts/{file.filename}"
+
     img = cv2.imread(img_path)
 
     reader=easyocr.Reader(['en']) #specifies lanuage
     result=reader.readtext(img)
 
-    string=[]
+    if os.path.exists(f"./texts/{file.filename}"):
+        os.remove(f"texts/{file.filename}")
 
+
+    string=[]
 
     for(bbox,text,prob) in result:
         print(f'Text: {text}, Probability: {prob}')
         string.append(text)
+
     return jsonify({"text":string})
 
 
@@ -78,7 +83,6 @@ def upload():
     if os.path.exists(f"./uploads/{file.filename}"):
         os.remove(f"uploads/{file.filename}")
 
-    # For percentage go from ChatGPT: Prompt: (Image of my code) I want to also send the percentage. How can I do this 24/01/2025
     percentage = float(prediction * 100)  # Convert prediction to percentage
 
     # Determine the label
