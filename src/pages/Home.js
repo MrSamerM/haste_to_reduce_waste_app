@@ -44,12 +44,11 @@ function Home() {
                         <div id='overviewTitleDiv'><h1 id="overviewTitle">What is this web application?</h1></div>
                         <div id="overviewParagraphsDiv">
                             <p className="overviewParagraphs">
-                                blablabalasasasasasaasaasasashgjhgjhgjhgjhgjgjhghjgjhghjgjhgjhgjhgjhgjhgjhgjh<br></br>
-                                blablabalasasasasasaasaasasashgjhgjhgjhgjhgjgjhghjgjhghjgjhgjhgjhgjhgjhgjhgjh<br></br>
-                                blablabalasasasasasaasaasasashgjhgjhgjhgjhgjgjhghjgjhghjgjhgjhgjhgjhgjhgjhgjh<br></br>
-                                blablabalasasasasasaasaasasashgjhgjhgjhgjhgjgjhghjgjhghjgjhgjhgjhgjhgjhgjhgjh<br></br>
-                                blablabalasasasasasaasaasasashgjhgjhgjhgjhgjgjhghjgjhghjgjhgjhgjhgjhgjhgjhgjh<br></br>
-                                blablabalasasasasasaasaasasashgjhgjhgjhgjhgjgjhghjgjhghjgjhgjhgjhgjhgjhgjhgjh<br></br>
+                                Lorem ipsum dolor sit amet, consectetur adipiscing elit. Sed do eiusmod tempor incididunt ut labore et dolore magna aliqua.
+                                Lorem ipsum dolor sit amet, consectetur adipiscing elit. Sed do eiusmod tempor incididunt ut labore et dolore magna aliqua.
+                                Lorem ipsum dolor sit amet, consectetur adipiscing elit. Sed do eiusmod tempor incididunt ut labore et dolore magna aliqua.
+                                Lorem ipsum dolor sit amet, consectetur adipiscing elit. Sed do eiusmod tempor incididunt ut labore et dolore magna aliqua.
+                                Lorem ipsum dolor sit amet, consectetur adipiscing elit. Sed do eiusmod tempor incididunt ut labore et dolore magna aliqua.
                             </p>
                         </div>
                     </div>

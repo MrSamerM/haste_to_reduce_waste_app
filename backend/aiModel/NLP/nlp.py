@@ -32,7 +32,8 @@ for question in customData['Questions']:
 
     question =question.translate(str.maketrans('','',string.punctuation)) #This remove punctuations in the dataset
     word_tokens=word_tokenize(question.lower())  #This makes the corpus lowercase
-    question_tokens.append(word_tokens) #append the filtered sentence
+    filtered_stop_wordQ=[each_word for each_word in word_tokens if each_word not in stop_words]
+    question_tokens.append(filtered_stop_wordQ) #append the filtered sentence
 
 customData['Question_Token']=question_tokens
 
@@ -54,7 +55,8 @@ clf.fit(vectorizer_fit, labels)
 def process_text(input):
     input =input.translate(str.maketrans('','',string.punctuation))
     word_tokens=word_tokenize(input.lower())
-    return " ".join(word_tokens)
+    filtered_stop_word=[each_word for each_word in word_tokens if each_word not in stop_words]
+    return " ".join(filtered_stop_word)
 
 def genResponse(input):
     preprocessed_input = process_text(input)
@@ -70,8 +72,8 @@ def genResponse(input):
     return best_response
 
     
-# while True:
-#     user_input = input("You: ")
-#     if user_input.lower() == "exit":
-#         break
-#     print("Bot:", genResponse(user_input))
+while True:
+    user_input = input("You: ")
+    if user_input.lower() == "exit":
+        break
+    print("Bot:", genResponse(user_input))
