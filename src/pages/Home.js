@@ -1,7 +1,9 @@
 import React, { useEffect, useState } from "react";
 import '../styling/Home.css'
-import foodWaste from '../image/foodWaste.jpg';
+import foodWaste from '../image/foodWaste1.jpg';
+// https://www.pexels.com/photo/pile-of-organic-waste-14824327/
 import foodWaste2 from '../image/foodWaste2.jpg';
+// https://www.pexels.com/photo/a-cardboard-box-with-food-label-beside-a-charity-sign-and-paper-cups-6646847/
 import axios from "axios";
 
 function Home() {

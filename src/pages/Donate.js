@@ -11,10 +11,13 @@ import suitableContainer2 from '../image/plasticContainer.jpg';
 import suitableContainer3 from '../image/takeawayContainer.jpg';
 
 import nonSuitableContainer1 from '../image/foamContainer.jpg';
+// https://www.pexels.com/photo/takeaway-chicken-served-in-a-restaurant-17429048/ 07/03/2025
+
 import nonSuitableContainer2 from '../image/cardboardContainer.jpg';
 import nonSuitableContainer3 from '../image/polytheneBag.jpg';
 
 import points from '../image/points.PNG';
+// https://pixabay.com/vectors/coin-penny-currency-money-old-1753248/ 07/03/2025
 
 
 import donationImage from '../image/Donation.jpg';

@@ -4,7 +4,10 @@ import axios from "axios";
 import { MapContainer, TileLayer, useMap, Marker, Popup } from 'react-leaflet'
 import 'leaflet/dist/leaflet.css'
 import { Icon } from "leaflet";
+
 import markerIcon from '../image/marker.png';
+// https://pixabay.com/vectors/location-poi-pin-marker-position-304467/ 07/03/2025
+
 import { GeoapifyGeocoderAutocomplete, GeoapifyContext } from '@geoapify/react-geocoder-autocomplete'
 import '@geoapify/geocoder-autocomplete/styles/minimal.css'
 
@@ -58,7 +61,6 @@ function ReserveDonation() {
     }
 
     const customIcon = new Icon({
-        // image marker from https://www.iconfinder.com/icons/285659/marker_map_icon 19/01/2025
         iconUrl: markerIcon,
         iconSize: [38, 38]
     })

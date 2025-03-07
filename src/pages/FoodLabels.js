@@ -3,14 +3,15 @@ import '../styling/FoodLabels.css'
 import { useState, useEffect, useRef } from "react";
 import axios from "axios";
 
-import England from '../image/England.PNG'
+import England from '../image/England.jpg'
+// https://www.pexels.com/photo/the-flag-of-the-united-kingdom-13863652/ 07/02/2025
 
 import UseBy from '../image/UseByDate.jpg';
 import BestBefore from '../image/BestBeforeDate.jpg';
 import Expiry from '../image/ExpiryDate.jpg';
 
 import star from '../image/star.PNG';
-
+// https://pixabay.com/vectors/star-favorite-bookmark-3d-gold-152151/ 07/03/2025
 
 import FullFoodLabel from '../image/FullFoodLabel.jpg';
 
@@ -604,11 +605,7 @@ function FoodLabels() {
                                     the food labels. This is due to lack of knowledge on what they mean, and
                                     how to deal with them.
                                 </p>
-                                <div><img className="suitableContainersLabel" src={England} alt="Image of england with 36%" /></div>
-                                {/* Image from chatgpt 22/02/2025
-                                prompt 1: Make me a image that shows an image of the map of England in green, then a large number in the middle going diaganol from south west to north west with the writing '36%' bold and black
-                                prompt 2: Only the map of england. and 36 percent
-                                prompt 3: the number has to be 36 % not 5 */}
+                                <div><img className="suitableContainersLabel" src={England} alt="Image of UK" /></div>
                             </div>
                         </div>
 
