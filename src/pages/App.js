@@ -51,7 +51,7 @@ function App() {
   // (sent image of app js and ReserveDonation
 
   if (sessionAvailability === null) {
-    return <div>Loading...</div>;
+    return <div id="loading"></div>;
   }
 
   return (

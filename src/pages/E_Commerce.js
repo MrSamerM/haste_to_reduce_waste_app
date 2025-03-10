@@ -12,6 +12,8 @@ function E_Commerce() {
     const [listOfProducts, setListOfProducts] = useState([]);
     const [userPoints, setUserPoints] = useState(0);
     const [address, setAddress] = useState("");
+    const [loading, setLoading] = useState(false);
+
 
 
 
@@ -24,6 +26,7 @@ function E_Commerce() {
         const products = async () => {
 
             try {
+                setLoading(true)
                 const res = await axios.get('http://localhost:8000/allProducts')
                 const allProducts = res.data.result.map((data) => ({ id: data._id, image: data.productImage, productName: data.productName, cost: data.pointCost, quantity: data.quantity }));
                 setProductList(allProducts);
@@ -31,6 +34,9 @@ function E_Commerce() {
                 const secondRes = await axios.get('http://localhost:8000/userPoints')
                 const points = secondRes.data.result.points;
                 setUserPoints(points)
+
+                setLoading(false)
+
 
             } catch (err) {
                 console.log("Error", err)
@@ -123,6 +129,10 @@ function E_Commerce() {
             }
         }
 
+    }
+
+    if (loading === true) {
+        return <div id="loading"></div>;
     }
 
     return (
