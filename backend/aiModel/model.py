@@ -28,8 +28,10 @@ batch_size = 32
 # Data augmentation for training only
 data_augmentation = keras.Sequential([
     layers.RandomFlip("horizontal",input_shape=(image_height,image_width,3)),
-    layers.RandomRotation(0.3),
-    layers.RandomZoom(0.2),
+    layers.RandomRotation(0.1),
+    # layers.RandomZoom(0.1),
+    # layers.RandomBrightness(0.1),
+    layers.RandomContrast(0.2),
 ], name="data_augmentation")
 
 
@@ -65,11 +67,11 @@ model = keras.Sequential([ #This groups layers sequentially
     layers.MaxPooling2D(),
     layers.Conv2D(64, 3, padding='same', activation='relu'),
     layers.MaxPooling2D(),
-    layers.Conv2D(128, 3, padding='same', activation='relu'),
-    layers.MaxPooling2D(),
-    layers.Dropout(0.2),
+    # layers.Conv2D(128, 3, padding='same', activation='relu'),
+    # layers.MaxPooling2D(),
+    # layers.Dropout(0.2),
     layers.Flatten(),#flatterns the inputs, does not affect batch size
-    layers.Dense(256, activation='relu'),
+    layers.Dense(128, activation='relu'),
     layers.Dense(1, activation='sigmoid')#this is the classes to predict
 ])
 
@@ -84,7 +86,7 @@ model.compile(
 model.summary()
 
 # Train the model
-epochs = 25
+epochs = 10
 history = model.fit(#this method is used to train the model
     train_dataset,
     steps_per_epoch=100,
@@ -94,7 +96,7 @@ history = model.fit(#this method is used to train the model
 )
 
 # Load and preprocess the image for prediction
-img_path = 'backend/aiModel/Images/image.png'
+img_path = 'backend/aiModel/Images/notContainer1.jpg'
 img = image.load_img(img_path, target_size=(image_height, image_width))
 x = image.img_to_array(img)
 x = np.expand_dims(x, axis=0)
@@ -102,14 +104,14 @@ x /= 255
 
 # Make the prediction
 prediction = model.predict(x)
-threshold = 0.6  # Adjustable threshold
+threshold = 0.5  # Adjustable threshold
 if prediction < threshold:
     print("The image is a Container.")
 else:
     print("The image is Not a container.")
 
 
-img_path2 = 'backend/aiModel/Images/image2.jpg'
+img_path2 = 'backend/aiModel/Images/notContainer2.png'
 img2 = image.load_img(img_path2, target_size=(image_height, image_width))
 y = image.img_to_array(img2)
 y = np.expand_dims(y, axis=0)
@@ -117,6 +119,80 @@ y /= 255
 
 # Make the prediction
 prediction = model.predict(y)
+threshold = 0.5  # Adjustable threshold
+if prediction < threshold:
+    print("The image is a Container.")
+else:
+    print("The image is Not a container.")
+
+
+# Load and preprocess the image for prediction
+# img_path3 = 'backend/aiModel/Images/notContainer3.png'
+# img3 = image.load_img(img_path3, target_size=(image_height, image_width))
+# a = image.img_to_array(img3)
+# a = np.expand_dims(a, axis=0)
+# a /= 255
+
+# # Make the prediction
+# prediction = model.predict(a)
+# threshold = 0.5  # Adjustable threshold
+# if prediction < threshold:
+#     print("The image is a Container.")
+# else:
+#     print("The image is Not a container.")
+
+
+img_path4 = 'backend/aiModel/Images/container1.jpg'
+img4 = image.load_img(img_path4, target_size=(image_height, image_width))
+b = image.img_to_array(img4)
+b = np.expand_dims(b, axis=0)
+b /= 255
+
+# Make the prediction
+prediction = model.predict(b)
+threshold = 0.5  # Adjustable threshold
+if prediction < threshold:
+    print("The image is a Container.")
+else:
+    print("The image is Not a container.")
+
+img_path5 = 'backend/aiModel/Images/container2.png'
+img5 = image.load_img(img_path5, target_size=(image_height, image_width))
+c = image.img_to_array(img5)
+c = np.expand_dims(c, axis=0)
+c /= 255
+
+# Make the prediction
+prediction = model.predict(c)
+threshold = 0.5  # Adjustable threshold
+if prediction < threshold:
+    print("The image is a Container.")
+else:
+    print("The image is Not a container.")
+
+
+img_path6 = 'backend/aiModel/Images/container3.jpg'
+img6 = image.load_img(img_path6, target_size=(image_height, image_width))
+d = image.img_to_array(img6)
+d = np.expand_dims(d, axis=0)
+d /= 255
+
+# Make the prediction
+prediction = model.predict(d)
+threshold = 0.5  # Adjustable threshold
+if prediction < threshold:
+    print("The image is a Container.")
+else:
+    print("The image is Not a container.")
+
+img_path7 = 'backend/aiModel/Images/container4.jpg'
+img7 = image.load_img(img_path7, target_size=(image_height, image_width))
+e = image.img_to_array(img7)
+e = np.expand_dims(e, axis=0)
+e /= 255
+
+# Make the prediction
+prediction = model.predict(e)
 threshold = 0.5  # Adjustable threshold
 if prediction < threshold:
     print("The image is a Container.")
