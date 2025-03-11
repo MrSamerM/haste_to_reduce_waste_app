@@ -86,7 +86,7 @@ def upload():
     percentage = float(prediction * 100)  # Convert prediction to percentage
 
     # Determine the label
-    if prediction < 0.6:
+    if prediction < 0.5:
         return jsonify({"message": "a Container", "confidence": round(100 - percentage, 2)})
     else:
         return jsonify({"message": "Not a Container", "confidence": round(percentage, 2)})
