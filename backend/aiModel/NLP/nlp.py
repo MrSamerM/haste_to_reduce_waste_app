@@ -18,6 +18,9 @@ EDAMAM_APP_ID = os.getenv("EDAMAM_APP_ID")
 EDAMAM_API_KEY = os.getenv("EDAMAM_API_KEY")
 EDAMAM_USER_ID= os.getenv("EDAMAM_USER_ID")
 
+EDAMAM_APP_ID_SECOND = os.getenv("EDAMAM_APP_ID_SECOND")
+EDAMAM_API_KEY_SECOND = os.getenv("EDAMAM_API_KEY_SECOND")
+
 nltk.download('punkt_tab')
 nltk.download('stopwords')
 
@@ -82,13 +85,27 @@ def genResponse(input):
     
     confidence_level=max(similarities)
 
-    if input=="check":
-        r = requests.get(f'https://api.edamam.com/api/recipes/v2?type=public&q=onion,pepper&app_id={EDAMAM_APP_ID}&app_key={EDAMAM_API_KEY}')
-        
-        return r.json()
 
-    if confidence_level<0.85:
-        return "I am sorry you have to be more specific"
+    if input=="check":
+
+        list_of_ingredients=['tomato','potato',"hello"]
+        new_list=[]
+
+        for i in list_of_ingredients:
+            s = requests.get(f"https://api.edamam.com/api/food-database/v2/parser?ingr={i}&app_id={EDAMAM_APP_ID_SECOND}&app_key={EDAMAM_API_KEY_SECOND}")
+      
+            if s.json()['parsed']:
+                 new_list.append(i)
+                 print(i)
+            else:
+                 return "food is not valid"
+
+    #     r = requests.get(f'https://api.edamam.com/api/recipes/v2?type=public&q={new_list}&app_id={EDAMAM_APP_ID}&app_key={EDAMAM_API_KEY}')
+        
+    #     return r.json()['results'][0]
+
+    # if confidence_level<0.85:
+    #     return "I am sorry you have to be more specific"
     
 
     best_response = customData.iloc[best_match_idx]['Response'] #the response is the row with the best closest index, from response column
