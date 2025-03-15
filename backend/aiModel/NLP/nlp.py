@@ -9,6 +9,15 @@ import random
 import numpy as np
 import os
 import nltk
+import requests
+from dotenv import load_dotenv
+
+load_dotenv()
+
+EDAMAM_APP_ID = os.getenv("EDAMAM_APP_ID")
+EDAMAM_API_KEY = os.getenv("EDAMAM_API_KEY")
+EDAMAM_USER_ID= os.getenv("EDAMAM_USER_ID")
+
 nltk.download('punkt_tab')
 nltk.download('stopwords')
 
@@ -72,8 +81,15 @@ def genResponse(input):
     best_match_idx = np.argmax(similarities) #find the index with the highest similarity
     
     confidence_level=max(similarities)
+
+    if input=="check":
+        r = requests.get(f'https://api.edamam.com/api/recipes/v2?type=public&q=onion,pepper&app_id={EDAMAM_APP_ID}&app_key={EDAMAM_API_KEY}')
+        
+        return r.json()
+
     if confidence_level<0.85:
         return "I am sorry you have to be more specific"
+    
 
     best_response = customData.iloc[best_match_idx]['Response'] #the response is the row with the best closest index, from response column
     return best_response

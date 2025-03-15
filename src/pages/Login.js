@@ -70,16 +70,17 @@ function Login({ setSessionAvailability }) {
             <div id="loginDetails">
                 <div className="loginInputDiv">
                     <label className="loginInputLabel" htmlFor="email">Email: </label>
-                    <input type="text" id="email" placeholder="Input Email" value={email} onChange={(evt) => setEmail(evt.target.value)} />
+                    <input data-testid="email" type="text" id="email" placeholder="Input Email" value={email} onChange={(evt) => setEmail(evt.target.value)} />
                 </div>
 
                 <div className="loginInputDiv">
                     <label className="loginInputLabel" htmlFor="password">Password: </label>
-                    <input type="password" id="password" placeholder="Input Password" value={password} onChange={(evt) => setPassword(evt.target.value)} />
+                    <input data-testid="password" type="password" id="password" placeholder="Input Password" value={password} onChange={(evt) => setPassword(evt.target.value)} />
                 </div>
 
-                {validate === true ? null : <p id="loginValidation">{validationMessage}</p>}
-                <button id="loginButton" onClick={submit}>Login</button>
+                <p data-testid="loginValidation" id="loginValidation">{validate === true ? "" : validationMessage}</p>
+
+                <button data-testid="loginButton" id="loginButton" onClick={submit}>Login</button>
             </div>
 
         </>
