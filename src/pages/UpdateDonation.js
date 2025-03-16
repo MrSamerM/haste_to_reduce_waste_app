@@ -57,16 +57,16 @@ function UpdateDonation() {
                     <div id="donationDetailsBox">
                         <div className="donationDetails">
                             <label className="donationDetailsInputLabels" htmlFor="donationAddress">Address: </label>
-                            <input className="donationDetailsInputs" id="donationAddress" value={data.address} disabled={true} />
+                            <input className="donationDetailsInputs" id="donationAddress" value={data.address} readonly />
                         </div>
                         <div className="donationDetails">
                             <label className="donationDetailsInputLabels" htmlFor="donationDescription">Description: </label>
-                            <input className="donationDetailsInputs" id="donationDescription" value={data.description} disabled={true} />
+                            <input className="donationDetailsInputs" id="donationDescription" value={data.description} readonly />
                         </div>
 
                         <div className="donationDetails">
                             <label className="donationDetailsInputLabels" htmlFor="donationPortionSize">Portion Size: </label>
-                            <input className="donationDetailsInputs" id="donationPortionSize" value={data.portionSize} disabled={true} />
+                            <input className="donationDetailsInputs" id="donationPortionSize" value={data.portionSize} readonly />
                         </div>
 
                     </div>

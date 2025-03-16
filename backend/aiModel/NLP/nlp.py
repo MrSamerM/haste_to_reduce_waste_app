@@ -120,7 +120,7 @@ def genResponse(input):
                 recipe_name=response_data['hits'][0]['recipe']['label']
                 recipe_url=response_data['hits'][0]['recipe']['url']
                 recipe_ingredients=response_data['hits'][0]['recipe']['ingredientLines']
-                return (f"\nRecipe:{recipe_name}\n Ingredients:{recipe_ingredients}\n URL:{recipe_url}")
+                return (f"\nRecipe: {recipe_name}\n Ingredients: {recipe_ingredients}\n URL: {recipe_url}")
             else:
                 return "No recipes found."
     
@@ -133,8 +133,8 @@ def genResponse(input):
         return best_response
 
 
-while True:
-    user_input = input("You: ")
-    if user_input.lower() == "exit":
-        break
-    print("Bot:", genResponse(user_input))
+# while True:
+#     user_input = input("You: ")
+#     if user_input.lower() == "exit":
+#         break
+#     print("Bot:", genResponse(user_input))

@@ -98,8 +98,16 @@ function Home() {
                                     <div id="hasteBubble">
                                         <p>HASTE</p>
                                     </div>
+
+                                    {/* chatGPT to fix the \n 
+                                    prompt: when I return this return 
+                                    (f"\nRecipe: {recipe_name}\n Ingredients: {recipe_ingredients}\n URL: {recipe_url}"), 
+                                    frompython, in react js it is still together. How can I fix this*/}
                                     <div id="responseSent">
-                                        <p>{response}</p>
+                                        {response.split("\n").map((line, index) => (
+                                            <p key={index}>{line}</p>
+                                        ))}
+
                                     </div>
                                 </div>
                             )) :

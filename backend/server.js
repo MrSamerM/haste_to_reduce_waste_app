@@ -290,24 +290,6 @@ app.get('/allReceipts', async (req, res) => {
     }
 })
 
-app.post('/removeReceipt', async (req, res) => {
-    try {
-        const { receiptID } = req.body
-
-        const findID = await Receipt.findByIdAndDelete(receiptID)
-        await findID.save();
-
-        console.log("Removed Receipt")
-        res.json({ message: "Receipt Removed" });
-
-    } catch (err) {
-        console.log("error", err)
-        res.status(500).json({ message: "database can't post data" })
-    }
-});
-
-
-
 app.get('/userPoints', async (req, res) => {
     try {
         const points = await User.findById(req.session.userID);
@@ -383,6 +365,21 @@ app.post('/removeReservation', async (req, res) => {
 
         console.log("Removed Reservation")
         res.json({ message: "Reservation Removed" });
+
+    } catch (err) {
+        console.log("error", err)
+        res.status(500).json({ message: "database can't post data" })
+    }
+});
+
+app.post('/removeReceipt', async (req, res) => {
+    try {
+        const { receiptID } = req.body
+
+        await Receipt.findByIdAndDelete(receiptID)
+
+        console.log("Removed Receipt")
+        res.json({ message: "Receipt Removed" });
 
     } catch (err) {
         console.log("error", err)

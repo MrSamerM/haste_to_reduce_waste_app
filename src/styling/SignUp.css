@@ -53,6 +53,7 @@ prompt 2 "I want the inputs to all be one below the other evenly macthed no one 
     height: 40px;
     font-size: large;
     margin-top: 30px;
+    cursor: pointer;
 }
 
 #loginValidation {

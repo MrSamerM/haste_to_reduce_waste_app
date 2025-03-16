@@ -186,7 +186,7 @@ section: Center Vertically - Using line-height  */
 }
 
 #noQuestionBox p,
-#noQuestionBoxResponse p {
+#noQuestionBoxResponse pre {
     line-height: 1.5;
     display: inline-block;
     vertical-align: middle;
