@@ -21,6 +21,10 @@ EDAMAM_USER_ID= os.getenv("EDAMAM_USER_ID")
 EDAMAM_APP_ID_SECOND = os.getenv("EDAMAM_APP_ID_SECOND")
 EDAMAM_API_KEY_SECOND = os.getenv("EDAMAM_API_KEY_SECOND")
 
+headers = {
+    "Edamam-Account-User": EDAMAM_USER_ID
+}
+
 nltk.download('punkt_tab')
 nltk.download('stopwords')
 
@@ -72,6 +76,9 @@ def process_text(input):
     filtered_stop_word=[each_word for each_word in word_tokens if each_word not in stop_words]
     return " ".join(filtered_stop_word)
 
+
+list_of_cook_words=['cook','prepare','make','recipe','recipes','dish','meal']
+
 def genResponse(input):
     preprocessed_input = process_text(input)
     input_vector = vectorizer.transform([preprocessed_input])
@@ -85,31 +92,45 @@ def genResponse(input):
     
     confidence_level=max(similarities)
 
+    new_list=[]
+         
+# received asistance from chatGPT for splitting the input to array, undertstanding response data for second get request
+# including hits, and converting to json file
 
-    if input=="check":
+# main prompt 1: (my code) but would it not be a array when pre processed
+# main prompt 2: what does this mean (trace back error)
+# main prompt 3: this gives me a lot of random labels, but I want the name of recipe
 
-        list_of_ingredients=['tomato','potato',"hello"]
-        new_list=[]
-
-        for i in list_of_ingredients:
+    if any(word in preprocessed_input.split() for word in list_of_cook_words):
+        for i in preprocessed_input.split():
             s = requests.get(f"https://api.edamam.com/api/food-database/v2/parser?ingr={i}&app_id={EDAMAM_APP_ID_SECOND}&app_key={EDAMAM_API_KEY_SECOND}")
-      
-            if s.json()['parsed']:
-                 new_list.append(i)
-                 print(i)
+                
+            if s.json().get('parsed'):
+                new_list.append(i)
+
+        if len(new_list)==0:
+            return "The items are not food products"
+        else:
+            query_string = ','.join(new_list)
+            print(query_string)
+            r = requests.get(f'https://api.edamam.com/api/recipes/v2?type=public&q={query_string}&app_id={EDAMAM_APP_ID}&app_key={EDAMAM_API_KEY}',headers=headers)  
+            response_data = r.json()
+
+            if 'hits' in response_data and response_data['hits']:
+                recipe_name=response_data['hits'][0]['recipe']['label']
+                recipe_url=response_data['hits'][0]['recipe']['url']
+                recipe_ingredients=response_data['hits'][0]['recipe']['ingredientLines']
+                return (f"\nRecipe:{recipe_name}\n Ingredients:{recipe_ingredients}\n URL:{recipe_url}")
             else:
-                 return "food is not valid"
-
-    #     r = requests.get(f'https://api.edamam.com/api/recipes/v2?type=public&q={new_list}&app_id={EDAMAM_APP_ID}&app_key={EDAMAM_API_KEY}')
-        
-    #     return r.json()['results'][0]
-
-    # if confidence_level<0.85:
-    #     return "I am sorry you have to be more specific"
+                return "No recipes found."
     
-
-    best_response = customData.iloc[best_match_idx]['Response'] #the response is the row with the best closest index, from response column
-    return best_response
+    elif confidence_level<0.85:
+        return "I am sorry you have to be more specific"
+    
+    else:
+    
+        best_response = customData.iloc[best_match_idx]['Response'] #the response is the row with the best closest index, from response column
+        return best_response
 
 
 while True:
