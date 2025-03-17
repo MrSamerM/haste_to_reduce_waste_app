@@ -332,6 +332,9 @@ app.post('/updateReservation', async (req, res) => {
         const findID = await Donation.findByIdAndUpdate(donationID, { reserved: reserved, recipientID: req.session.userID, })
         findID.save();
 
+        res.json({ message: "Reserved" });
+
+
     } catch (err) {
         console.log("error", err)
         res.status(500).json({ message: "database can't post data" })

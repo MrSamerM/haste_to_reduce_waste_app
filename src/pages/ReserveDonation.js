@@ -73,8 +73,11 @@ function ReserveDonation() {
         }
 
         try {
-            await axios.post('http://localhost:8000/updateReservation', data);
-            window.location.reload()
+            const res = await axios.post('http://localhost:8000/updateReservation', data);
+            if (res.data.message === "Reserved") {
+                window.location.reload();
+
+            }
         } catch (err) {
             console.log("Error", err)
         }
