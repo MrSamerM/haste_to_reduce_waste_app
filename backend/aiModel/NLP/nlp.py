@@ -31,7 +31,14 @@ nltk.download('stopwords')
 # https://medium.com/@kelsklane/tokenization-with-nltk-52cd7b88c7d 17/02/2025
 # https://medium.com/@lurkinguard30/how-to-build-a-simple-chatbot-with-python-and-nltk-c1b9fff5f3 17/02/2025
 # https://kantschants.com/paraphrasing-with-transformer-t5-bart-pegasus#heading-2-t5-text-to-text-transfer-transformer 28/02/2025
-# https://www.eatingwell.com/article/286048/the-best-way-to-store-fruits-and-veggies/ data from here
+# https://www.eatingwell.com/article/286048/the-best-way-to-store-fruits-and-veggies/ data for fruit and vegetable from here
+# https://www.foodsafety.gov/food-safety-charts/cold-food-storage-charts data for meat from here
+# https://www.healthline.com/nutrition/does-rice-go-bad data for rice from here
+# https://www.flavournetwork.ca/article/10-foods-you-can-eat-after-the-expiry-date/ for pasta data
+# https://www.kingarthurbaking.com/blog/2023/12/20/freeze-bread for bread data
+# https://thewonderfulworldofsprouts.com/how-long-do-dried-lentils-last/ for lentils data
+
+
 
 # chatGPT to change the way to read the csv file from an external python file
 # prompt:import sys sys.path.append("./NLP")from nlp import * would this code be correct based on the image (Screen shot), if my file is in NLP, and the file is called nlp.py 03/03/2025
@@ -67,8 +74,6 @@ questions, labels =zip(*corpus)
 
 vectorizer = CountVectorizer()
 vectorizer_fit=vectorizer.fit_transform(questions)
-clf = LogisticRegression(max_iter=500)
-clf.fit(vectorizer_fit, labels)
 
 def process_text(input):
     input =input.translate(str.maketrans('','',string.punctuation))
@@ -124,7 +129,7 @@ def genResponse(input):
             else:
                 return "No recipes found."
     
-    elif confidence_level<0.85:
+    elif confidence_level<0.5:
         return "I am sorry you have to be more specific"
     
     else:
@@ -133,8 +138,8 @@ def genResponse(input):
         return best_response
 
 
-# while True:
-#     user_input = input("You: ")
-#     if user_input.lower() == "exit":
-#         break
-#     print("Bot:", genResponse(user_input))
+while True:
+    user_input = input("You: ")
+    if user_input.lower() == "exit":
+        break
+    print("Bot:", genResponse(user_input))

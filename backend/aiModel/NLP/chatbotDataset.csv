@@ -255,91 +255,76 @@ How can I store strawberries?,Storage,"They should be stored in a fridge set to 
 Where should I store strawberries?,Storage,"They should be stored in a fridge set to around 5 degrees and in a container, to make it last long."
 Strawberries storage?,Storage,"They should be stored in a fridge set to around 5 degrees and in a container, to make it last long."
 Where should strawberries be stored?,Storage,"They should be stored in a fridge set to around 5 degrees and in a container, to make it last long."
-How can I store chicken?,Storage,
-Where should I store chicken?,Storage,
-Chicken storage?,Storage,
-Where should chicken be stored?,Storage,
-How can I store beef?,Storage,
-Where should I store beef?,Storage,
-Beef storage?,Storage,
-Where should beef be stored?,Storage,
-How can I store prawn?,Storage,
-Where should I store prawn?,Storage,
-Prawn storage?,Storage,
-Where should prawn be stored?,Storage,
-How can I store lamb?,Storage,
-Where should I store lamb?,Storage,
-Lamb storage?,Storage,
-Where should lamb be stored?,Storage,
-How can I store goat meat?,Storage,
-Where should I store goat meat?,Storage,
-Goat meat storage?,Storage,
-Where should goat meat be stored?,Storage,
-How can I store fish?,Storage,
-Where should I store fish?,Storage,
-Fish storage?,Storage,
-Where should fish be stored?,Storage,
-How can I store lobster?,Storage,
-Where should I store lobster?,Storage,
-Lobster storage?,Storage,
-Where should lobster be stored?,Storage,
-How can I store crab?,Storage,
-Where should I store crab?,Storage,
-Crab storage?,Storage,
-Where should crab be stored?,Storage,
-How can I store mussels?,Storage,
-Where should I store mussels?,Storage,
-Mussels storage?,Storage,
-Where should mussels be stored?,Storage,
-How can I store scallops?,Storage,
-Where should I store scallops?,Storage,
-Scallops storage?,Storage,
-Where should scallops be stored?,Storage,
-How can I store oysters?,Storage,
-Where should I store oysters?,Storage,
-Oysters storage?,Storage,
-Where should oysters be stored?,Storage,
-How can I store clams?,Storage,
-Where should I store clams?,Storage,
-Clams storage?,Storage,
-Where should clams be stored?,Storage,
-How can I store meat?,Storage,
-Where should I store meat?,Storage,
-Meat storage?,Storage,
-Where should meat be stored?,Storage,
-How can I store seafood?,Storage,
-Where should I store seafood?,Storage,
-Seafood storage?,Storage,
-Where should seafood be stored?,Storage,
-How can I store red meat?,Storage,
-Where should I store red meat?,Storage,
-Red meat storage?,Storage,
-Where should red meat be stored?,Storage,
-How can I store poultry?,Storage,
-Where should I store poultry?,Storage,
-Poultry storage?,Storage,
-Where should poultry be stored?,Storage,
-How can I store rice?,Storage,
-Where should I store rice?,Storage,
-Rice storage?,Storage,
-Where should rice be stored?,Storage,
-How can I store pasta?,Storage,
-Where should I store pasta?,Storage,
-Pasta storage?,Storage,
-Where should pasta be stored?,Storage,
-How can I store bread?,Storage,
-Where should I store bread?,Storage,
-Bread storage?,Storage,
-Where should bread be stored?,Storage,
-How can I store oats?,Storage,
-Where should I store oats?,Storage,
-Oats storage?,Storage,
-Where should oats be stored?,Storage,
-How can I store chickpeas?,Storage,
-Where should I store chickpeas?,Storage,
-Chickpeas storage?,Storage,
-Where should chickpeas be stored?,Storage,
-How can I store lentils?,Storage,
-Where should I store lentils?,Storage,
-Lentils storage?,Storage,
-Where should lentils be stored?,Storage,
+How can I store chicken?,Storage,"They could be stored in a fridge set to around 5 degrees in a container for 1-2 days, or in the freezer set to -18 degress for it to last 9-12 months"
+Where should I store chicken?,Storage,"They could be stored in a fridge set to around 5 degrees in a container for 1-2 days, or in the freezer set to -18 degress for it to last 9-12 months"
+Chicken storage?,Storage,"They could be stored in a fridge set to around 5 degrees in a container for 1-2 days, or in the freezer set to -18 degress for it to last 9-12 months"
+Where should chicken be stored?,Storage,"They could be stored in a fridge set to around 5 degrees in a container for 1-2 days, or in the freezer set to -18 degress for it to last 9-12 months"
+How can I store beef?,Storage,"They could be stored in a fridge set to around 5 degrees in a container for 3-5 days, or in the freezer set to -18 degress for it to last 4-12 months"
+Where should I store beef?,Storage,"They could be stored in a fridge set to around 5 degrees in a container for 3-5 days, or in the freezer set to -18 degress for it to last 4-12 months"
+Beef storage?,Storage,"They could be stored in a fridge set to around 5 degrees in a container for 3-5 days, or in the freezer set to -18 degress for it to last 4-12 months"
+Where should beef be stored?,Storage,"They could be stored in a fridge set to around 5 degrees in a container for 3-5 days, or in the freezer set to -18 degress for it to last 4-12 months"
+How can I store lamb?,Storage,"They could be stored in a fridge set to around 5 degrees in a container for 3-5 days, or in the freezer set to -18 degress for it to last 4-12 months"
+Where should I store lamb?,Storage,"They could be stored in a fridge set to around 5 degrees in a container for 3-5 days, or in the freezer set to -18 degress for it to last 4-12 months"
+Lamb storage?,Storage,"They could be stored in a fridge set to around 5 degrees in a container for 3-5 days, or in the freezer set to -18 degress for it to last 4-12 months"
+Where should lamb be stored?,Storage,"They could be stored in a fridge set to around 5 degrees in a container for 3-5 days, or in the freezer set to -18 degress for it to last 4-12 months"
+How can I store goat meat?,Storage,"They could be stored in a fridge set to around 5 degrees in a container for 3-5 days, or in the freezer set to -18 degress for it to last 4-12 months"
+Where should I store goat meat?,Storage,"They could be stored in a fridge set to around 5 degrees in a container for 3-5 days, or in the freezer set to -18 degress for it to last 4-12 months"
+Goat meat storage?,Storage,"They could be stored in a fridge set to around 5 degrees in a container for 3-5 days, or in the freezer set to -18 degress for it to last 4-12 months"
+Where should goat meat be stored?,Storage,"They could be stored in a fridge set to around 5 degrees in a container for 3-5 days, or in the freezer set to -18 degress for it to last 4-12 months"
+How can I store fish?,Storage,"They could be stored in a fridge set to around 5 degrees in a container for 1-3 days, or in the freezer set to -18 degress; 2-3 month for fatty fish, 4-8 month for lean fish."
+Where should I store fish?,Storage,"They could be stored in a fridge set to around 5 degrees in a container for 1-3 days, or in the freezer set to -18 degress; 2-3 month for fatty fish, 4-8 month for lean fish."
+Fish storage?,Storage,"They could be stored in a fridge set to around 5 degrees in a container for 1-3 days, or in the freezer set to -18 degress; 2-3 month for fatty fish, 4-8 month for lean fish."
+Where should fish be stored?,Storage,"They could be stored in a fridge set to around 5 degrees in a container for 1-3 days, or in the freezer set to -18 degress; 2-3 month for fatty fish, 4-8 month for lean fish."
+How can I store lobster?,Storage,"They could be stored in a fridge set to around 5 degrees in a container for 2-4 days, or in the freezer set to -18 degress for it to last 2-4 months"
+Where should I store lobster?,Storage,"They could be stored in a fridge set to around 5 degrees in a container for 2-4 days, or in the freezer set to -18 degress for it to last 2-4 months"
+Lobster storage?,Storage,"They could be stored in a fridge set to around 5 degrees in a container for 2-4 days, or in the freezer set to -18 degress for it to last 2-4 months"
+Where should lobster be stored?,Storage,"They could be stored in a fridge set to around 5 degrees in a container for 2-4 days, or in the freezer set to -18 degress for it to last 2-4 months"
+How can I store crab?,Storage,"They could be stored in a fridge set to around 5 degrees in a container for 2-4 days, or in the freezer set to -18 degress for it to last 2-4 months"
+Where should I store crab?,Storage,"They could be stored in a fridge set to around 5 degrees in a container for 2-4 days, or in the freezer set to -18 degress for it to last 2-4 months"
+Crab storage?,Storage,"They could be stored in a fridge set to around 5 degrees in a container for 2-4 days, or in the freezer set to -18 degress for it to last 2-4 months"
+Where should crab be stored?,Storage,"They could be stored in a fridge set to around 5 degrees in a container for 2-4 days, or in the freezer set to -18 degress for it to last 2-4 months"
+How can I store mussels?,Storage,They could be stored in a fridge set to around 5 degrees in a container for 3-10 days or in the freezer set to -18 degress for it to last 3-4 months
+Where should I store mussels?,Storage,They could be stored in a fridge set to around 5 degrees in a container for 3-10 days or in the freezer set to -18 degress for it to last 3-4 months
+Mussels storage?,Storage,They could be stored in a fridge set to around 5 degrees in a container for 3-10 days or in the freezer set to -18 degress for it to last 3-4 months
+Where should mussels be stored?,Storage,They could be stored in a fridge set to around 5 degrees in a container for 3-10 days or in the freezer set to -18 degress for it to last 3-4 months
+How can I store scallops?,Storage,They could be stored in a fridge set to around 5 degrees in a container for 3-10 days or in the freezer set to -18 degress for it to last 3-4 months
+Where should I store scallops?,Storage,They could be stored in a fridge set to around 5 degrees in a container for 3-10 days or in the freezer set to -18 degress for it to last 3-4 months
+Scallops storage?,Storage,They could be stored in a fridge set to around 5 degrees in a container for 3-10 days or in the freezer set to -18 degress for it to last 3-4 months
+Where should scallops be stored?,Storage,They could be stored in a fridge set to around 5 degrees in a container for 3-10 days or in the freezer set to -18 degress for it to last 3-4 months
+How can I store oysters?,Storage,They could be stored in a fridge set to around 5 degrees in a container for 3-10 days or in the freezer set to -18 degress for it to last 3-4 months
+Where should I store oysters?,Storage,They could be stored in a fridge set to around 5 degrees in a container for 3-10 days or in the freezer set to -18 degress for it to last 3-4 months
+Oysters storage?,Storage,They could be stored in a fridge set to around 5 degrees in a container for 3-10 days or in the freezer set to -18 degress for it to last 3-4 months
+Where should oysters be stored?,Storage,They could be stored in a fridge set to around 5 degrees in a container for 3-10 days or in the freezer set to -18 degress for it to last 3-4 months
+How can I store clams?,Storage,They could be stored in a fridge set to around 5 degrees in a container for 3-10 days or in the freezer set to -18 degress for it to last 3-4 months
+Where should I store clams?,Storage,They could be stored in a fridge set to around 5 degrees in a container for 3-10 days or in the freezer set to -18 degress for it to last 3-4 months
+Clams storage?,Storage,They could be stored in a fridge set to around 5 degrees in a container for 3-10 days or in the freezer set to -18 degress for it to last 3-4 months
+Where should clams be stored?,Storage,They could be stored in a fridge set to around 5 degrees in a container for 3-10 days or in the freezer set to -18 degress for it to last 3-4 months
+How can I store rice?,Storage,"They should be stored in a container in room temperature, with a shelf life of around 2 years for white rice, and between 3-6 month for brown from manufacture"
+Where should I store rice?,Storage,"They should be stored in a container in room temperature, with a shelf life of around 2 years for white rice, and between 3-6 month for brown from manufacture"
+Rice storage?,Storage,"They should be stored in a container in room temperature, with a shelf life of around 2 years for white rice, and between 3-6 month for brown from manufacture"
+Where should rice be stored?,Storage,"They should be stored in a container in room temperature, with a shelf life of around 2 years for white rice, and between 3-6 month for brown from manufacture"
+How can I store pasta?,Storage,"They should be stored in a container in room temperature, with a shelf life of around 2 years"
+Where should I store pasta?,Storage,"They should be stored in a container in room temperature, with a shelf life of around 2 years"
+Pasta storage?,Storage,"They should be stored in a container in room temperature, with a shelf life of around 2 years"
+Where should pasta be stored?,Storage,"They should be stored in a container in room temperature, with a shelf life of around 2 years"
+How can I store bread?,Storage,"They should be stored in room temperature until there date runs out, but can be put in a freezer for around 3 months"
+Where should I store bread?,Storage,"They should be stored in room temperature until there date runs out, but can be put in a freezer for around 3 months"
+Bread storage?,Storage,"They should be stored in room temperature until there date runs out, but can be put in a freezer for around 3 months"
+Where should bread be stored?,Storage,"They should be stored in room temperature until there date runs out, but can be put in a freezer for around 3 months"
+How can I store oats?,Storage,"They should be stored in room temperature in a container, which could last upto 12 months"
+Where should I store oats?,Storage,"They should be stored in room temperature in a container, which could last upto 12 months"
+Oats storage?,Storage,"They should be stored in room temperature in a container, which could last upto 12 months"
+Where should oats be stored?,Storage,"They should be stored in room temperature in a container, which could last upto 12 months"
+How can I store lentils?,Storage,"They should be stored in room temperature in a container, which could last upto 2-3 years if put in a suitbale container"
+Where should I store lentils?,Storage,"They should be stored in room temperature in a container, which could last upto 2-3 years if put in a suitbale container"
+Lentils storage?,Storage,"They should be stored in room temperature in a container, which could last upto 2-3 years if put in a suitbale container"
+Where should lentils be stored?,Storage,"They should be stored in room temperature in a container, which could last upto 2-3 years if put in a suitbale container"
+How can I dispose,Dispose,"Throwing away an item should be diposed in a suitable manner. If an item is compostable, then you should compost it. If not, then you should dispose of it into a food waste bin."
+Where can I dispose,Dispose,"Throwing away an item should be diposed in a suitable manner. If an item is compostable, then you should compost it. If not, then you should dispose of it into a food waste bin."
+where can I get rid of,Dispose,"Throwing away an item should be diposed in a suitable manner. If an item is compostable, then you should compost it. If not, then you should dispose of it into a food waste bin."
+where can I throw out,Dispose,"Throwing away an item should be diposed in a suitable manner. If an item is compostable, then you should compost it. If not, then you should dispose of it into a food waste bin."
+where can I trash,Dispose,"Throwing away an item should be diposed in a suitable manner. If an item is compostable, then you should compost it. If not, then you should dispose of it into a food waste bin."
+where can I discard,Dispose,"Throwing away an item should be diposed in a suitable manner. If an item is compostable, then you should compost it. If not, then you should dispose of it into a food waste bin."
+where can I dump,Dispose,"Throwing away an item should be diposed in a suitable manner. If an item is compostable, then you should compost it. If not, then you should dispose of it into a food waste bin."
+where can I chuck,Dispose,"Throwing away an item should be diposed in a suitable manner. If an item is compostable, then you should compost it. If not, then you should dispose of it into a food waste bin."
+where can I throw,Dispose,"Throwing away an item should be diposed in a suitable manner. If an item is compostable, then you should compost it. If not, then you should dispose of it into a food waste bin."
