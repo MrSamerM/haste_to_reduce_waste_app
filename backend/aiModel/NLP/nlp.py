@@ -138,8 +138,8 @@ def genResponse(input):
         return best_response
 
 
-while True:
-    user_input = input("You: ")
-    if user_input.lower() == "exit":
-        break
-    print("Bot:", genResponse(user_input))
+# while True:
+#     user_input = input("You: ")
+#     if user_input.lower() == "exit":
+#         break
+#     print("Bot:", genResponse(user_input))

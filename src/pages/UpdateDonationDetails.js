@@ -146,35 +146,47 @@ function UpdateDonationDetails() {
             latitude: latitude
         }
 
-
-        try {
-            const res = await axios.post("http://localhost:8000/updateDonation", data)
-            if (res.data.message === "Updated") {
-                alert("The updated has been made");
-                setFile("");
-                setFileURL("");
-                setPercentage(0);
-                setAddress("");
-                setDescription("");
-                setPortionSize(0);
-                setBaseSixtyFour("");
-                setPredictedClass("");
-                setDisableInput(true);
-                setDisableScanner(true);
-                setLongitude(0);
-                setLatitude(0);
-                window.location.reload()
-            }
-
-
-            if (fileInputRef.current) {
-                fileInputRef.current.value = null;
-            }
-
-        } catch (e) {
-            console.log("Error with submission", e)
+        if (description.length === 0) {
+            alert("You have to add a desciption");
         }
+        else if (portionSize === 0) {
+            alert("You have to have at least 1 portion size");
+        }
+        else if (address.length === 0) {
+            alert("You have to add a address");
+        }
+        else {
 
+
+
+            try {
+                const res = await axios.post("http://localhost:8000/updateDonation", data)
+                if (res.data.message === "Updated") {
+                    alert("The updated has been made");
+                    setFile("");
+                    setFileURL("");
+                    setPercentage(0);
+                    setAddress("");
+                    setDescription("");
+                    setPortionSize(0);
+                    setBaseSixtyFour("");
+                    setPredictedClass("");
+                    setDisableInput(true);
+                    setDisableScanner(true);
+                    setLongitude(0);
+                    setLatitude(0);
+                    window.location.reload()
+                }
+
+
+                if (fileInputRef.current) {
+                    fileInputRef.current.value = null;
+                }
+
+            } catch (e) {
+                console.log("Error with submission", e)
+            }
+        }
     }
 
     return (
