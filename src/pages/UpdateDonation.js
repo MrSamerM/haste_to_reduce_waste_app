@@ -34,8 +34,11 @@ function UpdateDonation() {
             donationID: id
         }
         try {
-            await axios.post('http://localhost:8000/removeDonation', data);
-            window.location.reload();
+            const res = await axios.post('http://localhost:8000/removeDonation', data);
+            if (res.data.message === "donation Removed") {
+                window.location.reload();
+
+            }
 
         } catch (err) {
             console.log("Error", err)

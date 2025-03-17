@@ -394,6 +394,9 @@ app.post('/removeDonation', async (req, res) => {
         const findUser = await User.findByIdAndUpdate(req.session.userID, { $inc: { points: -10 } })
         await findUser.save();
 
+        res.json({ message: "donation Removed" });
+
+
         console.log("Donation Removed")
 
     } catch (err) {
