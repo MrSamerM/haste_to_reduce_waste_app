@@ -58,8 +58,8 @@ function Donate() {
     const [description, setDescription] = useState("");
     const [portionSize, setPortionSize] = useState(0);
     const [baseSixtyFour, setBaseSixtyFour] = useState("");
-    const [predictedClass, setPredictedClass] = useState(""); // State for predicted class
-    const [education, setEducation] = useState(false);
+    const [predictedClass, setPredictedClass] = useState(""); // State for predicted class Change after test
+    const [education, setEducation] = useState(false); //Change after test
     const [educationState, setEducationState] = useState(0);
     const [displayScore, setDisplayScore] = useState(false);
     const [quizScore, setQuizScore] = useState(0)
@@ -68,6 +68,8 @@ function Donate() {
     const [foodPortion, setFoodPortion] = useState(0);
     const [answerSelected, setAnswerSelected] = useState(null);
     const [wrongAnswers, setWrongAnswers] = useState([]);
+    // const [address2, setAddress2] = useState(""); //ONLY FOR TESTING
+
 
 
 
@@ -194,6 +196,12 @@ function Donate() {
 
     }, []);
 
+    // useEffect(() => {
+
+    //     console.log(address2); only for testing
+
+    // }, [address2]);
+
     const submit = async (event) => {
         event.preventDefault();
 
@@ -224,11 +232,12 @@ function Donate() {
             setAddress(place.properties.formatted);
             setLongitude(place.geometry.coordinates[0]);
             setLatitude(place.geometry.coordinates[1]);
-
+            setAddress2(place.properties.formatted)
         }
     }
 
     const updatedAddress = (value) => {
+        setAddress(value);
         setAddress(value);
     }
 
@@ -667,10 +676,12 @@ function Donate() {
                                                 />
                                             </GeoapifyContext>
                                         </div>}
+                                    {/* <input value={address2} data-testid="testAddressInput" id="testAddressInput" />  */}
+                                    {/* only for testing */}
                                 </div>
                             </div>
                             <br></br>
-                            <button id="donateButton" disabled={predictedClass === "a Container" ? false : true} onClick={donate}>Donate</button>
+                            <button data-testid="donateButton" id="donateButton" disabled={predictedClass === "a Container" ? false : true} onClick={donate}>Donate</button>
                         </div>
                     </div>
                 </>)

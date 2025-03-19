@@ -486,3 +486,7 @@ Prompt2: is there a way of doing it in css
     text-shadow: 0 0 5px green, 0 0 10px green, 0 0 15px green;
     text-align: center;
 }
+
+#testAddressInput {
+    display: none;
+}
