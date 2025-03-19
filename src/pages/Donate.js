@@ -644,12 +644,12 @@ function Donate() {
 
                                 <div className="donationInputDiv">
                                     <label className="donateInputLabels" htmlFor="descriptionInput">Description:</label>
-                                    <input className="donationInputs" disabled={disableInput} type="text" id="descriptionInput" placeholder="Enter description here" value={description} onChange={(evt) => setDescription(evt.target.value)} />
+                                    <input className="donationInputs" data-testid="descriptionInput" disabled={disableInput} type="text" id="descriptionInput" placeholder="Enter description here" value={description} onChange={(evt) => setDescription(evt.target.value)} />
                                 </div>
                                 <br></br>
                                 <div className="donationInputDiv">
                                     <label className="donateInputLabels" htmlFor="portionSizeInput">Portion Size:</label>
-                                    <input className="donationInputs" disabled={disableInput} type="number" id="portionSizeInput" value={portionSize} onChange={(evt) => setPortionSize(evt.target.value)} />
+                                    <input className="donationInputs" data-testid="portionSizeInput" disabled={disableInput} type="number" id="portionSizeInput" value={portionSize} onChange={(evt) => setPortionSize(evt.target.value)} />
                                 </div>
                                 <br></br>
                                 <div className="donationInputDiv">
@@ -658,7 +658,7 @@ function Donate() {
                                     {disableInput === true ? <input className="donationInputs" id="addressInput" placeholder="Enter address here" disabled={disableInput} />
                                         : <div className="donationInputs" id="autoCompleteAddress">
                                             <GeoapifyContext apiKey={process.env.REACT_APP_GEOAPIFY_API_KEY}>
-                                                <GeoapifyGeocoderAutocomplete id="addressInput" placeholder="Enter address here"
+                                                <GeoapifyGeocoderAutocomplete data-testid="addressInput" id="addressInput" placeholder="Enter address here"
                                                     lang='en'
                                                     limit={5}
                                                     value={address}
@@ -670,8 +670,7 @@ function Donate() {
                                 </div>
                             </div>
                             <br></br>
-                            {predictedClass === "a Container" ? <button id="donateButton" disabled={false} onClick={donate}>Donate</button>
-                                : <button id="donateButton" disabled={true} onClick={donate}>Donate</button>}
+                            <button id="donateButton" disabled={predictedClass === "a Container" ? false : true} onClick={donate}>Donate</button>
                         </div>
                     </div>
                 </>)
