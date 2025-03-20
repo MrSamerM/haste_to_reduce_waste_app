@@ -68,7 +68,15 @@ function Donate() {
     const [foodPortion, setFoodPortion] = useState(0);
     const [answerSelected, setAnswerSelected] = useState(null);
     const [wrongAnswers, setWrongAnswers] = useState([]);
-    // const [address2, setAddress2] = useState(""); //ONLY FOR TESTING
+
+
+    //ONLY FOR TESTING
+    // const [predictedClass, setPredictedClass] = useState("a Container"); // State for predicted class Change after test
+    // const [address2, setAddress2] = useState("");
+    // const [education, setEducation] = useState(true); //Change after test
+    // const [baseSixtyFour, setBaseSixtyFour] = useState("image.png/base64String");
+
+
 
 
 
@@ -238,7 +246,7 @@ function Donate() {
 
     const updatedAddress = (value) => {
         setAddress(value);
-        setAddress(value);
+        setAddress2(value);
     }
 
     // Chatgpt Prompt: (image of my code) I want everything to reset, however the file still says the name of the previous file? 19/01/2025
@@ -253,7 +261,8 @@ function Donate() {
             image: baseSixtyFour,
             description: description,
             portionSize: portionSize,
-            address: address,
+            // address:address
+            address: address2,
             longitude: longitude,
             latitude: latitude
         }
@@ -264,7 +273,10 @@ function Donate() {
         else if (portionSize <= 0) {
             alert("You have to have at least 1 portion size");
         }
-        else if (address.length === 0) {
+        // else if (address.length === 0) {
+        //     alert("You have to add a address");
+        // }
+        else if (address2.length === 0) {
             alert("You have to add a address");
         }
 
@@ -676,12 +688,12 @@ function Donate() {
                                                 />
                                             </GeoapifyContext>
                                         </div>}
-                                    {/* <input value={address2} data-testid="testAddressInput" id="testAddressInput" />  */}
+                                    <input value={address2} data-testid="testAddressInput" id="testAddressInput" onChange={(evt) => setAddress2(evt.target.value)} />
                                     {/* only for testing */}
                                 </div>
                             </div>
                             <br></br>
-                            <button data-testid="donateButton" id="donateButton" disabled={predictedClass === "a Container" ? false : true} onClick={donate}>Donate</button>
+                            <button data-testid="donateButton" id="donateButton" disabled={false} onClick={donate}>Donate</button>
                         </div>
                     </div>
                 </>)
