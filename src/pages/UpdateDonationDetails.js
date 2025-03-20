@@ -21,6 +21,12 @@ function UpdateDonationDetails() {
     const [baseSixtyFour, setBaseSixtyFour] = useState("");
     const [predictedClass, setPredictedClass] = useState("");
 
+    //ONLY FOR TESTING
+    // const [predictedClass, setPredictedClass] = useState("a Container"); // State for predicted class Change after test
+    // const [address2, setAddress2] = useState("");
+    // const [baseSixtyFour, setBaseSixtyFour] = useState("image.png/base64String");
+
+
     axios.defaults.withCredentials = true;
 
     const { id } = useParams();
@@ -138,10 +144,12 @@ function UpdateDonationDetails() {
 
         const data = {
             donationId: id,
+            // donationId: "hu3649373u",
             image: decision,
             description: description,
             portionSize: portionSize,
             address: address,
+            // address: address2,
             longitude: longitude,
             latitude: latitude
         }
@@ -149,20 +157,21 @@ function UpdateDonationDetails() {
         if (description.length === 0) {
             alert("You have to add a desciption");
         }
-        else if (portionSize === 0) {
+        else if (portionSize <= 0) {
             alert("You have to have at least 1 portion size");
         }
         else if (address.length === 0) {
             alert("You have to add a address");
         }
+        // else if (address2.length === 0) {
+        //     alert("You have to add a address");
+        // }
         else {
-
-
 
             try {
                 const res = await axios.post("http://localhost:8000/updateDonation", data)
                 if (res.data.message === "Updated") {
-                    alert("The updated has been made");
+                    alert("The update has been made");
                     setFile("");
                     setFileURL("");
                     setPercentage(0);
@@ -226,12 +235,12 @@ function UpdateDonationDetails() {
 
                         <div className="donationInputDiv">
                             <label className="donateInputLabels" htmlFor="descriptionInput">Description:</label>
-                            <input className="donationInputs" disabled={disableInput} type="text" id="descriptionInput" placeholder="Enter description here" value={description} onChange={(evt) => setDescription(evt.target.value)} />
+                            <input className="donationInputs" disabled={disableInput} type="text" id="descriptionInput" data-testid="descriptionInput" placeholder="Enter description here" value={description} onChange={(evt) => setDescription(evt.target.value)} />
                         </div>
                         <br></br>
                         <div className="donationInputDiv">
                             <label className="donateInputLabels" htmlFor="portionSizeInput">Portion Size:</label>
-                            <input className="donationInputs" disabled={disableInput} type="number" id="portionSizeInput" value={portionSize} onChange={(evt) => setPortionSize(evt.target.value)} />
+                            <input className="donationInputs" disabled={disableInput} type="number" id="portionSizeInput" data-testid="portionSizeInput" value={portionSize} onChange={(evt) => setPortionSize(evt.target.value)} />
                         </div>
                         <br></br>
                         <div className="donationInputDiv">
@@ -249,10 +258,13 @@ function UpdateDonationDetails() {
                                         />
                                     </GeoapifyContext>
                                 </div>}
+                            {/* Only for testing */}
+                            {/* <input value={address2} data-testid="testAddressInput" id="testAddressInput" onChange={(evt) => setAddress2(evt.target.value)} /> */}
+
                         </div>
                     </div>
                     <br></br>
-                    <button id="donateButton" disabled={disableInput} onClick={updateDonation}>Update Donation</button>
+                    <button id="donateButton" data-testid="updateDonation" disabled={disableInput} onClick={updateDonation}>Update Donation</button>
                 </div>
 
 

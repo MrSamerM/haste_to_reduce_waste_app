@@ -76,11 +76,6 @@ function Donate() {
     // const [education, setEducation] = useState(true); //Change after test
     // const [baseSixtyFour, setBaseSixtyFour] = useState("image.png/base64String");
 
-
-
-
-
-
     const questions = [
         {
             question: "How many tonnes of food waste was prevented in 2024?",
@@ -688,7 +683,7 @@ function Donate() {
                                                 />
                                             </GeoapifyContext>
                                         </div>}
-                                    <input value={address2} data-testid="testAddressInput" id="testAddressInput" onChange={(evt) => setAddress2(evt.target.value)} />
+                                    {/* <input value={address2} data-testid="testAddressInput" id="testAddressInput" onChange={(evt) => setAddress2(evt.target.value)} /> */}
                                     {/* only for testing */}
                                 </div>
                             </div>
