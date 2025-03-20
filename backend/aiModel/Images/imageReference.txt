@@ -1,0 +1,14 @@
+SuitableContainer1: https://www.pexels.com/photo/a-man-holding-a-fork-6646027/ 
+SuitableContainer2: https://www.pexels.com/photo/variety-of-dishes-1640771/ 
+SuitableContainer3: https://unsplash.com/photos/pizza-on-white-ceramic-plates-2lWGQ02DGL8 
+SuitableContainer4: https://unsplash.com/photos/pizza-on-white-ceramic-plates-2lWGQ02DGL8
+SuitableContainer5: https://www.pexels.com/photo/spaghetti-with-meatballs-on-aluminum-tray-5724553/ 
+SuitbaleContainer6: https://www.pexels.com/photo/lasagna-on-tray-19589060/
+
+
+NotContainer1: https://unsplash.com/photos/burger-inside-styrofoam-container-M-fA89yvx2I 
+NotContainer2: https://unsplash.com/photos/two-fruits-bZI7Wj_KoWw 
+NotContainer3: https://www.pexels.com/photo/fresh-fruits-and-vegetables-put-in-plastic-bags-4033167/
+NotContainer4: https://www.pexels.com/photo/a-plastic-bag-with-green-and-black-fruits-5339371/
+NotContainer5: https://www.pexels.com/photo/fruits-in-a-plastic-bag-3645504/
+NotContainer6: https://www.pexels.com/photo/a-homeless-man-eating-on-a-sidewalk-9532295/

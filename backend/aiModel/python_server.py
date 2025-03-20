@@ -70,6 +70,17 @@ def upload():
 
     # Load image
     img_path = f"./uploads/{file.filename}"
+
+    reader=easyocr.Reader(['en']) #specifies lanuage
+    result=reader.readtext(img_path)
+
+    detected_text = [text for _, text, _ in result]
+
+    if detected_text:
+        return jsonify({"message": "Not a Container", "confidence": 100})
+
+    
+    
     img = image.load_img(img_path, target_size=(226, 226))
     x = image.img_to_array(img)
     x = np.expand_dims(x, axis=0)

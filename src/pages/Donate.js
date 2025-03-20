@@ -235,13 +235,11 @@ function Donate() {
             setAddress(place.properties.formatted);
             setLongitude(place.geometry.coordinates[0]);
             setLatitude(place.geometry.coordinates[1]);
-            setAddress2(place.properties.formatted)
         }
     }
 
     const updatedAddress = (value) => {
         setAddress(value);
-        setAddress2(value);
     }
 
     // Chatgpt Prompt: (image of my code) I want everything to reset, however the file still says the name of the previous file? 19/01/2025
@@ -256,8 +254,8 @@ function Donate() {
             image: baseSixtyFour,
             description: description,
             portionSize: portionSize,
-            // address:address
-            address: address2,
+            address: address,
+            // address: address2,
             longitude: longitude,
             latitude: latitude
         }
@@ -268,12 +266,12 @@ function Donate() {
         else if (portionSize <= 0) {
             alert("You have to have at least 1 portion size");
         }
-        // else if (address.length === 0) {
-        //     alert("You have to add a address");
-        // }
-        else if (address2.length === 0) {
+        else if (address.length === 0) {
             alert("You have to add a address");
         }
+        // else if (address2.length === 0) {
+        //     alert("You have to add a address");
+        // }
 
         else {
 
