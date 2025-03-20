@@ -395,6 +395,11 @@ function FoodLabels() {
                 const words = result.filter(element => pattern1.test(element));
                 const dates = result.filter(element => pattern2.test(element));
 
+                if (words.length === 0 || dates.length === 0) {
+                    console.log(`The image provided was not sufficient. The reason could be because the image was not clear enough, of the dates were not displayed, please find the dates and take clearer picture`);
+                    setText(`The image provided was not sufficient. The reason could be because the image was not clear enough, of the dates were not displayed, please find the dates and take clearer picture`);
+                }
+
                 console.log("this is word", words);
                 console.log("this is dates", dates);
 
