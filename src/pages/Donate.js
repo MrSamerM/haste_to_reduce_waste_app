@@ -212,6 +212,8 @@ function Donate() {
         formData.append("file", file);
 
         try {
+            // https://www.sitepoint.com/measuring-javascript-functions-performance/ for performance.now
+            const timeStart = performance.now()
             // POST request to backend with credentials (if needed)
             const response = await axios.post("http://localhost:5000/upload", formData, {
                 headers: {
@@ -222,6 +224,9 @@ function Donate() {
             console.log(response.data.message);
             setPredictedClass(response.data.message);
             setPercentage(response.data.confidence);
+            const timeEnd = performance.now()
+            console.log(((timeEnd - timeStart).toFixed(4)) / 1000 + ' Seconds')
+
         } catch (error) {
             console.error("Can't send the file", error);
         }

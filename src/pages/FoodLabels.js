@@ -153,6 +153,17 @@ function FoodLabels() {
             return newDate.getTime();
         }
 
+        else if (date.match(/\d{2}\\\d{2}\\\d{2,4}/)) {
+            const parts = date.split("'\'");
+            const day = parseInt(parts[0], 10);
+            const month = parseInt(parts[1], 10) - 1;
+            const yearString = parts[2];
+            const year = parseInt(yearString, 10);
+            const fullYear = yearString.length === 2 ? 2000 + year : year;
+            const newDate = new Date(fullYear, month, day);
+            return newDate.getTime();
+        }
+
         else if (date.match(/\d{2}\-\d{2}\-\d{2,4}/)) {
             const parts = date.split("-");
             const day = parseInt(parts[0], 10);
@@ -161,6 +172,38 @@ function FoodLabels() {
             const year = parseInt(yearString, 10);
             const fullYear = yearString.length === 2 ? 2000 + year : year;
             const newDate = new Date(fullYear, month, day);
+            return newDate.getTime();
+        }
+
+        else if (date.match(/\d{2}\.\d{2}\.\d{2,4}/)) {
+            const parts = date.split(".");
+            const day = parseInt(parts[0], 10);
+            const month = parseInt(parts[1], 10) - 1;
+            const yearString = parts[2];
+            const year = parseInt(yearString, 10);
+            const fullYear = yearString.length === 2 ? 2000 + year : year;
+            const newDate = new Date(fullYear, month, day);
+            return newDate.getTime();
+        }
+
+        else if (date.match(/\d{2}\ \d{2}\ \d{2,4}/)) {
+            const parts = date.split(" ");
+            const day = parseInt(parts[0], 10);
+            const month = parseInt(parts[1], 10) - 1;
+            const yearString = parts[2];
+            const year = parseInt(yearString, 10);
+            const fullYear = yearString.length === 2 ? 2000 + year : year;
+            const newDate = new Date(fullYear, month, day);
+            return newDate.getTime();
+        }
+
+        else if (date.match(/\d{2}\/\d{2,4}/)) {
+            const parts = date.split("/");
+            const month = parseInt(parts[0], 10) - 1;
+            const yearString = parts[1];
+            const year = parseInt(yearString, 10);
+            const fullYear = yearString.length === 2 ? 2000 + year : year;
+            const newDate = new Date(fullYear, month, 1);
             return newDate.getTime();
         }
 
@@ -179,6 +222,8 @@ function FoodLabels() {
             const newDate = new Date(fullYear, month, day);
             return newDate.getTime();
         }
+
+
         else {
             return null
         }
@@ -255,6 +300,18 @@ function FoodLabels() {
             return `${String(newDate.getDate()).padStart(2, '0')}/${String(newDate.getMonth() + 1).padStart(2, '0')}/${newDate.getFullYear()}`;
         }
 
+        else if (date.match(/\d{2}\\\d{2}\\\d{2,4}/)) {
+            const parts = date.split("'\'");
+            const day = parseInt(parts[0], 10);
+            const month = parseInt(parts[1], 10) - 1;
+            const yearString = parts[2];
+            const year = parseInt(yearString, 10);
+            const fullYear = yearString.length === 2 ? 2000 + year : year;
+            const newDate = new Date(fullYear, month, day);
+
+            return `${String(newDate.getDate()).padStart(2, '0')}/${String(newDate.getMonth() + 1).padStart(2, '0')}/${newDate.getFullYear()}`;
+        }
+
         else if (date.match(/\d{2}\-\d{2}\-\d{2,4}/)) {
             const parts = date.split("-");
             const day = parseInt(parts[0], 10);
@@ -264,6 +321,40 @@ function FoodLabels() {
             const fullYear = yearString.length === 2 ? 2000 + year : year;
             const newDate = new Date(fullYear, month, day);
 
+            return `${String(newDate.getDate()).padStart(2, '0')}/${String(newDate.getMonth() + 1).padStart(2, '0')}/${newDate.getFullYear()}`;
+        }
+
+        else if (date.match(/\d{2}\.\d{2}\.\d{2,4}/)) {
+            const parts = date.split(".");
+            const day = parseInt(parts[0], 10);
+            const month = parseInt(parts[1], 10) - 1;
+            const yearString = parts[2];
+            const year = parseInt(yearString, 10);
+            const fullYear = yearString.length === 2 ? 2000 + year : year;
+            const newDate = new Date(fullYear, month, day);
+
+            return `${String(newDate.getDate()).padStart(2, '0')}/${String(newDate.getMonth() + 1).padStart(2, '0')}/${newDate.getFullYear()}`;
+        }
+
+        else if (date.match(/\d{2}\ \d{2}\ \d{2,4}/)) {
+            const parts = date.split(" ");
+            const day = parseInt(parts[0], 10);
+            const month = parseInt(parts[1], 10) - 1;
+            const yearString = parts[2];
+            const year = parseInt(yearString, 10);
+            const fullYear = yearString.length === 2 ? 2000 + year : year;
+            const newDate = new Date(fullYear, month, day);
+
+            return `${String(newDate.getDate()).padStart(2, '0')}/${String(newDate.getMonth() + 1).padStart(2, '0')}/${newDate.getFullYear()}`;
+        }
+
+        else if (date.match(/\d{2}\/\d{2,4}/)) {
+            const parts = date.split("/");
+            const month = parseInt(parts[0], 10) - 1;
+            const yearString = parts[1];
+            const year = parseInt(yearString, 10);
+            const fullYear = yearString.length === 2 ? 2000 + year : year;
+            const newDate = new Date(fullYear, month, 1);
             return `${String(newDate.getDate()).padStart(2, '0')}/${String(newDate.getMonth() + 1).padStart(2, '0')}/${newDate.getFullYear()}`;
         }
 
@@ -297,6 +388,8 @@ function FoodLabels() {
             formData.append("file", file);
 
             try {
+                const timeStart = performance.now()
+
                 const response = await axios.post("http://localhost:5000/text", formData, {
                     headers: {
                         "Content-Type": "multipart/form-data",
@@ -313,7 +406,7 @@ function FoodLabels() {
                 // Main Prompts 1:I want this for loop to loop through a array with strings. If it finds 'by', and the next is 'before' or vise versa, then put it in front. For example [hello, very, best, by] => will be [best, by, hello, very]. I want to do this with use by. However I can't because both best by, and use by have by in it. what should I do (My code)
                 //Main Prompt 2: No you do not understand. I need to try and find the pairs either Best and By || By and Best || Best and Before || Before and Best || Use and By || By and Use, when these pairs are found, it does not mean they are next to each other, they could be very far a part, if they are found in the same array then I need to put them into the front
 
-                result = result.map(word => word.replace(/[^a-zA-Z0-9\s\/]/g, "").toUpperCase());
+                result = result.map(word => word.replace(/[^a-zA-Z0-9\s\/\-]/g, "").toUpperCase());
 
                 const targetPairs = [
                     ["BY", "BEST"],
@@ -386,7 +479,7 @@ function FoodLabels() {
                 // chatGPT i for case insensitivity, and matching by mapping Prompt: still a error (my pattern)
 
                 const pattern1 = /(BB|Expiry Date|BBE|EXP|BEST BY|Best By|Best Before|Use By|Expiry)/i;
-                const pattern2 = /(\d{1,2}\/\d{1,2}\/\d{2,4}|\d{6}(?<=^\d{2}[01-9]{1}[0-9]{1}[0-9]{1})|\d{1,2}\-\d{1,2}\-\d{2,4}|\d{1,2}\.\d{1,2}\.\d{2,4}|\d{1,2} \d{1,2} \d{2,4}|\d{1,2}[A-Za-z]{3}\d{1,2}|\d{1,2} [A-Za-z]{3} \d{2,4})/i;
+                const pattern2 = /(\d{1,2}\/\d{1,2}\/\d{2,4}|\d{6}(?<=^\d{2}[01-9]{1}[0-9]{1}[0-9]{1})|\d{1,2}\-\d{1,2}\-\d{2,4}|\d{1,2}\.\d{1,2}\.\d{2,4}|\d{1,2} \d{1,2} \d{2,4}|\d{1,2}[A-Za-z]{3}\d{1,2}|\d{1,2} [A-Za-z]{3} \d{2,4}|\d{2}\/\d{2,4})/i;
 
                 // filter method recieved by chatgpt, and remove gm, due to global issues with .test()
                 //prompt: I have a array but I want to remove the elements that dont follow a regex pattern. 31/01/2025
@@ -399,6 +492,8 @@ function FoodLabels() {
                     console.log(`The image provided was not sufficient. The reason could be because the image was not clear enough, of the dates were not displayed, please find the dates and take clearer picture`);
                     setText(`The image provided was not sufficient. The reason could be because the image was not clear enough, of the dates were not displayed, please find the dates and take clearer picture`);
                 }
+                const timeEnd = performance.now()
+                console.log(((timeEnd - timeStart).toFixed(4)) / 1000 + ' Seconds')
 
                 console.log("this is word", words);
                 console.log("this is dates", dates);
@@ -525,6 +620,9 @@ function FoodLabels() {
                     console.log(`The image provided was not sufficient. The reason could be because the image was not clear enough, of the dates were not displayed, please find the dates and take clearer picture`);
                     setText(`The image provided was not sufficient. The reason could be because the image was not clear enough, of the dates were not displayed, please find the dates and take clearer picture`);
                 }
+                const timeEnd2 = performance.now()
+                console.log(((timeEnd2 - timeStart).toFixed(4)) / 1000 + ' Seconds')
+
             } catch (error) {
                 console.error("Can't send the file", error);
             }
