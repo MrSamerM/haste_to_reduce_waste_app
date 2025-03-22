@@ -406,7 +406,7 @@ function FoodLabels() {
                 // Main Prompts 1:I want this for loop to loop through a array with strings. If it finds 'by', and the next is 'before' or vise versa, then put it in front. For example [hello, very, best, by] => will be [best, by, hello, very]. I want to do this with use by. However I can't because both best by, and use by have by in it. what should I do (My code)
                 //Main Prompt 2: No you do not understand. I need to try and find the pairs either Best and By || By and Best || Best and Before || Before and Best || Use and By || By and Use, when these pairs are found, it does not mean they are next to each other, they could be very far a part, if they are found in the same array then I need to put them into the front
 
-                result = result.map(word => word.replace(/[^a-zA-Z0-9\s\/\-]/g, "").toUpperCase());
+                result = result.map(word => word.replace(/[^a-zA-Z0-9\s\/\-\.]/g, "").toUpperCase());
 
                 const targetPairs = [
                     ["BY", "BEST"],
