@@ -50,8 +50,6 @@ customData = pd.read_csv(dataset_path)
 question_tokens=[]
 response_tokens=[]
 stop_words=set(stopwords.words('english'))
-stop_words=[word for word in stop_words if word not in("where","you")]
-
 
 for question in customData['Questions']:
 

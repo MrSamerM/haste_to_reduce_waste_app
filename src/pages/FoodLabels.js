@@ -617,7 +617,7 @@ function FoodLabels() {
 
                 if ((numberArray[0].word.toUpperCase().charAt(0) === ("E") || numberArray[0].word.toUpperCase().charAt(0) === ("U"))) {
                     console.log(`This means that you have until ${dateConvertionToDate(numberArray[1].word)} to consume. That is it`);
-                    setText(`This means that you have until ${dateConvertionToDate(numberArray[1].word)} to consume. That is it`);
+                    setText(`Based on the image that was posted, the label means that you have until ${dateConvertionToDate(numberArray[1].word)} to consume, it should not be consumed if over this date `);
                 }
                 else if ((numberArray[0].word.toUpperCase().charAt(0) === ("B"))) {
                     console.log(`This means that you have until ${dateConvertionToDate(numberArray[1].word)} to consume while it is closed, however if stored properly, and quality looks suitbale, it can extend over the date`);
@@ -626,7 +626,7 @@ function FoodLabels() {
                 }
 
                 else if ((numberArray[0].word.toUpperCase().charAt(0) === "B" || numberArray[0].word.toUpperCase().charAt(0) === "D") && (numberArray[2].word.toUpperCase().charAt(0) === ("E") || numberArray[2].word.toUpperCase().charAt(0) === ("U"))) {
-                    console.log(`This means that you have until ${dateConvertionToDate(numberArray[1].word)} to consume while it is closed, however if stored properly, and quality looks suitbale, it make extend over the date`)
+                    console.log(`This means that you have until ${dateConvertionToDate(numberArray[1].word)} to consume while it is closed, however if stored properly, and quality looks suitbale, it may extend over the date`)
                     console.log(`This means that you have until ${dateConvertionToDate(numberArray[3].word)} to consume. That is it`)
                     setText(`This means that you have until ${dateConvertionToDate(numberArray[1].word)} to consume while it is closed, however if stored properly, and quality looks suitbale, it make extend over the date`,
                         `This means that you have until ${dateConvertionToDate(numberArray[3].word)} to consume. That is it`
@@ -863,7 +863,7 @@ function FoodLabels() {
                                 <input type="file" id="imageFoodLabelFile" onChange={change} ref={fileInputRef} />
 
                                 <p id="imageFoodLabelRequirement">
-                                    The image must be a .png, jpeg, jpg, of gif file.<br></br>
+                                    The image must be a .png, jpeg, jpg, or gif file.<br></br>
                                     This is to allow you to press scan to scan the image.<br></br>
                                 </p>
                                 <button id="scanFoodLabelImage" disabled={false} onClick={submit}>Scan</button>

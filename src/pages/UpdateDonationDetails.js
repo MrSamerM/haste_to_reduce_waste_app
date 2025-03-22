@@ -210,7 +210,7 @@ function UpdateDonationDetails() {
                         <input type="file" id="imageFile" onChange={change} ref={fileInputRef} />
 
                         <p id="imageRequirement">
-                            The image must be a .png, jpeg, jpg, of gif file.<br></br>
+                            The image must be a .png, jpeg, jpg, or gif file.<br></br>
                             This is to allow you to press scan to scan the image.<br></br>
                             If the image is over 70% a container, then you can donate.<br></br>
                             The item should be put in a suitable container.<br></br>
