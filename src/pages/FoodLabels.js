@@ -486,31 +486,30 @@ function FoodLabels() {
                 //prompt2: No, I want to remove EXP from it
                 //prompt3: would this not work (old code)
 
-                // const words = result.filter(element => pattern1.test(element));
 
                 const words = result
                     .map(element => {
                         const match = element.match(pattern1);
                         return match ? match[0] : null;
                     })
-                    .filter(Boolean); // Removes null values
+                    .filter(Boolean);
 
-                // const dates = result.filter(element => pattern2.test(element));
 
                 const dates = result
                     .map(element => {
                         const match = element.match(pattern2);
                         return match ? match[0] : null;
                     })
-                    .filter(Boolean); // Removes null values
+                    .filter(Boolean);
 
                 if (words.length === 0 || dates.length === 0) {
                     console.log(`The image provided was not sufficient. The reason could be because the image was not clear enough, of the dates were not displayed, please find the dates and take clearer picture`);
                     setText(`The image provided was not sufficient. The reason could be because the image was not clear enough, of the dates were not displayed, please find the dates and take clearer picture`);
+                    const timeEnd = performance.now()
+                    console.log(((timeEnd - timeStart).toFixed(4)) / 1000 + ' Seconds')
                     return;
                 }
-                const timeEnd = performance.now()
-                console.log(((timeEnd - timeStart).toFixed(4)) / 1000 + ' Seconds')
+
 
                 console.log("this is word", words);
                 console.log("this is dates", dates);
