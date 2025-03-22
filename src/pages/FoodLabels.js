@@ -831,7 +831,6 @@ function FoodLabels() {
                                     <>
                                         <p className="resultMessageLabel">Congratulations You Got Full Marks<br></br></p><br></br>
                                         <img id="pointsLabel" src={star} alt="gold points coin" />
-                                        {/* image generated from dream.ai prompt: yellow star with "#1" in the middle 13/02/2025 */}
 
                                     </>
                                     :
