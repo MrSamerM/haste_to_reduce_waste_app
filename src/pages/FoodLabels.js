@@ -481,16 +481,33 @@ function FoodLabels() {
                 const pattern1 = /(BB|Expiry Date|BBE|EXP|BEST BY|Best By|Best Before|Use By|Expiry)/i;
                 const pattern2 = /(\d{1,2}\/\d{1,2}\/\d{2,4}|\d{6}(?<=^\d{2}[01-9]{1}[0-9]{1}[0-9]{1})|\d{1,2}\-\d{1,2}\-\d{2,4}|\d{1,2}\.\d{1,2}\.\d{2,4}|\d{1,2} \d{1,2} \d{2,4}|\d{1,2}[A-Za-z]{3}\d{1,2}|\d{1,2} [A-Za-z]{3} \d{2,4}|\d{2}\/\d{2,4})/i;
 
-                // filter method recieved by chatgpt, and remove gm, due to global issues with .test()
-                //prompt: I have a array but I want to remove the elements that dont follow a regex pattern. 31/01/2025
-                //prompt2: why is this not working (the method).
+                // filter method recieved by chatgpt, and remove gm, due to global issues with .test() 22/03/2025
+                //prompt: I have this EXP 02/2027, why would it match in this regex (pattern 2)
+                //prompt2: No, I want to remove EXP from it
+                //prompt3: would this not work (old code)
 
-                const words = result.filter(element => pattern1.test(element));
-                const dates = result.filter(element => pattern2.test(element));
+                // const words = result.filter(element => pattern1.test(element));
+
+                const words = result
+                    .map(element => {
+                        const match = element.match(pattern1);
+                        return match ? match[0] : null;
+                    })
+                    .filter(Boolean); // Removes null values
+
+                // const dates = result.filter(element => pattern2.test(element));
+
+                const dates = result
+                    .map(element => {
+                        const match = element.match(pattern2);
+                        return match ? match[0] : null;
+                    })
+                    .filter(Boolean); // Removes null values
 
                 if (words.length === 0 || dates.length === 0) {
                     console.log(`The image provided was not sufficient. The reason could be because the image was not clear enough, of the dates were not displayed, please find the dates and take clearer picture`);
                     setText(`The image provided was not sufficient. The reason could be because the image was not clear enough, of the dates were not displayed, please find the dates and take clearer picture`);
+                    return;
                 }
                 const timeEnd = performance.now()
                 console.log(((timeEnd - timeStart).toFixed(4)) / 1000 + ' Seconds')
