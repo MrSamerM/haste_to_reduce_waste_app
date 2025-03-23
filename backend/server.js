@@ -93,20 +93,6 @@ app.post('/register', async (req, res) => {
     }
 });
 
-app.post('/addPoints', async (req, res) => {
-    try {
-        const findUser = await User.findByIdAndUpdate(req.session.userID, { $inc: { points: +50 } })
-
-        await findUser.save();
-        console.log("Points added Successfully");
-        res.json({ message: "Added" })
-    }
-    catch (e) {
-        console.log("Error", e)
-        res.status(400).json({ error: "There appears to be a error when adding points" })
-    }
-});
-
 app.post('/donate', async (req, res) => {
     try {
         const { image, description, portionSize, address, longitude, latitude } = req.body
@@ -314,6 +300,10 @@ app.post('/purchase', async (req, res) => {
             }
         )
 
+        for (let i = 0; i < listOfProducts.length; i++) {
+            await Product.findByIdAndUpdate(listOfProducts[i], { $inc: { quantity: -1 } });
+        }
+
         const findUser = await User.findByIdAndUpdate(req.session.userID, { $inc: { points: -totalAmount } })
         await findUser.save();
         await registerReceipt.save()
@@ -394,12 +384,7 @@ app.post('/removeDonation', async (req, res) => {
     try {
         const { donationID } = req.body
         await Donation.findByIdAndDelete(donationID)
-        const findUser = await User.findByIdAndUpdate(req.session.userID, { $inc: { points: -10 } })
-        await findUser.save();
-
         res.json({ message: "donation Removed" });
-
-
         console.log("Donation Removed")
 
     } catch (err) {

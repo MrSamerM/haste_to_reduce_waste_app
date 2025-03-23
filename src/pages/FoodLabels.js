@@ -666,6 +666,9 @@ function FoodLabels() {
                 if (selectedAnswer === questions[currentQuestion].answer) {
                     setQuizScore(prevScore => prevScore + 1);
                 }
+                else if (selectedAnswer !== questions[currentQuestion].answer) {
+                    setWrongAnswers(prevWrongAnswers => [...prevWrongAnswers, questions[currentQuestion].question]);
+                }
                 setDisplayScore(true);
             }
             else if (selectedAnswer === questions[currentQuestion].answer) {
@@ -763,10 +766,10 @@ function FoodLabels() {
                                     <div className="textOverlayLabel">
                                         <h4>Use By Date</h4><br></br>
                                         <p>
-                                            Use By Date is when .......
-                                            hot food, especially for hot food,
-                                            and are able to contain heat and store food
-                                            properly without any affect
+                                            Use By Date is where the food consumed
+                                            has to be eaten before or on that date.
+                                            It should not be consumed pass that date
+                                            due to some risks that it may come with
                                         </p>
                                     </div>
                                 </div>
@@ -776,10 +779,10 @@ function FoodLabels() {
                                     <div className="textOverlayLabel">
                                         <h4>Best Before Date</h4><br></br>
                                         <p>
-                                            Best Before Date is when .....
-                                            hot food, especially for hot food,
-                                            and are able to contain heat and store food
-                                            properly without any affect
+                                            Best Before Date is the date where
+                                            the food quality begins to lose, however
+                                            if stored properly it can be suitbale even
+                                            after the date by a couple of days, so do not be keen waste the item.
                                         </p>
                                     </div>
                                 </div>
@@ -789,10 +792,10 @@ function FoodLabels() {
                                     <div className="textOverlayLabel">
                                         <h4>Expiry Date</h4><br></br>
                                         <p>
-                                            Expriy Date is when ......
-                                            hot food, especially for hot food,
-                                            and are able to contain heat and store food
-                                            properly without any affect
+                                            Expriy Date is where the food consumed
+                                            has to be eaten before or on that date.
+                                            It should not be consumed pass that date
+                                            due to some risks that it may come with
                                         </p>
                                     </div>
                                 </div>

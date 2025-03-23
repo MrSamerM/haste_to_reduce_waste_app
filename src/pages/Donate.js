@@ -11,14 +11,10 @@ import suitableContainer2 from '../image/plasticContainer.jpg';
 import suitableContainer3 from '../image/takeawayContainer.jpg';
 
 import nonSuitableContainer1 from '../image/foamContainer.jpg';
-// https://www.pexels.com/photo/takeaway-chicken-served-in-a-restaurant-17429048/ 07/03/2025
-
 import nonSuitableContainer2 from '../image/cardboardContainer.jpg';
 import nonSuitableContainer3 from '../image/polytheneBag.jpg';
 
-import points from '../image/points.PNG';
-// https://pixabay.com/vectors/coin-penny-currency-money-old-1753248/ 07/03/2025
-
+import star from '../image/star.PNG';
 
 import donationImage from '../image/Donation.jpg';
 
@@ -112,24 +108,6 @@ function Donate() {
         setFile(evt.target.files[0]);
         setFileURL(URL.createObjectURL(evt.target.files[0]));
     }
-
-    useEffect(() => {
-        const addPoints = async () => {
-            try {
-                if (quizScore === 3) {
-                    const response = await axios.post("http://localhost:8000/addPoints");
-                    if (response.data.message === "Added") {
-                        console.log("Points were added")
-                    }
-                }
-            } catch (error) {
-                console.error("Can't send the points", error);
-            }
-        };
-
-        addPoints();
-
-    }, [quizScore]);
 
     useEffect(() => {
 
@@ -332,6 +310,9 @@ function Donate() {
                 if (selectedAnswer === questions[currentQuestion].answer) {
                     setQuizScore(prevScore => prevScore + 1);
                 }
+                else if (selectedAnswer !== questions[currentQuestion].answer) {
+                    setWrongAnswers(prevWrongAnswers => [...prevWrongAnswers, questions[currentQuestion].question]);
+                }
                 setDisplayScore(true);
             }
             else if (selectedAnswer === questions[currentQuestion].answer) {
@@ -341,10 +322,10 @@ function Donate() {
                 setAnswerSelected(null);
             }
             else {
+                setWrongAnswers(prevWrongAnswers => [...prevWrongAnswers, questions[currentQuestion].question]);
                 setCurrentQuestion(prevQuestion => prevQuestion + 1);
                 setSelectedAnswer("");
                 setAnswerSelected(null);
-                setWrongAnswers(wrongAnswers => [...wrongAnswers, questions[currentQuestion].question])
             }
         }
         else {
@@ -524,7 +505,7 @@ function Donate() {
                             <div id="secondHalf">
                                 <div className="suitableImages">
                                     <img className="appropriateContainers" src={nonSuitableContainer1} alt="Foam container" />
-                                    {/* image generated from dream.ai prompt: white foam container takeaway box  11/02/2025 */}
+                                    {/* https://www.pexels.com/photo/takeaway-chicken-served-in-a-restaurant-17429048/ 07/03/2025 */}
                                     <div className="textOverlay">
                                         <h4>Foam container</h4><br></br>
                                         <p>
@@ -599,9 +580,9 @@ function Donate() {
                                 <div id="finalScore"> Score: {quizScore}/3</div><br></br>
                                 {quizScore === 3 ?
                                     <>
-                                        <p className="resultMessage">Congratulations You Got Full Marks<br></br>50 Points added</p><br></br>
-                                        <img id="points" src={points} alt="gold points coin" />
-                                        {/* image generated from dream.ai prompt: round circle yellow animated coin with P in the middle 12/02/2025 */}
+                                        <p className="resultMessage">Congratulations You Got Full Marks<br></br>Retry whenever you want</p><br></br>
+                                        <img id="points" src={star} alt="gold star" />
+                                        {/* https://pixabay.com/vectors/star-favorite-bookmark-3d-gold-152151/ 07/03/2025 */}
 
                                     </>
                                     :
@@ -609,8 +590,8 @@ function Donate() {
                                         <p className="resultMessage">Well done for attempting the quiz provided<br></br>try again and beat your score to gain points<br></br>
                                             Learn from the questions you got wrong bellow</p>
                                         <div>
-                                            {wrongAnswers.map((wrongAnswer) => (
-                                                <div className="wrongAnswers">{wrongAnswer}</div>
+                                            {wrongAnswers.map((wrongAnswer, index) => (
+                                                <div key={index} className="wrongAnswers">{wrongAnswer}</div>
                                             ))}
                                         </div>
                                     </>

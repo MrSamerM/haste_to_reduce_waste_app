@@ -14,37 +14,42 @@ function E_Commerce() {
     const [address, setAddress] = useState("");
     const [loading, setLoading] = useState(false);
 
-
-
-
     useEffect(() => {
-
         console.log("Total: ", totalAmount)
         console.log("List of Products: ", listOfProducts)
         console.log("User Points: ", userPoints)
 
-        const products = async () => {
+    }, [userPoints, totalAmount, listOfProducts]);
 
+    useEffect(() => {
+        const points = async () => {
+
+            try {
+                const secondRes = await axios.get('http://localhost:8000/userPoints')
+                const points = secondRes.data.result.points;
+                setUserPoints(points)
+            } catch (err) {
+                console.log("Error", err)
+            }
+        }
+        points();
+
+    }, [userPoints]);
+
+    useEffect(() => {
+        const products = async () => {
             try {
                 setLoading(true)
                 const res = await axios.get('http://localhost:8000/allProducts')
                 const allProducts = res.data.result.map((data) => ({ id: data._id, image: data.productImage, productName: data.productName, cost: data.pointCost, quantity: data.quantity }));
                 setProductList(allProducts);
-
-                const secondRes = await axios.get('http://localhost:8000/userPoints')
-                const points = secondRes.data.result.points;
-                setUserPoints(points)
-
                 setLoading(false)
-
-
             } catch (err) {
                 console.log("Error", err)
             }
         }
         products();
-
-    }, [totalAmount, listOfProducts, userPoints]);
+    }, []);
 
 
     // from chatGPT Prompt: mycode  it still updates all (my code): for setQuantities 02/02/2025
