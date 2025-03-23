@@ -46,11 +46,11 @@ function Home() {
                         <div id='overviewTitleDiv'><h1 id="overviewTitle">What is this web application?</h1></div>
                         <div id="overviewParagraphsDiv">
                             <p className="overviewParagraphs">
-                                Lorem ipsum dolor sit amet, consectetur adipiscing elit. Sed do eiusmod tempor incididunt ut labore et dolore magna aliqua.
-                                Lorem ipsum dolor sit amet, consectetur adipiscing elit. Sed do eiusmod tempor incididunt ut labore et dolore magna aliqua.
-                                Lorem ipsum dolor sit amet, consectetur adipiscing elit. Sed do eiusmod tempor incididunt ut labore et dolore magna aliqua.
-                                Lorem ipsum dolor sit amet, consectetur adipiscing elit. Sed do eiusmod tempor incididunt ut labore et dolore magna aliqua.
-                                Lorem ipsum dolor sit amet, consectetur adipiscing elit. Sed do eiusmod tempor incididunt ut labore et dolore magna aliqua.
+                                This web application is to help you gain knowledge, the minimal required to help you to start reducing food waste.
+                                There are so many different functionalities to help you be well educated with the main household food waste.
+                                This includes being better educated with labellings, and dates so that it is easier to understand.
+                                This includes storage and disposal of food items with the chatbot bellow, also generating recipies with remaining food items.
+                                Finally, being able to donate correctly, with suitable containers to help prevent food being contaminated and innedible .
                             </p>
                         </div>
                     </div>
