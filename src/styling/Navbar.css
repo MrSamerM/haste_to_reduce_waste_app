@@ -6,6 +6,27 @@
     padding: 0;
 }
 
+/* chatGPT 
+for logo and navbarcontainer
+prompt: the thing is, I want the logo to be a part of the navbar, but at the top in the center 24/02/2025 */
+
+#navbarContainer {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    width: 100%;
+    background-color: lightgreen;
+}
+
+#Logo {
+    width: 100%;
+    text-align: center;
+}
+
+#logoImage {
+    height: 60px;
+}
+
 /* to center the navbar chatgpt  25/02/2025
 prompt: how can I center the nav bar  */
 
