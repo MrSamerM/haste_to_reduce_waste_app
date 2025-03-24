@@ -60,7 +60,7 @@ function UpdateDonationDetails() {
                 setLongitude(res.data.longitude);
                 setLatitude(res.data.latitude);
                 setPredictedClass("a Container");
-
+                setPercentage(100);
             } catch (e) {
                 console.log("error when sending data", e)
             }

@@ -47,7 +47,7 @@ function UpdateDonation() {
 
     const navigateUpdate = (id) => {
 
-        navigate(`/update_donation_details/${id}`)
+        navigate(`/update_reserved_donation/update_donation_details/${id}`)
     }
 
     return (
