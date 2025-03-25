@@ -135,6 +135,12 @@ function UpdateDonationDetails() {
         setAddress(value);
     }
 
+    const clearAddress = () => {
+        setAddress('');
+        setLongitude(0);
+        setLatitude(0);
+    };
+
     const fileInputRef = useRef(null);
 
     const updateDonation = async (e) => {
@@ -257,10 +263,16 @@ function UpdateDonationDetails() {
                                             placeSelect={onPlaceSelect}
                                         />
                                     </GeoapifyContext>
+
                                 </div>}
                             {/* Only for testing */}
                             {/* <input value={address2} data-testid="testAddressInput" id="testAddressInput" onChange={(evt) => setAddress2(evt.target.value)} /> */}
-
+                            {address && (
+                                <div id="XButtonDiv" className="addressRemoval">
+                                    <button id="XButton" onClick={clearAddress}>
+                                        X
+                                    </button>
+                                </div>)}
                         </div>
                     </div>
                     <br></br>

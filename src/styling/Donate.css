@@ -88,7 +88,6 @@ body {
     margin: 0 auto 30px auto;
 }
 
-/* #aiResult #scanImage {} */
 
 .donationInputDiv {
     display: flex;
@@ -110,7 +109,25 @@ body {
 #donateDetails .donationInputs {
     padding: 5px;
     margin: 5px;
-    width: 70%;
+    width: 100%;
+}
+
+.addressRemoval {
+    padding: 5px;
+}
+
+#XButton {
+    font-size: larger;
+    color: rgb(129, 124, 124);
+    font-weight: bolder;
+    text-decoration: none;
+    background: none;
+    border-width: 0;
+    cursor: pointer;
+}
+
+#XButton:hover {
+    color: black
 }
 
 .donateInputLabels {

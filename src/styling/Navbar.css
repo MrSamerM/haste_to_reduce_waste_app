@@ -6,24 +6,18 @@
     padding: 0;
 }
 
-/* chatGPT 
-navbarcontainer and logo image
-prompt: the thing is, I want the logo to be a part of the navbar, but at the top in the center 24/02/2025 */
-
-#navbarContainer {
-    display: flex;
-    flex-direction: column;
-    align-items: center;
-    width: 100%;
-    background-color: lightgreen;
-}
 
 #Logo {
-    margin: 0 auto 10px auto;
+    align-items: center;
+    background-color: lightgreen;
+    width: 100%;
 }
 
+/* https://stackoverflow.com/questions/963636/why-cant-i-center-with-margin-0-auto  by Mankarse*/
 #logoImage {
-    height: 50px;
+    display: block;
+    margin: 0 auto;
+    width: 40%;
 }
 
 /* to center the navbar chatgpt  25/02/2025

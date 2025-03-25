@@ -99,7 +99,11 @@ function E_Commerce() {
 
     const updatedAddress = (value) => {
         setAddress(value);
-    }
+    };
+
+    const clearAddress = () => {
+        setAddress('');
+    };
 
     const submit = async (e) => {
 
@@ -174,16 +178,31 @@ function E_Commerce() {
                 <p>Total cost: {totalAmount}</p>
             </div>
 
-            <div id="autoCompleteAddressForPurchaseDiv">
-                <GeoapifyContext apiKey={process.env.REACT_APP_GEOAPIFY_API_KEY}>
-                    <GeoapifyGeocoderAutocomplete id="autoCompleteAddressForPurchase" placeholder="Enter address here"
-                        lang='en'
-                        limit={5}
-                        value={address}
-                        onChange={updatedAddress}
-                        placeSelect={onPlaceSelect}
-                    />
-                </GeoapifyContext>
+            <div id="autocomplete">
+
+                <div id="autoCompleteAddressForPurchaseDiv" className="addressRemoval">
+                    <GeoapifyContext apiKey={process.env.REACT_APP_GEOAPIFY_API_KEY}>
+                        <GeoapifyGeocoderAutocomplete id="autoCompleteAddressForPurchase" placeholder="Enter address here"
+                            lang='en'
+                            limit={5}
+                            value={address}
+                            onChange={updatedAddress}
+                            placeSelect={onPlaceSelect}
+                        />
+                    </GeoapifyContext>
+                </div>
+
+                {/* from chatGPT 
+Prompt 1: how can I deal with address (my code) when the user presses the x, then the address should be "" 
+Prompt 2: It still does not work. This is correct right  if (address === "") {alert("Must enter a address")*/}
+                {address && (
+                    <div id="XButtonDiv" className="addressRemoval">
+                        <button id="XButton" onClick={clearAddress}>
+                            X
+                        </button>
+                    </div>
+
+                )}
             </div>
 
             <div id="purchaseButtonDiv">

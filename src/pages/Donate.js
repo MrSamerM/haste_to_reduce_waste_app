@@ -225,6 +225,10 @@ function Donate() {
         setAddress(value);
     }
 
+    const clearAddress = () => {
+        setAddress('');
+    };
+
     // Chatgpt Prompt: (image of my code) I want everything to reset, however the file still says the name of the previous file? 19/01/2025
 
     const fileInputRef = useRef(null); // Add a ref for the file input
@@ -667,6 +671,13 @@ function Donate() {
                                                 />
                                             </GeoapifyContext>
                                         </div>}
+                                    {address && (
+                                        <div id="XButtonDiv" className="addressRemoval">
+                                            <button id="XButton" onClick={clearAddress}>
+                                                X
+                                            </button>
+                                        </div>)}
+
                                     {/* <input value={address2} data-testid="testAddressInput" id="testAddressInput" onChange={(evt) => setAddress2(evt.target.value)} /> */}
                                     {/* only for testing */}
                                 </div>

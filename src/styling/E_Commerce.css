@@ -163,3 +163,22 @@ body {
         transform: rotate(360deg);
     }
 }
+
+#autocomplete {
+    text-align: center;
+}
+
+#XButton {
+    font-size: larger;
+    color: black;
+    font-weight: bolder;
+    text-decoration: none;
+    background: none;
+    border-width: 0;
+    cursor: pointer;
+}
+
+
+.addressRemoval {
+    display: inline-block;
+}
