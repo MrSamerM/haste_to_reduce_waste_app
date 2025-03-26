@@ -141,7 +141,8 @@ app.get('/remove_session', async (req, res) => {
     }
 });
 
-
+// received assistnance from chatGPT
+// prompt 1: how do I fix this error TypeError: Cannot read properties of null (reading 'password') 26/02/2025
 app.post('/login', async (req, res) => {
     try {
         const { email, password } = req.body;
@@ -151,10 +152,9 @@ app.post('/login', async (req, res) => {
             console.log("Email wrong");
             return res.json({ message: "This is not a user" });
         }
-
         const comparePassword = await bcrypt.compare(password, user.password);
         if (comparePassword) {
-            console.log("Yes email matches");
+            console.log("Yes it is a user");
             console.log("Yes password matches");
             req.session.userID = user._id;
             return res.json({ message: "This is a user", userID: user._id });
