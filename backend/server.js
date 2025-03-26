@@ -141,7 +141,7 @@ app.get('/remove_session', async (req, res) => {
     }
 });
 
-// received assistnance from chatGPT
+// received assistance from chatGPT
 // prompt 1: how do I fix this error TypeError: Cannot read properties of null (reading 'password') 26/02/2025
 app.post('/login', async (req, res) => {
     try {
@@ -240,13 +240,16 @@ app.get('/allReservedDonations', async (req, res) => {
 app.get('/allReceipts', async (req, res) => {
     try {
 
-        // from chatgpt
+        // from chatgpt 
         // prompt: I want to do something. Right now the productid array stores productIDs,but I want it to store the names of the products which is in another table in mongo, how can I fix this 
+        // prompt2: it just does not work when productID is repeated 26/03/2025
+
         const allReceipts = await Receipt.aggregate([
             {
-                $match: {
-                    userID: new mongoose.Types.ObjectId(req.session.userID)
-                }
+                $match: { userID: new mongoose.Types.ObjectId(req.session.userID) }
+            },
+            {
+                $unwind: "$productID" // Flatten the productID array
             },
             {
                 $lookup: {
@@ -257,22 +260,21 @@ app.get('/allReceipts', async (req, res) => {
                 }
             },
             {
-                $project: {
-                    userID: 1,
-                    cost: 1,
-                    address: 1,
-                    productNames: {
-                        $map: {
-                            input: "$productDetails",
-                            as: "product",
-                            in: "$$product.productName"
-                        }
-                    }
+                $unwind: "$productDetails" // Ensure each product has its own document
+            },
+            {
+                $group: {
+                    _id: "$_id",
+                    userID: { $first: "$userID" },
+                    cost: { $first: "$cost" },
+                    address: { $first: "$address" },
+                    productNames: { $push: "$productDetails.productName" } // Collect product names, including duplicates
                 }
             }
         ]);
 
         res.json({ result: allReceipts });
+
 
     } catch (err) {
         console.log("error", err)
