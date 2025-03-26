@@ -89,7 +89,7 @@ app.post('/register', async (req, res) => {
     }
     catch (e) {
         console.log("Error", e)
-        res.status(400).json({ error: "There appears to be a error with the input" })
+        res.status(500).json({ error: "database can't post data" })
     }
 });
 
@@ -118,7 +118,7 @@ app.post('/donate', async (req, res) => {
     }
     catch (e) {
         console.log("Error", e)
-        res.status(400).json({ error: "There appears to be a error with the input" })
+        res.status(500).json({ error: "database can't post data" })
     }
 });
 
@@ -141,26 +141,30 @@ app.get('/remove_session', async (req, res) => {
     }
 });
 
-app.post('/login', async (req, res) => {
 
+app.post('/login', async (req, res) => {
     try {
         const { email, password } = req.body;
 
         const user = await User.findOne({ email: email });
-        if (user) {
-            console.log("Yes it is a user")
+        if (!user) {
+            console.log("Email wrong");
+            return res.json({ message: "This is not a user" });
         }
 
-        const comparePassword = await bcrypt.compare(password, user.password)
+        const comparePassword = await bcrypt.compare(password, user.password);
         if (comparePassword) {
-            console.log("Yes password matches")
-
+            console.log("Yes email matches");
+            console.log("Yes password matches");
+            req.session.userID = user._id;
+            return res.json({ message: "This is a user", userID: user._id });
+        } else {
+            console.log("Incorrect password");
+            return res.json({ message: "This is not a user" });
         }
-        req.session.userID = user._id;
-        res.json({ message: "This is a user", userID: user._id });
     } catch (err) {
-        console.log("error", err)
-        res.status(400).json({ message: "This is a not a user", validate: false })
+        console.log("Error:", err);
+        res.status(500).json({ message: "database can't post data" });
     }
 });
 
@@ -389,6 +393,6 @@ app.post('/removeDonation', async (req, res) => {
 
     } catch (err) {
         console.log("error", err)
-        res.status(500).json({ message: "database can't find data to remove" })
+        res.status(500).json({ message: "database can't post data" })
     }
 });

@@ -44,6 +44,10 @@ function Login({ setSessionAvailability }) {
                     setSessionAvailability(true)
                     navigate('/')
                 }
+                else if (res.data.message === "This is not a user") {
+                    setValidationMessage("Email or Password is incorrect")
+                    setValidate(false);
+                }
 
             }
             catch (e) {
