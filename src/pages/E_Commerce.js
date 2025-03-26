@@ -78,20 +78,15 @@ function E_Commerce() {
     };
 
 
-    // chatGPT 26/03/2025
+    // chatGPT 26/03/2025 for setTotalAmount
     // prompt1: why would this not work (subtract function)
     // prompt2: the thing with this is, if I substract, it subtract twice can you fix this without useeffect
 
     const subtract = (productId, cost) => {
-        setQuantities((prevQuantities) => {
-            const currentQuantity = prevQuantities[productId] || 0;
-            if (currentQuantity === 0) return prevQuantities;
-
-            return {
-                ...prevQuantities,
-                [productId]: currentQuantity - 1,
-            };
-        });
+        setQuantities((prevQuantities) => ({
+            ...prevQuantities,
+            [productId]: Math.max((prevQuantities[productId] || 0) - 1, 0)
+        }));
 
         setTotalAmount((prevTotalAmount) => {
             const currentQuantity = quantities[productId] || 0;
@@ -99,10 +94,9 @@ function E_Commerce() {
         });
 
         setListOfProducts(prevListOfProducts => {
-            const index = prevListOfProducts.indexOf(productId);
-            if (index !== -1) {
+            if (prevListOfProducts.includes(productId)) {
                 const update = [...prevListOfProducts];
-                update.splice(index, 1);
+                update.splice(prevListOfProducts.indexOf(productId), 1);
                 return update;
             }
             return prevListOfProducts;
