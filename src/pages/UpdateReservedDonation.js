@@ -7,6 +7,8 @@ import { useState, useEffect } from "react";
 function UpdateReservedDonation() {
 
     const [data, setData] = useState([]);
+    const [loading, setLoading] = useState(false);
+
 
     axios.defaults.withCredentials = true;
 
@@ -16,10 +18,13 @@ function UpdateReservedDonation() {
         const allDonations = async () => {
 
             try {
+                setLoading(true)
+
                 const res = await axios.get('http://localhost:8000/allReservedDonations')
                 const allDonatedDonations = res.data.result.map((data) => ({ id: data._id, description: data.description, portionSize: data.portionSize, address: data.address }));
                 console.log(allDonatedDonations)
                 setData(allDonatedDonations);
+                setLoading(false)
 
 
             } catch (err) {
@@ -43,6 +48,10 @@ function UpdateReservedDonation() {
         } catch (err) {
             console.log("Error", err)
         }
+    }
+
+    if (loading === true) {
+        return <div id="loading"></div>;
     }
 
     return (

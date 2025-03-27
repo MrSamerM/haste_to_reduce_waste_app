@@ -7,6 +7,8 @@ import { useState, useEffect } from "react";
 function Receipt() {
 
     const [data, setData] = useState([]);
+    const [loading, setLoading] = useState(false);
+
 
     axios.defaults.withCredentials = true;
 
@@ -16,11 +18,14 @@ function Receipt() {
         const allReceipts = async () => {
 
             try {
+                setLoading(true)
+
                 const res = await axios.get('http://localhost:8000/allReceipts')
                 const allReceipts = res.data.result.map((data) => ({ id: data._id, userID: data.userID, productNames: data.productNames, cost: data.cost, address: data.address }));
 
                 console.log(allReceipts)
                 setData(allReceipts);
+                setLoading(false)
 
 
             } catch (err) {
@@ -44,6 +49,10 @@ function Receipt() {
         } catch (err) {
             console.log("Error", err)
         }
+    }
+
+    if (loading === true) {
+        return <div id="loading"></div>;
     }
 
     return (

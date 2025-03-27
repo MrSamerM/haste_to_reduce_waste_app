@@ -8,6 +8,8 @@ function UpdateDonation() {
     const navigate = useNavigate();
 
     const [data, setData] = useState([]);
+    const [loading, setLoading] = useState(false);
+
 
     axios.defaults.withCredentials = true;
 
@@ -16,9 +18,12 @@ function UpdateDonation() {
         const allDonations = async () => {
 
             try {
+                setLoading(true)
                 const res = await axios.get('http://localhost:8000/allDonatedDonations')
                 const allDonatedDonations = res.data.result.map((data) => ({ id: data._id, description: data.description, portionSize: data.portionSize, reserved: data.reserved, address: data.address }));
                 setData(allDonatedDonations);
+                setLoading(false)
+
 
             } catch (err) {
                 console.log("Error", err)
@@ -48,6 +53,10 @@ function UpdateDonation() {
     const navigateUpdate = (id) => {
 
         navigate(`/update_reserved_donation/update_donation_details/${id}`)
+    }
+
+    if (loading === true) {
+        return <div id="loading"></div>;
     }
 
     return (

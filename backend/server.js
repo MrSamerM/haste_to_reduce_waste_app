@@ -12,6 +12,7 @@ const Receipt = require('./databaseModels/receiptModel');
 const Product = require('./databaseModels/productModel');
 
 
+// https://www.udemy.com/course/the-web-developer-bootcamp assistance throughout the web application throughout the web
 
 // https://javascript.plainenglish.io/what-is-cors-in-node-js-2024-a-comprehensive-guide-542630e0a805 as reference December 27
 // https://expressjs.com/en/resources/middleware/session.html as reference December 27

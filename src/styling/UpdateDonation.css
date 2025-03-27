@@ -96,3 +96,30 @@ body {
 .sideInformation button:hover {
     background-color: yellow;
 }
+
+#loadingContainer {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    height: 100vh;
+    width: 100vh;
+}
+
+#loading {
+    height: 400px;
+    width: 400px;
+    border-radius: 100%;
+    border: 25px;
+    border-style: solid;
+    border-color: white;
+    border-top-width: 20px;
+    border-top-style: solid;
+    border-top-color: green;
+    animation: circle 2.5s linear infinite;
+}
+
+@keyframes circle {
+    to {
+        transform: rotate(360deg);
+    }
+}
