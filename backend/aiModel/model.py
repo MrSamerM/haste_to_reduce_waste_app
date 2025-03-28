@@ -1,15 +1,28 @@
-# // For some images in NotContainer I used images from kaggle using data from the dataset from:
-# // https://www.kaggle.com/datasets/utkarshsaxenadn/landscape-recognition-image-dataset-12k-images/data Use kaggle for scenary
-# // https://www.kaggle.com/datasets/vikashrajluhaniwal/fashion-images Use kaggle for clothes and shoes
-# // https://www.kaggle.com/datasets/vencerlanz09/plastic-and-paper-cups-synthetic-image-dataset use kaggle for cups
-# // https://www.kaggle.com/datasets/boulahchichenadir/algerian-used-cars use kaggle for vehicles
+# For some images in NotContainer I used images from kaggle using data from the dataset below:
 
+#1. Saxena, U. (2023) Landscape Recognition | Image Dataset | 12k Images. Available at:
+# https://www.kaggle.com/datasets/utkarshsaxenadn/landscape-recognition-image-dataset-12k-images/data (Accessed: 7 January 2025)
 
-# https://medium.com/@ilaslanduzgun/image-classification-with-tensorflow-a361c7b1eb05 for assistance Throughout January
-# https://medium.com/nerd-for-tech/building-an-image-classifier-with-tensorflow-3e12c1d5d3a2 for assistance Throughout January
-# https://medium.com/@pooranjoyb/integration-deployment-of-ml-model-with-react-flask-3033dd6034b3 for assistance 24/01/2025
+#2. Luhaniwal, V. (2021) E-commerce Product Images. Available at:
+# https://www.kaggle.com/datasets/vikashrajluhaniwal/fashion-images (Accessed: 7 January 2025)
 
-# https://www.tensorflow.org/api_docs/python/tf/keras/layers/ explanation from tensorflow
+#3. Nadir, B. (2022) cars classification dataset. Available at:
+# https://www.kaggle.com/datasets/boulahchichenadir/algerian-used-cars (Accessed: 7 January 2025)
+ 
+
+# Assitance with image detection
+
+#1. İlaslan, D. (2023) Image Classification with TensorFlow. Available at:
+# https://medium.com/@ilaslanduzgun/image-classification-with-tensorflow-a361c7b1eb05 (Accessed: 10 January 2025) 
+
+#2. Wijetunga, C. (2021) Building an image classifier with TensorFlow. Available at:
+# https://medium.com/nerd-for-tech/building-an-image-classifier-with-tensorflow-3e12c1d5d3a2 (Accessed: 10 January 2025)
+
+#3. Bhattacharya, P. (2023) Integration & Deployment of ML model with React & Flask. Available at:
+# https://medium.com/@pooranjoyb/integration-deployment-of-ml-model-with-react-flask-3033dd6034b3 (Accessed: 24 January 2025)
+
+#4. Tensorflow. (n.d) Module: tf.keras.layers. Available at: 
+# https://www.tensorflow.org/api_docs/python/tf/keras/layers/ (Accessed: 24 January 2025)
 
 import numpy as np
 import tensorflow as tf
@@ -96,7 +109,7 @@ history = model.fit(#this method is used to train the model
 )
 
 # Load and preprocess the image for prediction
-img_path = 'backend/aiModel/Images/notContainer1.jpg'
+img_path = 'backend/aiModel/TestingImages/NotContainer1.jpg'
 img = image.load_img(img_path, target_size=(image_height, image_width))
 x = image.img_to_array(img)
 x = np.expand_dims(x, axis=0)
@@ -111,7 +124,7 @@ else:
     print("The image is Not a container.")
 
 
-img_path2 = 'backend/aiModel/Images/notContainer2.png'
+img_path2 = 'backend/aiModel/TestingImages/NotContainer2.jpg'
 img2 = image.load_img(img_path2, target_size=(image_height, image_width))
 y = image.img_to_array(img2)
 y = np.expand_dims(y, axis=0)
@@ -142,7 +155,7 @@ else:
 #     print("The image is Not a container.")
 
 
-img_path4 = 'backend/aiModel/Images/container1.jpg'
+img_path4 = 'backend/aiModel/TestingImages/SuitableContainer1.jpg'
 img4 = image.load_img(img_path4, target_size=(image_height, image_width))
 b = image.img_to_array(img4)
 b = np.expand_dims(b, axis=0)
@@ -156,7 +169,7 @@ if prediction < threshold:
 else:
     print("The image is Not a container.")
 
-img_path5 = 'backend/aiModel/Images/container2.png'
+img_path5 = 'backend/aiModel/TestingImages/SuitableContainer2.jpg'
 img5 = image.load_img(img_path5, target_size=(image_height, image_width))
 c = image.img_to_array(img5)
 c = np.expand_dims(c, axis=0)
@@ -171,7 +184,7 @@ else:
     print("The image is Not a container.")
 
 
-img_path6 = 'backend/aiModel/Images/container3.jpg'
+img_path6 = 'backend/aiModel/TestingImages/SuitableContainer3.jpg'
 img6 = image.load_img(img_path6, target_size=(image_height, image_width))
 d = image.img_to_array(img6)
 d = np.expand_dims(d, axis=0)
@@ -185,7 +198,7 @@ if prediction < threshold:
 else:
     print("The image is Not a container.")
 
-img_path7 = 'backend/aiModel/Images/container4.jpg'
+img_path7 = 'backend/aiModel/TestingImages/SuitableContainer4.jpg'
 img7 = image.load_img(img_path7, target_size=(image_height, image_width))
 e = image.img_to_array(img7)
 e = np.expand_dims(e, axis=0)
