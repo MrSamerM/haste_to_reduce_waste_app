@@ -1,4 +1,3 @@
-// import ImageClassifier from "./ImageClassifier";
 import Home from "./Home";
 import FoodLabels from "./FoodLabels";
 import E_Commerce from "./E_Commerce";
@@ -16,14 +15,14 @@ import { Routes, Route, Navigate } from 'react-router-dom';
 import React, { useEffect, useState } from "react";
 import axios from "axios";
 
-// https://www.udemy.com/course/the-web-developer-bootcamp assistance throughout the web application
-
+// assistance throughout the web application backend, and frontend. This course regularly updates
+// Steele, C. (2025) The Web Developer Bootcamp 2025. Available at:
+// https://www.udemy.com/course/the-web-developer-bootcamp (Accessed: 20 December 2024)
 
 function App() {
 
   const [sessionAvailability, setSessionAvailability] = useState(null);
   const [userPoints, setUserPoints] = useState(null);
-
 
   axios.defaults.withCredentials = true;
 
@@ -46,11 +45,11 @@ function App() {
 
   }, [userPoints, sessionAvailability])
 
-  // Received if statement from chatGPT 20/01/2025, also changed useEffect, and useState(null)
+  // OpenAI. (2025). ChatGPT (20 January Version) [Large Language Model]. Available at: https://chatgpt.com/ (Accessed: 20 January 2025).
   // Prompt: when I am in a page that requires a express session, I reload, and it returns me to the homepage. 
   // Is it because I have to make sure that there is a express session in all pages?   
   // example what should I add to this page to make it so I refresh on the same page
-  // (sent image of app js and ReserveDonation
+  // (sent code of app js and ReserveDonation)
 
   if (sessionAvailability === null) {
     return <div id="loading"></div>;
