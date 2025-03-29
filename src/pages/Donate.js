@@ -36,8 +36,11 @@ ChartJS.register(
     Legend);
 
 
-// https://www.geeksforgeeks.org/how-to-upload-image-and-preview-it-using-reactjs/ do display image 15/01/25
-// chatGPT [pasted my code to see why the if statements where not working] 16/01/21. Used for file type, FileURL useState and change function.
+// https://www.geeksforgeeks.org/how-to-upload-image-and-preview-it-using-reactjs/ to display image 15/01/25
+
+// OpenAI. (2025). ChatGPT (16 January Version) [Large Language Model]. Available at: https://chatgpt.com/ (Accessed: 16 January 2025).
+// Prompt: [pasted my code to see why the if statements where not working]. 
+// Used for file type, FileURL useState and change function.
 
 //  https://www.youtube.com/watch?v=pxkE2tT6Y-o to convert image to base64 17/01/2025
 
@@ -144,7 +147,7 @@ function Donate() {
 
     useEffect(() => {
 
-        // Used chatGPT for the effectRan, because useEffect ran twice which messes with the value
+        // OpenAI. (2025). ChatGPT (20 February Version) [Large Language Model]. Available at: https://chatgpt.com/ (Accessed: 20 February 2025).
         // prompt: Why is the use effect running twice. It is affecting my value
 
         if (effectRan.current) return;
@@ -229,7 +232,8 @@ function Donate() {
         setAddress('');
     };
 
-    // Chatgpt Prompt: (image of my code) I want everything to reset, however the file still says the name of the previous file? 19/01/2025
+    //  OpenAI. (2025). ChatGPT (19 January Version) [Large Language Model]. Available at: https://chatgpt.com/ (Accessed: 19 January 2025).
+    //  Prompt: (image of my code) I want everything to reset, however the file still says the name of the previous file?
 
     const fileInputRef = useRef(null); // Add a ref for the file input
 

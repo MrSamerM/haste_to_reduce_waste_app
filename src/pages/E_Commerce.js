@@ -52,13 +52,15 @@ function E_Commerce() {
     }, []);
 
 
-    // from chatGPT Prompt: mycode  it still updates all (my code): for setQuantities 02/02/2025
-
-    // Prompt: The thing is setListOfProducts(prevListOfProducts => prevListOfProducts.filter(id=>id!==productId)),
+    // OpenAI. (2025). ChatGPT (2 February Version) [Large Language Model]. Available at: https://chatgpt.com/ (Accessed: 2 February 2025).
+    // Prompt1: mycode  it still updates all (my code)
+    // Prompt2: The thing is setListOfProducts(prevListOfProducts => prevListOfProducts.filter(id=>id!==productId)),
     // It may have repeated products ids if a users buys the same thing more than once. so would this remove all of the same ids, or only one. 
     // ^^: for setListOfProducts 
-    // prompt 2: would this not work to cap it as the max quantity (my code) 23/02/2025
-    // prompt 3: why would this not work (code) 23/02/2025
+
+    // OpenAI. (2025). ChatGPT (23 February Version) [Large Language Model]. Available at: https://chatgpt.com/ (Accessed: 23 February 2025).
+    // prompt 1: would this not work to cap it as the max quantity (my code)
+    // prompt 2: why would this not work (code)
 
     const add = (productId, cost, quantity) => {
         setQuantities((prevQuantities) => ({
@@ -78,7 +80,7 @@ function E_Commerce() {
     };
 
 
-    // chatGPT 26/03/2025 for setTotalAmount
+    // OpenAI. (2025). ChatGPT (26 March Version) [Large Language Model]. Available at: https://chatgpt.com/ (Accessed: 26 March 2025).
     // prompt1: why would this not work (subtract function)
     // prompt2: the thing with this is, if I substract, it subtract twice can you fix this without useeffect
 
@@ -204,9 +206,11 @@ function E_Commerce() {
                     </GeoapifyContext>
                 </div>
 
-                {/* from chatGPT 
-Prompt 1: how can I deal with address (my code) when the user presses the x, then the address should be "" 
-Prompt 2: It still does not work. This is correct right  if (address === "") {alert("Must enter a address")*/}
+                {/*
+                OpenAI. (2025). ChatGPT (20 March Version) [Large Language Model]. Available at: https://chatgpt.com/ (Accessed: 20 March 2025).
+                Prompt 1: how can I deal with address (my code) when the user presses the x, then the address should be "" 
+                Prompt 2: It still does not work. This is correct right  if (address === "") {alert("Must enter a address")
+                */}
                 {address && (
                     <div id="XButtonDiv" className="addressRemoval">
                         <button id="XButton" onClick={clearAddress}>

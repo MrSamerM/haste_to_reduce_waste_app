@@ -32,10 +32,6 @@ export default function Navbar({ sessionAvailability, setSessionAvailability, us
 
     return (
         <>
-            {/* navbarcontainer div from chatGPT 
-        prompt: the thing is, I want the logo to be a part of the navbar, but at the top in the center 24/02/2025 */}
-            {/* <div id="navbarContainer"> */}
-
             <div id='Logo'><img id='logoImage' src={logo} /></div>
             <nav id='navbar'>
                 <ul id='listOfLinks' className={menue ? "active" : ""}>
@@ -79,6 +75,8 @@ export default function Navbar({ sessionAvailability, setSessionAvailability, us
                         </>
                         )}
                 </ul>
+
+                {/* OpenAI. (2025). ChatGPT (20 February Version) [Large Language Model]. Available at: https://chatgpt.com/ (Accessed: 20 February 2025). */}
                 {/* used chatgpt to find out, how to manage clicking 3 lines */}
                 <div id='threeLines' onClick={() => setMenue(!menue)}>
                     <p>&#9776;</p>

@@ -145,7 +145,8 @@ function UpdateDonationDetails() {
 
     const updateDonation = async (e) => {
 
-        // Line bellow is from Chatgpt Prompt: I am making a updated system. But when I update image is "" but it is supposed to be a base64 (my code) 25/01/2025
+        // OpenAI. (2025). ChatGPT (25 January Version) [Large Language Model]. Available at: https://chatgpt.com/ (Accessed: 25 January 2025).
+        // Line bellow Prompt: I am making a updated system. But when I update image is "" but it is supposed to be a base64 (my code)
         const decision = baseSixtyFour === "" ? fileURL : baseSixtyFour;
 
         const data = {
