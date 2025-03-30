@@ -6,13 +6,9 @@ import axios from 'axios';
 import logo from '../image/Logo.png'
 // made in logo.com
 
-// https://stackoverflow.com/questions/34693811/where-do-i-get-a-3-horizontal-lines-symbol-for-my-webpage to get the 3 lines
-// https://www.youtube.com/watch?v=QQlxvj_GKss for responsive nav bar
-
 export default function Navbar({ sessionAvailability, setSessionAvailability, userPoints }) {
 
     const navigate = useNavigate();
-
     const [menue, setMenue] = useState(false);
 
     const remove = (async () => {
@@ -30,6 +26,9 @@ export default function Navbar({ sessionAvailability, setSessionAvailability, us
         }
     })
 
+    // for responsive nav bar
+    // Lama code (2022) Create a Responsive Hamburger Menu using only HTML and CSS | Responsive Navigation Menu. 
+    // Available at:https://www.youtube.com/watch?v=QQlxvj_GKss (Accessed 10 February 2025).
     return (
         <>
             <div id='Logo'><img id='logoImage' src={logo} /></div>

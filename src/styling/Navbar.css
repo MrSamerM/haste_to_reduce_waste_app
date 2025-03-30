@@ -73,8 +73,11 @@ prompt: how can I center the nav bar  */
     text-decoration: underline;
 }
 
-/* to make a dropdown menue I used w3School https://www.w3schools.com/howto/howto_css_dropdown.asp 25/02/2025 */
-/* To fix the dropdown menue and center it correctly Chatgpt 
+/* to make a dropdown menue I used w3School 
+ w3school. (2025) How TO - Hoverable Dropdown. Available at:
+ https://www.w3schools.com/howto/howto_css_dropdown.asp (Accessed: 25 Februry 2025) */
+
+/*OpenAI. (2025). ChatGPT (25 February Version) [Large Language Model]. Available at: https://chatgpt.com/ (Accessed: 25 February 2025).
 prompt 1: why is the dropdown not working (my css)
 prompt 2: but it is kind of to the left. it works but not centered correctly
  */
@@ -101,7 +104,6 @@ prompt 2: but it is kind of to the left. it works but not centered correctly
     position: relative;
     display: inline-block;
     cursor: pointer;
-
 }
 
 .dropdownDiv:hover .dropdownMenue {
@@ -122,7 +124,6 @@ prompt 2: but it is kind of to the left. it works but not centered correctly
 }
 
 @media (max-width:1105px) {
-
     #listOfLinks {
         position: absolute;
         top: 70px;
@@ -141,7 +142,8 @@ prompt 2: but it is kind of to the left. it works but not centered correctly
         position: relative;
     }
 
-    /* chatgpt 26/02/2025
+    /* 
+    OpenAI. (2025). ChatGPT (26 February Version) [Large Language Model]. Available at: https://chatgpt.com/ (Accessed: 26 February 2025).
     prompt: the final problem is that the drop down drops, the menu goes beyond the nav bar, a bit of the link is going out of the nav bar */
 
     #navbar {
@@ -163,7 +165,7 @@ prompt 2: but it is kind of to the left. it works but not centered correctly
         padding-bottom: 20px;
     }
 
-    /* to always center the 3 lines 
+    /* OpenAI. (2025). ChatGPT (26 February Version) [Large Language Model]. Available at: https://chatgpt.com/ (Accessed: 26 February 2025). 
     prompt: The thing is, I want the 3lines to be in the middle, but now it is merged with one of the links */
     #threeLines {
         display: block;
