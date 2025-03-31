@@ -17,17 +17,21 @@ function Signup({ setSessionAvailability }) {
 
     axios.defaults.withCredentials = true;
 
+    // zerobounce. (n.d) How to Do Email Validation in JavaScript. Available at:
+    // https://www.zerobounce.net/email-guides/email-validation-javascript/ (Accessed: 2 January 2025)
     const validateEmail = (email) => {
-        const pattern = /^[a-zA-Z0-9._-]+@[a-zA-Z0-9.-]+\.[a-zA-Z]{2,6}$/; //https://www.zerobounce.net/email-guides/email-validation-javascript/ for reference
+        const pattern = /^[a-zA-Z0-9._-]+@[a-zA-Z0-9.-]+\.[a-zA-Z]{2,6}$/;
         return pattern.test(email);//This tests if the email is valid or not
     }
 
-    const validateAge = (dateOfBirth) => { //https://www.javatpoint.com/calculate-age-using-javascript as reference
+    // javatpoint. (n.d) calculate age using javascript. Available at:
+    // https://www.javatpoint.com/calculate-age-using-javascript (Accessed: 2 January 2025)
+    const validateAge = (dateOfBirth) => {
         const changeToDate = new Date(dateOfBirth)
-        const monthDifference = Date.now() - changeToDate.getTime();
-        const convertToDate = new Date(monthDifference);
-        const year = convertToDate.getUTCFullYear();
-        const age = Math.abs(year - 1970);
+        const monthDifference = Date.now() - changeToDate.getTime();//In milliseconds (date.now() starts in 1970)
+        const convertToDate = new Date(monthDifference);//Change it to a date
+        const year = convertToDate.getUTCFullYear();////Change it to a year
+        const age = Math.abs(year - 1970);//remove 1970 to get full age
         return age;
     }
 

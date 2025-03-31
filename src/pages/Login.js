@@ -9,24 +9,19 @@ import profileIcon from '../image/profileIcon.PNG';
 
 
 function Login({ setSessionAvailability }) {
-
-
     const [email, setEmail] = useState("");
     const [password, setPassword] = useState("");
     const [validate, setValidate] = useState(true);
     const [validationMessage, setValidationMessage] = useState("");
-
 
     const navigate = useNavigate();
 
     axios.defaults.withCredentials = true;
 
     const submit = async (evt) => {
-
         evt.preventDefault();
 
         const data = {
-
             email: email,
             password: password
         };
@@ -48,7 +43,6 @@ function Login({ setSessionAvailability }) {
                     setValidationMessage("Email or Password is incorrect")
                     setValidate(false);
                 }
-
             }
             catch (e) {
                 if (e.response.status === 400) {
