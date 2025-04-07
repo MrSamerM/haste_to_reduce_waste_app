@@ -86,21 +86,16 @@ def process_text(input):
 
 
 list_of_cook_words=['cook','prepare','make','recipe','recipes','dish','meal']
-
 def genResponse(input):
     preprocessed_input = process_text(input)
     input_vector = vectorizer.transform([preprocessed_input])
-
     # 3 lines below, and two at the end received by chatGPT. where cosin similarity is used to find the index with the similar questions. 03/03/2025
     #/* OpenAI. (2025). ChatGPT (3 March Version) [Large Language Model]. Available at: https://chatgpt.com/ (Accessed: 3 March 2025).
     # Prompt: the response I get depends on the label. But how about if I want accurate results. For example the difference between saying hi and hello is a different response. Both with the same label
-  
     question_vectors = vectorizer.transform(customData['Question_Token'])
     similarities = cosine_similarity(input_vector, question_vectors).flatten() #compares input with all questions in dataset. .flatten changes dataset to 1d
     best_match_idx = np.argmax(similarities) #find the index with the highest similarity
-    
     confidence_level=max(similarities)
-
     new_list=[]
          
 # received asistance from chatGPT for splitting the input to array, undertstanding response data for second get request including hits, and converting to json file
@@ -108,7 +103,6 @@ def genResponse(input):
 # main prompt 1: (my code) but would it not be a array when pre processed
 # main prompt 2: what does this mean (trace back error)
 # main prompt 3: this gives me a lot of random labels, but I want the name of recipe
-
     if any(word in preprocessed_input.split() for word in list_of_cook_words):
         for i in preprocessed_input.split():
             s = requests.get(f"https://api.edamam.com/api/food-database/v2/parser?ingr={i}&app_id={EDAMAM_APP_ID_SECOND}&app_key={EDAMAM_API_KEY_SECOND}")
@@ -134,9 +128,7 @@ def genResponse(input):
     
     elif confidence_level<0.5:
         return "I am sorry you have to be more specific"
-    
     else:
-    
         best_response = customData.iloc[best_match_idx]['Response'] #the response is the row with the best closest index, from response column
         return best_response
 

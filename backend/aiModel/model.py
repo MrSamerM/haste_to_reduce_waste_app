@@ -42,8 +42,6 @@ batch_size = 32
 data_augmentation = keras.Sequential([
     layers.RandomFlip("horizontal",input_shape=(image_height,image_width,3)),
     layers.RandomRotation(0.1),
-    # layers.RandomZoom(0.1),
-    # layers.RandomBrightness(0.1),
     layers.RandomContrast(0.2),
 ], name="data_augmentation")
 
@@ -60,9 +58,6 @@ train_dataset = train_datagen.flow_from_directory(
     seed=123
 )
 
-# validation_datagen = keras.preprocessing.image.ImageDataGenerator(
-#     rescale=1./255 #this rescales the images
-# )
 validation_dataset = train_datagen.flow_from_directory(
     image_dir,
     target_size=(image_height, image_width),
@@ -80,14 +75,10 @@ model = keras.Sequential([ #This groups layers sequentially
     layers.MaxPooling2D(),
     layers.Conv2D(64, 3, padding='same', activation='relu'),
     layers.MaxPooling2D(),
-    # layers.Conv2D(128, 3, padding='same', activation='relu'),
-    # layers.MaxPooling2D(),
-    # layers.Dropout(0.2),
     layers.Flatten(),#flatterns the inputs, does not affect batch size
     layers.Dense(128, activation='relu'),
     layers.Dense(1, activation='sigmoid')#this is the classes to predict
 ])
-
 
 # Compile the model
 model.compile(
