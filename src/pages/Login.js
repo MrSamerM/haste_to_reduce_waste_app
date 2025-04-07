@@ -63,7 +63,6 @@ function Login({ setSessionAvailability }) {
             <div id="IconImageDiv">
                 <img id="profile" src={profileIcon} />
             </div>
-            {/* https://pixabay.com/illustrations/icon-profile-user-clip-art-7797704/ image */}
 
             <div id="loginDetails">
                 <div className="loginInputDiv">

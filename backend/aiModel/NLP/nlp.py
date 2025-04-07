@@ -28,9 +28,12 @@ headers = {
 nltk.download('punkt_tab')
 nltk.download('stopwords')
 
+# Where I understood how chatbots functioned
 # https://medium.com/@kelsklane/tokenization-with-nltk-52cd7b88c7d 17/02/2025
 # https://medium.com/@lurkinguard30/how-to-build-a-simple-chatbot-with-python-and-nltk-c1b9fff5f3 17/02/2025
 # https://kantschants.com/paraphrasing-with-transformer-t5-bart-pegasus#heading-2-t5-text-to-text-transfer-transformer 28/02/2025
+
+# Where dataset data was found: 
 # https://www.eatingwell.com/article/286048/the-best-way-to-store-fruits-and-veggies/ data for fruit and vegetable from here
 # https://www.foodsafety.gov/food-safety-charts/cold-food-storage-charts data for meat from here
 # https://www.healthline.com/nutrition/does-rice-go-bad data for rice from here
@@ -41,7 +44,8 @@ nltk.download('stopwords')
 
 
 # chatGPT to change the way to read the csv file from an external python file
-# prompt:import sys sys.path.append("./NLP")from nlp import * would this code be correct based on the image (Screen shot), if my file is in NLP, and the file is called nlp.py 03/03/2025
+# OpenAI. (2025). ChatGPT (3 March Version) [Large Language Model]. Available at: https://chatgpt.com/ (Accessed: 3 March 2025).
+# prompt:import sys sys.path.append("./NLP")from nlp import * would this code be correct based on the image (Screen shot), if my file is in NLP, and the file is called nlp.py
 
 script_dir = os.path.dirname(os.path.abspath(__file__))
 dataset_path = os.path.join(script_dir, "chatbotDataset.csv")
@@ -60,7 +64,8 @@ for question in customData['Questions']:
 
 customData['Question_Token']=question_tokens
 
-# used chatgpt to make a corpus 
+#Used chatGPT to make a corpus from a csv file
+#OpenAI. (2025). ChatGPT (7 March Version) [Large Language Model].Available at: https://chatgpt.com/ (Accessed: 7 March 2025).
 #prompt 1: what does this mean corpus = [movie_reviews.raw(fileid) for fileid in movie_reviews.fileids()]
 #prompt 2: but what about for me, I have a csv dataset with questions, label and response. what should I do
 
@@ -87,6 +92,7 @@ def genResponse(input):
     input_vector = vectorizer.transform([preprocessed_input])
 
     # 3 lines below, and two at the end received by chatGPT. where cosin similarity is used to find the index with the similar questions. 03/03/2025
+    #/* OpenAI. (2025). ChatGPT (3 March Version) [Large Language Model]. Available at: https://chatgpt.com/ (Accessed: 3 March 2025).
     # Prompt: the response I get depends on the label. But how about if I want accurate results. For example the difference between saying hi and hello is a different response. Both with the same label
   
     question_vectors = vectorizer.transform(customData['Question_Token'])
@@ -97,9 +103,8 @@ def genResponse(input):
 
     new_list=[]
          
-# received asistance from chatGPT for splitting the input to array, undertstanding response data for second get request
-# including hits, and converting to json file
-
+# received asistance from chatGPT for splitting the input to array, undertstanding response data for second get request including hits, and converting to json file
+# OpenAI. (2025). ChatGPT (15 March Version) [Large Language Model]. Available at: https://chatgpt.com/ (Accessed: 15 March 2025).
 # main prompt 1: (my code) but would it not be a array when pre processed
 # main prompt 2: what does this mean (trace back error)
 # main prompt 3: this gives me a lot of random labels, but I want the name of recipe

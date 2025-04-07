@@ -14,7 +14,6 @@ function Home() {
     const [chatbotInformation, setChatbotInformation] = useState(true)
 
     const addQuestionAndResponse = async () => {
-
         setQuestion((prevQuestion) => [...prevQuestion, input])
         setInput("")
         const data = {
@@ -55,14 +54,11 @@ function Home() {
                         </div>
                     </div>
                     <div className="sideImages">
-                        {/* image from chatGPT prompt :can you show me a image of food waste*/}
                         <img src={foodWaste} className="xIcon" />
-                        {/* image from chatGPT prompt: show me one in bags */}
                         <img src={foodWaste2} className="xIcon" />
                     </div>
                 </div>
             </div>
-
 
             <div className="overviewBox">
                 <div id="overviewInformationBox">
@@ -99,7 +95,8 @@ function Home() {
                                         <p>HASTE</p>
                                     </div>
 
-                                    {/* chatGPT to fix the \n 
+                                    {/* OpenAI. (2025). ChatGPT (10 March Version) [Large Language Model]. 
+                                    Available at: https://chatgpt.com/ (Accessed: 10 March 2025).
                                     prompt: when I return this return 
                                     (f"\nRecipe: {recipe_name}\n Ingredients: {recipe_ingredients}\n URL: {recipe_url}"), 
                                     frompython, in react js it is still together. How can I fix this*/}
@@ -107,7 +104,6 @@ function Home() {
                                         {response.split("\n").map((line, index) => (
                                             <p key={index}>{line}</p>
                                         ))}
-
                                     </div>
                                 </div>
                             )) :
@@ -120,7 +116,6 @@ function Home() {
                     </div>
                 </div>
             </div>
-
         </>
 
     );
