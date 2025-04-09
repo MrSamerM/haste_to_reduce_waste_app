@@ -6,6 +6,8 @@ import '@geoapify/geocoder-autocomplete/styles/minimal.css'
 import axios from 'axios';
 import { useParams } from "react-router-dom";
 
+
+// This is an exact replica to the donation page, so all of the references are on the donation page
 function UpdateDonationDetails() {
 
     const [file, setFile] = useState("");
@@ -233,9 +235,6 @@ function UpdateDonationDetails() {
                     </div>
                 </div>
 
-
-                {/* GeoApify API  https://apidocs.geoapify.com/samples/autocomplete/react-geoapify-geocoder-autocomplete/ 
-            // https://www.npmjs.com/package/@geoapify/react-geocoder-autocomplete*/}
 
                 <div id="allDonationResults">
                     <div id="donateDetails">

@@ -4,14 +4,16 @@ import { useState, useEffect, useRef } from "react";
 import axios from "axios";
 
 import England from '../image/England.jpg'
-// https://www.pexels.com/photo/the-flag-of-the-united-kingdom-13863652/ 07/02/2025
+// Vesakaran, A.(2022). The Flag of the United Kingdom. Available at: 
+// https://www.pexels.com/photo/the-flag-of-the-united-kingdom-13863652/ (Accessed: 7 March 2025).
 
 import UseBy from '../image/UseByDate.jpg';
 import BestBefore from '../image/BestBeforeDate.jpg';
 import Expiry from '../image/ExpiryDate.jpg';
 
 import star from '../image/star.PNG';
-// https://pixabay.com/vectors/star-favorite-bookmark-3d-gold-152151/ 07/03/2025
+// OpenClipart-Vectors.(2013). star favorite bookmark 3d gold. Available at: 
+// https://pixabay.com/vectors/star-favorite-bookmark-3d-gold-152151/ (Accessed: 7 March 2025).
 
 import FullFoodLabel from '../image/FullFoodLabel.jpg';
 

@@ -35,15 +35,6 @@ ChartJS.register(
     Tooltip,
     Legend);
 
-
-// https://www.geeksforgeeks.org/how-to-upload-image-and-preview-it-using-reactjs/ to display image 15/01/25
-
-// OpenAI. (2025). ChatGPT (16 January Version) [Large Language Model]. Available at: https://chatgpt.com/ (Accessed: 16 January 2025).
-// Prompt: [pasted my code to see why the if statements where not working]. 
-
-// Used for file type, FileURL useState and change function.
-//  https://www.youtube.com/watch?v=pxkE2tT6Y-o to convert image to base64 17/01/2025
-
 function Donate() {
 
     const [file, setFile] = useState("");
@@ -108,10 +99,16 @@ function Donate() {
         setLongitude(0);
         setLatitude(0);
 
+        // assited to display an image
+        // geekforgeeks. (2025). How to convert an uploaded image to base64. 
+        // Available at:https://www.geeksforgeeks.org/how-to-upload-image-and-preview-it-using-reactjs/ (Accessed:15 January 2025)
+
         setFile(evt.target.files[0]);
         setFileURL(URL.createObjectURL(evt.target.files[0]));
     }
 
+    // OpenAI. (2025). ChatGPT (16 January Version) [Large Language Model]. Available at: https://chatgpt.com/ (Accessed: 16 January 2025).
+    // Prompt: (pasted my code to see why the if statements where not working for the file.type). 
     useEffect(() => {
 
         if (predictedClass === "Not a Container") {
@@ -126,6 +123,9 @@ function Donate() {
             setDisableScanner(false);
             console.log("true");
 
+            // Convert to base64
+            // coder4life (2022) How to convert an uploaded image to base64. 
+            // Available at:https://www.youtube.com/watch?v=pxkE2tT6Y-o (Accessed:17 January 2025)
             const base = new FileReader();
 
             base.onloadend = () => {
@@ -372,6 +372,7 @@ function Donate() {
     }
 
     // Required chatGPT to change the colour of the labels
+    // OpenAI. (2025). ChatGPT (20 February Version) [Large Language Model]. Available at: https://chatgpt.com/ (Accessed: 20 February 2025).
     // Prompt: Can I change the colour of the labels on the top. because it is grey right now
     // Prompt: how can I change the colour of the axes
 
@@ -431,7 +432,8 @@ function Donate() {
                                     but missed opportunities are assisting waste to good preishable foods
                                 </p>
                                 <div><img className="suitableContainers" src={donationImage} alt="Image of foods in containers" /></div>
-                                {/* image from https://www.pexels.com/photo/meals-in-boxed-prepared-for-box-diet-12050951/ 10/02/2025*/}
+                                {/* Freires, T.(2022) Meals in Boxed Prepared for Box Diet. Available at: 
+                                https://www.pexels.com/photo/meals-in-boxed-prepared-for-box-diet-12050951/ (Accessed: 10 February 2025).*/}
                             </div>
                         </div>
 
@@ -518,7 +520,8 @@ function Donate() {
                             <div id="secondHalf">
                                 <div className="suitableImages">
                                     <img className="appropriateContainers" src={nonSuitableContainer1} alt="Foam container" />
-                                    {/* https://www.pexels.com/photo/takeaway-chicken-served-in-a-restaurant-17429048/ 07/03/2025 */}
+                                    {/*Reynaga, J.(2023) Takeaway Chicken Served in a Restaurant. Available at: 
+                                    https://www.pexels.com/photo/takeaway-chicken-served-in-a-restaurant-17429048/ (Accessed: 7 March 2025).*/}
                                     <div className="textOverlay">
                                         <h4>Foam container</h4><br></br>
                                         <p>
@@ -533,7 +536,8 @@ function Donate() {
 
                                 <div className="suitableImages">
                                     <img className="appropriateContainers" src={nonSuitableContainer2} alt="Cardboard container" />
-                                    {/* Photo by Abdulrhman Alkady: https://www.pexels.com/photo/photo-of-burger-and-fries-in-a-takeout-box-8228281/ */}
+                                    {/* Alkady, A.(2021) Photo of Burger and Fries in a Takeout Box. Available at: 
+                                    https://www.pexels.com/photo/photo-of-burger-and-fries-in-a-takeout-box-8228281/ (Accessed: 7 March 2025).*/}
                                     <div className="textOverlay">
                                         <h4>Cardboard container</h4><br></br>
                                         <p>
@@ -548,7 +552,8 @@ function Donate() {
 
                                 <div className="suitableImages">
                                     <img className="appropriateContainers" src={nonSuitableContainer3} alt="Polythene bags" />
-                                    {/* Photo by Anna Shvets: https://www.pexels.com/photo/fruits-in-a-plastic-bag-3645504/ */}
+                                    {/* Shvets, A.(2020) Fruits In A Plastic Bag. Available at: 
+                                    https://www.pexels.com/photo/fruits-in-a-plastic-bag-3645504/ (Accessed: 7 March 2025).*/}
                                     <div className="textOverlay">
                                         <h4>Polythene bags</h4><br></br>
                                         <p>
@@ -566,7 +571,10 @@ function Donate() {
                     </div>
                 }
 
-                {/* https://www.youtube.com/watch?v=jE2Ivb7dlSQ&t=986s recieved some assistant 09/02/2025 */}
+                {/* recieved some assistant for quiz managment
+                    Learn Web Dev with Norbert. (2024) Build an Engaging Quiz App with React | Step-by-Step Tutorial. 
+                    Available at:https://www.youtube.com/watch?v=jE2Ivb7dlSQ&t=986s (Accessed:9 February 2025)
+                */}
 
                 {educationState === 2 &&
                     <div id="educationBox3">
@@ -581,7 +589,8 @@ function Donate() {
                                     {questions[currentQuestion].options.map((option, index) => (
 
                                         <button className={`answers ${answerSelected === index ? "selected" : ""}`} key={option} onClick={() => handleSelection(option, index)}>{option}</button>
-                                        // Used chatGPT to change colour of selected button: 
+                                        // Used chatGPT to change colour of selected button:
+                                        // OpenAI. (2025). ChatGPT (10 February Version) [Large Language Model]. Available at: https://chatgpt.com/ (Accessed: 10 February 2025). 
                                         // prompt 1: I have this quiz feature where users select the answer they think is correct. the css is on clikc the button changes color,
                                         // But the thing is now, lets say the user want to swtch answeres, the colour of the previous selection will still be there. What can I do
                                         // prompt 2: I am using react
@@ -595,7 +604,8 @@ function Donate() {
                                     <>
                                         <p className="resultMessage">Congratulations You Got Full Marks<br></br>Retry whenever you want</p><br></br>
                                         <img id="points" src={star} alt="gold star" />
-                                        {/* https://pixabay.com/vectors/star-favorite-bookmark-3d-gold-152151/ 07/03/2025 */}
+                                        {/* OpenClipart-Vectors.(2013). star favorite bookmark 3d gold. Available at: 
+                                            https://pixabay.com/vectors/star-favorite-bookmark-3d-gold-152151/ (Accessed: 7 March 2025).*/}
 
                                     </>
                                     :
@@ -609,11 +619,11 @@ function Donate() {
                                         </div>
                                     </>
                                 }
-                            </div>
+                            </div >
                         )}
 
                         <button className="nextButton" onClick={changeState}>Next</button>
-                    </div>
+                    </div >
                 }
 
             </>)
@@ -625,7 +635,11 @@ function Donate() {
                     <div id="donationBox">
 
                         <div id="selectDonationImage">
-                            {/* to remove select file button https://stackoverflow.com/questions/61468441/how-to-change-default-text-in-input-type-file-in-reactjs 21/01/2025 */}
+                            {/* to remove select file button
+                              21/01/2025 
+                                Ateeb Asif.(2023).How to change default text in input type=“file” in reactjs?. 
+                                Available at: https://stackoverflow.com/questions/61468441/how-to-change-default-text-in-input-type-file-in-reactjs (Accessed: 21 January 2025)
+                             */}
                             <div id="preDonationInformation">
                                 <label htmlFor="imageFile" id="selectFileLabel">Click here to upload donation image</label>
                                 <input type="file" id="imageFile" onChange={change} ref={fileInputRef} />
@@ -647,10 +661,14 @@ function Donate() {
                             </div>
                         </div>
 
+                        {/* GeoApify use and it's API: 
+                       geoapify(n.d) @geoapify/react-geocoder-autocomplete - React component
+                       Available at: https://apidocs.geoapify.com/samples/autocomplete/react-geoapify-geocoder-autocomplete/ (Accessed: 15 January 2025)
 
-                        {/* GeoApify API  https://apidocs.geoapify.com/samples/autocomplete/react-geoapify-geocoder-autocomplete/ 
-            // https://www.npmjs.com/package/@geoapify/react-geocoder-autocomplete*/}
-
+                       npm.(2024). React Geocoder Autocomplete.
+                       Available at: https://www.npmjs.com/package/@geoapify/react-geocoder-autocomplete (Accessed: 15 January 2025)
+                        
+                        */}
 
                         <div id="allDonationResults">
                             <div id="donateDetails">

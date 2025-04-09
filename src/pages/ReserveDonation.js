@@ -6,12 +6,15 @@ import 'leaflet/dist/leaflet.css'
 import { Icon } from "leaflet";
 
 import markerIcon from '../image/marker.png';
-// https://pixabay.com/vectors/location-poi-pin-marker-position-304467/ 07/03/2025
+//  07/03/2025
+
+// Clker-Free-Vector-Images.(2014). Location, Poi, Pin . Available at: 
+// https://pixabay.com/vectors/location-poi-pin-marker-position-304467/ (Accessed: 7 March 2025).
 
 import { GeoapifyGeocoderAutocomplete, GeoapifyContext } from '@geoapify/react-geocoder-autocomplete'
 import '@geoapify/geocoder-autocomplete/styles/minimal.css'
 
-// chatGPT 28/02/2025
+// OpenAI. (2025). ChatGPT (28 February Version) [Large Language Model]. Available at: https://chatgpt.com/ (Accessed: 28 February 2025). 
 // Prompt: when I change the address I want the position to move, but it isn't.
 const MapUpdater = ({ latitude, longitude }) => {
     const map = useMap();
@@ -21,8 +24,11 @@ const MapUpdater = ({ latitude, longitude }) => {
     return null;
 };
 
-// https://react-leaflet.js.org/docs/start-installation/ 19/01/2025
-// https://www.youtube.com/watch?v=jD6813wGdBA&t=442s  received help from video on 19/01/2025
+
+// received help from video 
+// Alejandro AO - Software & Ai. (2023) React Leaflet Tutorial for Beginners (2023). 
+// Available at:https://www.youtube.com/watch?v=jD6813wGdBA&t=442s (Accessed:19 January 2025)
+
 function ReserveDonation() {
     axios.defaults.withCredentials = true;
 
@@ -113,7 +119,9 @@ function ReserveDonation() {
                             <p>Description: {listOfMarker.description} </p>
                             <p>Portion Size: {listOfMarker.portionSize}</p>
                             {listOfMarker.reserved === true ? null : <button id="reserveButton" onClick={() => reserveDonation(listOfMarker.id)}>Reserve this donation</button>}
-                            {/* used chatgpt for top line, because I had to send the id straight away to the function. Prompt:(My entire code) */}
+                            {/* used chatgpt for top line, because I had to send the id straight away to the function. 
+                               OpenAI. (2025). ChatGPT (28 February Version) [Large Language Model]. Available at: https://chatgpt.com/ (Accessed: 28 February 2025). 
+                               Prompt:(My entire code) */}
                         </Popup>
                     </Marker>
                 ))}

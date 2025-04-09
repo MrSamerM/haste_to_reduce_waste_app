@@ -24,8 +24,14 @@ function Signup({ setSessionAvailability }) {
         return pattern.test(email);//This tests if the email is valid or not
     }
 
-    // javatpoint. (n.d) calculate age using javascript. Available at:
-    // https://www.javatpoint.com/calculate-age-using-javascript (Accessed: 2 January 2025)
+    // javatpoint. (n.d) calculate age using JavaScript. Available at:
+    // https://www.javatpoint.com/calculate-age-using-javascript (Accessed: 2 January 2025) 
+
+    // Javatpoint closed and the new refernce
+    // Tpointtech. (n.d) calculate age using JavaScript. Available at:
+    // https://www.tpointtech.com/calculate-age-using-javascript (Accessed: 4 April 2025) 
+
+
     const validateAge = (dateOfBirth) => {
         const changeToDate = new Date(dateOfBirth)
         const monthDifference = Date.now() - changeToDate.getTime();//In milliseconds (date.now() starts in 1970)
