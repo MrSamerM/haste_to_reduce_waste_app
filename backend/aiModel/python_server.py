@@ -68,9 +68,6 @@ def text():
 
     return jsonify({"text":string})
 
-
-
-
 # Bhattacharya, P. (2023) Integration & Deployment of ML model with React & Flask. Available at:
 # https://medium.com/@pooranjoyb/integration-deployment-of-ml-model-with-react-flask-3033dd6034b3 (Accessed: 24 Janaury 2025) 
 

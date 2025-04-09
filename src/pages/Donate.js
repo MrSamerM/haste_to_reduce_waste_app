@@ -242,9 +242,7 @@ function Donate() {
     const fileInputRef = useRef(null); // Add a ref for the file input
 
     const donate = async (e) => {
-
         e.preventDefault();
-
         const data = {
             image: baseSixtyFour,
             description: description,
@@ -269,8 +267,6 @@ function Donate() {
         // }
 
         else {
-
-
             try {
                 const res = await axios.post("http://localhost:8000/donate", data)
                 if (res.data.message === "Donated") {
@@ -289,12 +285,9 @@ function Donate() {
                     setLatitude(0);
                     window.location.reload();
                 }
-
-
                 if (fileInputRef.current) {
                     fileInputRef.current.value = null;
                 }
-
             } catch (e) {
                 console.log("Error with submission", e)
             }
