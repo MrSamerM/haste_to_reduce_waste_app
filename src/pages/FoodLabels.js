@@ -421,9 +421,7 @@ function FoodLabels() {
                     ["BY", "BEST"],
                     ["BY", "USE"],
                     ["BEST", "BY"],
-                    ["BEST", "USE"],
                     ["USE", "BY"],
-                    ["USE", "BEST"],
                     ["BEFORE", "BEST"],
                     ["BEST", "BEFORE"]
                 ];
@@ -537,7 +535,7 @@ function FoodLabels() {
 
                 for (let i = 0; i < words.length; i++) {
                     // if best before or use by date
-                    if (words[i].toUpperCase().charAt(0) === "B" || words[i].toUpperCase().charAt(0) === "U") {
+                    if (words[i].toUpperCase().charAt(0) === "B") {
                         numberArray.push({
                             word: words[i],
                             number: 1
@@ -546,15 +544,15 @@ function FoodLabels() {
 
                     // if expiry date only
 
-                    else if ((words[i].toUpperCase().charAt(0) !== "B" || words[i].toUpperCase().charAt(0) !== "U") && (words[i].toUpperCase().charAt(0) === "E")) {
+                    else if ((words[i].toUpperCase().charAt(0) !== "B") && (words[i].toUpperCase().charAt(0) === "E" || words[i].toUpperCase().charAt(0) === "U")) {
                         numberArray.push({
                             word: words[i],
                             number: 1
                         });
                     }
 
-                    // if expiry date with a use by / best before date.
-                    else if (words[i].toUpperCase().charAt(0) === "E") {
+                    // if expiry date/use by date with a use by / best before date.
+                    else if (words[i].toUpperCase().charAt(0) === "E" || words[i].toUpperCase().charAt(0) === "U") {
                         numberArray.push({
                             word: words[i],
                             number: 3
