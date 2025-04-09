@@ -1,5 +1,3 @@
-// https://javascript.plainenglish.io/node-js-models-and-database-3836f0c7f2da referenced for assistance
-// https://mongoosejs.com/docs/schematypes.html referenced for assistance
 
 const mongoose = require('mongoose');
 

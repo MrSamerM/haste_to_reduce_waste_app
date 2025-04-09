@@ -10,9 +10,6 @@ from NLP.nlp import genResponse
 
 app = Flask(__name__)
 
-# https://medium.com/@pooranjoyb/integration-deployment-of-ml-model-with-react-flask-3033dd6034b3 24/01/2025
-# https://medium.com/@adityamahajan.work/easyocr-a-comprehensive-guide-5ff1cb850168 29/01/2025 for easyocr
-# ChatGPT helped to handle the image using cv2. Prompt why is this wrong (the route for text) 29/01/2025
 
 CORS(app, resources={r"/*": {"origins": "http://localhost:3000", "supports_credentials": True}})
 
@@ -26,14 +23,25 @@ CORS(app, resources={r"/*": {"origins": "http://localhost:3000", "supports_crede
 @app.route("/response", methods=['POST'])
 def response():
 
-# two lines underneath received from chatGPT
-#prompt: (frontend function) this is the frontend, but how do I get the input from python (python function)
+
+# received asistance from chatGPT to get the input  to python for the chatbot
+# OpenAI. (2025). ChatGPT (10 March Version) [Large Language Model]. Available at: https://chatgpt.com/ (Accessed: 10 March 2025).
+# prompt 1: (frontend function) this is the frontend, but how do I get the input from python (python function)
+
     data = request.get_json()
     user_input = data.get("input", "")
 
 
     response_to_question=genResponse(user_input)
     return jsonify({"response":response_to_question})
+
+# Recieved assistance on how to use easyOCR
+# Mahajan, A. (2023) EasyOCR: A Comprehensive Guide. Available at:
+# https://medium.com/@adityamahajan.work/easyocr-a-comprehensive-guide-5ff1cb850168 (Accessed: 29 Janaury 2025) 
+
+# ChatGPT helped to handle the image using cv2.
+# OpenAI. (2025). ChatGPT (29 January Version) [Large Language Model]. Available at: https://chatgpt.com/ (Accessed: 29 January 2025).
+# prompt 1: why is this wrong (the route for text)
 
 @app.route("/text", methods=['POST'])
 def text():
@@ -63,6 +71,9 @@ def text():
 
 
 
+# Bhattacharya, P. (2023) Integration & Deployment of ML model with React & Flask. Available at:
+# https://medium.com/@pooranjoyb/integration-deployment-of-ml-model-with-react-flask-3033dd6034b3 (Accessed: 24 Janaury 2025) 
+
 @app.route("/upload", methods=['POST'])
 def upload():
     file = request.files['file']
@@ -75,7 +86,10 @@ def upload():
 
     loaded_model = load_model('container_model.keras')
 
-    # For percentage go from ChatGPT: Prompt: (Image of my code) I want to also send the percentage. How can I do this 24/01/2025
+    # To get percentage from ChatGPT:
+    # OpenAI. (2025). ChatGPT (24 January Version) [Large Language Model]. Available at: https://chatgpt.com/ (Accessed: 24 January 2025).
+    # Prompt: (Image of my code) I want to also send the percentage. How can I do this 24/01/2025
+    
     prediction = loaded_model.predict(x)[0][0]  
 
     if os.path.exists(f"./uploads/{file.filename}"):

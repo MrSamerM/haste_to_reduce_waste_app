@@ -12,17 +12,18 @@ const Receipt = require('./databaseModels/receiptModel');
 const Product = require('./databaseModels/productModel');
 
 
-// https://www.udemy.com/course/the-web-developer-bootcamp assistance throughout the web application throughout the web
+// assistance throughout the web application backend, and frontend. This course regularly updates
+// Steele, C. (2025) The Web Developer Bootcamp 2025. Available at:
+// https://www.udemy.com/course/the-web-developer-bootcamp (Accessed: 20 December 2024)
 
-// https://javascript.plainenglish.io/what-is-cors-in-node-js-2024-a-comprehensive-guide-542630e0a805 as reference December 27
-// https://expressjs.com/en/resources/middleware/session.html as reference December 27
-// https://stackoverflow.com/questions/50454992/req-session-destroy-and-passport-logout-arent-destroying-cookie-on-client-side  as reference 1/1/25
-// https://www.youtube.com/watch?v=pzGQMwGmCnc as reference
-
-
-// https://stackoverflow.com/questions/54716914/413-payload-too-large-for-base64-string-after-adjusting-size-in-express for limits 18/01/2025
+// for limits
+// Noszone. (2022) 413 payload too large, for base64 string after adjusting size in express. Available at:
+// https://stackoverflow.com/questions/54716914/413-payload-too-large-for-base64-string-after-adjusting-size-in-express (Accessed: 18 January 2025)
 app.use(bodyParser.json({ limit: '50mb', extended: true }));
-app.use(bodyParser.urlencoded({ limit: "50mb", extended: true, parameterLimit: 50000 }));//So it is extended for all types to be enoded
+app.use(bodyParser.urlencoded({ limit: "50mb", extended: true, parameterLimit: 50000 }));//So it is extended for all types to be encoded
+
+// Chamoli, A. (2024) What is CORS in Node.js 2024: A Comprehensive Guide. Available at:
+// https://javascript.plainenglish.io/what-is-cors-in-node-js-2024-a-comprehensive-guide-542630e0a805 (Accessed: 27 December 2025) 
 app.use(cors(
     {
         origin: process.env.REACT_APP_API_URL,
@@ -32,6 +33,8 @@ app.use(cors(
     }
 ))
 
+// Express. (n.d) express-session. Available at:
+// https://expressjs.com/en/resources/middleware/session.html (Accessed: 27 December 2025) 
 app.use(session(
     {
         secret: 'secret',
@@ -59,6 +62,10 @@ mongoose.connect(process.env.REACT_APP_MONGO_PATH)
 app.listen(8000, () => {
     console.log("Listening to port 8000")
 })
+
+
+// Manthan Dave (2016) Simple login using Mongoose / MongoDB - Node.js Tutorial 17. 
+// Available at: https://www.youtube.com/watch?v=pzGQMwGmCnc (Accessed:27 December 2025)
 
 app.post('/register', async (req, res) => {
     try {
@@ -133,6 +140,11 @@ app.get('/session_check', async (req, res) => {
     }
 })
 
+
+// To remove cookies
+// marcel.js. (2018) express-session. Available at:
+// https://stackoverflow.com/questions/50454992/req-session-destroy-and-passport-logout-arent-destroying-cookie-on-client-side (Accessed: 1 January 2025) 
+
 app.get('/remove_session', async (req, res) => {
 
     if (req.session.userID) {
@@ -142,8 +154,9 @@ app.get('/remove_session', async (req, res) => {
     }
 });
 
-// received assistance from chatGPT
-// prompt 1: how do I fix this error TypeError: Cannot read properties of null (reading 'password') 26/02/2025
+// received assistance from chatGPT to fix type error
+// OpenAI. (2025). ChatGPT (26 February Version) [Large Language Model]. Available at: https://chatgpt.com/ (Accessed: 26 February 2025).
+// prompt 1: how do I fix this error TypeError: Cannot read properties of null (reading 'password')
 app.post('/login', async (req, res) => {
     try {
         const { email, password } = req.body;
@@ -241,9 +254,10 @@ app.get('/allReservedDonations', async (req, res) => {
 app.get('/allReceipts', async (req, res) => {
     try {
 
-        // from chatgpt 
-        // prompt: I want to do something. Right now the productid array stores productIDs,but I want it to store the names of the products which is in another table in mongo, how can I fix this 
-        // prompt2: it just does not work when productID is repeated 26/03/2025
+        // received from chatGPT to get the data from the foreign key
+        // OpenAI. (2025). ChatGPT (26 March Version) [Large Language Model]. Available at: https://chatgpt.com/ (Accessed: 26 March 2025).
+        // prompt1: I want to do something. Right now the productid array stores productIDs,but I want it to store the names of the products which is in another table in mongo, how can I fix this 
+        // prompt2: it just does not work when productID is repeated
 
         const allReceipts = await Receipt.aggregate([
             {

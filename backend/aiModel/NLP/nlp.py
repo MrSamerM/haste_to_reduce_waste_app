@@ -29,17 +29,33 @@ nltk.download('punkt_tab')
 nltk.download('stopwords')
 
 # Where I understood how chatbots functioned
-# https://medium.com/@kelsklane/tokenization-with-nltk-52cd7b88c7d 17/02/2025
-# https://medium.com/@lurkinguard30/how-to-build-a-simple-chatbot-with-python-and-nltk-c1b9fff5f3 17/02/2025
-# https://kantschants.com/paraphrasing-with-transformer-t5-bart-pegasus#heading-2-t5-text-to-text-transfer-transformer 28/02/2025
 
-# Where dataset data was found: 
-# https://www.eatingwell.com/article/286048/the-best-way-to-store-fruits-and-veggies/ data for fruit and vegetable from here
-# https://www.foodsafety.gov/food-safety-charts/cold-food-storage-charts data for meat from here
-# https://www.healthline.com/nutrition/does-rice-go-bad data for rice from here
-# https://www.flavournetwork.ca/article/10-foods-you-can-eat-after-the-expiry-date/ for pasta data
-# https://www.kingarthurbaking.com/blog/2023/12/20/freeze-bread for bread data
-# https://thewonderfulworldofsprouts.com/how-long-do-dried-lentils-last/ for lentils data
+#1. Lane, K. (2021) Tokenization with NLTK. Available at:
+# https://medium.com/@kelsklane/tokenization-with-nltk-52cd7b88c7d (Accessed: 17 February 2025)
+
+#2. Excell. (2023) How to build a Simple Chatbot with Python and NLTK. Available at:
+# https://medium.com/@lurkinguard30/how-to-build-a-simple-chatbot-with-python-and-nltk-c1b9fff5f3 (Accessed: 17 February 2025) 
+
+
+# Where dataset data was found:
+
+#1 Meyer, H. (2022) The Best Way to Store Fruits and Veggies. Available at:
+# https://www.eatingwell.com/article/286048/the-best-way-to-store-fruits-and-veggies/ (Accessed: 10 March 2025)
+
+#2 Lang, A. (2021) Does Rice Go Bad? Shelf Life, Expiration Dates, and More. Available at:
+# https://www.healthline.com/nutrition/does-rice-go-bad (Accessed: 10 March 2025)
+
+#3 Flavour Network. (2024) Foods You Can Still Eat After the Expiry Date. Available at:
+# https://www.flavournetwork.ca/article/10-foods-you-can-eat-after-the-expiry-date/ (Accessed: 10 March 2025)
+
+#4 FoodSafety.gov. (2023) Cold Food Storage Chart. Available at:
+# https://www.foodsafety.gov/food-safety-charts/cold-food-storage-charts (Accessed: 10 March 2025)
+
+#5 Shippee, A. (2023) How can I freeze my bread? (And defrost it, too!). Available at:
+# https://www.kingarthurbaking.com/blog/2023/12/20/freeze-bread (Accessed: 10 March 2025)
+
+#6 Shippee, A. (2023) How Long Do Dried Lentils Last? Essential Storage Tips. Available at:
+# https://thewonderfulworldofsprouts.com/how-long-do-dried-lentils-last/ (Accessed: 10 March 2025)
 
 
 

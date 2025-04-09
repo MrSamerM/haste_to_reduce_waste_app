@@ -1,6 +1,6 @@
-// https://javascript.plainenglish.io/node-js-models-and-database-3836f0c7f2da referenced for assistance
-// https://mongoosejs.com/docs/schematypes.html referenced for assistance
-// https://stackoverflow.com/questions/26008555/creating-a-foreign-key-relationship-in-mongoose answered by Tim 03/02/2025 for foreign key
+
+// Tim. (2014) Creating a Foreign Key relationship in Mongoose. Available at:
+// https://stackoverflow.com/questions/26008555/creating-a-foreign-key-relationship-in-mongoose (Accessed: 3 February 2025) 
 
 const mongoose = require('mongoose');
 

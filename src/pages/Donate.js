@@ -40,8 +40,8 @@ ChartJS.register(
 
 // OpenAI. (2025). ChatGPT (16 January Version) [Large Language Model]. Available at: https://chatgpt.com/ (Accessed: 16 January 2025).
 // Prompt: [pasted my code to see why the if statements where not working]. 
-// Used for file type, FileURL useState and change function.
 
+// Used for file type, FileURL useState and change function.
 //  https://www.youtube.com/watch?v=pxkE2tT6Y-o to convert image to base64 17/01/2025
 
 function Donate() {
@@ -193,9 +193,11 @@ function Donate() {
         formData.append("file", file);
 
         try {
-            // https://www.sitepoint.com/measuring-javascript-functions-performance/ for performance.now
+            // to time performance of ai.
+            //Bengtsson, P.(2024).Measuring JavaScript Functions’ Performance 
+            //Available at: https://www.sitepoint.com/measuring-javascript-functions-performance/ (Accessed: 20 March 2025)
             const timeStart = performance.now()
-            // POST request to backend with credentials (if needed)
+
             const response = await axios.post("http://localhost:5000/upload", formData, {
                 headers: {
                     "Content-Type": "multipart/form-data",
@@ -215,7 +217,9 @@ function Donate() {
 
 
 
-    // from chatgpt to be able to update the address prompt: why is the address not saving (added my code) 18/01/2025
+    // from chatgpt to be able to update the address
+    // OpenAI. (2025). ChatGPT (18 January Version) [Large Language Model]. Available at: https://chatgpt.com/ (Accessed: 18 January 2025).
+    // prompt: why is the address not saving (added my code)
     const onPlaceSelect = (place) => {
         if (place && place.properties && place.properties.formatted) {
             setAddress(place.properties.formatted);
@@ -311,6 +315,7 @@ function Donate() {
                 alert("Must select a answer first")
             }
             // The bottom else if, received assistance from chatGPT due to quiz store not updating correctly
+            // OpenAI. (2025). ChatGPT (20 March Version) [Large Language Model]. Available at: https://chatgpt.com/ (Accessed: 20 March 2025).
             // prompt 1: (Code) why does this code give me the incorrect score at the end. if I get all of them correct, the score does not show 3/3
             // prompt 2: It still shows 2/3
 

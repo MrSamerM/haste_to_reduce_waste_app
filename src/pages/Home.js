@@ -20,9 +20,13 @@ function Home() {
             input: input
         }
         try {
+            const timeStart = performance.now()
+
             const response = await axios.post("http://localhost:5000/response", data, { withCredentials: true });
             console.log(response.data.response);
             setResponse((prevQuestion) => [...prevQuestion, response.data.response])
+            const timeEnd = performance.now()
+            console.log(((timeEnd - timeStart).toFixed(4)) / 1000 + ' Seconds')
         } catch (error) {
             console.error("Can't send the file", error);
         }
