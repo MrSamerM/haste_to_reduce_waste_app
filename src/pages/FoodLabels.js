@@ -80,8 +80,8 @@ function FoodLabels() {
     }, [file]);
 
 
-    // https://stackoverflow.com/questions/7335075/compare-2-dates-in-format-dd-mm-yyyy-with-javascript-jquery By Maxx 31/01/2025
-    // https://sentry.io/answers/how-to-insert-an-item-into-an-array-at-a-specific-index-using-javascript/ 01/02/2025 for .splice method
+    //Maxx.(2011).Compare 2 dates in format DD/MM/YYYY with javascript/jquery. 
+    //Available at: https://stackoverflow.com/questions/7335075/compare-2-dates-in-format-dd-mm-yyyy-with-javascript-jquery (Accessed: 31 January 2025)
 
     function dateConvertion(date) {
 
@@ -133,6 +133,7 @@ function FoodLabels() {
             const month = parseInt(parts[1], 10);
 
             // bottom 4 lines from chatGPT to differentiate between 2 and 4 digits
+            // OpenAI. (2025). ChatGPT (18 March Version) [Large Language Model]. Available at: https://chatgpt.com/ (Accessed: 18 March 2025).
             // prompt 1: no that is not my question. the last regex is {2,4} meaning it could be 18, or 2018, how can I differentiate them.
             // prompt 2:assume that it is always 20xx
 
@@ -209,7 +210,8 @@ function FoodLabels() {
             return newDate.getTime();
         }
 
-        // const parts=date.match got from chatGPT 
+        // const parts=date.match got from chatGPT
+        // OpenAI. (2025). ChatGPT (18 March Version) [Large Language Model]. Available at: https://chatgpt.com/ (Accessed: 18 March 2025).
         // prompt1: string.split () but 2 charcters
         // prompt2: No i mean every two characters it splits
         // prompt3:in js. there is a split method
@@ -278,7 +280,8 @@ function FoodLabels() {
                 parts[1] = 11
             }
 
-            // 5 Lines below recieved from chatgpt to convert to date 22/02/2025
+            // 5 Lines below recieved from chatgpt to convert to date
+            // OpenAI. (2025). ChatGPT (18 March Version) [Large Language Model]. Available at: https://chatgpt.com/ (Accessed: 22 February 2025).
             // main prompt: why is this wrong (my code)
             const day = parseInt(parts[0], 10);
             const month = parseInt(parts[1], 10);
@@ -399,17 +402,21 @@ function FoodLabels() {
                     withCredentials: true,
                 });
 
-                // https://stackoverflow.com/questions/65461724/how-can-i-remove-commas-or-whatever-from-within-a-string answered by munerik 30/01/2025
+
+
 
                 let result = response.data.text;
                 console.log(result);
 
-                // Used chatGPT for bottom function 
-                // Main Prompts 1:I want this for loop to loop through a array with strings. If it finds 'by', and the next is 'before' or vise versa, then put it in front. For example [hello, very, best, by] => will be [best, by, hello, very]. I want to do this with use by. However I can't because both best by, and use by have by in it. what should I do (My code)
-                //Main Prompt 2: No you do not understand. I need to try and find the pairs either Best and By || By and Best || Best and Before || Before and Best || Use and By || By and Use, when these pairs are found, it does not mean they are next to each other, they could be very far a part, if they are found in the same array then I need to put them into the front
 
+                //Munreinik.(2020).How can I remove commas or whatever from within a string?.
+                //Available at:https://stackoverflow.com/questions/65461724/how-can-i-remove-commas-or-whatever-from-within-a-string (Accessed: 30 January 2025)
                 result = result.map(word => word.replace(/[^a-zA-Z0-9\s\/\-\.]/g, "").toUpperCase());
 
+                // Used chatGPT for bottom function
+                // OpenAI. (2025). ChatGPT (15 March Version) [Large Language Model]. Available at: https://chatgpt.com/ (Accessed: 15 March 2025). 
+                // Main Prompts 1:I want this for loop to loop through a array with strings. If it finds 'by', and the next is 'before' or vise versa, then put it in front. For example [hello, very, best, by] => will be [best, by, hello, very]. I want to do this with use by. However I can't because both best by, and use by have by in it. what should I do (My code)
+                // Main Prompt 2: No you do not understand. I need to try and find the pairs either Best and By || By and Best || Best and Before || Before and Best || Use and By || By and Use, when these pairs are found, it does not mean they are next to each other, they could be very far a part, if they are found in the same array then I need to put them into the front
                 const targetPairs = [
                     ["BY", "BEST"],
                     ["BY", "USE"],
@@ -474,17 +481,30 @@ function FoodLabels() {
 
                 const numberArray = [];
 
-                // https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/RegExp reference 26/01/2025
-                // https://www.freecodecamp.org/news/regex-for-date-formats-what-is-the-regular-expression-for-matching-dates/
-                // https://stackoverflow.com/questions/33017274/find-all-words-with-3-letters-with-regex
-                // https://stackoverflow.com/questions/2951915/javascript-reg-ex-to-match-whole-word-only-bound-only-by-whitespace 
-                // chatGPT i for case insensitivity, and matching by mapping Prompt: still a error (my pattern)
+                // used below to reserach more about regex
+
+                //Mdn web docs.(n.d).RegExp.
+                //Available at:https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/RegExp (Accessed: 26 January 2025).
+
+                //Chris, K.(2023).RegEx for Date Formats – Regular Expressions for Matching Dates.
+                //Available at:https://www.freecodecamp.org/news/regex-for-date-formats-what-is-the-regular-expression-for-matching-dates/ (Accessed: 26 January 2025).
+
+                //Anubhava.(2015).Find all words with 3 letters with regex.
+                //Available at:https://stackoverflow.com/questions/33017274/find-all-words-with-3-letters-with-regex (Accessed: 26 January 2025).
+
+                //polygenelubricants.(2010).Javascript reg ex to match whole word only, bound only by whitespace.
+                //Available at:https://stackoverflow.com/questions/2951915/javascript-reg-ex-to-match-whole-word-only-bound-only-by-whitespace (Accessed: 26 January 2025).
+
+                // chatGPT i for case insensitivity, and matching by mapping
+                // OpenAI. (2025). ChatGPT (26 January Version) [Large Language Model]. Available at: https://chatgpt.com/ (Accessed: 26 January 2025). 
+                // Prompt: still a error (my pattern)
 
                 const pattern1 = /(BB|Expiry Date|BBE|EXP|BEST BY|Best By|Best Before|Use By|Expiry)/i;
                 const pattern2 = /(\d{1,2}\/\d{1,2}\/\d{2,4}|\d{6}(?<=^\d{2}[01-9]{1}[0-9]{1}[0-9]{1})|\d{1,2}\-\d{1,2}\-\d{2,4}|\d{1,2}\.\d{1,2}\.\d{2,4}|\d{1,2} \d{1,2} \d{2,4}|\d{1,2}[A-Za-z]{3}\d{1,2}|\d{1,2} [A-Za-z]{3} \d{2,4}|\d{2}\/\d{2,4})/i;
 
                 // filter method recieved by chatgpt, and remove gm, due to global issues with .test() 22/03/2025
-                //prompt: I have this EXP 02/2027, why would it match in this regex (pattern 2)
+                // OpenAI. (2025). ChatGPT ( 22 March Version) [Large Language Model]. Available at: https://chatgpt.com/ (Accessed: 22 March 2025). 
+                //prompt1: I have this EXP 02/2027, why would it match in this regex (pattern 2)
                 //prompt2: No, I want to remove EXP from it
                 //prompt3: would this not work (old code)
 
@@ -589,8 +609,13 @@ function FoodLabels() {
 
                 console.log("this is the array", numberArray);
 
-                // https://www.geeksforgeeks.org/insertion-sort-algorithm/ for the insertion sort 31/01/2025
+                //  for the insertion sort 31/01/2025
+
+                //geekforgeeks.(2025).Insertion Sort Algorithm.
+                //Available at:https://www.geeksforgeeks.org/insertion-sort-algorithm/ (Accessed: 26 January 2025).
+
                 // chatgpt to help with handling it with objects.
+                // OpenAI. (2025). ChatGPT ( 31 January Version) [Large Language Model]. Available at: https://chatgpt.com/ (Accessed: 31 January 2025). 
                 // prompt1: what I am expecting is for the array to sort the complete object. Not the value of the number in the object. how can I do this (my code)
                 // prompt2: questioning
                 // prompt3: but how about if I want to use my one regardless
@@ -610,12 +635,14 @@ function FoodLabels() {
 
                 console.log(numberArray)
 
-                // https://www.betterhealth.vic.gov.au/health/healthyliving/food-use-by-and-best-before-dates 01/02/2025
-                // https://www.webmd.com/diet/features/do-food-expiration-dates-matter 01/02/2025
+                //where I got my information about the type of labels
 
-                // Best before is the date where the food quality begins to lose, however if stored properly can be suitbale even after the date.
-                // Use by date is the date where the food consumed has to be eaten before or on that date.
-                // Expiry date is similar to use by date. Meaning it is not recommended to be conumed after the date. 
+                //BetterHealth.(n.d).Food – use-by and best-before dates.
+                //Available at:https://www.betterhealth.vic.gov.au/health/healthyliving/food-use-by-and-best-before-dates (Accessed: 1 February 2025).
+
+                //Hebebrand.(2021).Food Expiration Dates: What to Know.
+                //Available at:https://www.webmd.com/diet/features/do-food-expiration-dates-matter (Accessed: 1 February 2025).
+
 
                 if ((numberArray[0].word.toUpperCase().charAt(0) === ("E") || numberArray[0].word.toUpperCase().charAt(0) === ("U"))) {
                     console.log(`This means that you have until ${dateConvertionToDate(numberArray[1].word)} to consume. That is it`);
@@ -661,6 +688,7 @@ function FoodLabels() {
                 alert("Must select a answer first")
             }
             // The bottom else if, received assistance from chatGPT due to quiz store not updating correctly
+            // OpenAI. (2025). ChatGPT ( 20 February  Version) [Large Language Model]. Available at: https://chatgpt.com/ (Accessed: 20 February 2025). 
             // prompt 1: (Code) why does this code give me the incorrect score at the end. if I get all of them correct, the score does not show 3/3
             // prompt 2: It still shows 2/3
 
@@ -807,7 +835,10 @@ function FoodLabels() {
                     </div>
                 }
 
-                {/* https://www.youtube.com/watch?v=jE2Ivb7dlSQ&t=986s recieved some assistant 09/02/2025 */}
+                {/* recieved some assistant for quiz managment
+                    Learn Web Dev with Norbert. (2024) Build an Engaging Quiz App with React | Step-by-Step Tutorial. 
+                    Available at:https://www.youtube.com/watch?v=jE2Ivb7dlSQ&t=986s (Accessed:9 February 2025)
+                */}
 
                 {educationState === 2 &&
                     <div id="educationBox3Label">
@@ -822,7 +853,8 @@ function FoodLabels() {
                                     {questions[currentQuestion].options.map((option, index) => (
 
                                         <button className={`answersLabel ${answerSelected === index ? "selectedLabel" : ""}`} key={option} onClick={() => handleSelection(option, index)}>{option}</button>
-                                        // Used chatGPT to change colour of selected button: 
+                                        // Used chatGPT to change colour of selected button:
+                                        // OpenAI. (2025). ChatGPT ( 20 February  Version) [Large Language Model]. Available at: https://chatgpt.com/ (Accessed: 20 February 2025). 
                                         // prompt 1: I have this quiz feature where users select the answer they think is correct. the css is on clikc the button changes color,
                                         // But the thing is now, lets say the user want to swtch answeres, the colour of the previous selection will still be there. What can I do
                                         // prompt 2: I am using react
