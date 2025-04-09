@@ -14,27 +14,27 @@ function UpdateDonation() {
     axios.defaults.withCredentials = true;
 
     useEffect(() => {
-
         const allDonations = async () => {
-
             try {
                 setLoading(true)
                 const res = await axios.get('http://localhost:8000/allDonatedDonations')
-                const allDonatedDonations = res.data.result.map((data) => ({ id: data._id, description: data.description, portionSize: data.portionSize, reserved: data.reserved, address: data.address }));
+                const allDonatedDonations = res.data.result.map((data) => ({
+                    id: data._id,
+                    description: data.description,
+                    portionSize: data.portionSize,
+                    reserved: data.reserved,
+                    address: data.address
+                }));
                 setData(allDonatedDonations);
                 setLoading(false)
-
-
             } catch (err) {
                 console.log("Error", err)
             }
         }
         allDonations();
-
     }, []);
 
     const deleteDonation = async (id) => {
-
         const data = {
             donationID: id
         }
@@ -42,7 +42,6 @@ function UpdateDonation() {
             const res = await axios.post('http://localhost:8000/removeDonation', data);
             if (res.data.message === "donation Removed") {
                 window.location.reload();
-
             }
 
         } catch (err) {
@@ -95,7 +94,7 @@ function UpdateDonation() {
                         <label className="sideInformationLabels">Delete Donation</label>
                     </div>
 
-                    {/* https://www.youtube.com/watch?v=CUyU_ySLnIM&t=532s for reference 25/01/2025 */}
+                    {/* code With Yousaf.(2023). How to Update Data in React JS | Edit Record/Data using React JS. Available at: https://www.youtube.com/watch?v=CUyU_ySLnIM&t=532s (Accessed 25 January 2025) */}
                     <div className="sideInformation">
                         <button className="tickXAndEditIcon" onClick={() => navigateUpdate(data.id)}>&#9998;</button>
                         <br></br>
