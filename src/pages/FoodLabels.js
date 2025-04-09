@@ -479,7 +479,6 @@ function FoodLabels() {
                     console.log(result);
                 }
 
-                const numberArray = [];
 
                 // used below to reserach more about regex
 
@@ -498,6 +497,8 @@ function FoodLabels() {
                 // chatGPT i for case insensitivity, and matching by mapping
                 // OpenAI. (2025). ChatGPT (26 January Version) [Large Language Model]. Available at: https://chatgpt.com/ (Accessed: 26 January 2025). 
                 // Prompt: still a error (my pattern)
+
+                const numberArray = [];
 
                 const pattern1 = /(BB|Expiry Date|BBE|EXP|BEST BY|Best By|Best Before|Use By|Expiry)/i;
                 const pattern2 = /(\d{1,2}\/\d{1,2}\/\d{2,4}|\d{6}(?<=^\d{2}[01-9]{1}[0-9]{1}[0-9]{1})|\d{1,2}\-\d{1,2}\-\d{2,4}|\d{1,2}\.\d{1,2}\.\d{2,4}|\d{1,2} \d{1,2} \d{2,4}|\d{1,2}[A-Za-z]{3}\d{1,2}|\d{1,2} [A-Za-z]{3} \d{2,4}|\d{2}\/\d{2,4})/i;
@@ -531,8 +532,6 @@ function FoodLabels() {
                     console.log(((timeEnd - timeStart).toFixed(4)) / 1000 + ' Seconds')
                     return;
                 }
-
-
                 console.log("this is word", words);
                 console.log("this is dates", dates);
 
@@ -582,7 +581,6 @@ function FoodLabels() {
                 }
 
                 // if there are two dates, and two words
-
                 else if (dateConvertion(dates[0]) < dateConvertion(dates[1])) {
                     numberArray.push({
                         word: dates[1],
@@ -644,7 +642,9 @@ function FoodLabels() {
                 //Available at:https://www.webmd.com/diet/features/do-food-expiration-dates-matter (Accessed: 1 February 2025).
 
 
-                if ((numberArray[0].word.toUpperCase().charAt(0) === ("E") || numberArray[0].word.toUpperCase().charAt(0) === ("U"))) {
+
+                if ((numberArray[0].word.toUpperCase().charAt(0) === ("E") ||
+                    numberArray[0].word.toUpperCase().charAt(0) === ("U"))) {
                     console.log(`This means that you have until ${dateConvertionToDate(numberArray[1].word)} to consume. That is it`);
                     setText(`Based on the image that was posted, the label means that you have until ${dateConvertionToDate(numberArray[1].word)} to consume, it should not be consumed if over this date `);
                 }
@@ -654,7 +654,9 @@ function FoodLabels() {
 
                 }
 
-                else if ((numberArray[0].word.toUpperCase().charAt(0) === "B" || numberArray[0].word.toUpperCase().charAt(0) === "D") && (numberArray[2].word.toUpperCase().charAt(0) === ("E") || numberArray[2].word.toUpperCase().charAt(0) === ("U"))) {
+                else if (numberArray[0].word.toUpperCase().charAt(0) === "B"
+                    && (numberArray[2].word.toUpperCase().charAt(0) === ("E") ||
+                        numberArray[2].word.toUpperCase().charAt(0) === ("U"))) {
                     console.log(`This means that you have until ${dateConvertionToDate(numberArray[1].word)} to consume while it is closed, however if stored properly, and quality looks suitbale, it may extend over the date`)
                     console.log(`This means that you have until ${dateConvertionToDate(numberArray[3].word)} to consume. That is it`)
                     setText(`This means that you have until ${dateConvertionToDate(numberArray[1].word)} to consume while it is closed, however if stored properly, and quality looks suitbale, it make extend over the date`,
