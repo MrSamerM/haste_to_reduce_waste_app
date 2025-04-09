@@ -1,16 +1,43 @@
-SuitableContainer1: https://www.pexels.com/photo/a-man-holding-a-fork-6646027/ 
-SuitableContainer2: https://www.pexels.com/photo/variety-of-dishes-1640771/ 
-SuitableContainer3: https://unsplash.com/photos/pizza-on-white-ceramic-plates-2lWGQ02DGL8 
-SuitableContainer4: https://unsplash.com/photos/pizza-on-white-ceramic-plates-2lWGQ02DGL8
-SuitableContainer5: https://www.pexels.com/photo/spaghetti-with-meatballs-on-aluminum-tray-5724553/ 
-SuitbaleContainer6: https://www.pexels.com/photo/lasagna-on-tray-19589060/
+SuitableContainer1: 
+RDNE Stock project.(2021). A Man Holding a Fork. Available at: https://www.pexels.com/photo/a-man-holding-a-fork-6646027/ (Accessed: 7 March 2025)
+
+SuitableContainer2: 
+Olsson, E.(2018). Variety of Dishes. Available at: https://www.pexels.com/photo/variety-of-dishes-1640771/ (Accessed: 7 March 2025)
+
+SuitableContainer3: 
+Pinto, C.(2020). pizza on white ceramic plates. Available at: https://unsplash.com/photos/pizza-on-white-ceramic-plates-2lWGQ02DGL8 (Accessed: 7 March 2025)
+
+SuitableContainer4:
+Pinto, C.(2020). pizza on white ceramic plates. Available at: https://unsplash.com/photos/pizza-on-white-ceramic-plates-2lWGQ02DGL8 (Accessed: 7 March 2025)
+
+SuitableContainer5:
+Pahati, C.M.(2020). Spaghetti with Meatballs on Aluminum Tray. Available at: https://www.pexels.com/photo/spaghetti-with-meatballs-on-aluminum-tray-5724553/ (Accessed: 7 March 2025)
+
+SuitbaleContainer6:
+macarius draftStudio.(2023).Lasagna on Tray. Available at: https://www.pexels.com/photo/lasagna-on-tray-19589060/ (Accessed: 7 March 2025)
 
 
-NotContainer1: https://unsplash.com/photos/burger-inside-styrofoam-container-M-fA89yvx2I 
-NotContainer2: https://unsplash.com/photos/two-fruits-bZI7Wj_KoWw 
-NotContainer3: https://www.pexels.com/photo/fresh-fruits-and-vegetables-put-in-plastic-bags-4033167/
-NotContainer4: https://www.pexels.com/photo/a-plastic-bag-with-green-and-black-fruits-5339371/
-NotContainer5: https://www.pexels.com/photo/fruits-in-a-plastic-bag-3645504/
-NotContainer6: https://www.pexels.com/photo/a-homeless-man-eating-on-a-sidewalk-9532295/
-NotContainer7: https://unsplash.com/photos/rice-noddles-with-eggs-0gQ8Fh1f54k 
-NotContainer8: https://unsplash.com/photos/sliced-tomato-dish-on-black-plate-vACInYhNjY0
+
+NotContainer1: 
+Oliur.(2016). Burger in a car. Available at: https://unsplash.com/photos/burger-inside-styrofoam-container-M-fA89yvx2I (Accessed: 7 March 2025)
+
+NotContainer2: 
+Marston, S.(2019). two fruits. Available at: https://unsplash.com/photos/two-fruits-bZI7Wj_KoWw  (Accessed: 7 March 2025)
+
+NotContainer3: 
+Kaboompics.(2020).Fresh fruits and vegetables put in plastic bags. Available at: https://www.pexels.com/photo/fresh-fruits-and-vegetables-put-in-plastic-bags-4033167/ (Accessed: 7 March 2025)
+
+NotContainer4: 
+Fernandes, A.(2020). A Plastic Bag with Green and Black Fruits. Available at: https://www.pexels.com/photo/a-plastic-bag-with-green-and-black-fruits-5339371/ (Accessed: 7 March 2025)
+
+NotContainer5: 
+Shvets, A.(2020). Fruits In A Plastic Bag. Available at: https://www.pexels.com/photo/fruits-in-a-plastic-bag-3645504/ (Accessed: 7 March 2025)
+
+NotContainer6: 
+Weber, T.(2021). A Homeless Man Eating on a Sidewalk. Available at: https://www.pexels.com/photo/a-homeless-man-eating-on-a-sidewalk-9532295/ (Accessed: 7 March 2025)
+
+NotContainer7:  
+Aceron, E.(2018). rice noddles with eggs. Available at: https://unsplash.com/photos/rice-noddles-with-eggs-0gQ8Fh1f54k (Accessed: 7 March 2025)
+
+NotContainer8: 
+Horn, M.W.(2018). sliced tomato dish on black plate. Available at: https://unsplash.com/photos/sliced-tomato-dish-on-black-plate-vACInYhNjY0 (Accessed: 7 March 2025)
