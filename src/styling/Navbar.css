@@ -20,7 +20,8 @@
     width: 40%;
 }
 
-/* to center the navbar chatgpt  25/02/2025
+/* to center the navbar
+OpenAI. (2025). ChatGPT (25 February Version) [Large Language Model]. Available at: https://chatgpt.com/ (Accessed: 25 February 2025).
 prompt: how can I center the nav bar  */
 
 #navbar {
@@ -67,15 +68,18 @@ prompt: how can I center the nav bar  */
     background-color: lightgreen;
 }
 
-/* is it because it is a li, chatgpt to remove cursor from points system 27/02/2025 */
+
+/*chatgpt to remove cursor from points system
+OpenAI. (2025). ChatGPT (27 February Version) [Large Language Model]. Available at: https://chatgpt.com/ (Accessed: 27 February 2025).
+Prompt: is it because it is a li*/
+
 #userPoints a {
     cursor: default;
     text-decoration: underline;
 }
 
 /* to make a dropdown menue I used w3School 
- w3school. (2025) How TO - Hoverable Dropdown. Available at:
- https://www.w3schools.com/howto/howto_css_dropdown.asp (Accessed: 25 Februry 2025) */
+ w3school. (2025) How TO - Hoverable Dropdown. Available at: https://www.w3schools.com/howto/howto_css_dropdown.asp (Accessed: 25 Februry 2025). */
 
 /*OpenAI. (2025). ChatGPT (25 February Version) [Large Language Model]. Available at: https://chatgpt.com/ (Accessed: 25 February 2025).
 prompt 1: why is the dropdown not working (my css)

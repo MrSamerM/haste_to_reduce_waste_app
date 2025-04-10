@@ -52,7 +52,9 @@ body {
     margin-bottom: 30px;
 }
 
-/* to remove select file button https://stackoverflow.com/questions/61468441/how-to-change-default-text-in-input-type-file-in-reactjs 21/01/2025 */
+/* to remove select file button 
+Asif, A.(2023).How to change default text in input type=“file” in reactjs?.
+Available at: https://stackoverflow.com/questions/61468441/how-to-change-default-text-in-input-type-file-in-reactjs (Accessed: 21 January 2025) */
 
 #imageFile {
     display: none;
@@ -175,7 +177,9 @@ body {
     }
 }
 
-/* https://www.youtube.com/watch?v=_7DfrfEWJMc&list=LL&index=1&t=344s 05/02/2025 */
+/* Serenity Dev.(2023).ReactJS : Adding transition / animation / effect when toggling components (useState) - Easy.
+Available at: https://www.youtube.com/watch?v=_7DfrfEWJMc&list=LL&index=1&t=344s (Accessed: 5 Febraury 2025) */
+
 #educationBox1 {
     display: flex;
     flex-direction: column;
@@ -217,7 +221,10 @@ body {
 
 }
 
-/* https://www.youtube.com/watch?v=YFgTZF9_BH4  07/02/2025 to get a gradient animation*/
+/*  to get a gradient animation
+Code Instinct.(2022).How to Create Animated Background Gradient using HTML and CSS.
+Available at: https://www.youtube.com/watch?v=YFgTZF9_BH4 (Accessed: 7 Febraury 2025) */
+
 @keyframes gradientAnimate {
     0% {
         background-position: 0 85%;
@@ -253,7 +260,9 @@ body {
     color: black;
 }
 
-/* https://www.youtube.com/watch?v=hr4JiDr7Aec 06/02/2025 */
+/*  Used for overlays
+Learn Web.(2023).Add Text Overlays to Images on Hover with HTML & CSS.
+Available at: https://www.youtube.com/watch?v=hr4JiDr7Aec Accessed: 06 Febraury 2025 */
 
 .suitableImages {
     position: relative;
@@ -372,7 +381,8 @@ body {
 
 
 /* 
-ChatGPT to make a animation 07/02/2025
+ChatGPT to make a animation
+OpenAI. (2025). ChatGPT ( 07 February Version) [Large Language Model]. Available at: https://chatgpt.com/ (Accessed: 07 February 2025).
 Prompt1:I want to have something were the divs will appear one after the other like powerpoint.I am using react js
 Prompt2: is there a way of doing it in css
  */
@@ -478,7 +488,10 @@ Prompt2: is there a way of doing it in css
     border-style: solid;
 }
 
-/* https://www.geeksforgeeks.org/create-a-coin-toss-using-html-css-javascript/ to make spinning animation for coin 12/02/2025 */
+/* to make spinning animation for coin 
+Geekforgeeks.(n.d). Create a Coin Flip using HTML, CSS & JavaScript.
+Available at: https://www.geeksforgeeks.org/create-a-coin-toss-using-html-css-javascript/ (Accessed: 12 February 2025) */
+
 @keyframes spin {
     0% {
         transform: rotateY(0deg);
@@ -495,7 +508,10 @@ Prompt2: is there a way of doing it in css
     animation: spin 4s cubic-bezier(0.4, 2.5, 0.6, 0.5) infinite;
 }
 
-/* chatGPT Prompt: I want a font style that looks very cool for the phrase did you know using css 10/02/2025*/
+/* Used to find a good font
+OpenAI. (2025). ChatGPT ( 10 February Version) [Large Language Model]. Available at: https://chatgpt.com/ (Accessed: 10 February 2025).
+Prompt: I want a font style that looks very cool for the phrase did you know using css*/
+
 #didYouKnow {
     font-family: "Orbitron", sans-serif;
     font-size: 60px;

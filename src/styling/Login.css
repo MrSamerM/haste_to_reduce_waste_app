@@ -15,7 +15,8 @@ body {
     text-decoration: underline;
 }
 
-/* Used chatGPT because it was not centering properly 23/02/2025
+/* Used chatGPT because it was not centering properly
+OpenAI. (2025). ChatGPT ( 23 February Version) [Large Language Model]. Available at: https://chatgpt.com/ (Accessed: 23 February 2025).
 Prompt: How to allign this center (my code) */
 #IconImageDiv {
     display: flex;

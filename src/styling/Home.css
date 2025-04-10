@@ -84,7 +84,8 @@ body {
     flex-direction: column;
 }
 
-/* used w3school to alling in the center https://www.w3schools.com/css/css_align.asp 04/03/2025
+/* used w3school to alling in the center 
+w3school.(n.d).CSS Layout - Horizontal & Vertical Align. Available at: https://www.w3schools.com/css/css_align.asp (Accessed: 04 March 2025).
 section: Center Vertically - Using line-height  */
 
 #questionBox {
@@ -217,7 +218,9 @@ section: Center Vertically - Using line-height  */
     cursor: pointer;
 }
 
-/* https://www.geeksforgeeks.org/how-to-create-a-bouncing-bubble-effect-using-css/ 05/03/2025*/
+/* Geekforgeeks.(n.d). How to create a bouncing bubble effect using CSS ?.
+Available at: https://www.geeksforgeeks.org/how-to-create-a-bouncing-bubble-effect-using-css/ (Accessed: 5 March 2025) */
+
 @keyframes animate {
     0% {
         transform: translateY(4px);
