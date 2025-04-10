@@ -1,5 +1,5 @@
-/* Used ChatGPT for some css flex between the side informations and the main details 20/01/2025
-
+/* Used ChatGPT for some css flex between the side informations and the main details
+OpenAI. (2025). ChatGPT ( 20 January Version) [Large Language Model]. Available at: https://chatgpt.com/ (Accessed: 20 January 2025).
 prompt 1: I want the side information to be on the right of donationDetailBox, and I also want the isde information label to be below the tickXAndEditIcon (my code)
 prompt 2: I want it to the side information to be horizontal
 prompt 3: I want the label to be at the bottom of the icon
@@ -25,7 +25,9 @@ body {
     text-decoration: underline;
 }
 
-/* used ChatGPT for the 2 css below */
+/* used ChatGPT for the 2 css below 
+OpenAI. (2025). ChatGPT ( 20 January Version) [Large Language Model]. Available at: https://chatgpt.com/ (Accessed: 20 January 2025).
+*/
 .donationEntireBox {
     display: flex;
     flex-direction: row;
@@ -69,7 +71,9 @@ body {
 
 }
 
-/* used ChatGPT for bottom 3*/
+/* used ChatGPT for bottom 3
+OpenAI. (2025). ChatGPT ( 20 January Version) [Large Language Model]. Available at: https://chatgpt.com/ (Accessed: 20 January 2025).
+*/
 .sideInformation {
     display: flex;
     flex-direction: column;
@@ -96,6 +100,8 @@ body {
 .sideInformation button:hover {
     background-color: yellow;
 }
+
+/* techlearnerTL. (2024). CSS Circle Animation Effects | HTML | CSS. Available at: https://www.youtube.com/shorts/17ZlMLQ9YcQ (Accessed 10 March 2025). */
 
 #loadingContainer {
     display: flex;

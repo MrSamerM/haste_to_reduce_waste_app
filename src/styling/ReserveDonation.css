@@ -27,8 +27,8 @@ body {
     text-align: center;
 }
 
-/* 
-chatGPT 28/02/2025
+/* for the popup
+OpenAI. (2025). ChatGPT ( 28 February Version) [Large Language Model]. Available at: https://chatgpt.com/ (Accessed: 28 February 2025).
 Prompt:the pop up is hiding merged into the map, but I want it to be visible and big because of the image inside */
 .mapPopup img {
     max-width: 100%;
@@ -63,7 +63,8 @@ Prompt:the pop up is hiding merged into the map, but I want it to be visible and
     width: 70%;
 }
 
-/* chatgpt to make the dropdown menue to be over the map. 28/02/2025
+/* chatgpt to make the dropdown menue to be over the map.
+OpenAI. (2025). ChatGPT ( 28 February Version) [Large Language Model]. Available at: https://chatgpt.com/ (Accessed: 28 February 2025).
 prompt 1: the dropdown menu of the address is being coverd by the map, how can I make it over 
 prompt 2: the first one works, but the plus and negative sign does not get covered in the map
 */

@@ -17,6 +17,9 @@ body {
     text-decoration: underline;
 }
 
+/* used ChatGPT for the 2 css below 
+OpenAI. (2025). ChatGPT ( 20 January Version) [Large Language Model]. Available at: https://chatgpt.com/ (Accessed: 20 January 2025).
+*/
 .reservedDonationEntireBox {
     display: flex;
     flex-direction: row;
@@ -60,6 +63,9 @@ body {
 
 }
 
+/* used ChatGPT for bottom 3
+OpenAI. (2025). ChatGPT ( 20 January Version) [Large Language Model]. Available at: https://chatgpt.com/ (Accessed: 20 January 2025).
+*/
 .reservedSideInformation {
     display: flex;
     flex-direction: column;
@@ -86,6 +92,8 @@ body {
 .xIcon {
     font-size: 80px;
 }
+
+/* techlearnerTL. (2024). CSS Circle Animation Effects | HTML | CSS. Available at: https://www.youtube.com/shorts/17ZlMLQ9YcQ (Accessed 10 March 2025). */
 
 #loadingContainer {
     display: flex;
