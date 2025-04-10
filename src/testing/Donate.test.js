@@ -3,6 +3,8 @@ import { fireEvent, render, screen, waitFor } from "@testing-library/react";
 import axios from "axios";
 import { MemoryRouter, useNavigate } from "react-router-dom";
 
+// learnt how to use testing library by experimenting with chatgpt, and learning different methods. SO I used it to undertand different fireevent rules
+// OpenAI. (2025). ChatGPT ( 25 March Version) [Large Language Model]. Available at: https://chatgpt.com/ (Accessed: 25 March 2025).
 
 beforeEach(() => {
     jest.spyOn(window, "alert").mockImplementation(() => { }); // Mock alert
