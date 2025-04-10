@@ -8,7 +8,6 @@
 
 #3. Nadir, B. (2022) cars classification dataset. Available at:
 # https://www.kaggle.com/datasets/boulahchichenadir/algerian-used-cars (Accessed: 7 January 2025)
- 
 
 # Assitance with image detection
 
@@ -23,6 +22,19 @@
 
 #4. Tensorflow. (n.d) Module: tf.keras.layers. Available at: 
 # https://www.tensorflow.org/api_docs/python/tf/keras/layers/ (Accessed: 24 January 2025)
+
+#5. Tensorflow. (n.d-b) tf.keras.layers.Conv2D . Available at: 
+# https://www.tensorflow.org/api_docs/python/tf/keras/layers/Conv2D (Accessed: 24 January 2025)
+
+#6 Tensorflow. (n.d-c) tf.keras.layers.MaxPool2D  . Available at: 
+# https://www.tensorflow.org/api_docs/python/tf/keras/layers/MaxPool2D (Accessed: 24 January 2025)
+
+#7 Tensorflow. (n.d-c) tf.keras.layers.Flatten  . Available at: 
+# https://www.tensorflow.org/api_docs/python/tf/keras/layers/Flatten (Accessed: 24 January 2025)
+
+#8 Tensorflow. (n.d-c) tf.keras.layers.Dense. Available at: 
+# https://www.tensorflow.org/api_docs/python/tf/keras/layers/Dense (Accessed: 24 January 2025)
+
 
 import numpy as np
 import tensorflow as tf
@@ -66,7 +78,12 @@ validation_dataset = train_datagen.flow_from_directory(
     seed=123
 )
 
+
+    # OpenAI. (2025). ChatGPT (24 January Version) [Large Language Model]. Available at: https://chatgpt.com/ (Accessed: 24 January 2025).
+    #used for layers.InputLayer() method for expectations of this data.
+
 model = keras.Sequential([ #This groups layers sequentially
+    
     layers.InputLayer(input_shape=(image_height, image_width, 3)),
     data_augmentation,
     layers.Conv2D(16, 3, padding='same', activation='relu'),#Conv2D is used for images,16 is number of filter (dimention of output space), 3 is the size of the kernal (specifying size of convolution window) padding same (resulting in even padding all sides of image).relu helps network find complex patterns
