@@ -259,23 +259,23 @@ app.get('/allReceipts', async (req, res) => {
         // prompt1: I want to do something. Right now the productid array stores productIDs,but I want it to store the names of the products which is in another table in mongo, how can I fix this 
         // prompt2: it just does not work when productID is repeated
 
-        const allReceipts = await Receipt.aggregate([
+        const allReceipts = await Receipt.aggregate([ //here suggest that it is working with the recipe table
             {
-                $match: { userID: new mongoose.Types.ObjectId(req.session.userID) }
+                $match: { userID: new mongoose.Types.ObjectId(req.session.userID) } //only gets receipt with userID
             },
             {
-                $unwind: "$productID" // Flatten the productID array
+                $unwind: "$productID" // the array becomes seperated
             },
             {
                 $lookup: {
                     from: "products",
                     localField: "productID",
                     foreignField: "_id",
-                    as: "productDetails"
+                    as: "productDetails" //groups it in a array
                 }
             },
             {
-                $unwind: "$productDetails" // Ensure each product has its own document
+                $unwind: "$productDetails" // each is seperated
             },
             {
                 $group: {
@@ -283,7 +283,7 @@ app.get('/allReceipts', async (req, res) => {
                     userID: { $first: "$userID" },
                     cost: { $first: "$cost" },
                     address: { $first: "$address" },
-                    productNames: { $push: "$productDetails.productName" } // Collect product names, including duplicates
+                    productNames: { $push: "$productDetails.productName" } // Collect product names
                 }
             }
         ]);
