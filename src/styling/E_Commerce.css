@@ -1,0 +1,186 @@
+body {
+    margin: 0;
+    padding: 0;
+    background-color: #E1ECD8;
+}
+
+#allECommerceContent {
+    display: flex;
+    flex-direction: column;
+    width: 95%;
+    margin: 0 auto 60px auto;
+}
+
+#shopTitleDiv {
+    align-items: center;
+    margin: 0 auto 30px auto;
+    margin-bottom: 50px;
+    margin-top: 10px;
+}
+
+
+#shopTitle {
+    text-align: center;
+    text-decoration: underline;
+}
+
+#shopItems {
+    display: flex;
+    flex-direction: row;
+    width: 80%;
+    margin: 0 auto 60px auto;
+    flex-wrap: wrap;
+}
+
+#productDiv {
+    display: flex;
+    flex-direction: column;
+    align-items: flex-start;
+    width: 30%;
+    border-style: solid;
+    border-color: rgb(10, 244, 53);
+    border-width: 5px;
+    align-items: center;
+    margin: 5px;
+    border-radius: 10px;
+}
+
+
+.groupedDiv {
+    display: flex;
+    align-items: center;
+    width: 100%;
+    margin-bottom: 20px;
+}
+
+
+.productLabel {
+    margin-right: 10px;
+    text-align: right;
+    width: 200px;
+}
+
+#productDiv .productInput {
+    padding: 5px;
+    margin: 5px;
+    margin-right: 10%;
+    width: 95%;
+
+}
+
+#productImage {
+    height: 200px;
+    width: 200px;
+}
+
+#quantity {
+    display: flex;
+    flex-direction: row;
+    width: 95%;
+    align-items: center;
+    justify-content: center;
+    margin: 0 auto 10px auto;
+}
+
+#quantityRequired {
+    text-align: center;
+    font-weight: bold;
+    width: 50%;
+    margin-left: 5%;
+    margin-right: 5%;
+    padding-top: 2.5%;
+    padding-bottom: 2.5%;
+
+}
+
+.addOrSubtract {
+    width: 80px;
+    height: 50px;
+    color: black;
+    background-color: green;
+    font-size: larger;
+    font-weight: bolder;
+}
+
+#purchaseButtonDiv {
+    display: flex;
+    align-items: center;
+    width: 100%;
+    margin-bottom: 5%;
+}
+
+#autoCompleteAddressForPurchaseDiv {
+    position: relative;
+    margin-bottom: 2%;
+    width: 70%;
+}
+
+#submitPurchase {
+    background-color: black;
+    color: white;
+    width: 150px;
+    height: 40px;
+    font-size: large;
+    text-align: center;
+    cursor: pointer;
+}
+
+#submitPurchase,
+#autoCompleteAddressForPurchaseDiv,
+#totalCost {
+    margin: 0 auto 30px auto;
+}
+
+#totalCost {
+    font-size: larger;
+    font-family: Arial, Helvetica, sans-serif;
+    font-weight: bold;
+}
+
+/* techlearnerTL. (2024). CSS Circle Animation Effects | HTML | CSS. Available at: https://www.youtube.com/shorts/17ZlMLQ9YcQ (Accessed 10 March 2025). */
+
+#loadingContainer {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    height: 100vh;
+    width: 100vh;
+}
+
+#loading {
+    height: 400px;
+    width: 400px;
+    border-radius: 100%;
+    border: 25px;
+    border-style: solid;
+    border-color: white;
+    border-top-width: 20px;
+    border-top-style: solid;
+    border-top-color: green;
+    animation: circle 2.5s linear infinite;
+}
+
+@keyframes circle {
+    to {
+        transform: rotate(360deg);
+    }
+}
+
+#autocomplete {
+    text-align: center;
+}
+
+#XButton {
+    font-size: larger;
+    color: black;
+    font-weight: bolder;
+    text-decoration: none;
+    background: none;
+    border-width: 0;
+    cursor: pointer;
+}
+
+
+.addressRemoval {
+    display: inline-block;
+}

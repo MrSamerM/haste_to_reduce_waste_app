@@ -1,0 +1,525 @@
+body {
+    margin: 0;
+    padding: 0;
+    background-color: #E1ECD8;
+}
+
+#donateTitleDiv,
+.educationDonateTitleDiv {
+    align-items: center;
+    margin: 0 auto 30px auto;
+    margin-bottom: 50px;
+    margin-top: 10px;
+}
+
+
+#donateTitle,
+.educationDonateTitle {
+    text-align: center;
+    text-decoration: underline;
+}
+
+#donationBox {
+    display: flex;
+    flex-direction: column;
+    width: 95%;
+    margin: 0 auto 60px auto;
+}
+
+#selectDonationImage {
+    display: flex;
+    flex-direction: row;
+    margin: 0 auto 30px auto;
+    align-items: center;
+}
+
+
+#imageAndPercentage {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+}
+
+#preDonationInformation {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+
+}
+
+#selectFileLabel,
+#imageRequirement {
+    margin-bottom: 30px;
+}
+
+/* to remove select file button 
+Asif, A.(2023).How to change default text in input type=“file” in reactjs?.
+Available at: https://stackoverflow.com/questions/61468441/how-to-change-default-text-in-input-type-file-in-reactjs (Accessed: 21 January 2025) */
+
+#imageFile {
+    display: none;
+}
+
+#selectFileLabel {
+    font-size: larger;
+    cursor: pointer;
+    font-weight: bold;
+    border-style: solid;
+    border-width: 4px;
+
+}
+
+#selectedImage {
+    height: 250px;
+    width: 350px;
+    margin-left: 30px;
+    border: black;
+    border-style: solid;
+    border-width: 5px;
+}
+
+#allDonationResults {
+    display: flex;
+    flex-direction: column;
+    width: 95%;
+    margin: 0 auto 60px auto;
+}
+
+#aiResult {
+
+    margin: 0 auto 30px auto;
+}
+
+
+.donationInputDiv {
+    display: flex;
+    align-items: center;
+    width: 50%;
+    margin-bottom: 5px;
+}
+
+#donateDetails {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+}
+
+#autoCompleteAddress {
+    position: relative;
+}
+
+#donateDetails .donationInputs {
+    padding: 5px;
+    margin: 5px;
+    width: 100%;
+}
+
+.addressRemoval {
+    padding: 5px;
+}
+
+#XButton {
+    font-size: larger;
+    color: rgb(129, 124, 124);
+    font-weight: bolder;
+    text-decoration: none;
+    background: none;
+    border-width: 0;
+    cursor: pointer;
+}
+
+#XButton:hover {
+    color: black
+}
+
+.donateInputLabels {
+    margin-right: 20px;
+    text-align: right;
+    width: 200px;
+    font-weight: bold;
+}
+
+#donateButton,
+#scanImage,
+.nextButton,
+.skipButton {
+    background-color: black;
+    color: white;
+    width: 150px;
+    height: 40px;
+    font-size: large;
+    text-align: center;
+    cursor: pointer;
+}
+
+#donateButton {
+    margin: 0 auto 30px auto;
+}
+
+.skipButton {
+    margin-left: auto;
+
+}
+
+.nextButton {
+    margin: 0 auto 30px auto;
+
+}
+
+
+@keyframes opacityTransition {
+    from {
+        opacity: 0;
+    }
+
+    to {
+        opacity: 1;
+    }
+}
+
+/* Serenity Dev.(2023).ReactJS : Adding transition / animation / effect when toggling components (useState) - Easy.
+Available at: https://www.youtube.com/watch?v=_7DfrfEWJMc&list=LL&index=1&t=344s (Accessed: 5 Febraury 2025) */
+
+#educationBox1 {
+    display: flex;
+    flex-direction: column;
+    width: 85%;
+    margin: 0 auto 60px auto;
+    background-color: rgba(59, 175, 59, 0.785);
+    animation: opacityTransition 3s ease-in;
+    margin-top: 3%;
+    border-radius: 10px;
+
+
+}
+
+#entireSecondBox,
+#educationBox3 {
+    display: flex;
+    background-color: rgba(59, 175, 59, 0.785);
+    width: 85%;
+    margin: 0 auto 0px auto;
+    flex-direction: column;
+    animation: opacityTransition 3s ease-in;
+    margin-top: 3%;
+    border-radius: 10px;
+
+
+}
+
+#educationBox2,
+#selections {
+    display: flex;
+    flex-direction: row;
+    width: 85%;
+    margin: 0 auto 60px auto;
+    align-items: center;
+    border: black;
+    border-style: solid;
+    border-width: 5px;
+    border-radius: 10px;
+
+}
+
+/*  to get a gradient animation
+Code Instinct.(2022).How to Create Animated Background Gradient using HTML and CSS.
+Available at: https://www.youtube.com/watch?v=YFgTZF9_BH4 (Accessed: 7 Febraury 2025) */
+
+@keyframes gradientAnimate {
+    0% {
+        background-position: 0 85%;
+    }
+
+    60% {
+        background-position: 100% 20%;
+    }
+
+    100% {
+        background-position: 0 85%;
+    }
+}
+
+#barChart {
+    height: 250px;
+    width: 550px;
+}
+
+
+.suitableContainers {
+    height: 250px;
+    width: 350px;
+}
+
+.interactP {
+    margin: 0 auto 60px auto;
+    width: 60%;
+}
+
+#interactionParagraph {
+    font-size: large;
+    color: black;
+}
+
+/*  Used for overlays
+Learn Web.(2023).Add Text Overlays to Images on Hover with HTML & CSS.
+Available at: https://www.youtube.com/watch?v=hr4JiDr7Aec Accessed: 06 Febraury 2025 */
+
+.suitableImages {
+    position: relative;
+    width: 100%;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+    width: fit-content;
+    margin-bottom: 5%;
+    margin-top: 10%;
+}
+
+.textOverlay {
+    width: 100%;
+    height: 100%;
+    top: 0;
+    left: 0;
+    position: absolute;
+    background: rgba(0, 0, 0, 0.6);
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    flex-direction: column;
+    opacity: 0;
+    transition: 0.5s;
+}
+
+.textOverlay:hover {
+    opacity: 1;
+}
+
+.textOverlay p {
+    font-size: medium;
+    color: white;
+    text-align: center;
+}
+
+.appropriateContainers {
+    height: 250px;
+    width: 350px;
+}
+
+#firstHalf,
+#secondHalf {
+    display: flex;
+    flex-direction: column;
+    width: 50%;
+    align-items: center;
+}
+
+
+#firstHalf .suitableImages {
+    border: green;
+    border-style: solid;
+    border-width: 8px;
+}
+
+#secondHalf .suitableImages {
+    border: red;
+    border-style: solid;
+    border-width: 8px;
+}
+
+#firstHalf h4 {
+    color: white;
+    font-weight: bolder;
+    text-decoration: underline;
+    text-align: center;
+    font-size: larger;
+}
+
+#secondHalf h4 {
+    color: white;
+    font-weight: bolder;
+    text-decoration: underline;
+    text-align: center;
+    font-size: larger;
+}
+
+.boxOfEverything {
+    width: 100%;
+    margin: 0 auto 10px auto;
+}
+
+.theContents {
+    margin-bottom: 2%;
+    border: black;
+    border-style: solid;
+    border-width: 2px;
+    display: flex;
+    align-items: center;
+    margin-left: auto;
+    margin-right: auto;
+
+}
+
+.theContents {
+    display: flex;
+    align-items: center;
+    width: 60%;
+    margin-bottom: 10px;
+}
+
+.paragraphDetails {
+    margin-right: 20px;
+    text-align: center;
+    width: 50%;
+}
+
+.suitableContainers {
+    padding: 5px;
+    margin: 5px;
+    width: 70%;
+}
+
+
+/* 
+ChatGPT to make a animation
+OpenAI. (2025). ChatGPT ( 07 February Version) [Large Language Model]. Available at: https://chatgpt.com/ (Accessed: 07 February 2025).
+Prompt1:I want to have something were the divs will appear one after the other like powerpoint.I am using react js
+Prompt2: is there a way of doing it in css
+ */
+.boxOfEverything {
+    opacity: 0;
+    transform: translateY(20px);
+    animation: fade 1s ease-in forwards;
+}
+
+.boxOfEverything:nth-child(1n) {
+    animation-delay: 5s;
+}
+
+.boxOfEverything:nth-child(2n) {
+    animation-delay: 3s;
+}
+
+.boxOfEverything:nth-child(3n) {
+    animation-delay: 1s;
+}
+
+@keyframes fade {
+    from {
+        opacity: 0;
+        transform: translateY(20px);
+    }
+
+    to {
+        opacity: 1;
+        transform: translateY(0);
+    }
+}
+
+#quizQuestion {
+    align-items: center;
+    margin: 0 auto 30px auto;
+    margin-bottom: 50px;
+    margin-top: 10px;
+    font-size: x-large;
+    font-weight: bolder;
+}
+
+#quizSelections {
+    display: flex;
+    flex-direction: column;
+    width: 70%;
+    align-items: center;
+    margin: 0 auto 0px auto;
+}
+
+.answers {
+    width: 100%;
+    text-align: center;
+    font-size: larger;
+    font-family: Impact, Haettenschweiler, 'Arial Narrow Bold', sans-serif;
+    margin-bottom: 4%;
+    padding: 2%;
+    border-radius: 10px;
+    background-color: greenyellow;
+    cursor: pointer;
+}
+
+.answers.selected {
+    background-color: lightcoral;
+}
+
+#finalQuizPage {
+    display: flex;
+    flex-direction: column;
+    width: 80%;
+    align-items: center;
+    margin: 0 auto 0px auto;
+}
+
+#finalScore {
+    font-family: sans-serif;
+    font-size: xx-large;
+    font-weight: bolder;
+    text-align: center;
+    text-decoration: underline;
+}
+
+.resultMessage {
+    font-family: sans-serif;
+    font-size: medium;
+    font-weight: bold;
+    text-align: center;
+    margin-top: 5%;
+    margin-bottom: 5%;
+}
+
+.wrongAnswers {
+    width: 100%;
+    text-align: center;
+    font-size: larger;
+    font-family: Impact, Haettenschweiler, 'Arial Narrow Bold', sans-serif;
+    margin-bottom: 4%;
+    padding: 2%;
+    border-radius: 10px;
+    background-color: rgb(230, 35, 32);
+    border: black;
+    border-width: 3px;
+    border-style: solid;
+}
+
+/* to make spinning animation for coin 
+Geekforgeeks.(n.d). Create a Coin Flip using HTML, CSS & JavaScript.
+Available at: https://www.geeksforgeeks.org/create-a-coin-toss-using-html-css-javascript/ (Accessed: 12 February 2025) */
+
+@keyframes spin {
+    0% {
+        transform: rotateY(0deg);
+    }
+
+    100% {
+        transform: rotateY(360deg);
+    }
+}
+
+#points {
+    margin-bottom: 2%;
+    width: 20%;
+    animation: spin 4s cubic-bezier(0.4, 2.5, 0.6, 0.5) infinite;
+}
+
+/* Used to find a good font
+OpenAI. (2025). ChatGPT ( 10 February Version) [Large Language Model]. Available at: https://chatgpt.com/ (Accessed: 10 February 2025).
+Prompt: I want a font style that looks very cool for the phrase did you know using css*/
+
+#didYouKnow {
+    font-family: "Orbitron", sans-serif;
+    font-size: 60px;
+    color: #0ff;
+    text-shadow: 0 0 5px green, 0 0 10px green, 0 0 15px green;
+    text-align: center;
+}
+
+#testAddressInput {
+    display: none;
+}

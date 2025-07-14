@@ -1,0 +1,131 @@
+/* Used ChatGPT for some css flex between the side informations and the main details
+OpenAI. (2025). ChatGPT ( 20 January Version) [Large Language Model]. Available at: https://chatgpt.com/ (Accessed: 20 January 2025).
+prompt 1: I want the side information to be on the right of donationDetailBox, and I also want the isde information label to be below the tickXAndEditIcon (my code)
+prompt 2: I want it to the side information to be horizontal
+prompt 3: I want the label to be at the bottom of the icon
+prompt 4: I want to make the side information width a bit smaller, and lengthen donation details box
+*/
+
+body {
+    margin: 0;
+    padding: 0;
+    background-color: #E1ECD8;
+}
+
+#updatedDonationTitleDiv {
+    align-items: center;
+    margin: 0 auto 30px auto;
+    margin-bottom: 50px;
+    margin-top: 10px;
+}
+
+
+#updatedDonationTitle {
+    text-align: center;
+    text-decoration: underline;
+}
+
+/* used ChatGPT for the 2 css below 
+OpenAI. (2025). ChatGPT ( 20 January Version) [Large Language Model]. Available at: https://chatgpt.com/ (Accessed: 20 January 2025).
+*/
+.donationEntireBox {
+    display: flex;
+    flex-direction: row;
+    background-color: lightgreen;
+    border-radius: 60px;
+    width: 95%;
+    margin: 0 auto 60px auto;
+    border-color: black;
+    border-style: solid;
+    border-width: 5px;
+}
+
+#donationDetailsBox {
+    display: flex;
+    flex-direction: column;
+    align-items: flex-start;
+    flex: 2.8;
+}
+
+.donationDetails {
+    display: flex;
+    align-items: center;
+    width: 100%;
+    margin-bottom: 20px;
+}
+
+.donationDetailsInputLabels {
+    margin-right: 20px;
+    text-align: right;
+    width: 200px;
+    font-weight: bold;
+
+}
+
+
+
+#donationDetailsBox .donationDetailsInputs {
+    padding: 5px;
+    margin: 5px;
+    width: 100%;
+
+}
+
+/* used ChatGPT for bottom 3
+OpenAI. (2025). ChatGPT ( 20 January Version) [Large Language Model]. Available at: https://chatgpt.com/ (Accessed: 20 January 2025).
+*/
+.sideInformation {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+    flex: 0.8;
+}
+
+.sideInformationLabels {
+    text-align: center;
+    font-weight: bold;
+}
+
+.tickXAndEditIcon {
+    font-size: 80px;
+}
+
+.sideInformation button {
+    cursor: pointer;
+    background: none;
+    border: none;
+}
+
+.sideInformation button:hover {
+    background-color: yellow;
+}
+
+/* techlearnerTL. (2024). CSS Circle Animation Effects | HTML | CSS. Available at: https://www.youtube.com/shorts/17ZlMLQ9YcQ (Accessed 10 March 2025). */
+
+#loadingContainer {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    height: 100vh;
+    width: 100vh;
+}
+
+#loading {
+    height: 400px;
+    width: 400px;
+    border-radius: 100%;
+    border: 25px;
+    border-style: solid;
+    border-color: white;
+    border-top-width: 20px;
+    border-top-style: solid;
+    border-top-color: green;
+    animation: circle 2.5s linear infinite;
+}
+
+@keyframes circle {
+    to {
+        transform: rotate(360deg);
+    }
+}

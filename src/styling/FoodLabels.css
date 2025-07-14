@@ -1,0 +1,463 @@
+body {
+    margin: 0;
+    padding: 0;
+    background-color: #E1ECD8;
+}
+
+#foodLabelTitleDiv,
+.educationTitleDivLabel {
+    align-items: center;
+    margin: 0 auto 30px auto;
+    margin-bottom: 50px;
+    margin-top: 5%;
+}
+
+
+#foodLabelTitle,
+.educationTitleLabel {
+    text-align: center;
+    text-decoration: underline;
+}
+
+#foodLabelBox {
+    display: flex;
+    flex-direction: column;
+    width: 95%;
+    margin: 0 auto 60px auto;
+}
+
+#selectLabelImage {
+    display: flex;
+    flex-direction: row;
+    margin: 0 auto 30px auto;
+    align-items: center;
+}
+
+#foodLabelImage {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+}
+
+#preLabelImageInformation {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+
+}
+
+#selectFoodLabelFileLabel,
+#imageFoodLabelRequirement {
+    margin-bottom: 30px;
+}
+
+#imageFoodLabelFile {
+    display: none;
+}
+
+#selectFoodLabelFileLabel {
+    font-size: larger;
+    cursor: pointer;
+    font-weight: bold;
+    border-style: solid;
+    border-width: 4px;
+
+}
+
+#selectedFoodLabelImage {
+    height: 250px;
+    width: 350px;
+    margin-left: 30px;
+    border: black;
+    border-style: solid;
+    border-width: 5px;
+}
+
+#scanFoodLabelImage {
+    background-color: black;
+    color: white;
+    width: 150px;
+    height: 40px;
+    font-size: large;
+    text-align: center;
+    cursor: pointer;
+}
+
+#foodLabelDetails {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    margin-top: 20px;
+}
+
+#textArea {
+    width: 60%;
+    height: 200px;
+    font-size: larger;
+    font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+    font-weight: bold;
+}
+
+
+/* NEW */
+.nextButtonLabel,
+.skipButtonLabel {
+    background-color: black;
+    color: white;
+    width: 150px;
+    height: 40px;
+    font-size: large;
+    text-align: center;
+    cursor: pointer;
+}
+
+
+.skipButtonLabel {
+    margin-left: auto;
+
+}
+
+.nextButtonLabel {
+    margin: 0 auto 30px auto;
+
+}
+
+
+@keyframes opacityTransition {
+    from {
+        opacity: 0;
+    }
+
+    to {
+        opacity: 1;
+    }
+}
+
+/* Serenity Dev.(2023).ReactJS : Adding transition / animation / effect when toggling components (useState) - Easy.
+Available at: https://www.youtube.com/watch?v=_7DfrfEWJMc&list=LL&index=1&t=344s (Accessed: 5 Febraury 2025) */
+
+#educationBox1Label {
+    display: flex;
+    flex-direction: column;
+    width: 85%;
+    margin: 0 auto 60px auto;
+    background-color: rgba(59, 175, 59, 0.785);
+    animation: opacityTransition 3s ease-in;
+    margin-top: 3%;
+    border-radius: 10px;
+
+
+}
+
+#entireSecondBoxLabel,
+#educationBox3Label {
+    display: flex;
+    background-color: rgba(59, 175, 59, 0.785);
+    width: 65%;
+    margin: 0 auto 0px auto;
+    flex-direction: column;
+    animation: opacityTransition 3s ease-in;
+    margin-top: 3%;
+    border-radius: 10px;
+
+
+}
+
+#educationBox2Label,
+#selectionsLabel {
+    display: flex;
+    flex-direction: row;
+    width: 85%;
+    margin: 0 auto 60px auto;
+    align-items: center;
+    border: black;
+    border-style: solid;
+    border-width: 5px;
+    border-radius: 10px;
+
+}
+
+/*  to get a gradient animation
+Code Instinct.(2022).How to Create Animated Background Gradient using HTML and CSS.
+Available at: https://www.youtube.com/watch?v=YFgTZF9_BH4 (Accessed: 7 Febraury 2025) */
+
+@keyframes gradientAnimate {
+    0% {
+        background-position: 0 85%;
+    }
+
+    60% {
+        background-position: 100% 20%;
+    }
+
+    100% {
+        background-position: 0 85%;
+    }
+}
+
+
+
+.suitableContainersLabel {
+    height: 250px;
+    width: 350px;
+}
+
+.interactPLabel {
+    margin: 0 auto 60px auto;
+    width: 60%;
+}
+
+#interactionParagraphLabel {
+    font-size: large;
+    color: black;
+}
+
+/*  Used for overlays
+Learn Web.(2023).Add Text Overlays to Images on Hover with HTML & CSS.
+Available at: https://www.youtube.com/watch?v=hr4JiDr7Aec (Accessed: 06 Febraury 2025) */
+
+.suitableImagesLabel {
+    position: relative;
+    width: 100%;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+    width: fit-content;
+    margin-bottom: 3%;
+    margin-top: 3%;
+}
+
+.textOverlayLabel {
+    width: 100%;
+    height: 100%;
+    top: 0;
+    left: 0;
+    position: absolute;
+    background: rgba(0, 0, 0, 0.6);
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    flex-direction: column;
+    opacity: 0;
+    transition: 0.5s;
+}
+
+.textOverlayLabel:hover {
+    opacity: 1;
+}
+
+.textOverlayLabel p {
+    font-size: medium;
+    color: white;
+    text-align: center;
+}
+
+.appropriateContainersLabel {
+    width: 100%;
+    /* aspect ratio from chatGPT
+    OpenAI. (2025). ChatGPT ( 22 February Version) [Large Language Model]. Available at: https://chatgpt.com/ (Accessed: 22 February 2025).
+    Prompt: is there a way to use percentage for images, because I want it to fit the div size.
+ */
+    aspect-ratio: 5 / 2;
+
+}
+
+#firstHalfLabel {
+    display: flex;
+    flex-direction: column;
+    width: 100%;
+    align-items: center;
+}
+
+
+#firstHalfLabel .suitableImagesLabel {
+    border: green;
+    border-style: solid;
+    border-width: 8px;
+}
+
+#firstHalfLabel h4 {
+    color: white;
+    font-weight: bolder;
+    text-decoration: underline;
+    text-align: center;
+    font-size: larger;
+}
+
+.boxOfEverythingLabel {
+    width: 100%;
+    margin: 0 auto 10px auto;
+}
+
+.theContentsLabel {
+    margin-bottom: 2%;
+    border: black;
+    border-style: solid;
+    border-width: 2px;
+    display: flex;
+    align-items: center;
+    margin-left: auto;
+    margin-right: auto;
+
+}
+
+.theContentsLabel {
+    display: flex;
+    align-items: center;
+    width: 60%;
+    margin-bottom: 10px;
+}
+
+.paragraphDetailsLabel {
+    margin-right: 20px;
+    text-align: center;
+    width: 50%;
+}
+
+.suitableContainersLabel {
+    padding: 5px;
+    margin: 5px;
+    width: 80%;
+}
+
+
+/* 
+ChatGPT to make a animation
+OpenAI. (2025). ChatGPT ( 07 February Version) [Large Language Model]. Available at: https://chatgpt.com/ (Accessed: 07 February 2025).
+Prompt1:I want to have something were the divs will appear one after the other like powerpoint.I am using react js
+Prompt2: is there a way of doing it in css
+ */
+
+.boxOfEverythingLabel {
+    opacity: 0;
+    transform: translateY(20px);
+    animation: fade 1s ease-in forwards;
+}
+
+.boxOfEverythingLabel:nth-child(1n) {
+    animation-delay: 5s;
+}
+
+.boxOfEverythingLabel:nth-child(2n) {
+    animation-delay: 3s;
+}
+
+.boxOfEverythingLabel:nth-child(3n) {
+    animation-delay: 1s;
+}
+
+@keyframes fade {
+    from {
+        opacity: 0;
+        transform: translateY(20px);
+    }
+
+    to {
+        opacity: 1;
+        transform: translateY(0);
+    }
+}
+
+#quizQuestionLabel {
+    align-items: center;
+    margin: 0 auto 30px auto;
+    margin-bottom: 50px;
+    margin-top: 10px;
+    font-size: x-large;
+    font-weight: bolder;
+}
+
+#quizSelectionsLabel {
+    display: flex;
+    flex-direction: column;
+    width: 70%;
+    align-items: center;
+    margin: 0 auto 0px auto;
+}
+
+.answersLabel {
+    width: 100%;
+    text-align: center;
+    font-size: larger;
+    font-family: Impact, Haettenschweiler, 'Arial Narrow Bold', sans-serif;
+    margin-bottom: 4%;
+    padding: 2%;
+    border-radius: 10px;
+    background-color: greenyellow;
+    cursor: pointer;
+}
+
+.answersLabel.selectedLabel {
+    background-color: lightcoral;
+}
+
+#finalQuizPageLabel {
+    display: flex;
+    flex-direction: column;
+    width: 80%;
+    align-items: center;
+    margin: 0 auto 0px auto;
+}
+
+#finalScoreLabel {
+    font-family: sans-serif;
+    font-size: xx-large;
+    font-weight: bolder;
+    text-align: center;
+    text-decoration: underline;
+}
+
+.resultMessageLabel {
+    font-family: sans-serif;
+    font-size: medium;
+    font-weight: bold;
+    text-align: center;
+    margin-top: 5%;
+}
+
+.wrongAnswersLabel {
+    width: 100%;
+    text-align: center;
+    font-size: larger;
+    font-family: Impact, Haettenschweiler, 'Arial Narrow Bold', sans-serif;
+    margin-bottom: 4%;
+    padding: 2%;
+    border-radius: 10px;
+    background-color: rgb(230, 35, 32);
+    border: black;
+    border-width: 3px;
+    border-style: solid;
+}
+
+/* to make spinning animation for coin 
+Geekforgeeks.(n.d). Create a Coin Flip using HTML, CSS & JavaScript.
+Available at: https://www.geeksforgeeks.org/create-a-coin-toss-using-html-css-javascript/ (Accessed: 12 February 2025) */
+
+@keyframes spin {
+    0% {
+        transform: rotateY(0deg);
+    }
+
+    100% {
+        transform: rotateY(360deg);
+    }
+}
+
+#pointsLabel {
+    margin-bottom: 2%;
+    width: 30%;
+    animation: spin 4s cubic-bezier(0.4, 2.5, 0.6, 0.5) infinite;
+}
+
+/* Used to find a good font
+OpenAI. (2025). ChatGPT ( 10 February Version) [Large Language Model]. Available at: https://chatgpt.com/ (Accessed: 10 February 2025).
+Prompt: I want a font style that looks very cool for the phrase did you know using css*/
+
+#didYouKnowLabel {
+    font-family: "Orbitron", sans-serif;
+    font-size: 60px;
+    color: #0ff;
+    text-shadow: 0 0 5px green, 0 0 10px green, 0 0 15px green;
+    text-align: center;
+}
